@@ -1,0 +1,11 @@
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.AssemblyInfoInputs.cache
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.AssemblyInfo.cs
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.csproj.CoreCompileInputs.cache
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\bin\Debug\net9.0\AuthSystem.Domain.deps.json
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\bin\Debug\net9.0\AuthSystem.Domain.dll
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\bin\Debug\net9.0\AuthSystem.Domain.pdb
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.dll
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\refint\AuthSystem.Domain.dll
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.pdb
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\ref\AuthSystem.Domain.dll

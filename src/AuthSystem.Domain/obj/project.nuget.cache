@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "UCnFiGuIPS0=",
+  "success": true,
+  "projectFilePath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\zar\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
