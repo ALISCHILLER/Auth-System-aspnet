@@ -4,73 +4,72 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using AuthSystem.Domain.Common;
+
 namespace AuthSystem.Domain.ValueObjects
 {
-    /// <summary>
-    /// Value Object برای نشانی ایمیل
-    /// </summary>
-
-    public class Email
+    public class Email : ValueObject
     {
-        private readonly string _email;
+        private const string EmailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+        private static readonly Regex EmailRegex = new(EmailPattern, RegexOptions.Compiled);
 
-        /// <summary>
-        /// سازنده خصوصی برای جلوگیری از ایجاد مستقیم
-        /// </summary>
-        /// <param name="email">آدرس ایمیل</param>
-        private Email(string email)
+        public string Value { get; }
+
+        private Email(string value)
         {
-            if (string.IsNullOrWhiteSpace(email))
-                throw new ArgumentException("ایمیل نمی‌تواند خالی باشد.", nameof(email));
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value), "آدرس ایمیل نمی‌تواند خالی باشد");
 
-            email = email.Trim().ToLowerInvariant();
+            value = value.Trim().ToLowerInvariant();
 
-            if (!IsValidEmail(email))
-                throw new ArgumentException("فرمت ایمیل نامعتبر است.", nameof(email));
+            if (!EmailRegex.IsMatch(value))
+                throw new ArgumentException("فرمت ایمیل نامعتبر است", nameof(value));
 
-            _email = email;
+            Value = value;
         }
 
-        /// <summary>
-        /// تبدیل implicit به string
-        /// </summary>
-        public static implicit operator string(Email email) => email._email;
+        public static Email Create(string email) => new(email);
 
-        /// <summary>
-        /// تبدیل implicit از string
-        /// </summary>
-        public static implicit operator Email(string email) => new Email(email);
-
-        /// <summary>
-        /// بازگرداندن نمایش رشته‌ای ایمیل
-        /// </summary>
-        public override string ToString() => _email;
-
-        /// <summary>
-        /// مقایسه دو شیء Email
-        /// </summary>
-        public override bool Equals(object? obj)
+        public static bool TryCreate(string email, out Email? result)
         {
-            if (obj is Email other)
-                return _email.Equals(other._email, StringComparison.OrdinalIgnoreCase);
-            return false;
+            try
+            {
+                result = Create(email);
+                return true;
+            }
+            catch
+            {
+                result = null;
+                return false;
+            }
         }
 
-        /// <summary>
-        /// دریافت HashCode برای Email
-        /// </summary>
-        public override int GetHashCode() => _email.GetHashCode(StringComparison.OrdinalIgnoreCase);
+        public static implicit operator string(Email email) => email.Value;
 
-        /// <summary>
-        /// اعتبارسنجی فرمت ایمیل با استفاده از Regular Expression
-        /// </summary>
-        private static bool IsValidEmail(string email)
+        protected override IEnumerable<object> GetEqualityComponents()
         {
-            // الگوی ساده‌تر برای اعتبارسنجی ایمیل
-            var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-            return emailRegex.IsMatch(email);
-            // برای اعتبارسنجی دقیق‌تر می‌توان از DataAnnotations استفاده کرد:
-            // return new EmailAddressAttribute().IsValid(email);
+            yield return Value;
+        }
+
+        public override string ToString() => Value;
+
+        // نمونه متدهای کمکی
+        public string GetDomainPart()
+        {
+            return Value.Split('@').Last();
+        }
+
+        public string GetLocalPart()
+        {
+            return Value.Split('@').First();
+        }
+
+        public bool IsInDomain(string domain)
+        {
+            return GetDomainPart().Equals(domain, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
