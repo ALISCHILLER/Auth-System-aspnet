@@ -1,34 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace AuthSystem.Domain.Enums;
 
-namespace AuthSystem.Domain.Enums
+/// <summary>
+/// انواع دستگاه‌هایی که کاربران می‌توانند از آن‌ها وارد سیستم شوند
+/// این enum برای مدیریت انواع دستگاه‌ها در سیستم احراز هویت استفاده می‌شود
+/// </summary>
+public enum DeviceType
 {
     /// <summary>
-    /// انواع دستگاه‌ها
+    /// نوع دستگاه نامشخص است
+    /// این مقدار زمانی استفاده می‌شود که سیستم نتواند نوع دستگاه را تشخیص دهد
     /// </summary>
+    Unknown,
 
-    public enum DeviceType
-    {
-        /// <summary>
-        /// نامشخص
-        /// </summary>
-        Unknown,
+    /// <summary>
+    /// دستگاه رایانه شخصی یا لپ‌تاپ
+    /// این مقدار برای دستگاه‌های دسکتاپ و لپ‌تاپ استفاده می‌شود
+    /// </summary>
+    Desktop,
 
-        /// <summary>
-        /// رایانه شخصی یا لپ‌تاپ
-        /// </summary>
-        Desktop,
+    /// <summary>
+    /// دستگاه گوشی همراه
+    /// این مقدار برای تلفن‌های همراه استفاده می‌شود
+    /// </summary>
+    Mobile,
 
-        /// <summary>
-        /// گوشی همراه
-        /// </summary>
-        Mobile,
-
-        /// <summary>
-        /// تبلت
-        /// </summary>
-        Tablet
-    }
+    /// <summary>
+    /// دستگاه تبلت
+    /// این مقدار برای تبلت‌ها استفاده می‌شود
+    /// </summary>
+    Tablet
 }

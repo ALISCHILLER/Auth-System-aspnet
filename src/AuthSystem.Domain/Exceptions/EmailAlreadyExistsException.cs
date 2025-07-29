@@ -1,29 +1,35 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Exceptions
+namespace AuthSystem.Domain.Exceptions;
+
+/// <summary>
+/// استثنا برای زمانی که آدرس ایمیل تکراری است
+/// </summary>
+public class EmailAlreadyExistsException : DomainException
 {
     /// <summary>
-    /// Exception برای زمانی که ایمیل قبلاً ثبت شده است
+    /// آدرس ایمیل که تکراری است
     /// </summary>
+    public string Email { get; }
 
-    public class EmailAlreadyExistsException : DomainException
+    /// <summary>
+    /// سازنده با آدرس ایمیل
+    /// </summary>
+    /// <param name="email">آدرس ایمیل</param>
+    public EmailAlreadyExistsException(string email)
+        : base($"آدرس ایمیل {email} قبلاً ثبت شده است")
     {
-        /// <summary>
-        /// سازنده پیش‌فرض
-        /// </summary>
-        public EmailAlreadyExistsException() : base("ایمیل قبلاً ثبت شده است.")
-        {
-        }
+        Email = email;
+    }
 
-        /// <summary>
-        /// سازنده با ایمیل تکراری
-        /// </summary>
-        /// <param name="email">ایمیل تکراری</param>
-        public EmailAlreadyExistsException(string email) : base($"ایمیل {email} قبلاً ثبت شده است.")
-        {
-        }
+    /// <summary>
+    /// سازنده با آدرس ایمیل و پیام خطا
+    /// </summary>
+    /// <param name="email">آدرس ایمیل</param>
+    /// <param name="message">پیام خطا</param>
+    public EmailAlreadyExistsException(string email, string message)
+        : base(message)
+    {
+        Email = email;
     }
 }

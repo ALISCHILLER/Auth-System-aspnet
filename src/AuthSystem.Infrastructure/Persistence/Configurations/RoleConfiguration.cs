@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AuthSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,20 +5,18 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace AuthSystem.Infrastructure.Persistence.Configurations;
 
 /// <summary>
-/// پیکربندی Entity نقش
+/// تنظیمات Entity Role برای EF Core
 /// </summary>
 public class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
-    /// <summary>
-    /// پیکربندی Entity نقش
-    /// </summary>
-    /// <param name="builder">سازنده Entity</param>
     public void Configure(EntityTypeBuilder<Role> builder)
     {
-        // نام جدول
-        builder.ToTable("Roles");
+        builder.HasKey(r => r.Id);
 
-        // پیکربندی فیلدهای اجباری و محدودیت‌ها
+        // Index
+        builder.HasIndex(r => r.Name).IsUnique();
+
+        // ویژگی‌ها
         builder.Property(r => r.Name)
             .IsRequired()
             .HasMaxLength(50);
@@ -30,21 +24,17 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(r => r.Description)
             .HasMaxLength(255);
 
-        // ایجاد Index برای فیلد Unik
-        builder.HasIndex(r => r.Name)
-            .IsUnique();
-
-        // پیکربندی روابط
-        // یک نقش می‌تواند به چند کاربر تعلق داشته باشد (Many-to-Many با UserRole)
+        // روابط
         builder.HasMany(r => r.UserRoles)
             .WithOne(ur => ur.Role)
             .HasForeignKey(ur => ur.RoleId)
+            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        // یک نقش می‌تواند چند مجوز داشته باشد (Many-to-Many با RolePermission)
         builder.HasMany(r => r.RolePermissions)
             .WithOne(rp => rp.Role)
             .HasForeignKey(rp => rp.RoleId)
+            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

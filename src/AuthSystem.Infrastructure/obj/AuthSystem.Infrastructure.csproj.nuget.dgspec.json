@@ -4,96 +4,6 @@
     "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj": {}
   },
   "projects": {
-    "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj",
-        "projectName": "AuthSystem.Application",
-        "projectPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj",
-        "packagesPath": "C:\\Users\\zar\\.nuget\\packages\\",
-        "outputPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "e:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\zar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net9.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
-            "projectReferences": {
-              "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj": {
-                "projectPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
-          "dependencies": {
-            "AutoMapper": {
-              "target": "Package",
-              "version": "[15.0.1, )"
-            },
-            "FluentValidation": {
-              "target": "Package",
-              "version": "[12.0.0, )"
-            },
-            "FluentValidation.DependencyInjectionExtensions": {
-              "target": "Package",
-              "version": "[12.0.0, )"
-            },
-            "MediatR": {
-              "target": "Package",
-              "version": "[13.0.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
     "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -159,6 +69,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+              "version": "[9.0.301, 9.0.301]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -199,8 +115,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj": {
-                "projectPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj"
+              "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj": {
+                "projectPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj"
               }
             }
           }
@@ -271,6 +187,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+              "version": "[9.0.301, 9.0.301]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"

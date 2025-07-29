@@ -1,38 +1,53 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AuthSystem.Domain.Exceptions
 {
     /// <summary>
-    /// Exception برای زمانی که کاربر مجوز لازم را ندارد
+    /// استثنا برای زمانی که کاربر مجوز کافی برای انجام عملیات ندارد
     /// </summary>
-
     public class InsufficientPermissionsException : DomainException
     {
         /// <summary>
-        /// سازنده پیش‌فرض
+        /// نام عملیات یا مجوز مورد نیاز
         /// </summary>
-        public InsufficientPermissionsException() : base("شما مجوز لازم برای انجام این عملیات را ندارید.")
-        {
-        }
+        public string RequiredPermission { get; }
+
+        /// <summary>
+        /// شناسه کاربر
+        /// </summary>
+        public Guid? UserId { get; }
 
         /// <summary>
         /// سازنده با نام مجوز
         /// </summary>
-        /// <param name="permission">نام مجوز لازم</param>
-        public InsufficientPermissionsException(string permission) : base($"شما مجوز '{permission}' را ندارید.")
+        /// <param name="requiredPermission">نام مجوز مورد نیاز</param>
+        public InsufficientPermissionsException(string requiredPermission)
+            : base($"مجوز کافی برای انجام عملیات {requiredPermission} وجود ندارد")
         {
+            RequiredPermission = requiredPermission;
         }
 
         /// <summary>
-        /// سازنده با پیام و نام مجوز
+        /// سازنده با شناسه کاربر و نام مجوز
+        /// </summary>
+        /// <param name="userId">شناسه کاربر</param>
+        /// <param name="requiredPermission">نام مجوز مورد نیاز</param>
+        public InsufficientPermissionsException(Guid userId, string requiredPermission)
+            : base($"کاربر با شناسه {userId} مجوز کافی برای انجام عملیات {requiredPermission} ندارد")
+        {
+            UserId = userId;
+            RequiredPermission = requiredPermission;
+        }
+
+        /// <summary>
+        /// سازنده عمومی با پیام خطا
         /// </summary>
         /// <param name="message">پیام خطا</param>
-        /// <param name="permission">نام مجوز لازم</param>
-        public InsufficientPermissionsException(string message, string permission) : base($"{message} شما مجوز '{permission}' را ندارید.")
+        public InsufficientPermissionsException(string message, bool isCustomMessage)
+            : base(message)
         {
+            // این سازنده وقتی استفاده می‌شود که بخواهیم پیام دلخواه بفرستیم
+            // پارامتر دوم فقط برای تمایز سازنده است
         }
     }
 }

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "UCnFiGuIPS0=",
+  "dgSpecHash": "CUeyks6aHq4=",
   "success": true,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\zar\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+    "C:\\Users\\zar\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.301\\microsoft.net.sdk.compilers.toolset.9.0.301.nupkg.sha512"
   ],
   "logs": []
 }

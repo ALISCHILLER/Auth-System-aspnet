@@ -1,0 +1,5 @@
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net8.0\AuthSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net8.0\AuthSystem.Domain.AssemblyInfoInputs.cache
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net8.0\AuthSystem.Domain.AssemblyInfo.cs
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net8.0\AuthSystem.Domain.csproj.CoreCompileInputs.cache
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net8.0\AuthSystem.Domain.sourcelink.json

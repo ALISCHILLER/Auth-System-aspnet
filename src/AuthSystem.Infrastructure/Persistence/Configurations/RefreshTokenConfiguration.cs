@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AuthSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,31 +5,32 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace AuthSystem.Infrastructure.Persistence.Configurations;
 
 /// <summary>
-/// پیکربندی Entity توکن تازه‌سازی
+/// تنظیمات Entity RefreshToken برای EF Core
 /// </summary>
 public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 {
-    /// <summary>
-    /// پیکربندی Entity توکن تازه‌سازی
-    /// </summary>
-    /// <param name="builder">سازنده Entity</param>
     public void Configure(EntityTypeBuilder<RefreshToken> builder)
     {
-        // نام جدول
-        builder.ToTable("RefreshTokens");
+        builder.HasKey(rt => rt.Id);
 
-        // پیکربندی فیلدهای اجباری و محدودیت‌ها
+        // Index
+        builder.HasIndex(rt => rt.Token).IsUnique();
+
+        // ویژگی‌ها
         builder.Property(rt => rt.Token)
             .IsRequired();
 
-        // ایجاد Index برای فیلد Unik
-        builder.HasIndex(rt => rt.Token)
-            .IsUnique();
+        builder.Property(rt => rt.IpAddress)
+            .HasMaxLength(50);
 
-        // پیکربندی روابط
+        builder.Property(rt => rt.UserAgent)
+            .HasMaxLength(255);
+
+        // روابط
         builder.HasOne(rt => rt.User)
             .WithMany(u => u.RefreshTokens)
             .HasForeignKey(rt => rt.UserId)
+            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

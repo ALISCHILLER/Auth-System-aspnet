@@ -1,34 +1,74 @@
-using System;
+using AuthSystem.Domain.Exceptions;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Entities
+namespace AuthSystem.Domain.Entities;
+
+/// <summary>
+/// موجودیت مجوز در سیستم احراز هویت
+/// این کلاس مجوزهای مختلف سیستم را تعریف می‌کند (مثل CreateUser، DeleteUser)
+/// </summary>
+public class Permission : BaseEntity
 {
     /// <summary>
-    /// Entity مجوز
+    /// نام مجوز (باید منحصر به فرد باشد)
+    /// محدودیت طول: حداکثر 100 کاراکتر
     /// </summary>
-    public class Permission : BaseEntity
+    [Required]
+    [MaxLength(100)]
+    public string Name { get; private set; } = string.Empty;
+
+    /// <summary>
+    /// توضیحات مجوز
+    /// محدودیت طول: حداکثر 255 کاراکتر
+    /// </summary>
+    [MaxLength(255)]
+    public string? Description { get; private set; }
+
+    // ویژگی‌های ناوبری (Navigation Properties)
+
+    /// <summary>
+    /// لیست روابط مجوز با نقش‌ها (برای رابطه چند به چند)
+    /// </summary>
+    public ICollection<RolePermission> RolePermissions { get; private set; } = new List<RolePermission>();
+
+    // متدهای دامنه‌ای
+
+    /// <summary>
+    /// ساخت یک مجوز جدید
+    /// </summary>
+    /// <param name="name">نام مجوز</param>
+    /// <param name="description">توضیحات مجوز</param>
+    /// <returns>یک نمونه جدید از کلاس Permission</returns>
+    public static Permission Create(string name, string? description = null)
     {
-        /// <summary>
-        /// نام مجوز (unik)
-        /// </summary>
-        [Required]
-        [MaxLength(100)]
-        public string Name { get; set; } = string.Empty;
+        return new Permission
+        {
+            Name = name,
+            Description = description
+        };
+    }
 
-        /// <summary>
-        /// توضیحات مجوز
-        /// </summary>
-        [MaxLength(255)]
-        public string? Description { get; set; }
+    /// <summary>
+    /// به‌روزرسانی نام مجوز
+    /// </summary>
+    /// <param name="name">نام جدید مجوز</param>
+    public void UpdateName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new InvalidPermissionNameException(name);
 
-        // Navigation Properties
+        Name = name;
+        MarkAsUpdated();
+    }
 
-        /// <summary>
-        /// لیست نقش‌هایی که این مجوز را دارند
-        /// </summary>
-        public ICollection<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
+    /// <summary>
+    /// به‌روزرسانی توضیحات مجوز
+    /// </summary>
+    /// <param name="description">توضیحات جدید مجوز</param>
+    public void UpdateDescription(string? description)
+    {
+        Description = description;
+        MarkAsUpdated();
     }
 }

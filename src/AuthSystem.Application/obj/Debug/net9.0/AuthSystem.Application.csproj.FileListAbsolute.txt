@@ -13,3 +13,4 @@ E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application\obj\Debug\net9.0
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application\obj\Debug\net9.0\refint\AuthSystem.Application.dll
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application\obj\Debug\net9.0\AuthSystem.Application.pdb
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application\obj\Debug\net9.0\ref\AuthSystem.Application.dll
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application\obj\Debug\net9.0\AuthSystem.Application.sourcelink.json

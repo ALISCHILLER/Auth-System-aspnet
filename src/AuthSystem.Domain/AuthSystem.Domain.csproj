@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Events\UserLoggedInEvent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Events\UserLoggedInEvent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 

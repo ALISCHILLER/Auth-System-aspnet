@@ -1,29 +1,35 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Exceptions
+namespace AuthSystem.Domain.Exceptions;
+
+/// <summary>
+/// استثنا برای زمانی که توکن تازه‌سازی نامعتبر است
+/// </summary>
+public class InvalidRefreshTokenException : DomainException
 {
     /// <summary>
-    /// Exception برای زمانی که توکن تازه‌سازی نامعتبر یا منقضی شده است
+    /// مقدار توکن تازه‌سازی
     /// </summary>
+    public string Token { get; }
 
-    public class InvalidRefreshTokenException : DomainException
+    /// <summary>
+    /// سازنده با مقدار توکن
+    /// </summary>
+    /// <param name="token">مقدار توکن</param>
+    public InvalidRefreshTokenException(string token)
+        : base($"توکن تازه‌سازی {token} نامعتبر است")
     {
-        /// <summary>
-        /// سازنده پیش‌فرض
-        /// </summary>
-        public InvalidRefreshTokenException() : base("توکن تازه‌سازی نامعتبر یا منقضی شده است.")
-        {
-        }
+        Token = token;
+    }
 
-        /// <summary>
-        /// سازنده با پیام سفارشی
-        /// </summary>
-        /// <param name="message">پیام خطا</param>
-        public InvalidRefreshTokenException(string message) : base(message)
-        {
-        }
+    /// <summary>
+    /// سازنده با مقدار توکن و پیام خطا
+    /// </summary>
+    /// <param name="token">مقدار توکن</param>
+    /// <param name="message">پیام خطا</param>
+    public InvalidRefreshTokenException(string token, string message)
+        : base(message)
+    {
+        Token = token;
     }
 }

@@ -1,36 +1,35 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Exceptions
+namespace AuthSystem.Domain.Exceptions;
+
+/// <summary>
+/// استثنا برای زمانی که کاربری با شناسه مورد نظر پیدا نشد
+/// </summary>
+public class UserNotFoundException : DomainException
 {
     /// <summary>
-    /// Exception برای زمانی که کاربر یافت نشود
+    /// شناسه کاربر که پیدا نشد
     /// </summary>
-    public class UserNotFoundException : DomainException
+    public Guid UserId { get; }
+
+    /// <summary>
+    /// سازنده با شناسه کاربر
+    /// </summary>
+    /// <param name="userId">شناسه کاربر</param>
+    public UserNotFoundException(Guid userId)
+        : base($"کاربری با شناسه {userId} یافت نشد")
     {
-        /// <summary>
-        /// سازنده پیش‌فرض
-        /// </summary>
-        public UserNotFoundException() : base("کاربر یافت نشد.")
-        {
-        }
+        UserId = userId;
+    }
 
-        /// <summary>
-        /// سازنده با پیام سفارشی
-        /// </summary>
-        /// <param name="message">پیام خطا</param>
-        public UserNotFoundException(string message) : base(message)
-        {
-        }
-
-        /// <summary>
-        /// سازنده با شناسه کاربر
-        /// </summary>
-        /// <param name="userId">شناسه کاربر یافت نشده</param>
-        public UserNotFoundException(Guid userId) : base($"کاربر با شناسه {userId} یافت نشد.")
-        {
-        }
+    /// <summary>
+    /// سازنده با شناسه کاربر و پیام خطا
+    /// </summary>
+    /// <param name="userId">شناسه کاربر</param>
+    /// <param name="message">پیام خطا</param>
+    public UserNotFoundException(Guid userId, string message)
+        : base(message)
+    {
+        UserId = userId;
     }
 }

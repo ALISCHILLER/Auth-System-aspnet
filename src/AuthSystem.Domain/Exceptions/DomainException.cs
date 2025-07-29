@@ -1,21 +1,24 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Exceptions
+namespace AuthSystem.Domain.Exceptions;
+
+/// <summary>
+/// استثنا پایه برای تمام استثناهای دامنه
+/// تمام استثناهای مربوط به منطق دامنه باید از این کلاس ارث‌بری کنند
+/// </summary>
+public abstract class DomainException : Exception
 {
     /// <summary>
-    /// Exception پایه برای تمامی Exceptionهای دامنه
+    /// سازنده با پیام خطا
     /// </summary>
-    public abstract class DomainException : Exception
-    {
-        /// <summary>
-        /// سازنده با پیام
-        /// </summary>
-        /// <param name="message">پیام خطا</param>
-        protected DomainException(string message) : base(message)
-        {
-        }
-    }
+    /// <param name="message">پیام خطا</param>
+    protected DomainException(string message) : base(message) { }
+
+    /// <summary>
+    /// سازنده با پیام خطا و استثنا داخلی
+    /// </summary>
+    /// <param name="message">پیام خطا</param>
+    /// <param name="innerException">استثنا داخلی</param>
+    protected DomainException(string message, Exception innerException)
+        : base(message, innerException) { }
 }

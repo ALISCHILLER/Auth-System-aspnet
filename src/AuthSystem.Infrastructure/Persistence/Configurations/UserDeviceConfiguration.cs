@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AuthSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,20 +5,18 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace AuthSystem.Infrastructure.Persistence.Configurations;
 
 /// <summary>
-/// پیکربندی Entity دستگاه کاربر
+/// تنظیمات Entity UserDevice برای EF Core
 /// </summary>
 public class UserDeviceConfiguration : IEntityTypeConfiguration<UserDevice>
 {
-    /// <summary>
-    /// پیکربندی Entity دستگاه کاربر
-    /// </summary>
-    /// <param name="builder">سازنده Entity</param>
     public void Configure(EntityTypeBuilder<UserDevice> builder)
     {
-        // نام جدول
-        builder.ToTable("UserDevices");
+        builder.HasKey(ud => ud.Id);
 
-        // پیکربندی فیلدهای اجباری و محدودیت‌ها
+        // Index
+        builder.HasIndex(ud => ud.DeviceId).IsUnique();
+
+        // ویژگی‌ها
         builder.Property(ud => ud.DeviceId)
             .IsRequired()
             .HasMaxLength(255);
@@ -42,14 +36,11 @@ public class UserDeviceConfiguration : IEntityTypeConfiguration<UserDevice>
         builder.Property(ud => ud.IpAddress)
             .HasMaxLength(50);
 
-        // ایجاد Index برای فیلد Unik
-        builder.HasIndex(ud => new { ud.UserId, ud.DeviceId })
-            .IsUnique(); // هر کاربر فقط یک بار می‌تواند یک DeviceId داشته باشد
-
-        // پیکربندی روابط
+        // روابط
         builder.HasOne(ud => ud.User)
             .WithMany(u => u.UserDevices)
             .HasForeignKey(ud => ud.UserId)
+            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

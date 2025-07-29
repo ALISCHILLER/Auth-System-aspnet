@@ -5,23 +5,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace AuthSystem.Infrastructure.Persistence.Configurations;
 
 /// <summary>
-/// پیکربندی Entity ارتباط Many-to-Many کاربر و نقش
+/// تنظیمات Entity UserRole برای EF Core
 /// </summary>
 public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
 {
-    /// <summary>
-    /// پیکربندی Entity ارتباط کاربر و نقش
-    /// </summary>
-    /// <param name="builder">سازنده Entity</param>
     public void Configure(EntityTypeBuilder<UserRole> builder)
     {
-        // نام جدول
-        builder.ToTable("UserRoles");
-
-        // ترکیب UserId و RoleId کلید اصلی (Composite Key) تشکیل می‌دهند
+        // کلید اصلی ترکیبی
         builder.HasKey(ur => new { ur.UserId, ur.RoleId });
 
-        // پیکربندی روابط
+        // روابط
         builder.HasOne(ur => ur.User)
             .WithMany(u => u.UserRoles)
             .HasForeignKey(ur => ur.UserId)
