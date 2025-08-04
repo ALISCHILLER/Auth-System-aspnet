@@ -1,30 +1,43 @@
+using System;
+
 namespace AuthSystem.Domain.Entities;
 
 /// <summary>
-/// موجودیت رابطه چند به چند بین نقش و مجوز
-/// این کلاس برای مدیریت مجوزهای مربوط به هر نقش استفاده می‌شود
+/// موجودیت ارتباط Many-to-Many بین Role و Permission
 /// </summary>
 public class RolePermission
 {
     /// <summary>
     /// شناسه نقش
     /// </summary>
-    public Guid RoleId { get; set; }
+    public Guid RoleId { get; private set; }
 
     /// <summary>
     /// شناسه مجوز
     /// </summary>
-    public Guid PermissionId { get; set; }
+    public Guid PermissionId { get; private set; }
 
-    // ویژگی‌های ناوبری (Navigation Properties)
-
+    // Navigation Properties
     /// <summary>
     /// نقش مربوطه
     /// </summary>
-    public Role Role { get; set; } = default!;
+    public Role Role { get; private set; } = default!;
 
     /// <summary>
     /// مجوز مربوطه
     /// </summary>
-    public Permission Permission { get; set; } = default!;
+    public Permission Permission { get; private set; } = default!;
+
+    // Required for EF Core
+    private RolePermission() { }
+
+    // Factory method
+    public static RolePermission Create(Guid roleId, Guid permissionId)
+    {
+        return new RolePermission
+        {
+            RoleId = roleId,
+            PermissionId = permissionId
+        };
+    }
 }

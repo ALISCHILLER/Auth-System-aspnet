@@ -138,13 +138,16 @@ public class User : BaseEntity
     /// <param name="email">آدرس ایمیل</param>
     /// <param name="passwordHash">هش رمز عبور</param>
     /// <returns>یک نمونه جدید از کلاس User</returns>
-    public static User Create(string userName, string email, string passwordHash)
+    public static User Create(string userName, string email, string passwordHash,string phoneNumber,string nationalCode,string roleId)
     {
         return new User
         {
             UserName = userName,
             EmailAddress = email,
-            PasswordHash = passwordHash
+            PasswordHash = passwordHash,
+            PhoneNumberValue=phoneNumber,
+            NationalCodeValue=nationalCode,
+      
         };
     }
 

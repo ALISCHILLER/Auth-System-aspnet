@@ -3,6 +3,7 @@ using AuthSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using AuthSystem.Infrastructure.Persistence.Contexts;
 
 namespace AuthSystem.Infrastructure.Persistence.Repositories;
 

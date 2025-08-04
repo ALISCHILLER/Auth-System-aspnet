@@ -32,7 +32,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.ProfileImageUrl)
             .HasMaxLength(500);
 
-        builder.Property(u => u.NationalCode)
+        builder.Property(u => u.NationalCodeValue)
             .HasMaxLength(10);
 
         // روابط

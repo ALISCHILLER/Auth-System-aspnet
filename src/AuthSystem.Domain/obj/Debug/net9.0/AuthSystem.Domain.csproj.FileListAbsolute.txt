@@ -9,3 +9,5 @@ E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\Auth
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\refint\AuthSystem.Domain.dll
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.pdb
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\ref\AuthSystem.Domain.dll
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.csproj.AssemblyReference.cache
+E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.sourcelink.json

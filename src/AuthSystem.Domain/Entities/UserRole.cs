@@ -1,30 +1,43 @@
+using System;
+
 namespace AuthSystem.Domain.Entities;
 
 /// <summary>
-/// موجودیت رابطه چند به چند بین کاربر و نقش
-/// این کلاس برای مدیریت روابط کاربران با نقش‌های مختلف استفاده می‌شود
+/// موجودیت ارتباط Many-to-Many بین User و Role
 /// </summary>
 public class UserRole
 {
     /// <summary>
     /// شناسه کاربر
     /// </summary>
-    public Guid UserId { get; set; }
+    public Guid UserId { get; private set; }
 
     /// <summary>
     /// شناسه نقش
     /// </summary>
-    public Guid RoleId { get; set; }
+    public Guid RoleId { get; private set; }
 
-    // ویژگی‌های ناوبری (Navigation Properties)
-
+    // Navigation Properties
     /// <summary>
     /// کاربر مربوطه
     /// </summary>
-    public User User { get; set; } = default!;
+    public User User { get; private set; } = default!;
 
     /// <summary>
     /// نقش مربوطه
     /// </summary>
-    public Role Role { get; set; } = default!;
+    public Role Role { get; private set; } = default!;
+
+    // Required for EF Core
+    private UserRole() { }
+
+    // Factory method
+    public static UserRole Create(Guid userId, Guid roleId)
+    {
+        return new UserRole
+        {
+            UserId = userId,
+            RoleId = roleId
+        };
+    }
 }

@@ -5,7 +5,7 @@ namespace AuthSystem.Infrastructure.Services;
 
 /// <summary>
 /// پیاده‌سازی IDateTimeProvider
-/// این کلاس برای تست‌پذیری بهتر و کنترل زمان استفاده می‌شود
+/// این کلاس برای ارائه زمان استفاده می‌شود
 /// </summary>
 public class DateTimeProvider : IDateTimeProvider
 {

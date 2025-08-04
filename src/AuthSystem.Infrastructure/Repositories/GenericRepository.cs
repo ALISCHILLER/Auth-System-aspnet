@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using AuthSystem.Infrastructure.Persistence.Contexts;
 
 namespace AuthSystem.Infrastructure.Persistence.Repositories;
 
