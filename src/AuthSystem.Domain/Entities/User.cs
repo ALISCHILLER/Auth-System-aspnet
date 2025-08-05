@@ -1,6 +1,8 @@
+using AuthSystem.Domain.Common;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Events;
 using AuthSystem.Domain.Exceptions;
+using AuthSystem.Domain.Extensions;
 using AuthSystem.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -14,86 +16,73 @@ namespace AuthSystem.Domain.Entities;
 /// </summary>
 public class User : BaseEntity
 {
+    #region Fields (پشتیبان ویژگی‌های خواندنی)
+    private string _userName;
+    private Email _emailAddress;
+    private string _passwordHash;
+    private PhoneNumber _phoneNumber;
+    private NationalCode _nationalCode;
+    #endregion
+
+    #region Properties (فقط خواندنی یا از طریق متد به‌روزرسانی)
     /// <summary>
     /// نام کاربری منحصر به فرد کاربر
     /// محدودیت طول: حداکثر 50 کاراکتر
     /// </summary>
-    [Required]
-    [MaxLength(50)]
-    public string UserName { get; private set; } = string.Empty;
+    public string UserName => _userName;
 
     /// <summary>
     /// آدرس ایمیل کاربر
-    /// این فیلد باید منحصر به فرد باشد و فرمت صحیح داشته باشد
-    /// محدودیت طول: حداکثر 255 کاراکتر
     /// </summary>
-    [Required]
-    [EmailAddress]
-    [MaxLength(255)]
-    public string EmailAddress { get; private set; } = string.Empty;
+    public string EmailAddress => _emailAddress.Value;
 
     /// <summary>
     /// نشان‌دهنده تأیید شدن ایمیل کاربر
-    /// مقدار پیش‌فرض: false (ایمیل تأیید نشده)
     /// </summary>
     public bool EmailConfirmed { get; private set; }
 
     /// <summary>
     /// شماره تلفن کاربر
-    /// فرمت شماره تلفن باید مطابق با استانداردهای ایران باشد
-    /// محدودیت طول: حداکثر 20 کاراکتر
     /// </summary>
-    [Phone]
-    [MaxLength(20)]
-    public string? PhoneNumberValue { get; private set; }
+    public string PhoneNumberValue => _phoneNumber.Value;
 
     /// <summary>
     /// نشان‌دهنده تأیید شدن شماره تلفن کاربر
-    /// مقدار پیش‌فرض: false (شماره تلفن تأیید نشده)
     /// </summary>
     public bool PhoneNumberConfirmed { get; private set; }
 
     /// <summary>
     /// کد ملی کاربر
-    /// فرمت کد ملی باید مطابق با استانداردهای ایران باشد
     /// </summary>
-    [MaxLength(10)]
-    public string? NationalCodeValue { get; private set; }
+    public string NationalCodeValue => _nationalCode.Value;
 
     /// <summary>
     /// هش رمز عبور کاربر
-    /// این فیلد نباید هرگز به صورت متن ساده ذخیره شود
     /// </summary>
-    [Required]
-    public string PasswordHash { get; private set; } = string.Empty;
+    public string PasswordHash => _passwordHash;
 
     /// <summary>
     /// URL تصویر پروفایل کاربر
-    /// می‌تواند خالی باشد (در این صورت از تصویر پیش‌فرض استفاده می‌شود)
     /// </summary>
     public string? ProfileImageUrl { get; private set; }
 
     /// <summary>
     /// وضعیت فعال بودن کاربر
-    /// مقدار پیش‌فرض: true (کاربر فعال است)
     /// </summary>
     public bool IsActive { get; private set; } = true;
 
     /// <summary>
     /// تاریخ و زمان آخرین ورود موفق کاربر
-    /// می‌تواند null باشد (اگر کاربر هیچ‌وقت وارد نشده باشد)
     /// </summary>
     public DateTime? LastLoginAt { get; private set; }
 
     /// <summary>
     /// جنسیت کاربر
-    /// مقدار پیش‌فرض: Unknown (نامشخص)
     /// </summary>
     public Gender Gender { get; private set; } = Gender.Unknown;
 
     /// <summary>
     /// تعداد تلاش‌های ناموفق ورود به سیستم
-    /// برای پیاده‌سازی سیستم قفل شدن حساب کاربری استفاده می‌شود
     /// </summary>
     public int FailedLoginAttempts { get; private set; }
 
@@ -106,9 +95,9 @@ public class User : BaseEntity
     /// تاریخ انقضای رمز عبور (در صورت استفاده از سیاست انقضای رمز عبور)
     /// </summary>
     public DateTime? PasswordExpiresAt { get; private set; }
+    #endregion
 
-    // ویژگی‌های ناوبری (Navigation Properties)
-
+    #region Navigation Properties
     /// <summary>
     /// لیست روابط کاربر با نقش‌ها (برای رابطه چند به چند)
     /// </summary>
@@ -128,37 +117,52 @@ public class User : BaseEntity
     /// لیست دستگاه‌هایی که کاربر از آن‌ها وارد شده است
     /// </summary>
     public ICollection<UserDevice> UserDevices { get; private set; } = new List<UserDevice>();
+    #endregion
 
-    // متدهای دامنه‌ای برای مدیریت وضعیت کاربر
+    #region Constructors
+    // سازنده پیش‌فرض فقط برای EF Core
+    private User() { }
+    #endregion
 
+    #region Factory Method
     /// <summary>
     /// ساخت یک کاربر جدید
     /// </summary>
     /// <param name="userName">نام کاربری</param>
     /// <param name="email">آدرس ایمیل</param>
     /// <param name="passwordHash">هش رمز عبور</param>
+    /// <param name="phoneNumber">شماره تلفن</param>
+    /// <param name="nationalCode">کد ملی</param>
     /// <returns>یک نمونه جدید از کلاس User</returns>
-    public static User Create(string userName, string email, string passwordHash,string phoneNumber,string nationalCode,string roleId)
+    public static User Create(string userName, string email, string passwordHash,
+        string phoneNumber, string nationalCode)
     {
-        return new User
+        var user = new User
         {
-            UserName = userName,
-            EmailAddress = email,
-            PasswordHash = passwordHash,
-            PhoneNumberValue=phoneNumber,
-            NationalCodeValue=nationalCode,
-      
+            _userName = EnsureValidString(userName, nameof(userName)),
+            _emailAddress = Email.Create(email),
+            _passwordHash = passwordHash,
+            _phoneNumber = PhoneNumber.Create(phoneNumber),
+            _nationalCode = NationalCode.Create(nationalCode)
         };
-    }
 
+        user.InitializeEntity();
+        user.AddDomainEvent(new UserRegisteredEvent(user.Id, email, userName));
+        return user;
+    }
+    #endregion
+
+    #region Update Methods
     /// <summary>
     /// به‌روزرسانی ایمیل کاربر
     /// </summary>
     /// <param name="email">آدرس ایمیل جدید</param>
     public void UpdateEmail(string email)
     {
-        // اعتبارسنجی ایمیل از طریق ValueObject
-        EmailAddress = Email.Create(email).Value;
+        var newEmail = Email.Create(email);
+        if (newEmail == _emailAddress) return;
+
+        _emailAddress = newEmail;
         EmailConfirmed = false;
         AddDomainEvent(new EmailChangedEvent(Id, email));
     }
@@ -170,7 +174,6 @@ public class User : BaseEntity
     {
         if (EmailConfirmed)
             throw new EmailAlreadyConfirmedException(Id);
-
         EmailConfirmed = true;
         AddDomainEvent(new EmailConfirmedEvent(Id));
     }
@@ -181,8 +184,10 @@ public class User : BaseEntity
     /// <param name="phoneNumber">شماره تلفن جدید</param>
     public void UpdatePhoneNumber(string phoneNumber)
     {
-        // اعتبارسنجی شماره تلفن از طریق ValueObject
-        PhoneNumberValue = PhoneNumber.Create(phoneNumber).Value;
+        var newPhone = PhoneNumber.Create(phoneNumber);
+        if (newPhone == _phoneNumber) return;
+
+        _phoneNumber = newPhone;
         PhoneNumberConfirmed = false;
         AddDomainEvent(new PhoneNumberChangedEvent(Id, phoneNumber));
     }
@@ -194,7 +199,6 @@ public class User : BaseEntity
     {
         if (PhoneNumberConfirmed)
             throw new PhoneNumberAlreadyConfirmedException(Id);
-
         PhoneNumberConfirmed = true;
         AddDomainEvent(new PhoneNumberConfirmedEvent(Id));
     }
@@ -205,8 +209,10 @@ public class User : BaseEntity
     /// <param name="nationalCode">کد ملی جدید</param>
     public void UpdateNationalCode(string nationalCode)
     {
-        // اعتبارسنجی کد ملی از طریق ValueObject
-        NationalCodeValue = NationalCode.Create(nationalCode).Value;
+        var newCode = NationalCode.Create(nationalCode);
+        if (newCode == _nationalCode) return;
+
+        _nationalCode = newCode;
         AddDomainEvent(new NationalCodeChangedEvent(Id, nationalCode));
     }
 
@@ -216,21 +222,23 @@ public class User : BaseEntity
     /// <param name="passwordHash">هش رمز عبور جدید</param>
     public void UpdatePassword(string passwordHash)
     {
-        PasswordHash = passwordHash;
+        if (string.IsNullOrWhiteSpace(passwordHash))
+            throw new InvalidPasswordException("هش رمز عبور نمی‌تواند خالی باشد");
+
+        _passwordHash = passwordHash;
         AddDomainEvent(new PasswordChangedEvent(Id));
     }
 
     /// <summary>
     /// قفل کردن حساب کاربری
     /// </summary>
-    /// <param name="lockoutDuration">مدت زمان قفل شدن حساب (در صورت نیاز)</param>
+    /// <param name="lockoutDuration">مدت زمان قفل شدن حساب</param>
     public void LockAccount(TimeSpan? lockoutDuration = null)
     {
+        if (!IsActive) return; // اگر قبلاً قفل شده، دوباره قفل نکن
+
         IsActive = false;
-
-        if (lockoutDuration.HasValue)
-            LockoutEnd = DateTime.UtcNow.Add(lockoutDuration.Value);
-
+        LockoutEnd = lockoutDuration.HasValue ? DateTime.UtcNow.Add(lockoutDuration.Value) : null;
         AddDomainEvent(new AccountLockedEvent(Id, DateTime.UtcNow, LockoutEnd));
     }
 
@@ -251,10 +259,15 @@ public class User : BaseEntity
     /// <summary>
     /// به‌روزرسانی آخرین زمان ورود
     /// </summary>
-    public void UpdateLastLogin()
+    /// <param name="ipAddress">آدرس IP ورود</param>
+    /// <param name="userAgent">اطلاعات User Agent</param>
+    public void UpdateLastLogin(string? ipAddress, string? userAgent)
     {
         LastLoginAt = DateTime.UtcNow;
         MarkAsUpdated();
+
+        // ثبت رویداد ورود
+        AddDomainEvent(new UserLoggedInEvent(Id, ipAddress, userAgent));
     }
 
     /// <summary>
@@ -285,7 +298,6 @@ public class User : BaseEntity
         FailedLoginAttempts++;
         MarkAsUpdated();
 
-        // بررسی آیا تعداد تلاش‌های ناموفق به حد مجاز رسیده است
         if (FailedLoginAttempts >= 5)
         {
             LockAccount(TimeSpan.FromMinutes(15));
@@ -309,9 +321,22 @@ public class User : BaseEntity
     /// </summary>
     public bool IsLockedOut()
     {
-        if (LockoutEnd.HasValue)
-            return DateTime.UtcNow < LockoutEnd;
-
-        return false;
+        return LockoutEnd.HasValue && DateTime.UtcNow < LockoutEnd;
     }
+    #endregion
+
+    #region Helper Methods
+    /// <summary>
+    /// بررسی و بازگرداندن رشته معتبر (غیر خالی و Trim شده)
+    /// </summary>
+    /// <param name="value">رشته ورودی</param>
+    /// <param name="paramName">نام پارامتر برای پیام خطا</param>
+    /// <returns>رشته Trim شده</returns>
+    private static string EnsureValidString(string value, string paramName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            throw new ArgumentException($"مقدار {paramName} نمی‌تواند خالی باشد", paramName);
+        return value.Trim();
+    }
+    #endregion
 }

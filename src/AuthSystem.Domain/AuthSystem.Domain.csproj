@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Events\UserLoggedInEvent.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Events\UserLoggedInEvent.cs" />
+    <!-- حذف هر دو خط زیر -->
+    <!-- <Compile Remove="Events\UserLoggedInEvent.cs" /> -->
+    <!-- <None Include="Events\UserLoggedInEvent.cs" /> -->
+    <!-- فقط اجازه دهید فایل به صورت پیش‌فرض کامپایل شود -->
   </ItemGroup>
 
   <ItemGroup>

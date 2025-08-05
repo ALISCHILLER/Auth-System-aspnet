@@ -38,4 +38,14 @@ public class CryptoOptions
     /// مدت زمان انقضای توکن JWT
     /// </summary>
     public TimeSpan JwtExpiration { get; set; } = TimeSpan.FromHours(2);
+
+    /// <summary>
+    /// مدت زمان انقضای توکن تأیید
+    /// </summary>
+    public TimeSpan VerificationTokenExpiration { get; set; } = TimeSpan.FromHours(24);
+
+    /// <summary>
+    /// مدت زمان انقضای توکن بازیابی رمز عبور
+    /// </summary>
+    public TimeSpan PasswordResetTokenExpiration { get; set; } = TimeSpan.FromHours(1);
 }

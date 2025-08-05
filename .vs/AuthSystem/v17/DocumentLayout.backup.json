@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.infrastructure\\services\\cryptoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|solutionrelative:src\\authsystem.infrastructure\\services\\cryptoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.infrastructure\\persistence\\seeddata\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|solutionrelative:src\\authsystem.infrastructure\\persistence\\seeddata\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\interfaces\\services\\icryptoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\interfaces\\services\\icryptoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.infrastructure\\services\\jwtservice\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|solutionrelative:src\\authsystem.infrastructure\\services\\jwtservice\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.infrastructure\\services\\passwordhasher\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|solutionrelative:src\\authsystem.infrastructure\\services\\passwordhasher\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.infrastructure\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A8B9C0D-1E2F-3A4B-5C6D-7E8F9A0B1C2D}|src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj|solutionrelative:src\\authsystem.infrastructure\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,21 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "User.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\User.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\User.cs*",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\User.cs*",
-              "ViewState": "AgIAAHwAAAAAAAAAAIA2wIwAAAB3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T10:26:11.88Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -40,14 +39,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SeedData.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Persistence\\SeedData\\SeedData.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Infrastructure\\Persistence\\SeedData\\SeedData.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Persistence\\SeedData\\SeedData.cs",
-              "RelativeToolTip": "src\\AuthSystem.Infrastructure\\Persistence\\SeedData\\SeedData.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAnwCwAAAAcAAAAAAAAAA==",
+              "Title": "ICryptoService.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Interfaces\\Services\\ICryptoService.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Interfaces\\Services\\ICryptoService.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Interfaces\\Services\\ICryptoService.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Interfaces\\Services\\ICryptoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T10:06:28.565Z",
+              "WhenOpened": "2025-08-04T12:48:47.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "src\\AuthSystem.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA3wB8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T12:43:17.624Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CryptoService.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Services\\CryptoService.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Infrastructure\\Services\\CryptoService.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Services\\CryptoService.cs",
+              "RelativeToolTip": "src\\AuthSystem.Infrastructure\\Services\\CryptoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T12:41:43.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JwtService.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Services\\JwtService\\JwtService.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Infrastructure\\Services\\JwtService\\JwtService.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Services\\JwtService\\JwtService.cs",
+              "RelativeToolTip": "src\\AuthSystem.Infrastructure\\Services\\JwtService\\JwtService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T12:28:18.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PasswordHasher.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Services\\PasswordHasher\\PasswordHasher.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Infrastructure\\Services\\PasswordHasher\\PasswordHasher.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\Services\\PasswordHasher\\PasswordHasher.cs",
+              "RelativeToolTip": "src\\AuthSystem.Infrastructure\\Services\\PasswordHasher\\PasswordHasher.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwFYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T12:25:24.873Z",
               "EditorCaption": ""
             }
           ]
