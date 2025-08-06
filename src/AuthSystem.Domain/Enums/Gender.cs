@@ -10,15 +10,15 @@ public enum Gender
     /// جنسیت نامشخص است
     /// این مقدار زمانی استفاده می‌شود که کاربر جنسیت خود را انتخاب نکرده باشد
     /// </summary>
-    Unknown,
+    Unknown = 0,
 
     /// <summary>
     /// جنسیت مرد
     /// </summary>
-    Male,
+    Male = 1 ,
 
     /// <summary>
     /// جنسیت زن
     /// </summary>
-    Female
+    Female = 2 
 }

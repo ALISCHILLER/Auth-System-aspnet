@@ -11,111 +11,42 @@ using System.ComponentModel.DataAnnotations;
 namespace AuthSystem.Domain.Entities;
 
 /// <summary>
-/// موجودیت اصلی کاربر در سیستم احراز هویت
-/// این کلاس تمام ویژگی‌ها و رفتارهای دامنه‌ای کاربر را تعریف می‌کند
+/// موجودیت اصلی کاربر — یک مدل دامنه غنی (Rich Domain Model)
+/// این کلاس تمام ویژگی‌ها و رفتارهای دامنه‌ای کاربر را تعریف می‌کند.
 /// </summary>
 public class User : BaseEntity
 {
-    #region Fields (پشتیبان ویژگی‌های خواندنی)
+    #region Fields (فیلدهای پشتیبان)
     private string _userName;
     private Email _emailAddress;
     private string _passwordHash;
     private PhoneNumber _phoneNumber;
     private NationalCode _nationalCode;
+    private string? _profileImageUrl;
+    private Gender _gender = Gender.Unknown; ;
     #endregion
 
-    #region Properties (فقط خواندنی یا از طریق متد به‌روزرسانی)
-    /// <summary>
-    /// نام کاربری منحصر به فرد کاربر
-    /// محدودیت طول: حداکثر 50 کاراکتر
-    /// </summary>
+    #region Properties (ویژگی‌های خواندنی)
     public string UserName => _userName;
-
-    /// <summary>
-    /// آدرس ایمیل کاربر
-    /// </summary>
     public string EmailAddress => _emailAddress.Value;
-
-    /// <summary>
-    /// نشان‌دهنده تأیید شدن ایمیل کاربر
-    /// </summary>
     public bool EmailConfirmed { get; private set; }
-
-    /// <summary>
-    /// شماره تلفن کاربر
-    /// </summary>
     public string PhoneNumberValue => _phoneNumber.Value;
-
-    /// <summary>
-    /// نشان‌دهنده تأیید شدن شماره تلفن کاربر
-    /// </summary>
     public bool PhoneNumberConfirmed { get; private set; }
-
-    /// <summary>
-    /// کد ملی کاربر
-    /// </summary>
     public string NationalCodeValue => _nationalCode.Value;
-
-    /// <summary>
-    /// هش رمز عبور کاربر
-    /// </summary>
     public string PasswordHash => _passwordHash;
-
-    /// <summary>
-    /// URL تصویر پروفایل کاربر
-    /// </summary>
-    public string? ProfileImageUrl { get; private set; }
-
-    /// <summary>
-    /// وضعیت فعال بودن کاربر
-    /// </summary>
+    public string? ProfileImageUrl => _profileImageUrl;
     public bool IsActive { get; private set; } = true;
-
-    /// <summary>
-    /// تاریخ و زمان آخرین ورود موفق کاربر
-    /// </summary>
     public DateTime? LastLoginAt { get; private set; }
-
-    /// <summary>
-    /// جنسیت کاربر
-    /// </summary>
-    public Gender Gender { get; private set; } = Gender.Unknown;
-
-    /// <summary>
-    /// تعداد تلاش‌های ناموفق ورود به سیستم
-    /// </summary>
+    public Gender Gender => _gender;
     public int FailedLoginAttempts { get; private set; }
-
-    /// <summary>
-    /// زمان پایان قفل حساب کاربری (در صورت قفل شدن)
-    /// </summary>
     public DateTime? LockoutEnd { get; private set; }
-
-    /// <summary>
-    /// تاریخ انقضای رمز عبور (در صورت استفاده از سیاست انقضای رمز عبور)
-    /// </summary>
     public DateTime? PasswordExpiresAt { get; private set; }
     #endregion
 
-    #region Navigation Properties
-    /// <summary>
-    /// لیست روابط کاربر با نقش‌ها (برای رابطه چند به چند)
-    /// </summary>
+    #region Navigation Properties (روابط)
     public ICollection<UserRole> UserRoles { get; private set; } = new List<UserRole>();
-
-    /// <summary>
-    /// لیست توکن‌های تازه‌سازی مربوط به این کاربر
-    /// </summary>
     public ICollection<RefreshToken> RefreshTokens { get; private set; } = new List<RefreshToken>();
-
-    /// <summary>
-    /// تاریخچه ورودهای کاربر به سیستم
-    /// </summary>
     public ICollection<LoginHistory> LoginHistories { get; private set; } = new List<LoginHistory>();
-
-    /// <summary>
-    /// لیست دستگاه‌هایی که کاربر از آن‌ها وارد شده است
-    /// </summary>
     public ICollection<UserDevice> UserDevices { get; private set; } = new List<UserDevice>();
     #endregion
 
@@ -128,12 +59,6 @@ public class User : BaseEntity
     /// <summary>
     /// ساخت یک کاربر جدید
     /// </summary>
-    /// <param name="userName">نام کاربری</param>
-    /// <param name="email">آدرس ایمیل</param>
-    /// <param name="passwordHash">هش رمز عبور</param>
-    /// <param name="phoneNumber">شماره تلفن</param>
-    /// <param name="nationalCode">کد ملی</param>
-    /// <returns>یک نمونه جدید از کلاس User</returns>
     public static User Create(string userName, string email, string passwordHash,
         string phoneNumber, string nationalCode)
     {
@@ -153,23 +78,16 @@ public class User : BaseEntity
     #endregion
 
     #region Update Methods
-    /// <summary>
-    /// به‌روزرسانی ایمیل کاربر
-    /// </summary>
-    /// <param name="email">آدرس ایمیل جدید</param>
     public void UpdateEmail(string email)
     {
         var newEmail = Email.Create(email);
-        if (newEmail == _emailAddress) return;
-
-        _emailAddress = newEmail;
-        EmailConfirmed = false;
-        AddDomainEvent(new EmailChangedEvent(Id, email));
+        SetValueIfChanged(ref _emailAddress, newEmail, () =>
+        {
+            EmailConfirmed = false;
+            AddDomainEvent(new EmailChangedEvent(Id, email));
+        });
     }
 
-    /// <summary>
-    /// تأیید ایمیل کاربر
-    /// </summary>
     public void ConfirmEmail()
     {
         if (EmailConfirmed)
@@ -178,23 +96,16 @@ public class User : BaseEntity
         AddDomainEvent(new EmailConfirmedEvent(Id));
     }
 
-    /// <summary>
-    /// به‌روزرسانی شماره تلفن کاربر
-    /// </summary>
-    /// <param name="phoneNumber">شماره تلفن جدید</param>
     public void UpdatePhoneNumber(string phoneNumber)
     {
         var newPhone = PhoneNumber.Create(phoneNumber);
-        if (newPhone == _phoneNumber) return;
-
-        _phoneNumber = newPhone;
-        PhoneNumberConfirmed = false;
-        AddDomainEvent(new PhoneNumberChangedEvent(Id, phoneNumber));
+        SetValueIfChanged(ref _phoneNumber, newPhone, () =>
+        {
+            PhoneNumberConfirmed = false;
+            AddDomainEvent(new PhoneNumberChangedEvent(Id, phoneNumber));
+        });
     }
 
-    /// <summary>
-    /// تأیید شماره تلفن کاربر
-    /// </summary>
     public void ConfirmPhoneNumber()
     {
         if (PhoneNumberConfirmed)
@@ -203,23 +114,15 @@ public class User : BaseEntity
         AddDomainEvent(new PhoneNumberConfirmedEvent(Id));
     }
 
-    /// <summary>
-    /// به‌روزرسانی کد ملی کاربر
-    /// </summary>
-    /// <param name="nationalCode">کد ملی جدید</param>
     public void UpdateNationalCode(string nationalCode)
     {
         var newCode = NationalCode.Create(nationalCode);
-        if (newCode == _nationalCode) return;
-
-        _nationalCode = newCode;
-        AddDomainEvent(new NationalCodeChangedEvent(Id, nationalCode));
+        SetValueIfChanged(ref _nationalCode, newCode, () =>
+        {
+            AddDomainEvent(new NationalCodeChangedEvent(Id, nationalCode));
+        });
     }
 
-    /// <summary>
-    /// به‌روزرسانی رمز عبور کاربر
-    /// </summary>
-    /// <param name="passwordHash">هش رمز عبور جدید</param>
     public void UpdatePassword(string passwordHash)
     {
         if (string.IsNullOrWhiteSpace(passwordHash))
@@ -229,22 +132,26 @@ public class User : BaseEntity
         AddDomainEvent(new PasswordChangedEvent(Id));
     }
 
-    /// <summary>
-    /// قفل کردن حساب کاربری
-    /// </summary>
-    /// <param name="lockoutDuration">مدت زمان قفل شدن حساب</param>
+    public bool VerifyPassword(string inputPasswordHash) => _passwordHash == inputPasswordHash;
+
+    public bool IsPasswordExpired() =>
+        PasswordExpiresAt.HasValue && DateTime.UtcNow > PasswordExpiresAt.Value;
+
+    public void ExtendPasswordExpiration(int days)
+    {
+        PasswordExpiresAt = DateTime.UtcNow.AddDays(days);
+        MarkAsUpdated();
+    }
+
     public void LockAccount(TimeSpan? lockoutDuration = null)
     {
-        if (!IsActive) return; // اگر قبلاً قفل شده، دوباره قفل نکن
+        if (!IsActive) return;
 
         IsActive = false;
         LockoutEnd = lockoutDuration.HasValue ? DateTime.UtcNow.Add(lockoutDuration.Value) : null;
         AddDomainEvent(new AccountLockedEvent(Id, DateTime.UtcNow, LockoutEnd));
     }
 
-    /// <summary>
-    /// باز کردن حساب کاربری قفل شده
-    /// </summary>
     public void UnlockAccount()
     {
         if (IsActive)
@@ -256,43 +163,48 @@ public class User : BaseEntity
         AddDomainEvent(new AccountUnlockedEvent(Id, DateTime.UtcNow));
     }
 
-    /// <summary>
-    /// به‌روزرسانی آخرین زمان ورود
-    /// </summary>
-    /// <param name="ipAddress">آدرس IP ورود</param>
-    /// <param name="userAgent">اطلاعات User Agent</param>
+    public void Deactivate()
+    {
+        if (!IsActive) return;
+        IsActive = false;
+        AddDomainEvent(new UserDeactivatedEvent(Id));
+    }
+
+    public void Activate()
+    {
+        if (IsActive) return;
+        IsActive = true;
+        AddDomainEvent(new UserActivatedEvent(Id));
+    }
+
     public void UpdateLastLogin(string? ipAddress, string? userAgent)
     {
         LastLoginAt = DateTime.UtcNow;
         MarkAsUpdated();
 
-        // ثبت رویداد ورود
+        // ایجاد رویداد ورود
         AddDomainEvent(new UserLoggedInEvent(Id, ipAddress, userAgent));
+
+        // اضافه کردن به تاریخچه ورود
+        LoginHistories.Add(LoginHistory.CreateSuccess(Id, ipAddress, userAgent));
     }
 
-    /// <summary>
-    /// به‌روزرسانی تصویر پروفایل
-    /// </summary>
-    /// <param name="url">آدرس جدید تصویر پروفایل</param>
     public void UpdateProfileImage(string url)
     {
-        ProfileImageUrl = url;
-        MarkAsUpdated();
+        SetValueIfChanged(ref _profileImageUrl, url, () =>
+        {
+            AddDomainEvent(new ProfileImageChangedEvent(Id, url));
+        });
     }
 
-    /// <summary>
-    /// به‌روزرسانی جنسیت کاربر
-    /// </summary>
-    /// <param name="gender">جنسیت جدید</param>
     public void UpdateGender(Gender gender)
     {
-        Gender = gender;
-        MarkAsUpdated();
+        SetValueIfChanged(ref _gender, gender, () =>
+        {
+            AddDomainEvent(new GenderChangedEvent(Id, gender));
+        });
     }
 
-    /// <summary>
-    /// افزودن یک تلاش ناموفق ورود
-    /// </summary>
     public void IncrementFailedLoginAttempts()
     {
         FailedLoginAttempts++;
@@ -304,9 +216,6 @@ public class User : BaseEntity
         }
     }
 
-    /// <summary>
-    /// ریست کردن تعداد تلاش‌های ناموفق ورود
-    /// </summary>
     public void ResetFailedLoginAttempts()
     {
         if (FailedLoginAttempts > 0)
@@ -316,27 +225,31 @@ public class User : BaseEntity
         }
     }
 
-    /// <summary>
-    /// بررسی آیا حساب کاربری قفل شده است یا خیر
-    /// </summary>
-    public bool IsLockedOut()
-    {
-        return LockoutEnd.HasValue && DateTime.UtcNow < LockoutEnd;
-    }
+    public bool IsLockedOut() => LockoutEnd.HasValue && DateTime.UtcNow < LockoutEnd;
     #endregion
 
     #region Helper Methods
-    /// <summary>
-    /// بررسی و بازگرداندن رشته معتبر (غیر خالی و Trim شده)
-    /// </summary>
-    /// <param name="value">رشته ورودی</param>
-    /// <param name="paramName">نام پارامتر برای پیام خطا</param>
-    /// <returns>رشته Trim شده</returns>
     private static string EnsureValidString(string value, string paramName)
     {
         if (string.IsNullOrWhiteSpace(value))
             throw new ArgumentException($"مقدار {paramName} نمی‌تواند خالی باشد", paramName);
         return value.Trim();
+    }
+
+    /// <summary>
+    /// تنظیم مقدار یک فیلد در صورت تغییر
+    /// این متد برای جلوگیری از تکرار کد در متدهای Update استفاده می‌شود
+    /// </summary>
+    /// <typeparam name="T">نوع داده</typeparam>
+    /// <param name="field">مراجعه به فیلد</param>
+    /// <param name="newValue">مقدار جدید</param>
+    /// <param name="onChanged">عملیاتی که در صورت تغییر انجام می‌شود</param>
+    private void SetValueIfChanged<T>(ref T field, T newValue, Action onChanged)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, newValue)) return;
+        field = newValue;
+        onChanged();
+        MarkAsUpdated();
     }
     #endregion
 }
