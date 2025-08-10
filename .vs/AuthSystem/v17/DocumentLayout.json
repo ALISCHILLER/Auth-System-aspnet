@@ -1,28 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\enums\\devicetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\enums\\devicetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\enums\\gender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\enums\\gender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\enums\\authstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\enums\\authstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\enums\\roletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\enums\\roletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -30,76 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Role.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Role.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Role.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Role.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Role.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T09:48:01.192Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthStatus.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\AuthStatus.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Enums\\AuthStatus.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\AuthStatus.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Enums\\AuthStatus.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAwA4AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T08:47:54.603Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DeviceType.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\DeviceType.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Enums\\DeviceType.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\DeviceType.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Enums\\DeviceType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T08:47:48.343Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Gender.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\Gender.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Enums\\Gender.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\Gender.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Enums\\Gender.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T08:47:42.704Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RoleType.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\RoleType.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Enums\\RoleType.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Enums\\RoleType.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Enums\\RoleType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T08:47:38.54Z",
-              "EditorCaption": ""
             }
           ]
         }
