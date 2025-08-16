@@ -1,4 +1,8 @@
-ببین ساختار ----                 -------------         ------ ----
+    Directory: E:\project-zar\custom\asp\AuthSystem
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
 d-----          8/4/2025  10:11 AM                .github
 d-----         7/27/2025   4:56 PM                docker
 d-----         7/27/2025   4:57 PM                docs
@@ -6,74 +10,78 @@ d-----         7/27/2025   4:57 PM                scripts
 d-----         7/27/2025  10:33 AM                src
 d-----         7/27/2025  10:33 AM                tests
 -a----         7/29/2025   5:21 PM           3237 AuthSystem.sln
--a----         7/28/2025  11:18 AM          16866 domain.docx
--a----          8/5/2025  11:43 AM           5827 ساختار پوشه.txt
+-a----         7/28/2025   9:51 AM          33220 red.docx
+-a----         8/11/2025   9:23 AM           5864 ساختار پوشه.txt
 
 
 PS E:\project-zar\custom\asp\AuthSystem> cd src
 PS E:\project-zar\custom\asp\AuthSystem\src> ls
 
 
+    Directory: E:\project-zar\custom\asp\AuthSystem\src
+
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----          8/5/2025  11:32 AM                AuthSystem.Api
-d-----         8/10/2025  11:06 AM                AuthSystem.Application
-d-----         8/10/2025  10:27 AM                AuthSystem.Domain
+d-----         8/16/2025   3:12 PM                AuthSystem.Application
+d-----         8/16/2025   3:13 PM                AuthSystem.Domain
+d-----         8/10/2025  10:27 AM                AuthSystem.Infrastructure
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----          8/5/2025  11:32 AM                AuthSystem.Api
+d-----         8/16/2025   3:12 PM                AuthSystem.Application
+d-----         8/16/2025   3:13 PM                AuthSystem.Domain
 d-----         8/10/2025  10:27 AM                AuthSystem.Infrastructure
 d-----         7/29/2025   2:09 PM                AuthSystem.Shared
 
 
-PS E:\project-zar\custom\asp\AuthSystem\src> cd AuthSystem.Api
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api> ls
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.domain> ls
 
 
-    Directory: E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api
+    Directory: E:\project-zar\custom\asp\AuthSystem\src\authsystem.domain
 
 
-Mode                 LastWriteTime         Length Name
-d-----         7/27/2025   3:14 PM                Logs
-d-----         8/10/2025  12:05 PM                obj
-d-----         7/27/2025  10:33 AM                Properties
--a----         7/27/2025  10:33 AM            127 appsettings.Development.json
--a----          8/5/2025  11:32 AM           2602 appsettings.json
--a----         7/27/2025   3:12 PM           1319 AuthSystem.Api.csproj
--a----         7/29/2025   3:36 PM            238 AuthSystem.Api.csproj.user
--a----         7/27/2025  10:33 AM            141 AuthSystem.Api.http
--a----         7/27/2025   3:37 PM           2526 Program.cs
-
-
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api> cd /../AuthSystem.Application
-cd : Cannot find path 'E:\AuthSystem.Application' because it does not exist.
-At line:1 char:1
-+ cd /../AuthSystem.Application
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : ObjectNotFound: (E:\AuthSystem.Application:String) [Set-Location], ItemNotFoundException
-    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
-
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api> cd ../AuthSystem.Application
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application> ls
-
-
-    Directory: E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----         7/29/2025   2:09 PM                bin
-d-----         8/10/2025   2:00 PM                Common
+d-----         7/29/2025   1:06 PM                Common
+d-----         8/11/2025   9:34 AM                Entities
+d-----         8/10/2025   3:51 PM                Enums
+d-----          8/6/2025  12:00 PM                Events
+d-----          8/5/2025  12:10 PM                Exceptions
+d-----          8/4/2025  12:09 PM                Extensions
+d-----          8/4/2025   1:52 PM                obj
+d-----         7/29/2025   2:09 PM                Specifications
+d-----          8/4/2025   2:23 PM                ValueObjects
+-a----          8/5/2025   3:10 PM            705 AuthSystem.Domain.csproj
+-a----         8/16/2025   9:40 AM          22471 map.docx
+
+
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.domain> cd ./../authsystem.application
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.application> ls
+    Directory: E:\project-zar\custom\asp\AuthSystem\src\authsystem.application
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         7/29/2025   2:09 PM                bin
+d-----         8/16/2025   2:04 PM                Common
 d-----         8/10/2025  11:13 AM                DTOs
 d-----         8/10/2025  11:13 AM                Features
 d-----         8/10/2025   4:24 PM                Interfaces
 d-----         8/10/2025   4:40 PM                Mappings
-d-----         8/10/2025  12:05 PM                obj
+d-----         8/16/2025  12:17 PM                obj
 d-----         8/10/2025   4:33 PM                Validators
 -a----         8/10/2025   4:50 PM            873 AuthSystem.Application.csproj
+-a----         8/16/2025   3:12 PM          19400 map.docx
 
 
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Application> cd ../AuthSystem.Infrastructure
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Infrastructure> ls
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.application> cd ./../authsystem.infrastructure
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.infrastructure> ls
 
 
-    Directory: E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Infrastructure
+    Directory: E:\project-zar\custom\asp\AuthSystem\src\authsystem.infrastructure
 
 
 Mode                 LastWriteTime         Length Name
@@ -95,24 +103,25 @@ d-----          8/5/2025  11:32 AM                Validation
 -a----          8/4/2025   2:45 PM            223 DependencyInjection.cs
 
 
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Infrastructure> cd ../AuthSystem.Domain
-PS E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain> ls
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.infrastructure> cd ./../authsystem.api
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.api> ls
 
 
-    Directory: E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Domain
+    Directory: E:\project-zar\custom\asp\AuthSystem\src\authsystem.api
 
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----         7/29/2025   2:09 PM                bin
-d-----         7/29/2025   1:06 PM                Common
-d-----          8/6/2025  12:14 PM                Entities
-d-----         8/10/2025   3:51 PM                Enums
-d-----          8/6/2025  12:00 PM                Events
-d-----          8/5/2025  12:10 PM                Exceptions
-d-----          8/4/2025  12:09 PM                Extensions
-d-----          8/4/2025   1:52 PM                obj
-d-----         7/29/2025   2:09 PM                Specifications
-d-----          8/4/2025   2:23 PM                ValueObjects
--a----          8/5/2025   3:10 PM            705 AuthSystem.Domain.csproj
--a----         7/27/2025  10:32 AM             64 Class1.cs
+d-----         7/27/2025   3:14 PM                Logs
+d-----         8/16/2025  12:17 PM                obj
+d-----         7/27/2025  10:33 AM                Properties
+-a----         7/27/2025  10:33 AM            127 appsettings.Development.json
+-a----          8/5/2025  11:32 AM           2602 appsettings.json
+-a----         7/27/2025   3:12 PM           1319 AuthSystem.Api.csproj
+-a----         7/29/2025   3:36 PM            238 AuthSystem.Api.csproj.user
+-a----         7/27/2025  10:33 AM            141 AuthSystem.Api.http
+-a----         7/27/2025   3:37 PM           2526 Program.cs
+
+
+PS E:\project-zar\custom\asp\AuthSystem\src\authsystem.api>
