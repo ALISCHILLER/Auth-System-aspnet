@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/aNHPf0LEQg=",
+  "dgSpecHash": "UuWbALJXBCU=",
   "success": false,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Api\\AuthSystem.Api.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\zar\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.0.0\\fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\libphonenumber-csharp\\9.0.12\\libphonenumber-csharp.9.0.12.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\mailkit\\4.13.0\\mailkit.4.13.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\mediatr\\13.0.0\\mediatr.13.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
@@ -19,7 +20,8 @@
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.3.0\\microsoft.aspnetcore.authorization.2.3.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.3.0\\microsoft.aspnetcore.authorization.policy.2.3.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.3.0\\microsoft.aspnetcore.cors.2.3.0.nupkg.sha512",
-    "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.3.0\\microsoft.aspnetcore.cryptography.internal.2.3.0.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\9.0.8\\microsoft.aspnetcore.cryptography.internal.9.0.8.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\9.0.8\\microsoft.aspnetcore.cryptography.keyderivation.9.0.8.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.dataprotection\\2.3.0\\microsoft.aspnetcore.dataprotection.2.3.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.dataprotection.abstractions\\2.3.0\\microsoft.aspnetcore.dataprotection.abstractions.2.3.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.abstractions\\2.3.0\\microsoft.aspnetcore.diagnostics.abstractions.2.3.0.nupkg.sha512",

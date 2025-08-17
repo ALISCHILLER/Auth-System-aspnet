@@ -1,14 +1,14 @@
-using AuthSystem.Domain.Enums;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using AuthSystem.Domain.Common;
+using AuthSystem.Domain.ValueObjects;
 
 namespace AuthSystem.Domain.Entities;
 
 /// <summary>
 /// موجودیت دستگاه کاربر
-/// این کلاس برای مدیریت دستگاه‌هایی که کاربر از آن‌ها وارد شده است استفاده می‌شود
+/// برای مدیریت دستگاه‌های مورد اعتماد کاربر
 /// </summary>
-public class UserDevice : BaseEntity
+public class UserDevice : BaseEntity<Guid>, IAuditableEntity
 {
     /// <summary>
     /// شناسه کاربر
@@ -16,110 +16,117 @@ public class UserDevice : BaseEntity
     public Guid UserId { get; private set; }
 
     /// <summary>
-    /// کاربر مربوطه
+    /// شناسه منحصر به فرد دستگاه
     /// </summary>
-    public User User { get; private set; } = default!;
+    public string DeviceId { get; private set; } = null!;
 
     /// <summary>
-    /// شناسه یکتای دستگاه (Fingerprint یا Device Identifier)
+    /// نام دستگاه (مثلاً "گوشی شخصی" یا "لپ‌تاپ کار")
     /// </summary>
-    [Required]
-    [MaxLength(255)]
-    public string DeviceId { get; private set; } = string.Empty;
-
-    /// <summary>
-    /// نام دستگاه (اختیاری)
-    /// </summary>
-    [MaxLength(100)]
-    public string? DeviceName { get; private set; }
+    public string DeviceName { get; private set; } = null!;
 
     /// <summary>
     /// نوع دستگاه
     /// </summary>
-    public DeviceType DeviceType { get; private set; } = DeviceType.Unknown;
+    public DeviceType Type { get; private set; }
 
     /// <summary>
-    /// نام سیستم عامل
+    /// آیا دستگاه مورد اعتماد است
     /// </summary>
-    [MaxLength(50)]
-    public string? OsName { get; private set; }
+    public bool IsTrusted { get; private set; }
 
     /// <summary>
-    /// اطلاعات مرورگر
+    /// زمان آخرین استفاده
     /// </summary>
-    [MaxLength(255)]
-    public string? BrowserInfo { get; private set; }
+    public DateTime LastUsedAt { get; private set; }
 
     /// <summary>
-    /// آخرین آدرس IP مورد استفاده از این دستگاه
+    /// تاریخ ایجاد (از IAuditableEntity)
     /// </summary>
-    public string? IpAddress { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
     /// <summary>
-    /// تاریخ آخرین ورود از این دستگاه
+    /// تاریخ آخرین به‌روزرسانی (از IAuditableEntity)
     /// </summary>
-    public DateTime LastLoginAt { get; private set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt => LastUsedAt;
 
     /// <summary>
-    /// آیا این دستگاه مورد اعتماد است؟
+    /// سازنده خصوصی برای ORM
     /// </summary>
-    public bool IsTrusted { get; private set; } = false;
-
-    // متدهای دامنه‌ای
+    private UserDevice() { }
 
     /// <summary>
-    /// ساخت یک دستگاه کاربر جدید
+    /// سازنده اصلی
     /// </summary>
-    /// <param name="userId">شناسه کاربر</param>
-    /// <param name="deviceId">شناسه دستگاه</param>
-    /// <param name="deviceType">نوع دستگاه</param>
-    /// <param name="ipAddress">آدرس IP</param>
-    /// <param name="userAgent">اطلاعات User Agent</param>
-    /// <returns>یک نمونه جدید از کلاس UserDevice</returns>
-    public static UserDevice Create(Guid userId, string deviceId, DeviceType deviceType, string? ipAddress, string? userAgent)
+    private UserDevice(
+        Guid userId,
+        string deviceId,
+        string deviceName,
+        DeviceType type)
     {
-        return new UserDevice
-        {
-            UserId = userId,
-            DeviceId = deviceId,
-            DeviceType = deviceType,
-            IpAddress = ipAddress,
-            LastLoginAt = DateTime.UtcNow
-        };
-    }
-
-    /// <summary>
-    /// به‌روزرسانی اطلاعات دستگاه
-    /// </summary>
-    /// <param name="deviceName">نام دستگاه</param>
-    /// <param name="osName">نام سیستم عامل</param>
-    /// <param name="browserInfo">اطلاعات مرورگر</param>
-    /// <param name="ipAddress">آدرس IP</param>
-    public void UpdateDeviceInfo(string? deviceName, string? osName, string? browserInfo, string? ipAddress)
-    {
+        Id = Guid.NewGuid();
+        UserId = userId;
+        DeviceId = deviceId;
         DeviceName = deviceName;
-        OsName = osName;
-        BrowserInfo = browserInfo;
-        IpAddress = ipAddress;
-        LastLoginAt = DateTime.UtcNow;
-        MarkAsUpdated();
+        Type = type;
+        IsTrusted = false;
+        LastUsedAt = DateTime.UtcNow;
+        CreatedAt = DateTime.UtcNow;
     }
 
     /// <summary>
-    /// علامت‌گذاری دستگاه به عنوان مورد اعتماد
+    /// ایجاد نمونه جدید دستگاه کاربر
     /// </summary>
-    public void MarkAsTrusted()
+    public static UserDevice Create(
+        Guid userId,
+        string deviceId,
+        string deviceName,
+        DeviceType type)
+    {
+        if (string.IsNullOrWhiteSpace(deviceId))
+            throw new ArgumentException("شناسه دستگاه نمی‌تواند خالی باشد", nameof(deviceId));
+
+        if (string.IsNullOrWhiteSpace(deviceName))
+            throw new ArgumentException("نام دستگاه نمی‌تواند خالی باشد", nameof(deviceName));
+
+        return new UserDevice(userId, deviceId, deviceName, type);
+    }
+
+    /// <summary>
+    /// اعتماد به دستگاه
+    /// </summary>
+    public void Trust()
     {
         IsTrusted = true;
-        MarkAsUpdated();
+        LastUsedAt = DateTime.UtcNow;
     }
 
     /// <summary>
-    /// علامت‌گذاری دستگاه به عنوان غیرقابل اعتماد
+    /// عدم اعتماد به دستگاه
     /// </summary>
-    public void MarkAsUntrusted()
+    public void Untrust()
     {
         IsTrusted = false;
-        MarkAsUpdated();
+        LastUsedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// ثبت استفاده از دستگاه
+    /// </summary>
+    public void RecordUsage()
+    {
+        LastUsedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// تغییر نام دستگاه
+    /// </summary>
+    public void ChangeName(string newName)
+    {
+        if (string.IsNullOrWhiteSpace(newName))
+            throw new ArgumentException("نام جدید نمی‌تواند خالی باشد");
+
+        DeviceName = newName;
+        LastUsedAt = DateTime.UtcNow;
     }
 }

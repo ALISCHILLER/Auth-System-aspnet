@@ -1,13 +1,14 @@
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using AuthSystem.Domain.Common;
+using AuthSystem.Domain.ValueObjects;
 
 namespace AuthSystem.Domain.Entities;
 
 /// <summary>
-/// موجودیت تاریخچه ورود
-/// این کلاس برای ثبت تاریخچه ورود کاربران به سیستم استفاده می‌شود
+/// موجودیت تاریخچه ورود کاربر
+/// برای ردیابی ورودهای کاربر به سیستم
 /// </summary>
-public class LoginHistory : BaseEntity
+public class LoginHistory : BaseEntity<Guid>
 {
     /// <summary>
     /// شناسه کاربر
@@ -15,73 +16,93 @@ public class LoginHistory : BaseEntity
     public Guid UserId { get; private set; }
 
     /// <summary>
-    /// کاربر مربوطه
+    /// آدرس IP ورود
     /// </summary>
-    public User User { get; private set; } = default!;
+    public IpAddress IpAddress { get; private set; }
 
     /// <summary>
-    /// تاریخ و زمان ورود
-    /// مقدار پیش‌فرض: زمان فعلی سیستم
+    /// User Agent دستگاه
     /// </summary>
-    public DateTime LoginAt { get; private set; } = DateTime.UtcNow;
+    public UserAgent UserAgent { get; private set; }
 
     /// <summary>
-    /// آدرس IP که از آن وارد شده
+    /// نوع دستگاه
     /// </summary>
-    public string? IpAddress { get; private set; }
+    public DeviceType DeviceType { get; private set; }
 
     /// <summary>
-    /// اطلاعات User Agent (مرورگر/دستگاه)
-    /// </summary>
-    public string? UserAgent { get; private set; }
-
-    /// <summary>
-    /// آیا ورود موفق بوده؟
+    /// آیا ورود موفق بود
     /// </summary>
     public bool IsSuccessful { get; private set; }
 
     /// <summary>
-    /// دلیل ناموفق بودن ورود (در صورت وجود)
+    /// زمان ورود
     /// </summary>
-    public string? FailureReason { get; private set; }
-
-    // متدهای دامنه‌ای
+    public DateTime LoginAt { get; private set; }
 
     /// <summary>
-    /// ساخت یک ورود موفق جدید
+    /// زمان خروج (در صورت وجود)
     /// </summary>
-    /// <param name="userId">شناسه کاربر</param>
-    /// <param name="ipAddress">آدرس IP</param>
-    /// <param name="userAgent">اطلاعات User Agent</param>
-    /// <returns>یک نمونه جدید از کلاس LoginHistory</returns>
-    public static LoginHistory CreateSuccess(Guid userId, string? ipAddress, string? userAgent)
+    public DateTime? LogoutAt { get; private set; }
+
+    /// <summary>
+    /// مدت زمان جلسه (در صورت پایان یافتن)
+    /// </summary>
+    public TimeSpan? Duration => LogoutAt.HasValue ? LogoutAt.Value - LoginAt : null;
+
+    /// <summary>
+    /// سازنده خصوصی برای ORM
+    /// </summary>
+    private LoginHistory() { }
+
+    /// <summary>
+    /// سازنده اصلی
+    /// </summary>
+    private LoginHistory(
+        Guid userId,
+        IpAddress ipAddress,
+        UserAgent userAgent,
+        bool isSuccessful)
     {
-        return new LoginHistory
-        {
-            UserId = userId,
-            IpAddress = ipAddress,
-            UserAgent = userAgent,
-            IsSuccessful = true
-        };
+        Id = Guid.NewGuid();
+        UserId = userId;
+        IpAddress = ipAddress;
+        UserAgent = userAgent;
+        DeviceType = userAgent.DeviceType;
+        IsSuccessful = isSuccessful;
+        LoginAt = DateTime.UtcNow;
     }
 
     /// <summary>
-    /// ساخت یک ورود ناموفق جدید
+    /// ایجاد نمونه جدید تاریخچه ورود
     /// </summary>
-    /// <param name="userId">شناسه کاربر</param>
-    /// <param name="ipAddress">آدرس IP</param>
-    /// <param name="userAgent">اطلاعات User Agent</param>
-    /// <param name="failureReason">دلیل ناموفق بودن</param>
-    /// <returns>یک نمونه جدید از کلاس LoginHistory</returns>
-    public static LoginHistory CreateFailure(Guid userId, string? ipAddress, string? userAgent, string failureReason)
+    public static LoginHistory Create(
+        Guid userId,
+        IpAddress ipAddress,
+        UserAgent userAgent,
+        bool isSuccessful)
     {
-        return new LoginHistory
-        {
-            UserId = userId,
-            IpAddress = ipAddress,
-            UserAgent = userAgent,
-            IsSuccessful = false,
-            FailureReason = failureReason
-        };
+        return new LoginHistory(userId, ipAddress, userAgent, isSuccessful);
+    }
+
+    /// <summary>
+    /// ثبت زمان خروج
+    /// </summary>
+    public void RecordLogout()
+    {
+        LogoutAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// بررسی آیا این ورود هنوز فعال است
+    /// </summary>
+    public bool IsActive => !LogoutAt.HasValue;
+
+    /// <summary>
+    /// تمدید زمان ورود (برای جلسه‌های فعال)
+    /// </summary>
+    public void ExtendSession(TimeSpan extension)
+    {
+        // در عمل ممکن است نیاز به به‌روزرسانی LoginAt داشته باشید
     }
 }

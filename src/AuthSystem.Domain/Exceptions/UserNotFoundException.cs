@@ -1,35 +1,146 @@
-using System;
+﻿using System;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
-/// استثنا برای زمانی که کاربری با شناسه مورد نظر پیدا نشد
+/// استثنا برای عدم یافتن کاربر
 /// </summary>
-public class UserNotFoundException : DomainException
+[Serializable]
+public sealed class UserNotFoundException : DomainException
 {
-    /// <summary>
-    /// شناسه کاربر که پیدا نشد
-    /// </summary>
-    public Guid UserId { get; }
+    private const string DEFAULT_ERROR_CODE = "AUTH.USER.NOT_FOUND";
 
     /// <summary>
-    /// سازنده با شناسه کاربر
+    /// شناسه کاربر (در صورت جستجو با شناسه)
     /// </summary>
-    /// <param name="userId">شناسه کاربر</param>
-    public UserNotFoundException(Guid userId)
-        : base($"کاربری با شناسه {userId} یافت نشد")
+    public Guid? UserId { get; private set; } // اضافه کردن private setter
+
+    /// <summary>
+    /// ایمیل کاربر (در صورت جستجو با ایمیل)
+    /// </summary>
+    public string? Email { get; private set; } // اضافه کردن private setter
+
+    /// <summary>
+    /// کد ملی کاربر (در صورت جستجو با کد ملی)
+    /// </summary>
+    public string? NationalCode { get; private set; } // اضافه کردن private setter
+
+    /// <summary>
+    /// شماره تلفن (در صورت جستجو با شماره تلفن)
+    /// </summary>
+    public string? PhoneNumber { get; private set; } // اضافه کردن private setter
+
+    /// <summary>
+    /// نوع جستجو
+    /// </summary>
+    public SearchType SearchType { get; }
+
+    private UserNotFoundException(string message, SearchType searchType, string errorCode = DEFAULT_ERROR_CODE)
+        : base(message, errorCode)
     {
-        UserId = userId;
+        SearchType = searchType;
+        WithDetail(nameof(SearchType), searchType.ToString());
     }
 
     /// <summary>
-    /// سازنده با شناسه کاربر و پیام خطا
+    /// متد WithDetail با بازگشت نوع صحیح
     /// </summary>
-    /// <param name="userId">شناسه کاربر</param>
-    /// <param name="message">پیام خطا</param>
-    public UserNotFoundException(Guid userId, string message)
-        : base(message)
+    public new UserNotFoundException WithDetail(string key, object value)
     {
-        UserId = userId;
+        base.WithDetail(key, value);
+        return this;
     }
+
+    /// <summary>
+    /// ایجاد استثنا برای عدم یافتن کاربر با شناسه
+    /// </summary>
+    public static UserNotFoundException ForId(Guid userId)
+    {
+        var exception = new UserNotFoundException(
+            $"کاربری با شناسه '{userId}' یافت نشد.",
+            SearchType.ById,
+            "AUTH.USER.NOT_FOUND_BY_ID"
+        );
+        exception.UserId = userId;
+        return exception.WithDetail(nameof(UserId), userId);
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای عدم یافتن کاربر با ایمیل
+    /// </summary>
+    public static UserNotFoundException ForEmail(string email)
+    {
+        var exception = new UserNotFoundException(
+            $"کاربری با ایمیل '{email}' یافت نشد.",
+            SearchType.ByEmail,
+            "AUTH.USER.NOT_FOUND_BY_EMAIL"
+        );
+        exception.Email = email;
+        return exception.WithDetail(nameof(Email), email);
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای عدم یافتن کاربر با کد ملی
+    /// </summary>
+    public static UserNotFoundException ForNationalCode(string nationalCode)
+    {
+        var exception = new UserNotFoundException(
+            $"کاربری با کد ملی '{nationalCode}' یافت نشد.",
+            SearchType.ByNationalCode,
+            "AUTH.USER.NOT_FOUND_BY_NATIONAL_CODE"
+        );
+        exception.NationalCode = nationalCode;
+        return exception.WithDetail(nameof(NationalCode), nationalCode);
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای عدم یافتن کاربر با شماره تلفن
+    /// </summary>
+    public static UserNotFoundException ForPhoneNumber(string phoneNumber)
+    {
+        var exception = new UserNotFoundException(
+            $"کاربری با شماره تلفن '{phoneNumber}' یافت نشد.",
+            SearchType.ByPhoneNumber,
+            "AUTH.USER.NOT_FOUND_BY_PHONE"
+        );
+        exception.PhoneNumber = phoneNumber;
+        return exception.WithDetail(nameof(PhoneNumber), phoneNumber);
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای عدم یافتن کاربر با معیار ترکیبی
+    /// </summary>
+    public static UserNotFoundException ForCriteria(string criteria)
+    {
+        var exception = new UserNotFoundException(
+            $"کاربری با معیار '{criteria}' یافت نشد.",
+            SearchType.ByCriteria,
+            "AUTH.USER.NOT_FOUND_BY_CRITERIA"
+        );
+        return exception.WithDetail("Criteria", criteria);
+    }
+
+    /// <summary>
+    /// ایجاد استثنا عمومی
+    /// </summary>
+    public static UserNotFoundException General()
+    {
+        return new UserNotFoundException(
+            "کاربر مورد نظر یافت نشد.",
+            SearchType.General
+        );
+    }
+}
+
+/// <summary>
+/// نوع جستجوی انجام شده
+/// </summary>
+public enum SearchType
+{
+    General,
+    ById,
+    ByEmail,
+    ByNationalCode,
+    ByPhoneNumber,
+    ByCriteria
 }

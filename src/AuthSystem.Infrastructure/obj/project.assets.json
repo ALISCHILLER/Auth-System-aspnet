@@ -41,6 +41,19 @@
           }
         }
       },
+      "libphonenumber-csharp/9.0.12": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MailKit/4.13.0": {
         "type": "package",
         "dependencies": {
@@ -55,6 +68,35 @@
         "runtime": {
           "lib/net8.0/MailKit.dll": {
             "related": ".dll.config;.pdb;.xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.Internal/9.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.Internal": "9.0.8"
+        },
+        "compile": {
+          "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -2229,7 +2271,9 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
-          "System.ComponentModel.Annotations": "5.0.0"
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.8",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "libphonenumber-csharp": "9.0.12"
         },
         "compile": {
           "bin/placeholder/AuthSystem.Domain.dll": {}
@@ -2310,6 +2354,25 @@
         "logo.png"
       ]
     },
+    "libphonenumber-csharp/9.0.12": {
+      "sha512": "vQZjoHexJsqMzesq1s0d7MrYWzdus4wR6++Hgn+O/iF1d3ulrRnEe/m0zCftzn8uUs1sZ8Jz6yy8Fl189OqAmQ==",
+      "type": "package",
+      "path": "libphonenumber-csharp/9.0.12",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/PhoneNumbers.dll",
+        "lib/net8.0/PhoneNumbers.xml",
+        "lib/net9.0/PhoneNumbers.dll",
+        "lib/net9.0/PhoneNumbers.xml",
+        "lib/netstandard2.0/PhoneNumbers.dll",
+        "lib/netstandard2.0/PhoneNumbers.xml",
+        "libphonenumber-csharp.9.0.12.nupkg.sha512",
+        "libphonenumber-csharp.nuspec"
+      ]
+    },
     "MailKit/4.13.0": {
       "sha512": "GsepEHKkaQvbAuBizlhz93yc0ihJWzVCfoerfnpCeqiKLeS6gsTKInYy3/U2wqgkGE62TKs5OKS1a90pyc+j4g==",
       "type": "package",
@@ -2348,6 +2411,44 @@
         "lib/netstandard2.1/MailKit.xml",
         "mailkit.4.13.0.nupkg.sha512",
         "mailkit.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Cryptography.Internal/9.0.8": {
+      "sha512": "NwGO0wh/IjEthBLGA6fWfIiftsNF/paA5RxWp6ji4wWazetJgQ4truR9nU2thAzzFLiXqlg8vGjdVDA8bHu0zA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.cryptography.internal/9.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/net462/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "microsoft.aspnetcore.cryptography.internal.9.0.8.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.internal.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.8": {
+      "sha512": "gK70xxXYwwPiXYKYVmLYMuIO5EOGrRtQghmM6PkgtZ/0lgLEjIs//xgSLvZkV/mroNHA1DEqTcqscEj9OzZ1IA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/9.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/net462/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "microsoft.aspnetcore.cryptography.keyderivation.9.0.8.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/7.0.0": {

@@ -9,9 +9,37 @@ namespace AuthSystem.Domain.Common;
 public interface IDomainEvent
 {
     /// <summary>
-    /// زمان وقوع رویداد
-    /// همیشه از زمان جهانی (UTC) استفاده می‌کنیم تا از مشکلات مربوط به منطقه زمانی جلوگیری شود
-    /// این ویژگی اطمینان می‌دهد که تمام رویدادها زمان یکسانی برای ثبت دارند
+    /// شناسه یکتای رویداد
+    /// </summary>
+    Guid EventId { get; }
+
+    /// <summary>
+    /// زمان وقوع رویداد (همیشه UTC)
     /// </summary>
     DateTime OccurredOn { get; }
+
+    /// <summary>
+    /// شناسه کاربری که رویداد را ایجاد کرده (اختیاری)
+    /// </summary>
+    string? TriggeredBy { get; }
+
+    /// <summary>
+    /// شناسه Correlation برای ردیابی در سیستم‌های توزیع‌شده
+    /// </summary>
+    Guid CorrelationId { get; }
+
+    /// <summary>
+    /// نوع رویداد برای سریال‌سازی و دسته‌بندی
+    /// </summary>
+    string EventType { get; }
+
+    /// <summary>
+    /// نسخه رویداد برای مدیریت تغییرات schema
+    /// </summary>
+    int EventVersion { get; }
+
+    /// <summary>
+    /// دریافت metadata رویداد
+    /// </summary>
+    DomainEventMetadata GetMetadata();
 }

@@ -14,31 +14,30 @@ public abstract class ValueObject : IEquatable<ValueObject>
     /// دریافت کامپوننت‌های مورد نیاز برای مقایسه برابری
     /// هر Value Object باید این متد را پیاده‌سازی کند
     /// </summary>
-    protected abstract IEnumerable<object> GetEqualityComponents();
+    protected abstract IEnumerable<object?> GetEqualityComponents();
 
     /// <summary>
     /// مقایسه برابری عمیق بر اساس کامپوننت‌ها
     /// </summary>
     public override bool Equals(object? obj)
     {
-        // اگر شیء مقایسه‌شونده null باشد یا نوع آن متفاوت باشد
         if (obj == null || obj.GetType() != GetType())
             return false;
-            
-        // تبدیل به ValueObject و مقایسه کامپوننت‌ها
+
         var other = (ValueObject)obj;
         return GetEqualityComponents()
             .SequenceEqual(other.GetEqualityComponents());
     }
 
     /// <summary>
-    /// محاسبه هش کد بر اساس کامپوننت‌های برابری
+    /// محاسبه هش کود بر اساس کامپوننت‌های برابری
     /// این متد برای استفاده در ساختارهای داده‌ای مانند Dictionary مهم است
     /// </summary>
     public override int GetHashCode()
     {
         return GetEqualityComponents()
-            .Select(x => x?.GetHashCode() ?? 0)
+            .Where(x => x != null)
+            .Select(x => x!.GetHashCode())
             .Aggregate((x, y) => x ^ y);
     }
 
@@ -48,17 +47,24 @@ public abstract class ValueObject : IEquatable<ValueObject>
     public bool Equals(ValueObject? other) => Equals((object?)other);
 
     /// <summary>
+    /// کپی Value Object با تغییر یک یا چند ویژگی (Immutability)
+    /// </summary>
+    protected static T Copy<T>(T source, Action<T> update) where T : ValueObject
+    {
+        var copy = (T)source.MemberwiseClone();
+        update(copy);
+        return copy;
+    }
+
+    /// <summary>
     /// عملگر تساوی برای مقایسه دو Value Object
     /// </summary>
     public static bool operator ==(ValueObject? a, ValueObject? b)
     {
-        // اگر هر دو null هستند
         if (a is null && b is null)
             return true;
-        // اگر یکی null و دیگری نه
         if (a is null || b is null)
             return false;
-        // فراخوانی متد Equals
         return a.Equals(b);
     }
 
@@ -66,4 +72,14 @@ public abstract class ValueObject : IEquatable<ValueObject>
     /// عملگر عدم تساوی برای مقایسه دو Value Object
     /// </summary>
     public static bool operator !=(ValueObject? a, ValueObject? b) => !(a == b);
+
+    /// <summary>
+    /// تبدیل به رشته قابل خواندن
+    /// </summary>
+    public override string ToString()
+    {
+        var components = GetEqualityComponents()
+            .Select(c => c?.ToString() ?? "null");
+        return $"{GetType().Name}({string.Join(", ", components)})";
+    }
 }

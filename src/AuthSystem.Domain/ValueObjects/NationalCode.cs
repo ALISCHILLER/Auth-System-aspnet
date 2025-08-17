@@ -1,6 +1,8 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AuthSystem.Domain.Common;
 using AuthSystem.Domain.Exceptions;
-using System;
 
 namespace AuthSystem.Domain.ValueObjects;
 
@@ -8,15 +10,40 @@ namespace AuthSystem.Domain.ValueObjects;
 /// Value Object کد ملی ایرانی
 /// این کلاس مسئول اعتبارسنجی و مدیریت کد ملی ایرانی است
 /// </summary>
-public class NationalCode : ValueObject
+public sealed class NationalCode : ValueObject
 {
     /// <summary>
-    /// مقدار کد ملی
+    /// طول استاندارد کد ملی
+    /// </summary>
+    private const int Length = 10;
+
+    /// <summary>
+    /// کدهای ملی غیرمجاز (همه ارقام یکسان)
+    /// </summary>
+    private static readonly string[] InvalidCodes =
+    {
+        "0000000000", "1111111111", "2222222222", "3333333333",
+        "4444444444", "5555555555", "6666666666", "7777777777",
+        "8888888888", "9999999999"
+    };
+
+    /// <summary>
+    /// مقدار کد ملی (همیشه 10 رقم)
     /// </summary>
     public string Value { get; }
 
     /// <summary>
-    /// سازنده خصوصی برای ایجاد نمونه از طریق متد Create
+    /// کد منطقه (3 رقم اول)
+    /// </summary>
+    public string RegionCode => Value.Substring(0, 3);
+
+    /// <summary>
+    /// آیا کد ملی مربوط به اتباع خارجی است
+    /// </summary>
+    public bool IsForeigner => Value.StartsWith("9");
+
+    /// <summary>
+    /// سازنده خصوصی
     /// </summary>
     private NationalCode(string value)
     {
@@ -24,68 +51,86 @@ public class NationalCode : ValueObject
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد یک نمونه معتبر از کد ملی
-    /// این متد قبل از ساخت نمونه، اعتبارسنجی لازم را انجام می‌دهد
+    /// ایجاد نمونه معتبر از کد ملی
     /// </summary>
-    /// <param name="value">مقدار کد ملی وارد شده</param>
-    /// <returns>یک نمونه معتبر از کلاس NationalCode</returns>
-    /// <exception cref="ArgumentNullException">در صورت خالی بودن مقدار</exception>
-    /// <exception cref="InvalidNationalCodeException">در صورت نامعتبر بودن فرمت کد ملی</exception>
     public static NationalCode Create(string value)
     {
-        // بررسی خالی بودن مقدار
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentNullException(nameof(value), "کد ملی نمی‌تواند خالی باشد");
+            throw InvalidNationalCodeException.ForEmptyCode();
 
-        // بررسی طول کد ملی
-        if (value.Length != 10)
-            throw new InvalidNationalCodeException(value, "کد ملی باید 10 رقم باشد");
+        // تمیز کردن ورودی
+        value = CleanInput(value);
 
-        // بررسی فرمت کد ملی ایرانی
+        if (value.Length != Length)
+            throw InvalidNationalCodeException.ForInvalidLength(value, Length);
+
+        if (!value.All(char.IsDigit))
+            throw InvalidNationalCodeException.ForInvalidFormat(value);
+
+        if (InvalidCodes.Contains(value))
+            throw InvalidNationalCodeException.ForRepeatingDigits(value);
+
         if (!IsValidNationalCode(value))
-            throw new InvalidNationalCodeException(value, "کد ملی نامعتبر است");
+            throw InvalidNationalCodeException.ForInvalidChecksum(value);
 
         return new NationalCode(value);
     }
 
     /// <summary>
-    /// بررسی اعتبار فرمت کد ملی ایرانی
+    /// تمیز کردن ورودی (حذف فاصله، خط تیره و تبدیل اعداد فارسی)
     /// </summary>
-    /// <param name="code">کد ملی برای بررسی</param>
-    /// <returns>در صورت معتبر بودن فرمت، true باز می‌گرداند</returns>
-    private static bool IsValidNationalCode(string code)
+    private static string CleanInput(string value)
     {
-        try
-        {
-            // اعتبارسنجی کد ملی ایران
-            var check = int.Parse(code[9].ToString());
-            var sum = 0;
-            for (var i = 0; i < 9; i++)
-            {
-                sum += int.Parse(code[i].ToString()) * (10 - i);
-            }
-            var remainder = sum % 11;
+        value = value.Trim().Replace(" ", "").Replace("-", "");
 
-            // بررسی بر اساس الگوریتم کد ملی ایران
-            return (remainder < 2 && check == remainder) ||
-                   (remainder >= 2 && check == 11 - remainder);
-        }
-        catch
+        // تبدیل اعداد فارسی/عربی به انگلیسی
+        var persianNumbers = new[] { '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' };
+        var arabicNumbers = new[] { '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩' };
+        var englishNumbers = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+        for (int i = 0; i < 10; i++)
         {
-            return false;
+            value = value.Replace(persianNumbers[i], englishNumbers[i]);
+            value = value.Replace(arabicNumbers[i], englishNumbers[i]);
         }
+
+        return value;
     }
 
     /// <summary>
-    /// دریافت کامپوننت‌های مورد نیاز برای مقایسه برابری
+    /// بررسی اعتبار کد ملی با الگوریتم استاندارد
     /// </summary>
-    protected override IEnumerable<object> GetEqualityComponents()
+    private static bool IsValidNationalCode(string code)
+    {
+        var check = int.Parse(code[9].ToString());
+        var sum = 0;
+        for (var i = 0; i < 9; i++)
+        {
+            sum += int.Parse(code[i].ToString()) * (10 - i);
+        }
+        var remainder = sum % 11;
+        return (remainder < 2 && check == remainder) ||
+               (remainder >= 2 && check == 11 - remainder);
+    }
+
+    /// <summary>
+    /// فرمت نمایشی کد ملی (xxx-xxxxxx-x)
+    /// </summary>
+    public string GetFormattedValue()
+    {
+        return $"{Value.Substring(0, 3)}-{Value.Substring(3, 6)}-{Value[9]}";
+    }
+
+    /// <summary>
+    /// بررسی برابری با کد ملی دیگر
+    /// </summary>
+    protected override IEnumerable<object?> GetEqualityComponents()
     {
         yield return Value;
     }
 
     /// <summary>
-    /// تبدیل به رشته
+    /// نمایش مقدار کد ملی
     /// </summary>
     public override string ToString() => Value;
 }
