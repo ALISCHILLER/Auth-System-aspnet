@@ -1,33 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// File: AuthSystem.Domain/Enums/SecurityLevel.cs
 namespace AuthSystem.Domain.Enums;
 
 /// <summary>
-/// سطح امنیتی
+/// سطوح امنیتی مختلف در سیستم
+/// - این enum برای تعیین سطح امنیتی عملیات‌ها استفاده می‌شود
 /// </summary>
 public enum SecurityLevel
 {
     /// <summary>
-    /// سطح پایین
+    /// سطح امنیتی پایین (برای عملیات‌های غیرحساس)
     /// </summary>
-    Low,
+    Low = 1,
 
     /// <summary>
-    /// سطح متوسط
+    /// سطح امنیتی متوسط (برای عملیات‌های معمولی)
     /// </summary>
-    Medium,
+    Medium = 2,
 
     /// <summary>
-    /// سطح بالا
+    /// سطح امنیتی بالا (برای عملیات‌های حساس)
     /// </summary>
-    High,
+    High = 3,
 
     /// <summary>
-    /// سطح بحرانی
+    /// سطح امنیتی بسیار بالا (برای عملیات‌های بسیار حساس)
     /// </summary>
-    Critical
+    Critical = 4,
+
+    /// <summary>
+    /// سطح امنیتی موقت (برای زمان‌های خاص)
+    /// </summary>
+    Temporary = 5
 }

@@ -1,158 +1,66 @@
-﻿using System;
+﻿// File: AuthSystem.Domain/Exceptions/InvalidEmailException.cs
+using AuthSystem.Domain.Common.Exceptions;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
-/// استثنا برای ایمیل نامعتبر
+/// استثنا برای آدرس ایمیل نامعتبر
+/// - هنگام اعتبارسنجی ایمیل رخ می‌دهد
+/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
 /// </summary>
-[Serializable]
-public sealed class InvalidEmailException : DomainException
+public class InvalidEmailException : DomainException
 {
-    private const string DEFAULT_ERROR_CODE = "AUTH.EMAIL.INVALID";
-
     /// <summary>
     /// آدرس ایمیل نامعتبر
     /// </summary>
-    public string? InvalidEmail { get; private set; }
+    public string? Email { get; }
 
     /// <summary>
-    /// دلیل نامعتبر بودن
+    /// سازنده پرایوت
     /// </summary>
-    public EmailInvalidReason Reason { get; }
-
-    /// <summary>
-    /// سازنده خصوصی
-    /// </summary>
-    private InvalidEmailException(
-        string message,
-        EmailInvalidReason reason = EmailInvalidReason.InvalidFormat,
-        string errorCode = DEFAULT_ERROR_CODE)
+    private InvalidEmailException(string message, string errorCode, string? email = null)
         : base(message, errorCode)
     {
-        Reason = reason;
-        WithDetail(nameof(Reason), reason.ToString());
+        Email = email;
+        if (email != null)
+            Data.Add("Email", email);
     }
 
     /// <summary>
-    /// متد WithDetail با بازگشت نوع صحیح
+    /// سازنده استاتیک برای ایجاد استثنا برای ایمیل خالی
     /// </summary>
-    public new InvalidEmailException WithDetail(string key, object value)
+    public static InvalidEmailException Empty()
+        => new InvalidEmailException(
+            "آدرس ایمیل نمی‌تواند خالی باشد",
+            "EMAIL_EMPTY");
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای طول بیش از حد ایمیل
+    /// </summary>
+    public static InvalidEmailException TooLong(string email, int maxLength)
     {
-        base.WithDetail(key, value);
-        return this;
+        var ex = new InvalidEmailException(
+            $"طول آدرس ایمیل نمی‌تواند بیشتر از {maxLength} کاراکتر باشد",
+            "EMAIL_TOO_LONG",
+            email);
+
+        ex.Data.Add("MaxLength", maxLength);
+        return ex;
     }
 
     /// <summary>
-    /// تنظیم ایمیل نامعتبر
+    /// سازنده استاتیک برای ایجاد استثنا برای فرمت نامعتبر ایمیل
     /// </summary>
-    private InvalidEmailException WithInvalidEmail(string email)
+    public static InvalidEmailException InvalidFormat(string email, string reason)
     {
-        InvalidEmail = email;
-        return WithDetail(nameof(InvalidEmail), email);
-    }
+        var ex = new InvalidEmailException(
+            $"فرمت آدرس ایمیل '{email}' نامعتبر است: {reason}",
+            "EMAIL_INVALID_FORMAT",
+            email);
 
-    /// <summary>
-    /// ایجاد استثنا برای فرمت نامعتبر ایمیل
-    /// </summary>
-    public static InvalidEmailException ForInvalidFormat(string email)
-    {
-        var exception = new InvalidEmailException(
-            $"فرمت ایمیل '{email}' نامعتبر است.",
-            EmailInvalidReason.InvalidFormat
-        );
-        return exception.WithInvalidEmail(email);
+        ex.Data.Add("Reason", reason);
+        return ex;
     }
-
-    /// <summary>
-    /// ایجاد استثنا برای ایمیل خالی
-    /// </summary>
-    public static InvalidEmailException ForEmptyEmail()
-    {
-        return new InvalidEmailException(
-            "آدرس ایمیل نمی‌تواند خالی باشد.",
-            EmailInvalidReason.Empty,
-            "AUTH.EMAIL.EMPTY"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای ایمیل تکراری
-    /// </summary>
-    public static InvalidEmailException ForDuplicateEmail(string email)
-    {
-        var exception = new InvalidEmailException(
-            $"ایمیل '{email}' قبلاً ثبت شده است.",
-            EmailInvalidReason.AlreadyExists,
-            "AUTH.EMAIL.DUPLICATE"
-        );
-        return exception.WithInvalidEmail(email);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای دامنه غیرمجاز
-    /// </summary>
-    public static InvalidEmailException ForBlockedDomain(string email, string domain)
-    {
-        var exception = new InvalidEmailException(
-            $"دامنه '{domain}' برای ثبت‌نام مجاز نیست.",
-            EmailInvalidReason.BlockedDomain,
-            "AUTH.EMAIL.BLOCKED_DOMAIN"
-        );
-        return exception
-            .WithInvalidEmail(email)
-            .WithDetail("Domain", domain);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای ایمیل موقت
-    /// </summary>
-    public static InvalidEmailException ForDisposableEmail(string email)
-    {
-        var exception = new InvalidEmailException(
-            "استفاده از ایمیل‌های موقت مجاز نیست.",
-            EmailInvalidReason.DisposableEmail,
-            "AUTH.EMAIL.DISPOSABLE"
-        );
-        return exception.WithInvalidEmail(email);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای طول نامعتبر
-    /// </summary>
-    public static InvalidEmailException ForInvalidLength(string email, int maxLength = 254)
-    {
-        var exception = new InvalidEmailException(
-            $"طول ایمیل نباید بیشتر از {maxLength} کاراکتر باشد.",
-            EmailInvalidReason.TooLong,
-            "AUTH.EMAIL.TOO_LONG"
-        );
-        return exception
-            .WithInvalidEmail(email)
-            .WithDetail("MaxLength", maxLength)
-            .WithDetail("ActualLength", email.Length);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا عمومی برای ایمیل نامعتبر
-    /// </summary>
-    public static InvalidEmailException ForInvalidEmail(string email)
-    {
-        var exception = new InvalidEmailException(
-            $"ایمیل '{email}' نامعتبر است."
-        );
-        return exception.WithInvalidEmail(email);
-    }
-}
-
-/// <summary>
-/// دلایل نامعتبر بودن ایمیل
-/// </summary>
-public enum EmailInvalidReason
-{
-    InvalidFormat,
-    Empty,
-    AlreadyExists,
-    BlockedDomain,
-    DisposableEmail,
-    TooLong
 }

@@ -1,4 +1,4 @@
-﻿using AuthSystem.Domain.Common;
+﻿using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Enums.AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;

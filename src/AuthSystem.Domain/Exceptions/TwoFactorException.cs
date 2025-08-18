@@ -1,170 +1,88 @@
-﻿using System;
+﻿// File: AuthSystem.Domain/Exceptions/TwoFactorException.cs
+using AuthSystem.Domain.Common.Exceptions;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
-/// استثنا برای خطاهای احراز هویت دو عاملی
+/// استثنا عمومی برای خطاهای احراز هویت دو عاملی
+/// - برای خطاهای عمومی مرتبط با 2FA استفاده می‌شود
+/// - شامل انواع خطاها مانند کد نامعتبر، زمان انقضای کد و غیره
 /// </summary>
-[Serializable]
-public sealed class TwoFactorException : DomainException
+public class TwoFactorException : DomainException
 {
-    private const string DEFAULT_ERROR_CODE = "AUTH.2FA.ERROR";
-
     /// <summary>
-    /// نوع خطای احراز هویت دو عاملی
+    /// نوع خطا در احراز هویت دو عاملی
     /// </summary>
     public TwoFactorErrorType ErrorType { get; }
 
     /// <summary>
-    /// تعداد تلاش‌های باقی‌مانده
+    /// سازنده پرایوت
     /// </summary>
-    public int? RemainingAttempts { get; private set; } // اضافه کردن private setter
-
-    /// <summary>
-    /// زمان باقی‌مانده تا امکان تلاش مجدد (ثانیه)
-    /// </summary>
-    public int? RetryAfterSeconds { get; private set; } // اضافه کردن private setter
-
-    private TwoFactorException(
-        string message,
-        TwoFactorErrorType errorType = TwoFactorErrorType.GeneralError,
-        string errorCode = DEFAULT_ERROR_CODE)
+    private TwoFactorException(string message, string errorCode, TwoFactorErrorType errorType)
         : base(message, errorCode)
     {
         ErrorType = errorType;
-        WithDetail(nameof(ErrorType), errorType.ToString());
+        Data.Add("ErrorType", errorType.ToString());
     }
 
     /// <summary>
-    /// متد WithDetail با بازگشت نوع صحیح
+    /// سازنده استاتیک برای ایجاد استثنا برای کد تایید نامعتبر
     /// </summary>
-    public new TwoFactorException WithDetail(string key, object value)
+    public static TwoFactorException InvalidCode(string code)
+        => new TwoFactorException(
+            $"کد تایید '{code}' نامعتبر است یا منقضی شده است",
+            "TWO_FACTOR_INVALID_CODE",
+            TwoFactorErrorType.InvalidCode)
+        {
+            Data = { ["Code"] = code }
+        };
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای زمان انقضای کد
+    /// </summary>
+    public static TwoFactorException CodeExpired(TimeSpan validityPeriod)
+        => new TwoFactorException(
+            $"کد تایید منقضی شده است. کدها تنها به مدت {validityPeriod:mm\\:ss} معتبر هستند",
+            "TWO_FACTOR_CODE_EXPIRED",
+            TwoFactorErrorType.CodeExpired)
+        {
+            Data = { ["ValidityPeriod"] = validityPeriod }
+        };
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای تعداد تلاش‌های بیش از حد
+    /// </summary>
+    public static TwoFactorException MaxAttemptsExceeded(int maxAttempts, int remainingAttempts)
     {
-        base.WithDetail(key, value);
-        return this;
+        var ex = new TwoFactorException(
+            $"تعداد تلاش‌ها بیش از حد مجاز است. {remainingAttempts} تلاش باقی‌مانده است",
+            "TWO_FACTOR_MAX_ATTEMPTS_EXCEEDED",
+            TwoFactorErrorType.MaxAttemptsExceeded);
+
+        ex.Data.Add("MaxAttempts", maxAttempts);
+        ex.Data.Add("RemainingAttempts", remainingAttempts);
+        return ex;
     }
 
     /// <summary>
-    /// تنظیم تعداد تلاش‌های باقی‌مانده
+    /// سازنده استاتیک برای ایجاد استثنا برای 2FA غیرفعال
     /// </summary>
-    private TwoFactorException WithRemainingAttempts(int attempts)
-    {
-        RemainingAttempts = attempts;
-        return WithDetail(nameof(RemainingAttempts), attempts);
-    }
+    public static TwoFactorException NotEnabled()
+        => new TwoFactorException(
+            "احراز هویت دو عاملی برای این حساب فعال نیست",
+            "TWO_FACTOR_NOT_ENABLED",
+            TwoFactorErrorType.NotEnabled);
 
     /// <summary>
-    /// تنظیم زمان انتظار
+    /// سازنده استاتیک برای ایجاد استثنا برای نیاز به تنظیم 2FA
     /// </summary>
-    private TwoFactorException WithRetryAfter(int seconds)
-    {
-        RetryAfterSeconds = seconds;
-        return WithDetail(nameof(RetryAfterSeconds), seconds);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای کد نامعتبر
-    /// </summary>
-    public static TwoFactorException ForInvalidCode(int remainingAttempts)
-    {
-        var exception = new TwoFactorException(
-            $"کد وارد شده نامعتبر است. {remainingAttempts} تلاش باقی مانده است.",
-            TwoFactorErrorType.InvalidCode,
-            "AUTH.2FA.INVALID_CODE"
-        );
-        return exception.WithRemainingAttempts(remainingAttempts);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای کد منقضی شده
-    /// </summary>
-    public static TwoFactorException ForExpiredCode()
-    {
-        return new TwoFactorException(
-            "کد تأیید منقضی شده است. لطفاً کد جدید درخواست کنید.",
-            TwoFactorErrorType.CodeExpired,
-            "AUTH.2FA.CODE_EXPIRED"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای تلاش‌های زیاد
-    /// </summary>
-    public static TwoFactorException ForTooManyAttempts(int lockoutMinutes = 15)
-    {
-        var exception = new TwoFactorException(
-            $"تعداد تلاش‌های شما بیش از حد مجاز است. لطفاً {lockoutMinutes} دقیقه صبر کنید.",
-            TwoFactorErrorType.TooManyAttempts,
-            "AUTH.2FA.TOO_MANY_ATTEMPTS"
-        );
-        return exception
-            .WithRetryAfter(lockoutMinutes * 60)
-            .WithDetail("LockoutMinutes", lockoutMinutes);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای احراز هویت دو عاملی غیرفعال
-    /// </summary>
-    public static TwoFactorException ForNotEnabled()
-    {
-        return new TwoFactorException(
-            "احراز هویت دو عاملی برای این حساب فعال نیست.",
-            TwoFactorErrorType.NotEnabled,
-            "AUTH.2FA.NOT_ENABLED"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای کد قبلاً استفاده شده
-    /// </summary>
-    public static TwoFactorException ForAlreadyUsedCode()
-    {
-        return new TwoFactorException(
-            "این کد قبلاً استفاده شده است.",
-            TwoFactorErrorType.CodeAlreadyUsed,
-            "AUTH.2FA.CODE_ALREADY_USED"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای روش تأیید نامعتبر
-    /// </summary>
-    public static TwoFactorException ForInvalidMethod(string method)
-    {
-        var exception = new TwoFactorException(
-            $"روش احراز هویت '{method}' پشتیبانی نمی‌شود.",
-            TwoFactorErrorType.InvalidMethod,
-            "AUTH.2FA.INVALID_METHOD"
-        );
-        return exception.WithDetail("Method", method);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای خطای تولید کد
-    /// </summary>
-    public static TwoFactorException ForGenerationError()
-    {
-        return new TwoFactorException(
-            "خطا در تولید کد احراز هویت. لطفاً دوباره تلاش کنید.",
-            TwoFactorErrorType.GenerationError,
-            "AUTH.2FA.GENERATION_ERROR"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای درخواست مکرر
-    /// </summary>
-    public static TwoFactorException ForRateLimitExceeded(int waitSeconds)
-    {
-        var exception = new TwoFactorException(
-            $"درخواست شما بیش از حد مجاز است. لطفاً {waitSeconds} ثانیه صبر کنید.",
-            TwoFactorErrorType.RateLimitExceeded,
-            "AUTH.2FA.RATE_LIMIT"
-        );
-        return exception
-            .WithRetryAfter(waitSeconds)
-            .WithDetail("WaitSeconds", waitSeconds);
-    }
+    public static TwoFactorException SetupRequired()
+        => new TwoFactorException(
+            "نیاز به تنظیم احراز هویت دو عاملی است",
+            "TWO_FACTOR_SETUP_REQUIRED",
+            TwoFactorErrorType.SetupRequired);
 }
 
 /// <summary>
@@ -172,13 +90,28 @@ public sealed class TwoFactorException : DomainException
 /// </summary>
 public enum TwoFactorErrorType
 {
-    GeneralError,
+    /// <summary>
+    /// کد تایید نامعتبر است
+    /// </summary>
     InvalidCode,
+
+    /// <summary>
+    /// کد تایید منقضی شده است
+    /// </summary>
     CodeExpired,
-    TooManyAttempts,
+
+    /// <summary>
+    /// تعداد تلاش‌ها بیش از حد مجاز است
+    /// </summary>
+    MaxAttemptsExceeded,
+
+    /// <summary>
+    /// احراز هویت دو عاملی فعال نیست
+    /// </summary>
     NotEnabled,
-    CodeAlreadyUsed,
-    InvalidMethod,
-    GenerationError,
-    RateLimitExceeded
+
+    /// <summary>
+    /// نیاز به تنظیم احراز هویت دو عاملی است
+    /// </summary>
+    SetupRequired
 }

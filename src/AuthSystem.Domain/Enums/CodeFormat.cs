@@ -1,23 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// File: AuthSystem.Domain/Enums/CodeFormat.cs
 namespace AuthSystem.Domain.Enums;
 
 /// <summary>
-/// فرمت کد تأیید
+/// فرمت‌های مختلف کد تأیید
+/// - این enum برای تعیین فرمت کد تأیید استفاده می‌شود
 /// </summary>
 public enum CodeFormat
 {
     /// <summary>
-    /// فقط عددی
+    /// کد عددی (مثلاً 123456)
     /// </summary>
-    Numeric,
+    Numeric = 1,
 
     /// <summary>
-    /// ترکیب حروف و اعداد
+    /// کد الفبایی-عددی (مثلاً A1B2C3)
     /// </summary>
-    AlphaNumeric
+    Alphanumeric = 2,
+
+    /// <summary>
+    /// کد فقط حروف بزرگ (مثلاً ABC123)
+    /// </summary>
+    UppercaseLetters = 3,
+
+    /// <summary>
+    /// کد فقط اعداد (مثلاً 123456)
+    /// </summary>
+    NumbersOnly = 4,
+
+    /// <summary>
+    /// کد QR (برای احراز هویت دو عاملی)
+    /// </summary>
+    QRCode = 5
 }

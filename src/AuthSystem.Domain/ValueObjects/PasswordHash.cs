@@ -1,4 +1,4 @@
-﻿using AuthSystem.Domain.Common;
+﻿using AuthSystem.Domain.Common.Entities;
 
 namespace AuthSystem.Domain.ValueObjects;
 

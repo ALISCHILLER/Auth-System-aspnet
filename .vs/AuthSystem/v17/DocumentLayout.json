@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\exceptions\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\exceptions\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\aggregates\\useraggregate\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\aggregates\\useraggregate\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\exceptions\\duplicateemailexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\exceptions\\duplicateemailexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +14,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "InvalidPasswordException.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAIA3wGoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T13:19:16.166Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "User.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "ViewState": "AgIAAPYAAAAAAAAAAAAowAABAAAuAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "DuplicateEmailException.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Exceptions\\DuplicateEmailException.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Exceptions\\DuplicateEmailException.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Exceptions\\DuplicateEmailException.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Exceptions\\DuplicateEmailException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T12:44:56.827Z",
+              "WhenOpened": "2025-08-18T13:26:08.178Z",
               "EditorCaption": ""
             }
           ]

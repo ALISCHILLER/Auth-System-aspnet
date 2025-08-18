@@ -1,48 +1,61 @@
-﻿using System;
+﻿// File: AuthSystem.Domain/Exceptions/InvalidIpAddressException.cs
+using AuthSystem.Domain.Common.Exceptions;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای آدرس IP نامعتبر
+/// - هنگام اعتبارسنجی آدرس IP رخ می‌دهد
+/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
 /// </summary>
-[Serializable]
-public sealed class InvalidIpAddressException : DomainException
+public class InvalidIpAddressException : DomainException
 {
-    private const string DEFAULT_ERROR_CODE = "AUTH.IP.INVALID";
-
     /// <summary>
     /// آدرس IP نامعتبر
     /// </summary>
-    public string? InvalidIpAddress { get; }
+    public string? IpAddress { get; }
 
     /// <summary>
-    /// نوع IP مورد انتظار
+    /// سازنده پرایوت
     /// </summary>
-    public string? ExpectedType { get; }
-
-    public InvalidIpAddressException(string ipAddress, string? expectedType = null)
-        : base(
-            expectedType != null
-                ? $"آدرس IP '{ipAddress}' نامعتبر است. نوع مورد انتظار: {expectedType}"
-                : $"آدرس IP '{ipAddress}' نامعتبر است.",
-            DEFAULT_ERROR_CODE)
+    private InvalidIpAddressException(string message, string errorCode, string? ipAddress = null)
+        : base(message, errorCode)
     {
-        InvalidIpAddress = ipAddress;
-        ExpectedType = expectedType;
-
-        WithDetail(nameof(InvalidIpAddress), ipAddress);
-        if (expectedType != null)
-            WithDetail(nameof(ExpectedType), expectedType);
+        IpAddress = ipAddress;
+        if (ipAddress != null)
+            Data.Add("IpAddress", ipAddress);
     }
 
     /// <summary>
-    /// ایجاد استثنا برای IP مسدود شده
+    /// سازنده استاتیک برای ایجاد استثنا برای آدرس IP خالی
     /// </summary>
-    public static InvalidIpAddressException ForBlockedIp(string ipAddress)
+    public static InvalidIpAddressException Empty()
+        => new InvalidIpAddressException(
+            "آدرس IP نمی‌تواند خالی باشد",
+            "IP_ADDRESS_EMPTY");
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای فرمت نامعتبر آدرس IP
+    /// </summary>
+    public static InvalidIpAddressException InvalidFormat(string ipAddress)
+        => new InvalidIpAddressException(
+            $"فرمت آدرس IP '{ipAddress}' نامعتبر است",
+            "IP_ADDRESS_INVALID_FORMAT",
+            ipAddress);
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای آدرس IP غیرمجاز
+    /// </summary>
+    public static InvalidIpAddressException NotAllowed(string ipAddress, string reason)
     {
-        return new InvalidIpAddressException(
-            ipAddress,
-            "آدرس IP مسدود شده است"
-        ).WithDetail("Blocked", true) as InvalidIpAddressException;
+        var ex = new InvalidIpAddressException(
+            $"آدرس IP '{ipAddress}' غیرمجاز است: {reason}",
+            "IP_ADDRESS_NOT_ALLOWED",
+            ipAddress);
+
+        ex.Data.Add("Reason", reason);
+        return ex;
     }
 }

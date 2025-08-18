@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AuthSystem.Domain.Common;
+using AuthSystem.Domain.Common.Events;
 
 namespace AuthSystem.Domain.Aggregates.UserAggregate.Events;
 

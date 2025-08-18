@@ -1,9 +1,9 @@
-﻿using AuthSystem.Domain.Common;
-using AuthSystem.Domain.Exceptions;
+﻿using AuthSystem.Domain.Exceptions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using AuthSystem.Domain.Common.Entities;
 
 namespace AuthSystem.Domain.ValueObjects;
 

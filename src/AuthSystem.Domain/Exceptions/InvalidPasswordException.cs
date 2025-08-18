@@ -1,161 +1,71 @@
-﻿using System;
+﻿// File: AuthSystem.Domain/Exceptions/InvalidPasswordException.cs
+using AuthSystem.Domain.Common.Exceptions;
+using AuthSystem.Domain.Enums;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای رمز عبور نامعتبر
+/// - هنگام اعتبارسنجی رمز عبور رخ می‌دهد
+/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
 /// </summary>
-[Serializable]
-public sealed class InvalidPasswordException : DomainException
+public class InvalidPasswordException : DomainException
 {
-    private const string DEFAULT_ERROR_CODE = "AUTH.PASSWORD.INVALID";
+    /// <summary>
+    /// سطح امنیتی رمز عبور
+    /// </summary>
+    public SecurityLevel? SecurityLevel { get; }
 
     /// <summary>
-    /// نوع خطای اعتبارسنجی
+    /// سازنده پرایوت
     /// </summary>
-    public PasswordValidationError ValidationError { get; }
-
-    /// <summary>
-    /// طول فعلی رمز عبور (در صورت خطای طول)
-    /// </summary>
-    public int? ActualLength { get; private set; }
-
-    /// <summary>
-    /// حداقل طول مورد نیاز
-    /// </summary>
-    public int? MinLength { get; private set; }
-
-    /// <summary>
-    /// حداکثر طول مجاز
-    /// </summary>
-    public int? MaxLength { get; private set; }
-
-    private InvalidPasswordException(
-        string message,
-        PasswordValidationError validationError = PasswordValidationError.InvalidFormat,
-        string errorCode = DEFAULT_ERROR_CODE)
+    private InvalidPasswordException(string message, string errorCode, SecurityLevel? securityLevel = null)
         : base(message, errorCode)
     {
-        ValidationError = validationError;
-        WithDetail(nameof(ValidationError), validationError.ToString());
+        SecurityLevel = securityLevel;
+        if (securityLevel.HasValue)
+            Data.Add("SecurityLevel", securityLevel.Value.ToString());
     }
 
     /// <summary>
-    /// متد WithDetail با بازگشت نوع صحیح
+    /// سازنده استاتیک برای ایجاد استثنا برای رمز عبور خالی
     /// </summary>
-    public new InvalidPasswordException WithDetail(string key, object value)
+    public static InvalidPasswordException Empty()
+        => new InvalidPasswordException(
+            "رمز عبور نمی‌تواند خالی باشد",
+            "PASSWORD_EMPTY");
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای طول نامعتبر رمز عبور
+    /// </summary>
+    public static InvalidPasswordException InvalidLength(int minLength, int maxLength)
     {
-        base.WithDetail(key, value);
-        return this;
+        var ex = new InvalidPasswordException(
+            $"رمز عبور باید بین {minLength} و {maxLength} کاراکتر باشد",
+            "PASSWORD_INVALID_LENGTH");
+
+        ex.Data.Add("MinLength", minLength);
+        ex.Data.Add("MaxLength", maxLength);
+        return ex;
     }
 
     /// <summary>
-    /// ایجاد استثنا برای رمز عبور خالی
+    /// سازنده استاتیک برای ایجاد استثنا برای عدم رعایت الزامات امنیتی
     /// </summary>
-    public static InvalidPasswordException ForEmptyPassword()
+    public static InvalidPasswordException RequirementNotMet(string requirement, SecurityLevel securityLevel)
     {
-        return new InvalidPasswordException(
-            "رمز عبور نمی‌تواند خالی باشد.",
-            PasswordValidationError.Empty,
-            "AUTH.PASSWORD.EMPTY"
-        );
+        var ex = new InvalidPasswordException(
+            $"رمز عبور باید شامل {requirement} باشد",
+            "PASSWORD_REQUIREMENT_NOT_MET",
+            securityLevel);
+
+        ex.Data.Add("Requirement", requirement);
+        return ex;
     }
-
-    /// <summary>
-    /// ایجاد استثنا برای طول نامعتبر
-    /// </summary>
-    public static InvalidPasswordException ForInvalidLength(int actualLength, int minLength = 8, int maxLength = 128)
-    {
-        var message = actualLength < minLength
-            ? $"رمز عبور باید حداقل {minLength} کاراکتر باشد."
-            : $"رمز عبور نباید بیشتر از {maxLength} کاراکتر باشد.";
-
-        var exception = new InvalidPasswordException(
-            message,
-            actualLength < minLength ? PasswordValidationError.TooShort : PasswordValidationError.TooLong,
-            actualLength < minLength ? "AUTH.PASSWORD.TOO_SHORT" : "AUTH.PASSWORD.TOO_LONG"
-        );
-
-        exception.ActualLength = actualLength;
-        exception.MinLength = minLength;
-        exception.MaxLength = maxLength;
-
-        return exception
-            .WithDetail(nameof(ActualLength), actualLength)
-            .WithDetail(nameof(MinLength), minLength)
-            .WithDetail(nameof(MaxLength), maxLength);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای عدم رعایت پیچیدگی
-    /// </summary>
-    public static InvalidPasswordException ForWeakPassword()
-    {
-        return new InvalidPasswordException(
-            "رمز عبور باید حداقل شامل 3 مورد از موارد زیر باشد: حرف بزرگ، حرف کوچک، عدد، کاراکتر خاص.",
-            PasswordValidationError.NotComplex,
-            "AUTH.PASSWORD.WEAK"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای رمز عبور نامعتبر عمومی
-    /// </summary>
-    public static InvalidPasswordException ForInvalidPassword()
-    {
-        return new InvalidPasswordException(
-            "رمز عبور نامعتبر است."
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای رمز عبور رایج
-    /// </summary>
-    public static InvalidPasswordException ForCommonPassword()
-    {
-        return new InvalidPasswordException(
-            "این رمز عبور بسیار رایج است و امنیت کافی ندارد.",
-            PasswordValidationError.TooCommon,
-            "AUTH.PASSWORD.COMMON"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای شباهت به اطلاعات کاربر
-    /// </summary>
-    public static InvalidPasswordException ForSimilarToUserInfo()
-    {
-        return new InvalidPasswordException(
-            "رمز عبور نباید شبیه به نام کاربری یا سایر اطلاعات شخصی باشد.",
-            PasswordValidationError.SimilarToUserInfo,
-            "AUTH.PASSWORD.SIMILAR_TO_USER_INFO"
-        );
-    }
-    /// <summary>
-    /// ایجاد استثنا برای رمز عبور فعلی نادرست
-    /// </summary>
-    public static InvalidPasswordException ForIncorrectCurrentPassword()
-    {
-        return new InvalidPasswordException(
-            "رمز عبور فعلی نادرست است.",
-            PasswordValidationError.InvalidFormat,
-            "AUTH.PASSWORD.INCORRECT_CURRENT"
-        );
-    }
-
-
 }
 
 /// <summary>
-/// انواع خطاهای اعتبارسنجی رمز عبور
+/// سطوح امنیتی مختلف رمز عبور
 /// </summary>
-public enum PasswordValidationError
-{
-    InvalidFormat,
-    Empty,
-    TooShort,
-    TooLong,
-    NotComplex,
-    TooCommon,
-    SimilarToUserInfo
-}

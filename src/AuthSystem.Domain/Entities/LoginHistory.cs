@@ -1,5 +1,5 @@
 ﻿using System;
-using AuthSystem.Domain.Common;
+using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.ValueObjects;
 
 namespace AuthSystem.Domain.Entities;

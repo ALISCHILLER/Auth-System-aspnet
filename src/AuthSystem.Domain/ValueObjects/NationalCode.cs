@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AuthSystem.Domain.Common;
+using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.Exceptions;
 
 namespace AuthSystem.Domain.ValueObjects;

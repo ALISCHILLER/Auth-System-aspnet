@@ -1,188 +1,73 @@
-﻿using System;
+﻿// File: AuthSystem.Domain/Exceptions/InvalidPhoneNumberException.cs
+using AuthSystem.Domain.Common.Exceptions;
+using AuthSystem.Domain.Enums;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای شماره تلفن نامعتبر
+/// - هنگام اعتبارسنجی شماره تلفن رخ می‌دهد
+/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
 /// </summary>
-[Serializable]
-public sealed class InvalidPhoneNumberException : DomainException
+public class InvalidPhoneNumberException : DomainException
 {
-    private const string DEFAULT_ERROR_CODE = "AUTH.PHONE.INVALID";
-
     /// <summary>
     /// شماره تلفن نامعتبر
     /// </summary>
-    public string? InvalidPhoneNumber { get; private set; }
+    public string? PhoneNumber { get; }
 
     /// <summary>
-    /// کد کشور
+    /// نوع شماره تلفن (موبایل یا ثابت)
     /// </summary>
-    public string? CountryCode { get; private set; }
+    public PhoneType? PhoneType { get; }
 
     /// <summary>
-    /// منطقه/کشور
+    /// سازنده پرایوت
     /// </summary>
-    public string? Region { get; private set; }
-
-    /// <summary>
-    /// نوع خطا
-    /// </summary>
-    public PhoneNumberErrorType ErrorType { get; private set; }
-
-    private InvalidPhoneNumberException(
-        string message,
-        string errorCode = DEFAULT_ERROR_CODE)
+    private InvalidPhoneNumberException(string message, string errorCode, string? phoneNumber = null, PhoneType? phoneType = null)
         : base(message, errorCode)
     {
-        ErrorType = PhoneNumberErrorType.InvalidFormat;
-    }
+        PhoneNumber = phoneNumber;
+        PhoneType = phoneType;
 
-    private InvalidPhoneNumberException(
-        string message,
-        Exception innerException,
-        string errorCode = DEFAULT_ERROR_CODE)
-        : base(message, errorCode, innerException)
-    {
-        ErrorType = PhoneNumberErrorType.InvalidFormat;
+        if (phoneNumber != null)
+            Data.Add("PhoneNumber", phoneNumber);
+        if (phoneType.HasValue)
+            Data.Add("PhoneType", phoneType.Value.ToString());
     }
 
     /// <summary>
-    /// متد WithDetail با بازگشت نوع صحیح
+    /// سازنده استاتیک برای ایجاد استثنا برای شماره تلفن خالی
     /// </summary>
-    public new InvalidPhoneNumberException WithDetail(string key, object value)
+    public static InvalidPhoneNumberException Empty()
+        => new InvalidPhoneNumberException(
+            "شماره تلفن نمی‌تواند خالی باشد",
+            "PHONE_NUMBER_EMPTY");
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای فرمت نامعتبر شماره تلفن
+    /// </summary>
+    public static InvalidPhoneNumberException InvalidFormat(string phoneNumber, string reason)
     {
-        base.WithDetail(key, value);
-        return this;
+        var ex = new InvalidPhoneNumberException(
+            $"شماره تلفن '{phoneNumber}' نامعتبر است: {reason}",
+            "PHONE_NUMBER_INVALID_FORMAT",
+            phoneNumber);
+
+        ex.Data.Add("Reason", reason);
+        return ex;
     }
 
     /// <summary>
-    /// ایجاد استثنا برای شماره تلفن خالی
+    /// سازنده استاتیک برای ایجاد استثنا برای شماره تلفن غیرمجاز
     /// </summary>
-    public static InvalidPhoneNumberException ForEmptyPhoneNumber()
-    {
-        return new InvalidPhoneNumberException(
-            "شماره تلفن نمی‌تواند خالی باشد.",
-            "AUTH.PHONE.EMPTY"
-        )
-        {
-            ErrorType = PhoneNumberErrorType.Empty
-        };
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای فرمت نامعتبر
-    /// </summary>
-    public static InvalidPhoneNumberException ForInvalidFormat(string phoneNumber)
-    {
-        return new InvalidPhoneNumberException(
-            $"فرمت شماره تلفن '{phoneNumber}' نامعتبر است.",
-            "AUTH.PHONE.INVALID_FORMAT"
-        )
-        {
-            InvalidPhoneNumber = phoneNumber,
-            ErrorType = PhoneNumberErrorType.InvalidFormat
-        }
-        .WithDetail(nameof(InvalidPhoneNumber), phoneNumber);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای فرمت نامعتبر با استثنای داخلی
-    /// </summary>
-    public static InvalidPhoneNumberException ForInvalidFormat(string phoneNumber, string message, Exception innerException)
-    {
-        return new InvalidPhoneNumberException(
-            message,
-            innerException,
-            "AUTH.PHONE.INVALID_FORMAT"
-        )
-        {
-            InvalidPhoneNumber = phoneNumber,
-            ErrorType = PhoneNumberErrorType.InvalidFormat
-        }
-        .WithDetail(nameof(InvalidPhoneNumber), phoneNumber);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای شماره نامعتبر
-    /// </summary>
-    public static InvalidPhoneNumberException ForInvalidNumber(string phoneNumber)
-    {
-        return new InvalidPhoneNumberException(
-            $"شماره تلفن '{phoneNumber}' نامعتبر است.",
-            "AUTH.PHONE.INVALID_NUMBER"
-        )
-        {
-            InvalidPhoneNumber = phoneNumber,
-            ErrorType = PhoneNumberErrorType.InvalidNumber
-        }
-        .WithDetail(nameof(InvalidPhoneNumber), phoneNumber);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای کد کشور نامعتبر
-    /// </summary>
-    public static InvalidPhoneNumberException ForInvalidCountryCode(string phoneNumber, string countryCode)
-    {
-        return new InvalidPhoneNumberException(
-            $"کد کشور '{countryCode}' برای شماره '{phoneNumber}' نامعتبر است.",
-            "AUTH.PHONE.INVALID_COUNTRY_CODE"
-        )
-        {
-            InvalidPhoneNumber = phoneNumber,
-            CountryCode = countryCode,
-            ErrorType = PhoneNumberErrorType.InvalidCountryCode
-        }
-        .WithDetail(nameof(InvalidPhoneNumber), phoneNumber)
-        .WithDetail(nameof(CountryCode), countryCode);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای منطقه نامعتبر
-    /// </summary>
-    public static InvalidPhoneNumberException ForInvalidRegion(string phoneNumber, string region)
-    {
-        return new InvalidPhoneNumberException(
-            $"منطقه '{region}' برای شماره '{phoneNumber}' نامعتبر است.",
-            "AUTH.PHONE.INVALID_REGION"
-        )
-        {
-            InvalidPhoneNumber = phoneNumber,
-            Region = region,
-            ErrorType = PhoneNumberErrorType.InvalidRegion
-        }
-        .WithDetail(nameof(InvalidPhoneNumber), phoneNumber)
-        .WithDetail(nameof(Region), region);
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای شماره تکراری
-    /// </summary>
-    public static InvalidPhoneNumberException ForDuplicateNumber(string phoneNumber)
-    {
-        return new InvalidPhoneNumberException(
-            $"شماره تلفن '{phoneNumber}' قبلاً ثبت شده است.",
-            "AUTH.PHONE.DUPLICATE"
-        )
-        {
-            InvalidPhoneNumber = phoneNumber,
-            ErrorType = PhoneNumberErrorType.Duplicate
-        }
-        .WithDetail(nameof(InvalidPhoneNumber), phoneNumber);
-    }
+    public static InvalidPhoneNumberException NotAllowed(string phoneNumber, PhoneType phoneType)
+        => new InvalidPhoneNumberException(
+            $"شماره تلفن '{phoneNumber}' معتبر نیست",
+            "PHONE_NUMBER_NOT_ALLOWED",
+            phoneNumber,
+            phoneType);
 }
 
-/// <summary>
-/// انواع خطاهای شماره تلفن
-/// </summary>
-public enum PhoneNumberErrorType
-{
-    Empty,
-    InvalidFormat,
-    InvalidNumber,
-    InvalidCountryCode,
-    InvalidRegion,
-    Duplicate,
-    TooShort,
-    TooLong
-}

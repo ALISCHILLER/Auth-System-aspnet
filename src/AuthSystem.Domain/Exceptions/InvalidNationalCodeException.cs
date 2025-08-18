@@ -1,145 +1,66 @@
-﻿using System;
+﻿// File: AuthSystem.Domain/Exceptions/InvalidNationalCodeException.cs
+using AuthSystem.Domain.Common.Exceptions;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای کد ملی نامعتبر
+/// - هنگام اعتبارسنجی کد ملی رخ می‌دهد
+/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
 /// </summary>
-[Serializable]
-public sealed class InvalidNationalCodeException : DomainException
+public class InvalidNationalCodeException : DomainException
 {
-    private const string DEFAULT_ERROR_CODE = "AUTH.NATIONALCODE.INVALID";
-
     /// <summary>
     /// کد ملی نامعتبر
     /// </summary>
-    public string? InvalidNationalCode { get; private set; }
+    public string? NationalCode { get; }
 
     /// <summary>
-    /// نوع خطا
+    /// سازنده پرایوت
     /// </summary>
-    public NationalCodeError ErrorType { get; private set; }
-
-    private InvalidNationalCodeException(string message, string errorCode = DEFAULT_ERROR_CODE)
+    private InvalidNationalCodeException(string message, string errorCode, string? nationalCode = null)
         : base(message, errorCode)
     {
-        ErrorType = NationalCodeError.General;
-    }
-
-    private InvalidNationalCodeException(string? nationalCode, string message, NationalCodeError errorType = NationalCodeError.General, string errorCode = DEFAULT_ERROR_CODE)
-        : base(message, errorCode)
-    {
-        InvalidNationalCode = nationalCode;
-        ErrorType = errorType;
-
-        if (!string.IsNullOrWhiteSpace(nationalCode))
-            WithDetail(nameof(InvalidNationalCode), nationalCode);
-
-        WithDetail(nameof(ErrorType), errorType.ToString());
+        NationalCode = nationalCode;
+        if (nationalCode != null)
+            Data.Add("NationalCode", nationalCode);
     }
 
     /// <summary>
-    /// ایجاد استثنا برای کد ملی خالی
+    /// سازنده استاتیک برای ایجاد استثنا برای کد ملی خالی
     /// </summary>
-    public static InvalidNationalCodeException ForEmptyCode()
+    public static InvalidNationalCodeException Empty()
+        => new InvalidNationalCodeException(
+            "کد ملی نمی‌تواند خالی باشد",
+            "NATIONAL_CODE_EMPTY");
+
+    /// <summary>
+    /// سازنده استاتیک برای ایجاد استثنا برای طول نامعتبر کد ملی
+    /// </summary>
+    public static InvalidNationalCodeException InvalidLength(string nationalCode, int requiredLength)
     {
-        return new InvalidNationalCodeException(
-            null,
-            "کد ملی نمی‌تواند خالی باشد.",
-            NationalCodeError.InvalidFormat,
-            "AUTH.NATIONALCODE.EMPTY"
-        );
+        var ex = new InvalidNationalCodeException(
+            $"کد ملی باید {requiredLength} رقم باشد",
+            "NATIONAL_CODE_INVALID_LENGTH",
+            nationalCode);
+
+        ex.Data.Add("RequiredLength", requiredLength);
+        return ex;
     }
 
     /// <summary>
-    /// ایجاد استثنا برای طول نامعتبر
+    /// سازنده استاتیک برای ایجاد استثنا برای فرمت نامعتبر کد ملی
     /// </summary>
-    public static InvalidNationalCodeException ForInvalidLength(string nationalCode, int expectedLength)
+    public static InvalidNationalCodeException InvalidFormat(string nationalCode, string reason)
     {
-        return new InvalidNationalCodeException(
-            nationalCode,
-            $"کد ملی باید دقیقاً {expectedLength} رقم باشد. کد وارد شده دارای {nationalCode?.Length ?? 0} رقم است.",
-            NationalCodeError.InvalidLength,
-            "AUTH.NATIONALCODE.INVALID_LENGTH"
-        );
-    }
+        var ex = new InvalidNationalCodeException(
+            $"کد ملی '{nationalCode}' نامعتبر است: {reason}",
+            "NATIONAL_CODE_INVALID_FORMAT",
+            nationalCode);
 
-    /// <summary>
-    /// ایجاد استثنا برای فرمت نامعتبر
-    /// </summary>
-    public static InvalidNationalCodeException ForInvalidFormat(string nationalCode)
-    {
-        return new InvalidNationalCodeException(
-            nationalCode,
-            $"کد ملی '{nationalCode}' باید فقط شامل ارقام باشد.",
-            NationalCodeError.InvalidFormat,
-            "AUTH.NATIONALCODE.INVALID_FORMAT"
-        );
+        ex.Data.Add("Reason", reason);
+        return ex;
     }
-
-    /// <summary>
-    /// ایجاد استثنا برای چک‌سام نامعتبر
-    /// </summary>
-    public static InvalidNationalCodeException ForInvalidChecksum(string nationalCode)
-    {
-        return new InvalidNationalCodeException(
-            nationalCode,
-            $"کد ملی '{nationalCode}' از نظر الگوریتم اعتبارسنجی کد ملی ایران نامعتبر است.",
-            NationalCodeError.InvalidChecksum,
-            "AUTH.NATIONALCODE.INVALID_CHECKSUM"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای کد ملی تکراری
-    /// </summary>
-    public static InvalidNationalCodeException ForRepeatingDigits(string nationalCode)
-    {
-        return new InvalidNationalCodeException(
-            nationalCode,
-            $"کد ملی نمی‌تواند از ارقام تکراری مانند '{nationalCode}' تشکیل شده باشد.",
-            NationalCodeError.RepeatingDigits,
-            "AUTH.NATIONALCODE.REPEATING_DIGITS"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای کد ملی مسدود شده
-    /// </summary>
-    public static InvalidNationalCodeException ForBlockedCode(string nationalCode)
-    {
-        return new InvalidNationalCodeException(
-            nationalCode,
-            $"کد ملی '{nationalCode}' مسدود شده است و قابل استفاده نیست.",
-            NationalCodeError.Blocked,
-            "AUTH.NATIONALCODE.BLOCKED"
-        );
-    }
-
-    /// <summary>
-    /// ایجاد استثنا برای کد ملی تکراری در سیستم
-    /// </summary>
-    public static InvalidNationalCodeException ForDuplicateCode(string nationalCode)
-    {
-        return new InvalidNationalCodeException(
-            nationalCode,
-            $"کد ملی '{nationalCode}' قبلاً در سیستم ثبت شده است.",
-            NationalCodeError.Duplicate,
-            "AUTH.NATIONALCODE.DUPLICATE"
-        );
-    }
-}
-
-/// <summary>
-/// انواع خطاهای کد ملی
-/// </summary>
-public enum NationalCodeError
-{
-    General,
-    InvalidLength,
-    InvalidFormat,
-    InvalidChecksum,
-    RepeatingDigits,
-    Blocked,
-    Duplicate
 }

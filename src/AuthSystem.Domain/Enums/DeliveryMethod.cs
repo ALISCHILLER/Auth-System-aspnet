@@ -1,39 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// File: AuthSystem.Domain/Enums/DeliveryMethod.cs
 namespace AuthSystem.Domain.Enums;
 
 /// <summary>
-/// روش‌های ارسال کد
+/// روش‌های تحویل کد تأیید
+/// - این enum برای تعیین روش ارسال کد تأیید استفاده می‌شود
 /// </summary>
-[Flags]
 public enum DeliveryMethod
 {
     /// <summary>
-    /// ارسال از طریق ایمیل
+    /// ایمیل
     /// </summary>
     Email = 1,
 
     /// <summary>
-    /// ارسال از طریق پیامک
+    /// پیامک
     /// </summary>
-    SMS = 2,
+    Sms = 2,
 
     /// <summary>
-    /// نمایش در اپلیکیشن
+    /// تماس تلفنی
     /// </summary>
-    App = 4,
+    VoiceCall = 3,
 
     /// <summary>
-    /// تماس صوتی
+    /// اپلیکیشن‌های پیام‌رسان
     /// </summary>
-    Voice = 8,
+    MessagingApp = 4,
 
     /// <summary>
-    /// پیام‌رسان (WhatsApp, Telegram, etc.)
+    /// اپلیکیشن احراز هویت (مثل Google Authenticator)
     /// </summary>
-    Messenger = 16
+    AuthenticatorApp = 5,
+
+    /// <summary>
+    /// ایمیل و پیامک (ارسال همزمان)
+    /// </summary>
+    EmailAndSms = 6
 }
