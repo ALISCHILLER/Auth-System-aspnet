@@ -1,31 +1,24 @@
-﻿// File: AuthSystem.Domain/Common/Rules/AsyncBusinessRuleBase.cs
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Domain.Common.Exceptions;
-using AuthSystem.Domain.Exceptions;
+﻿using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Common.Rules
+namespace AuthSystem.Domain.Common.Rules;
+
+/// <summary>
+/// کلاس پایه برای قوانین کسب‌وکار ناهمزمان
+/// </summary>
+public abstract class AsyncBusinessRuleBase : IAsyncBusinessRule
 {
     /// <summary>
-    /// پایهٔ ساده برای قواعد کسب‌وکار ناهمگام
-    /// - متد CheckAsync برای پرتاب استثنای دامنه در صورت نقض
+    /// پیام خطای قانون
     /// </summary>
-    public abstract class AsyncBusinessRuleBase : IAsyncBusinessRule
-    {
-        public abstract string Message { get; }
-        public abstract string ErrorCode { get; }
+    public abstract string Message { get; }
 
-        /// <summary>منطق async تشخیص نقض قاعده</summary>
-        protected abstract Task<bool> BrokenAsync(CancellationToken cancellationToken);
+    /// <summary>
+    /// کد خطا برای پردازش‌های بعدی
+    /// </summary>
+    public virtual string ErrorCode => GetType().Name;
 
-        public Task<bool> IsBrokenAsync(CancellationToken cancellationToken = default)
-            => BrokenAsync(cancellationToken);
-
-        /// <summary>بررسی و پرتاب خطا به‌صورت ناهمگام</summary>
-        public async Task CheckAsync(CancellationToken cancellationToken = default)
-        {
-            if (await IsBrokenAsync(cancellationToken).ConfigureAwait(false))
-                throw new BusinessRuleValidationException(Message, ErrorCode);
-        }
-    }
+    /// <summary>
+    /// بررسی آیا قانون نقض شده است (ناهمزمان)
+    /// </summary>
+    public abstract Task<bool> IsBrokenAsync();
 }

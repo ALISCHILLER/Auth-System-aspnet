@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AuthSystem.Application.DTOs.Responses;
-using AuthSystem.Domain.Entities;
+using AuthSystem.Domain.Entities.Authorization.Role;
 
 namespace AuthSystem.Application.Mappings;
 

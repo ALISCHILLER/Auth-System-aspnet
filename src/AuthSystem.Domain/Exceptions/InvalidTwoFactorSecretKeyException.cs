@@ -1,61 +1,87 @@
-﻿// File: AuthSystem.Domain/Exceptions/InvalidTwoFactorSecretKeyException.cs
-using AuthSystem.Domain.Common.Exceptions;
+﻿using AuthSystem.Domain.Common.Exceptions;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای کلید محرمانه احراز هویت دو عاملی نامعتبر
-/// - هنگام اعتبارسنجی کلید 2FA رخ می‌دهد
-/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
+/// این استثنا زمانی رخ می‌دهد که کلید محرمانه 2FA از قوانین سیستم پیروی نکند
 /// </summary>
 public class InvalidTwoFactorSecretKeyException : DomainException
 {
     /// <summary>
-    /// کلید محرمانه نامعتبر
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    public string? SecretKey { get; }
+    public override string ErrorCode => "InvalidTwoFactorSecretKey";
 
     /// <summary>
-    /// سازنده پرایوت
+    /// سازنده با پیام خطا
     /// </summary>
-    private InvalidTwoFactorSecretKeyException(string message, string errorCode, string? secretKey = null)
-        : base(message, errorCode)
+    public InvalidTwoFactorSecretKeyException(string message) : base(message)
     {
-        SecretKey = secretKey;
-        if (secretKey != null)
-            Data.Add("SecretKey", secretKey);
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای کلید خالی
+    /// سازنده با پیام خطا و استثنای داخلی
     /// </summary>
-    public static InvalidTwoFactorSecretKeyException Empty()
-        => new InvalidTwoFactorSecretKeyException(
-            "کلید محرمانه نمی‌تواند خالی باشد",
-            "TWO_FACTOR_SECRET_KEY_EMPTY");
-
-    /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای فرمت نامعتبر کلید
-    /// </summary>
-    public static InvalidTwoFactorSecretKeyException InvalidFormat(string secretKey, string reason)
+    public InvalidTwoFactorSecretKeyException(string message, Exception innerException)
+        : base(message, innerException)
     {
-        var ex = new InvalidTwoFactorSecretKeyException(
-            $"فرمت کلید محرمانه '{secretKey}' نامعتبر است: {reason}",
-            "TWO_FACTOR_SECRET_KEY_INVALID_FORMAT",
-            secretKey);
-
-        ex.Data.Add("Reason", reason);
-        return ex;
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای کلید غیرفعال
+    /// ایجاد استثنا برای کلید محرمانه خالی
     /// </summary>
-    public static InvalidTwoFactorSecretKeyException NotActive(string secretKey)
-        => new InvalidTwoFactorSecretKeyException(
-            $"کلید محرمانه '{secretKey}' غیرفعال است",
-            "TWO_FACTOR_SECRET_KEY_NOT_ACTIVE",
-            secretKey);
+    public static InvalidTwoFactorSecretKeyException ForEmptySecretKey()
+    {
+        return new InvalidTwoFactorSecretKeyException("کلید محرمانه نمی‌تواند خالی باشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای فرمت کلید محرمانه نامعتبر
+    /// </summary>
+    public static InvalidTwoFactorSecretKeyException ForInvalidFormat(string reason)
+    {
+        return new InvalidTwoFactorSecretKeyException($"فرمت کلید محرمانه نامعتبر است: {reason}");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای کلید محرمانه غیرفعال
+    /// </summary>
+    public static InvalidTwoFactorSecretKeyException ForInactiveSecretKey()
+    {
+        return new InvalidTwoFactorSecretKeyException("کلید محرمانه غیرفعال است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای کلید محرمانه منقضی شده
+    /// </summary>
+    public static InvalidTwoFactorSecretKeyException ForExpiredSecretKey()
+    {
+        return new InvalidTwoFactorSecretKeyException("کلید محرمانه منقضی شده است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای کلید محرمانه نامعتبر
+    /// </summary>
+    public static InvalidTwoFactorSecretKeyException ForInvalidSecretKey()
+    {
+        return new InvalidTwoFactorSecretKeyException("کلید محرمانه نامعتبر است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای کلید محرمانه تکراری
+    /// </summary>
+    public static InvalidTwoFactorSecretKeyException ForDuplicateSecretKey()
+    {
+        return new InvalidTwoFactorSecretKeyException("کلید محرمانه تکراری است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای کلید محرمانه با فرمت Base32 نامعتبر
+    /// </summary>
+    public static InvalidTwoFactorSecretKeyException ForInvalidBase32Format()
+    {
+        return new InvalidTwoFactorSecretKeyException("کلید محرمانه باید در فرمت Base32 باشد");
+    }
 }

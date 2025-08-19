@@ -1,47 +1,52 @@
-﻿// File: AuthSystem.Domain/Common/Events/DomainEventBase.cs
-using System;
-using AuthSystem.Domain.Common.Clock;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Common.Events
+namespace AuthSystem.Domain.Common.Events;
+
+/// <summary>
+/// کلاس پایه برای رویدادهای دامنه
+/// </summary>
+public abstract class DomainEventBase : IDomainEvent
 {
     /// <summary>
-    /// کلاس پایه برای پیاده‌سازی رویدادها
-    /// - تولید EventId/CorrelationId
-    /// - ثبت زمان وقوع به UTC
+    /// تاریخ و زمان وقوع رویداد
     /// </summary>
-    public abstract class DomainEventBase : IDomainEvent
+    public DateTime OccurredOn { get; } = DateTime.UtcNow;
+
+    /// <summary>
+    /// متادیتای اضافی رویداد
+    /// </summary>
+    public Dictionary<string, object> Metadata { get; } = new Dictionary<string, object>();
+
+    /// <summary>
+    /// شناسه منحصر به فرد رویداد
+    /// </summary>
+    public Guid EventId { get; } = Guid.NewGuid();
+
+    /// <summary>
+    /// آیا رویداد به صورت ناهمزمان پردازش شود
+    /// </summary>
+    public virtual bool IsAsync => false;
+
+    /// <summary>
+    /// آیا رویداد باید منتشر شود
+    /// </summary>
+    public bool IsPublished { get; private set; }
+
+    /// <summary>
+    /// علامت‌گذاری رویداد به عنوان منتشر شده
+    /// </summary>
+    public void MarkAsPublished()
     {
-        public Guid EventId { get; }
-        public DateTime OccurredOn { get; }
-        public string? TriggeredBy { get; }
-        public Guid CorrelationId { get; }
-        public string EventType => GetType().Name;
-        public virtual int EventVersion => 1;
+        IsPublished = true;
+    }
 
-        protected DomainEventBase(string? triggeredBy = null, Guid? correlationId = null)
-        {
-            EventId = Guid.NewGuid();
-            OccurredOn = DomainClock.UtcNow;
-            TriggeredBy = triggeredBy;
-            CorrelationId = correlationId ?? Guid.NewGuid();
-        }
-
-        protected DomainEventBase(Guid eventId, DateTime occurredOn, string? triggeredBy, Guid correlationId)
-        {
-            EventId = eventId;
-            OccurredOn = occurredOn;
-            TriggeredBy = triggeredBy;
-            CorrelationId = correlationId;
-        }
-
-        public virtual DomainEventMetadata GetMetadata() => new()
-        {
-            EventId = EventId,
-            EventType = EventType,
-            EventVersion = EventVersion,
-            OccurredOn = OccurredOn,
-            TriggeredBy = TriggeredBy,
-            CorrelationId = CorrelationId
-        };
+    /// <summary>
+    /// افزودن متادیتای سفارشی
+    /// </summary>
+    public void AddMetadata(string key, object value)
+    {
+        Metadata[key] = value;
     }
 }

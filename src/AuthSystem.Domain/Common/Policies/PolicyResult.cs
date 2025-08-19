@@ -1,147 +1,55 @@
-﻿// File: AuthSystem.Domain/Common/Policies/PolicyResult.cs
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
-namespace AuthSystem.Domain.Common.Policies
+namespace AuthSystem.Domain.Common.Policies;
+
+/// <summary>
+/// کلاس برای نتیجه ارزیابی سیاست‌ها
+/// </summary>
+public class PolicyResult
 {
     /// <summary>
-    /// نتیجهٔ ارزیابی Policy
-    /// - IsAllowed: اجازه داده شد؟
-    /// - Errors: دلایل/پیام‌ها در صورت عدم اجازه
+    /// آیا سیاست برآورده شده است
     /// </summary>
-    public sealed class PolicyResult
+    public bool IsSatisfied { get; set; }
+
+    /// <summary>
+    /// پیام‌های نتیجه
+    /// </summary>
+    public List<string> Messages { get; } = new List<string>();
+
+    /// <summary>
+    /// ایجاد نتیجه موفق
+    /// </summary>
+    public static PolicyResult Success(string message = null)
     {
-        /// <summary>
-        /// آیا اجازه داده شد؟
-        /// </summary>
-        public bool IsAllowed { get; }
-
-        /// <summary>
-        /// لیست خطاها (پیام و کد) در صورت عدم اجازه
-        /// </summary>
-        public IReadOnlyList<PolicyError> Errors { get; }
-
-        /// <summary>
-        /// سازنده خصوصی
-        /// </summary>
-        private PolicyResult(bool isAllowed, List<PolicyError> errors)
+        return new PolicyResult
         {
-            IsAllowed = isAllowed;
-            Errors = errors.AsReadOnly();
-        }
-
-        /// <summary>
-        /// ساخت نتیجه موفق
-        /// </summary>
-        public static PolicyResult Allow() => new PolicyResult(true, new List<PolicyError>());
-
-        /// <summary>
-        /// ساخت نتیجه ناموفق با یک یا چند خطا
-        /// </summary>
-        public static PolicyResult Deny(params PolicyError[] errors)
-        {
-            return new PolicyResult(false, new List<PolicyError>(errors));
-        }
-
-        /// <summary>
-        /// ساخت نتیجه ناموفق با یک خطا
-        /// </summary>
-        public static PolicyResult Deny(string message, string errorCode)
-        {
-            return Deny(new PolicyError(message, errorCode));
-        }
-
-        /// <summary>
-        /// ترکیب چندین نتیجه Policy به صورت AND
-        /// - اگر هر یک از سیاست‌ها نقض شود، نتیجه ناموفق است
-        /// - تمام خطاهای نقض شده را جمع‌آوری می‌کند
-        /// </summary>
-        public static PolicyResult Combine(params PolicyResult[] results)
-        {
-            if (results == null || results.Length == 0)
-                return Allow();
-
-            var allErrors = new List<PolicyError>();
-            foreach (var result in results)
-            {
-                if (!result.IsAllowed)
-                    allErrors.AddRange(result.Errors);
-            }
-
-            return allErrors.Count > 0 ? Deny(allErrors.ToArray()) : Allow();
-        }
-
-        /// <summary>
-        /// ترکیب چندین نتیجه Policy به صورت AND
-        /// - نسخه با پارامتر IEnumerable برای استفاده آسان‌تر
-        /// </summary>
-        public static PolicyResult Combine(IEnumerable<PolicyResult> results)
-        {
-            return Combine(results?.ToArray() ?? new PolicyResult[0]);
-        }
-
-        /// <summary>
-        /// آیا این نتیجه حاوی خطا با کد مشخص است؟
-        /// </summary>
-        public bool HasError(string errorCode)
-        {
-            return Errors.Any(e => e.ErrorCode == errorCode);
-        }
-
-        /// <summary>
-        /// دریافت خطاهای با کد مشخص
-        /// </summary>
-        public IEnumerable<PolicyError> GetErrorsByCode(string errorCode)
-        {
-            return Errors.Where(e => e.ErrorCode == errorCode);
-        }
-
-        /// <summary>
-        /// تبدیل به رشته برای لاگ و دیباگ
-        /// </summary>
-        public override string ToString()
-        {
-            return IsAllowed
-                ? "PolicyResult: Allowed"
-                : $"PolicyResult: Denied ({Errors.Count} errors)";
-        }
+            IsSatisfied = true,
+            Messages = message != null ? new List<string> { message } : new List<string>()
+        };
     }
 
     /// <summary>
-    /// خطای مرتبط با سیاست
+    /// ایجاد نتیجه ناموفق
     /// </summary>
-    public sealed class PolicyError
+    public static PolicyResult Failure(string message)
     {
-        /// <summary>
-        /// پیام خطا
-        /// </summary>
-        public string Message { get; }
-
-        /// <summary>
-        /// کد خطا
-        /// </summary>
-        public string ErrorCode { get; }
-
-        /// <summary>
-        /// سازنده
-        /// </summary>
-        public PolicyError(string message, string errorCode)
+        return new PolicyResult
         {
-            Message = string.IsNullOrWhiteSpace(message)
-                ? "خطا در ارزیابی سیاست"
-                : message;
-            ErrorCode = string.IsNullOrWhiteSpace(errorCode)
-                ? "POLICY_ERROR"
-                : errorCode;
-        }
+            IsSatisfied = false,
+            Messages = new List<string> { message }
+        };
+    }
 
-        /// <summary>
-        /// تبدیل به رشته برای نمایش
-        /// </summary>
-        public override string ToString()
+    /// <summary>
+    /// ترکیب چندین نتیجه
+    /// </summary>
+    public static PolicyResult Combine(IEnumerable<PolicyResult> results)
+    {
+        return new PolicyResult
         {
-            return $"[{ErrorCode}] {Message}";
-        }
+            IsSatisfied = results.All(r => r.IsSatisfied),
+            Messages = results.SelectMany(r => r.Messages).ToList()
+        };
     }
 }

@@ -1,33 +1,34 @@
-// File: AuthSystem.Domain/Common/Events/IDomainEvent.cs
 using System;
 
-namespace AuthSystem.Domain.Common.Events
+namespace AuthSystem.Domain.Common.Events;
+
+/// <summary>
+/// اینترفیس پایه برای تمام رویدادهای دامنه
+/// </summary>
+public interface IDomainEvent
 {
     /// <summary>
-    /// قرارداد پایه رویدادهای دامنه
-    /// - همهٔ رویدادها باید این اینترفیس را پیاده‌سازی کنند
+    /// تاریخ و زمان وقوع رویداد
     /// </summary>
-    public interface IDomainEvent
-    {
-        /// <summary>شناسه یکتای رویداد</summary>
-        Guid EventId { get; }
+    DateTime OccurredOn { get; }
 
-        /// <summary>زمان وقوع (UTC)</summary>
-        DateTime OccurredOn { get; }
+    /// <summary>
+    /// شناسه منحصر به فرد رویداد
+    /// </summary>
+    Guid EventId { get; }
 
-        /// <summary>شناسه/نام کاربری که رویداد را ایجاد کرده (اختیاری)</summary>
-        string? TriggeredBy { get; }
+    /// <summary>
+    /// آیا رویداد به صورت ناهمزمان پردازش شود
+    /// </summary>
+    bool IsAsync { get; }
 
-        /// <summary>Correlation Id برای ردیابی توزیع‌شده</summary>
-        Guid CorrelationId { get; }
+    /// <summary>
+    /// آیا رویداد منتشر شده است
+    /// </summary>
+    bool IsPublished { get; }
 
-        /// <summary>نام/نوع رویداد جهت دسته‌بندی/سریال‌سازی</summary>
-        string EventType { get; }
-
-        /// <summary>نسخهٔ رویداد جهت سازگاری</summary>
-        int EventVersion { get; }
-
-        /// <summary>بازیابی متادیتای رویداد</summary>
-        DomainEventMetadata GetMetadata();
-    }
+    /// <summary>
+    /// علامت‌گذاری رویداد به عنوان منتشر شده
+    /// </summary>
+    void MarkAsPublished();
 }

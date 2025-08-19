@@ -1,9 +1,8 @@
-﻿// File: AuthSystem.Domain/Enums/PhoneType.cs
-namespace AuthSystem.Domain.Enums;
+﻿namespace AuthSystem.Domain.Enums;
 
 /// <summary>
 /// انواع شماره تلفن
-/// - این enum برای تمایز بین شماره‌های موبایل و ثابت استفاده می‌شود
+/// این enum برای تشخیص نوع شماره تلفن استفاده می‌شود
 /// </summary>
 public enum PhoneType
 {
@@ -18,12 +17,17 @@ public enum PhoneType
     Landline = 2,
 
     /// <summary>
-    /// شماره تلفن ویژه (مثلاً شماره‌های 909)
-    /// </summary>
-    Special = 3,
-
-    /// <summary>
     /// شماره فکس
     /// </summary>
-    Fax = 4
+    Fax = 3,
+
+    /// <summary>
+    /// شماره تول فری
+    /// </summary>
+    TollFree = 4,
+
+    /// <summary>
+    /// شماره اختصاصی
+    /// </summary>
+    PremiumRate = 5
 }

@@ -1,17 +1,25 @@
-﻿// File: AuthSystem.Domain/Common/Auditing/IFullyAuditableEntity.cs
-namespace AuthSystem.Domain.Common.Auditing
+﻿using System;
+
+namespace AuthSystem.Domain.Common.Auditing;
+
+/// <summary>
+/// اینترفیس برای موجودیت‌های کاملاً قابل حسابرسی
+/// شامل تمام فیلدهای حسابرسی
+/// </summary>
+public interface IFullyAuditableEntity : IAuditableEntity
 {
     /// <summary>
-    /// قرارداد «حسابرسی کامل»
-    /// - شامل ایجاد/به‌روزرسانی + حذف نرم + شناسه‌های کاربری
-    /// - معمولاً در Aggregateهای حساس به ردیابی استفاده می‌شود
+    /// نشانه‌گذاری حذف منطقی
     /// </summary>
-    public interface IFullyAuditableEntity : IAuditableEntity, ISoftDeletableEntity
-    {
-        /// <summary>کاربر ایجادکننده (اختیاری)</summary>
-        string? CreatedBy { get; }
+    bool IsDeleted { get; }
 
-        /// <summary>کاربر آخرین به‌روزرسانی‌کننده (اختیاری)</summary>
-        string? UpdatedBy { get; }
-    }
+    /// <summary>
+    /// تاریخ حذف (در صورت حذف منطقی)
+    /// </summary>
+    DateTime? DeletedAt { get; }
+
+    /// <summary>
+    /// شناسه کاربر حذف کننده
+    /// </summary>
+    Guid? DeletedBy { get; }
 }

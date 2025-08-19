@@ -1,66 +1,85 @@
-﻿// File: AuthSystem.Domain/Exceptions/InvalidNationalCodeException.cs
-using AuthSystem.Domain.Common.Exceptions;
+﻿using AuthSystem.Domain.Common.Exceptions;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای کد ملی نامعتبر
-/// - هنگام اعتبارسنجی کد ملی رخ می‌دهد
-/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
+/// این استثنا زمانی رخ می‌دهد که فرمت کد ملی صحیح نباشد
 /// </summary>
 public class InvalidNationalCodeException : DomainException
 {
     /// <summary>
     /// کد ملی نامعتبر
     /// </summary>
-    public string? NationalCode { get; }
+    public string NationalCode { get; }
 
     /// <summary>
-    /// سازنده پرایوت
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    private InvalidNationalCodeException(string message, string errorCode, string? nationalCode = null)
-        : base(message, errorCode)
+    public override string ErrorCode => "InvalidNationalCode";
+
+    /// <summary>
+    /// سازنده با پیام خطا
+    /// </summary>
+    public InvalidNationalCodeException(string message) : base(message)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با پیام خطا و استثنای داخلی
+    /// </summary>
+    public InvalidNationalCodeException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با کد ملی و پیام خطا
+    /// </summary>
+    public InvalidNationalCodeException(string nationalCode, string message)
+        : this(message)
     {
         NationalCode = nationalCode;
-        if (nationalCode != null)
-            Data.Add("NationalCode", nationalCode);
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای کد ملی خالی
+    /// ایجاد استثنا برای کد ملی خالی
     /// </summary>
-    public static InvalidNationalCodeException Empty()
-        => new InvalidNationalCodeException(
-            "کد ملی نمی‌تواند خالی باشد",
-            "NATIONAL_CODE_EMPTY");
-
-    /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای طول نامعتبر کد ملی
-    /// </summary>
-    public static InvalidNationalCodeException InvalidLength(string nationalCode, int requiredLength)
+    public static InvalidNationalCodeException ForEmptyNationalCode()
     {
-        var ex = new InvalidNationalCodeException(
-            $"کد ملی باید {requiredLength} رقم باشد",
-            "NATIONAL_CODE_INVALID_LENGTH",
-            nationalCode);
-
-        ex.Data.Add("RequiredLength", requiredLength);
-        return ex;
+        return new InvalidNationalCodeException("کد ملی نمی‌تواند خالی باشد");
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای فرمت نامعتبر کد ملی
+    /// ایجاد استثنا برای طول نامناسب کد ملی
     /// </summary>
-    public static InvalidNationalCodeException InvalidFormat(string nationalCode, string reason)
+    public static InvalidNationalCodeException ForInvalidLength(int expectedLength)
     {
-        var ex = new InvalidNationalCodeException(
-            $"کد ملی '{nationalCode}' نامعتبر است: {reason}",
-            "NATIONAL_CODE_INVALID_FORMAT",
-            nationalCode);
+        return new InvalidNationalCodeException($"کد ملی باید {expectedLength} رقم باشد");
+    }
 
-        ex.Data.Add("Reason", reason);
-        return ex;
+    /// <summary>
+    /// ایجاد استثنا برای فرمت کد ملی نامعتبر
+    /// </summary>
+    public static InvalidNationalCodeException ForInvalidFormat(string nationalCode)
+    {
+        return new InvalidNationalCodeException(nationalCode, $"فرمت کد ملی '{nationalCode}' نامعتبر است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای کد ملی تکراری
+    /// </summary>
+    public static InvalidNationalCodeException ForDuplicateNationalCode(string nationalCode)
+    {
+        return new InvalidNationalCodeException(nationalCode, $"کد ملی '{nationalCode}' قبلاً ثبت شده است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای کد ملی نامعتبر
+    /// </summary>
+    public static InvalidNationalCodeException ForInvalidChecksum(string nationalCode)
+    {
+        return new InvalidNationalCodeException(nationalCode, $"کد ملی '{nationalCode}' نامعتبر است");
     }
 }

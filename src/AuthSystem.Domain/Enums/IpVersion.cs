@@ -1,9 +1,8 @@
-﻿// File: AuthSystem.Domain/Enums/IpVersion.cs
-namespace AuthSystem.Domain.Enums;
+﻿namespace AuthSystem.Domain.Enums;
 
 /// <summary>
 /// نسخه‌های پروتکل IP
-/// - این enum برای تشخیص نسخه IP استفاده می‌شود
+/// این enum برای تشخیص نسخه IP استفاده می‌شود
 /// </summary>
 public enum IpVersion
 {

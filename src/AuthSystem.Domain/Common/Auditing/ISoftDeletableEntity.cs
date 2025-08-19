@@ -1,22 +1,24 @@
-﻿// File: AuthSystem.Domain/Common/Auditing/ISoftDeletableEntity.cs
-using System;
+﻿using System;
 
-namespace AuthSystem.Domain.Common.Auditing
+namespace AuthSystem.Domain.Common.Auditing;
+
+/// <summary>
+/// اینترفیس برای موجودیت‌های قابل حذف منطقی
+/// </summary>
+public interface ISoftDeletableEntity
 {
     /// <summary>
-    /// قرارداد «حذف نرم» برای موجودیت‌ها
-    /// - بدون حذف فیزیکی؛ فقط علامت حذف و زمان/کاربر ثبت می‌شود
-    /// - پیاده‌سازی در لایهٔ دامنه صرفاً قرارداد است
+    /// نشانه‌گذاری حذف منطقی
     /// </summary>
-    public interface ISoftDeletableEntity
-    {
-        /// <summary>آیا حذف نرم شده است</summary>
-        bool IsDeleted { get; }
+    bool IsDeleted { get; }
 
-        /// <summary>زمان حذف (UTC)</summary>
-        DateTime? DeletedAt { get; }
+    /// <summary>
+    /// تاریخ حذف (در صورت حذف منطقی)
+    /// </summary>
+    DateTime? DeletedAt { get; }
 
-        /// <summary>شناسهٔ کاربری که حذف را انجام داده (اختیاری)</summary>
-        string? DeletedBy { get; }
-    }
+    /// <summary>
+    /// شناسه کاربر حذف کننده
+    /// </summary>
+    Guid? DeletedBy { get; }
 }

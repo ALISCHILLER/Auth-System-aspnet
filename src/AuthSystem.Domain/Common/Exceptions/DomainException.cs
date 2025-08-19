@@ -1,27 +1,28 @@
-﻿// File: AuthSystem.Domain/Common/Exceptions/DomainException.cs
-using System;
+﻿using System;
 
-namespace AuthSystem.Domain.Common.Exceptions
+namespace AuthSystem.Domain.Common.Exceptions;
+
+/// <summary>
+/// کلاس پایه برای استثناهای دامنه
+/// </summary>
+public abstract class DomainException : Exception
 {
     /// <summary>
-    /// استثنای پایه برای تمامی خطاهای سطح Domain
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    public class DomainException : Exception
+    public virtual string ErrorCode => GetType().Name;
+
+    /// <summary>
+    /// سازنده با پیام خطا
+    /// </summary>
+    protected DomainException(string message) : base(message)
     {
-        /// <summary>
-        /// کد خطا برای پردازش‌های بعدی
-        /// </summary>
-        public string? ErrorCode { get; }
+    }
 
-        public DomainException(string message, string? errorCode = null) : base(message)
-        {
-            ErrorCode = errorCode;
-        }
-
-        public DomainException(string message, string? errorCode, Exception? innerException)
-            : base(message, innerException)
-        {
-            ErrorCode = errorCode;
-        }
+    /// <summary>
+    /// سازنده با پیام خطا و استثنای داخلی
+    /// </summary>
+    protected DomainException(string message, Exception innerException) : base(message, innerException)
+    {
     }
 }

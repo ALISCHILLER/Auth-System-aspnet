@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AuthSystem.Domain.Common;
 using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.Exceptions;
 
@@ -13,12 +14,12 @@ namespace AuthSystem.Domain.ValueObjects;
 public sealed class NationalCode : ValueObject
 {
     /// <summary>
-    /// طول استاندارد کد ملی
+    /// طول کد ملی
     /// </summary>
     private const int Length = 10;
 
     /// <summary>
-    /// کدهای ملی غیرمجاز (همه ارقام یکسان)
+    /// کدهای ملی غیرمجاز
     /// </summary>
     private static readonly string[] InvalidCodes =
     {
@@ -28,7 +29,7 @@ public sealed class NationalCode : ValueObject
     };
 
     /// <summary>
-    /// مقدار کد ملی (همیشه 10 رقم)
+    /// مقدار کد ملی
     /// </summary>
     public string Value { get; }
 
@@ -38,7 +39,7 @@ public sealed class NationalCode : ValueObject
     public string RegionCode => Value.Substring(0, 3);
 
     /// <summary>
-    /// آیا کد ملی مربوط به اتباع خارجی است
+    /// آیا کد ملی برای اتباع خارجی است
     /// </summary>
     public bool IsForeigner => Value.StartsWith("9");
 
@@ -56,45 +57,27 @@ public sealed class NationalCode : ValueObject
     public static NationalCode Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw InvalidNationalCodeException.ForEmptyCode();
+            throw new InvalidNationalCodeException("کد ملی نمی‌تواند خالی باشد");
 
-        // تمیز کردن ورودی
-        value = CleanInput(value);
-
-        if (value.Length != Length)
-            throw InvalidNationalCodeException.ForInvalidLength(value, Length);
-
-        if (!value.All(char.IsDigit))
-            throw InvalidNationalCodeException.ForInvalidFormat(value);
-
-        if (InvalidCodes.Contains(value))
-            throw InvalidNationalCodeException.ForRepeatingDigits(value);
-
-        if (!IsValidNationalCode(value))
-            throw InvalidNationalCodeException.ForInvalidChecksum(value);
-
-        return new NationalCode(value);
-    }
-
-    /// <summary>
-    /// تمیز کردن ورودی (حذف فاصله، خط تیره و تبدیل اعداد فارسی)
-    /// </summary>
-    private static string CleanInput(string value)
-    {
+        // حذف فاصله‌ها و کاراکترهای اضافی
         value = value.Trim().Replace(" ", "").Replace("-", "");
 
-        // تبدیل اعداد فارسی/عربی به انگلیسی
-        var persianNumbers = new[] { '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' };
-        var arabicNumbers = new[] { '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩' };
-        var englishNumbers = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        // تبدیل اعداد فارسی به انگلیسی
+        value = ConvertPersianToEnglishNumbers(value);
 
-        for (int i = 0; i < 10; i++)
-        {
-            value = value.Replace(persianNumbers[i], englishNumbers[i]);
-            value = value.Replace(arabicNumbers[i], englishNumbers[i]);
-        }
+        if (value.Length != Length)
+            throw new InvalidNationalCodeException($"کد ملی باید {Length} رقم باشد");
 
-        return value;
+        if (!value.All(char.IsDigit))
+            throw new InvalidNationalCodeException("کد ملی فقط باید شامل اعداد باشد");
+
+        if (InvalidCodes.Contains(value))
+            throw new InvalidNationalCodeException("کد ملی وارد شده نامعتبر است");
+
+        if (!IsValidNationalCode(value))
+            throw new InvalidNationalCodeException("کد ملی نامعتبر است");
+
+        return new NationalCode(value);
     }
 
     /// <summary>
@@ -114,6 +97,20 @@ public sealed class NationalCode : ValueObject
     }
 
     /// <summary>
+    /// تبدیل اعداد فارسی به انگلیسی
+    /// </summary>
+    private static string ConvertPersianToEnglishNumbers(string input)
+    {
+        var persianNumbers = new[] { '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' };
+        var englishNumbers = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        for (var i = 0; i < persianNumbers.Length; i++)
+        {
+            input = input.Replace(persianNumbers[i], englishNumbers[i]);
+        }
+        return input;
+    }
+
+    /// <summary>
     /// فرمت نمایشی کد ملی (xxx-xxxxxx-x)
     /// </summary>
     public string GetFormattedValue()
@@ -121,16 +118,10 @@ public sealed class NationalCode : ValueObject
         return $"{Value.Substring(0, 3)}-{Value.Substring(3, 6)}-{Value[9]}";
     }
 
-    /// <summary>
-    /// بررسی برابری با کد ملی دیگر
-    /// </summary>
     protected override IEnumerable<object?> GetEqualityComponents()
     {
         yield return Value;
     }
 
-    /// <summary>
-    /// نمایش مقدار کد ملی
-    /// </summary>
     public override string ToString() => Value;
 }

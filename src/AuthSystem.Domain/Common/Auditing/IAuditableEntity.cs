@@ -1,19 +1,30 @@
-﻿// File: AuthSystem.Domain/Common/Auditing/IAuditableEntity.cs
-using System;
+﻿using System;
 
-namespace AuthSystem.Domain.Common.Auditing
+namespace AuthSystem.Domain.Common.Auditing;
+
+/// <summary>
+/// اینترفیس برای موجودیت‌های قابل حسابرسی
+/// شامل فیلدهای پایه برای حسابرسی
+/// </summary>
+public interface IAuditableEntity
 {
     /// <summary>
-    /// قرارداد «حسابرسی پایه» برای موجودیت‌ها
-    /// - تاریخ ایجاد و آخرین به‌روزرسانی
-    /// - پیاده‌سازی ویژگی‌ها معمولاً در BaseEntity انجام می‌شود
+    /// تاریخ ایجاد موجودیت (UTC)
     /// </summary>
-    public interface IAuditableEntity
-    {
-        /// <summary>تاریخ ایجاد (UTC)</summary>
-        DateTime CreatedAt { get; }
+    DateTime CreatedAt { get; }
 
-        /// <summary>تاریخ آخرین به‌روزرسانی (UTC)</summary>
-        DateTime? UpdatedAt { get; }
-    }
+    /// <summary>
+    /// تاریخ آخرین به‌روزرسانی (UTC)
+    /// </summary>
+    DateTime? UpdatedAt { get; }
+
+    /// <summary>
+    /// شناسه کاربر ایجاد کننده
+    /// </summary>
+    Guid? CreatedBy { get; }
+
+    /// <summary>
+    /// شناسه کاربر ویرایش کننده
+    /// </summary>
+    Guid? UpdatedBy { get; }
 }

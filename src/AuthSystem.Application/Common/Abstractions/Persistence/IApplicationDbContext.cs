@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using AuthSystem.Domain.Entities;
+using AuthSystem.Domain.Entities.Authorization.Role;
 
 namespace AuthSystem.Application.Common.Abstractions.Persistence;
 

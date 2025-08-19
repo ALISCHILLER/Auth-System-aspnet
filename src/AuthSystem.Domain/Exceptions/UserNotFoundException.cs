@@ -1,82 +1,113 @@
-﻿// File: AuthSystem.Domain/Exceptions/UserNotFoundException.cs
-using AuthSystem.Domain.Common.Exceptions;
+﻿using AuthSystem.Domain.Common.Exceptions;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای یافتن نشدن کاربر
-/// - هنگام جستجوی کاربر بر اساس شناسه یا ایمیل رخ می‌دهد
-/// - شامل جزئیات جستجو برای ارائه پیام مناسب به کاربر
+/// این استثنا زمانی رخ می‌دهد که سیستم نتواند کاربر مورد نظر را پیدا کند
 /// </summary>
 public class UserNotFoundException : DomainException
 {
     /// <summary>
-    /// شناسه کاربر (در صورت جستجو بر اساس شناسه)
+    /// شناسه کاربر
     /// </summary>
     public Guid? UserId { get; }
 
     /// <summary>
-    /// آدرس ایمیل (در صورت جستجو بر اساس ایمیل)
+    /// نام کاربری
     /// </summary>
-    public string? Email { get; }
+    public string Username { get; }
 
     /// <summary>
-    /// نام کاربری (در صورت جستجو بر اساس نام کاربری)
+    /// آدرس ایمیل
     /// </summary>
-    public string? Username { get; }
+    public string Email { get; }
 
     /// <summary>
-    /// سازنده پرایوت
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    private UserNotFoundException(string message, string errorCode, Guid? userId = null, string? email = null, string? username = null)
-        : base(message, errorCode)
+    public override string ErrorCode => "UserNotFound";
+
+    /// <summary>
+    /// سازنده با پیام خطا
+    /// </summary>
+    public UserNotFoundException(string message) : base(message)
     {
-        UserId = userId;
-        Email = email;
-        Username = username;
-
-        if (userId.HasValue)
-            Data.Add("UserId", userId.Value);
-        if (!string.IsNullOrEmpty(email))
-            Data.Add("Email", email);
-        if (!string.IsNullOrEmpty(username))
-            Data.Add("Username", username);
     }
 
     /// <summary>
-    /// سازنده استاتیک برای جستجو بر اساس شناسه
+    /// سازنده با پیام خطا و استثنای داخلی
     /// </summary>
-    public static UserNotFoundException ById(Guid userId)
-        => new UserNotFoundException(
-            $"کاربر با شناسه '{userId}' یافت نشد",
-            "USER_NOT_FOUND_BY_ID",
-            userId: userId);
+    public UserNotFoundException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
 
     /// <summary>
-    /// سازنده استاتیک برای جستجو بر اساس ایمیل
+    /// سازنده با شناسه کاربر و پیام خطا
     /// </summary>
-    public static UserNotFoundException ByEmail(string email)
-        => new UserNotFoundException(
-            $"کاربری با آدرس ایمیل '{email}' یافت نشد",
-            "USER_NOT_FOUND_BY_EMAIL",
-            email: email);
+    public UserNotFoundException(Guid userId, string message)
+        : this(message)
+    {
+        UserId = userId;
+    }
 
     /// <summary>
-    /// سازنده استاتیک برای جستجو بر اساس نام کاربری
+    /// سازنده با نام کاربری و پیام خطا
     /// </summary>
-    public static UserNotFoundException ByUsername(string username, bool caseSensitive = false)
-        => new UserNotFoundException(
-            $"کاربری با نام کاربری '{username}' {(caseSensitive ? "یافت نشد" : "یافت نشد (حساس به بزرگی و کوچکی حروف)")}",
-            "USER_NOT_FOUND_BY_USERNAME",
-            username: username);
+    public UserNotFoundException(string username, string message)
+        : this(message)
+    {
+        Username = username;
+    }
 
     /// <summary>
-    /// سازنده استاتیک برای استفاده عمومی
+    /// سازنده با آدرس ایمیل و پیام خطا
     /// </summary>
-    public static UserNotFoundException General()
-        => new UserNotFoundException(
-            "کاربر مورد نظر یافت نشد",
-            "USER_NOT_FOUND");
+    public UserNotFoundException(string email, string message, bool isEmail)
+        : this(message)
+    {
+        Email = email;
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای یافتن نشدن کاربر با شناسه
+    /// </summary>
+    public static UserNotFoundException ForId(Guid userId)
+    {
+        return new UserNotFoundException(userId, $"کاربر با شناسه {userId} یافت نشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای یافتن نشدن کاربر با نام کاربری
+    /// </summary>
+    public static UserNotFoundException ForUsername(string username)
+    {
+        return new UserNotFoundException(username, $"کاربر با نام کاربری '{username}' یافت نشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای یافتن نشدن کاربر با آدرس ایمیل
+    /// </summary>
+    public static UserNotFoundException ForEmail(string email)
+    {
+        return new UserNotFoundException(email, $"کاربر با آدرس ایمیل '{email}' یافت نشد", true);
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای یافتن نشدن کاربر با شماره تلفن
+    /// </summary>
+    public static UserNotFoundException ForPhoneNumber(string phoneNumber)
+    {
+        return new UserNotFoundException($"کاربر با شماره تلفن '{phoneNumber}' یافت نشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای یافتن نشدن کاربر با توکن تأیید
+    /// </summary>
+    public static UserNotFoundException ForVerificationToken(string token)
+    {
+        return new UserNotFoundException($"کاربر مربوط به توکن تأیید '{token}' یافت نشد");
+    }
 }

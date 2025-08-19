@@ -1,98 +1,109 @@
-﻿// File: AuthSystem.Domain/Exceptions/RateLimitExceededException.cs
-using AuthSystem.Domain.Common.Exceptions;
+﻿using AuthSystem.Domain.Common.Exceptions;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای تجاوز از محدودیت نرخ درخواست‌ها
-/// - هنگام تجاوز از تعداد مجاز درخواست در بازه زمانی مشخص رخ می‌دهد
-/// - شامل جزئیات محدودیت و زمان باقی‌مانده تا بازنشانی
+/// این استثنا زمانی رخ می‌دهد که کاربر بیش از حد مجاز درخواست ارسال کند
 /// </summary>
 public class RateLimitExceededException : DomainException
 {
     /// <summary>
-    /// کلید مربوط به محدودیت نرخ
+    /// کلید محدودیت نرخ (معمولاً آدرس IP یا شناسه کاربر)
     /// </summary>
     public string RateLimitKey { get; }
 
     /// <summary>
-    /// حداکثر تعداد درخواست مجاز
+    /// نوع محدودیت
     /// </summary>
-    public int MaxRequests { get; }
+    public string RateLimitType { get; }
 
     /// <summary>
-    /// بازه زمانی محدودیت (ثانیه)
-    /// </summary>
-    public int WindowSeconds { get; }
-
-    /// <summary>
-    /// زمان بازنشانی محدودیت (UTC)
+    /// زمان بازنشانی محدودیت
     /// </summary>
     public DateTime ResetTime { get; }
 
     /// <summary>
-    /// سازنده پرایوت
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    private RateLimitExceededException(
-        string message,
-        string errorCode,
-        string rateLimitKey,
-        int maxRequests,
-        int windowSeconds,
-        DateTime resetTime)
-        : base(message, errorCode)
+    public override string ErrorCode => "RateLimitExceeded";
+
+    /// <summary>
+    /// سازنده با پیام خطا
+    /// </summary>
+    public RateLimitExceededException(string message) : base(message)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با پیام خطا و استثنای داخلی
+    /// </summary>
+    public RateLimitExceededException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با کلید محدودیت، نوع محدودیت، زمان بازنشانی و پیام خطا
+    /// </summary>
+    public RateLimitExceededException(string rateLimitKey, string rateLimitType, DateTime resetTime, string message)
+        : this(message)
     {
         RateLimitKey = rateLimitKey;
-        MaxRequests = maxRequests;
-        WindowSeconds = windowSeconds;
+        RateLimitType = rateLimitType;
         ResetTime = resetTime;
-
-        Data.Add("RateLimitKey", rateLimitKey);
-        Data.Add("MaxRequests", maxRequests);
-        Data.Add("WindowSeconds", windowSeconds);
-        Data.Add("ResetTime", resetTime);
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای محدودیت تلاش‌های ورود
+    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های ورود
     /// </summary>
-    public static RateLimitExceededException ForLoginAttempts(int maxAttempts, TimeSpan lockoutTime)
+    public static RateLimitExceededException ForLoginAttempts(string ip, DateTime resetTime)
     {
-        var resetTime = DateTime.UtcNow.Add(lockoutTime);
+        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalSeconds);
         return new RateLimitExceededException(
-            $"تعداد درخواست‌ها بیش از حد مجاز است. لطفاً {GetTimeRemaining(resetTime)} دیگر تلاش کنید.",
-            "RATE_LIMIT_EXCEEDED",
-            "LOGIN_ATTEMPTS",
-            maxAttempts,
-            (int)lockoutTime.TotalSeconds,
-            resetTime);
+            ip,
+            "Login",
+            resetTime,
+            $"تعداد تلاش‌های ورود بیش از حد مجاز است. لطفاً {waitTime} ثانیه صبر کنید");
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای محدودیت تولید کد تایید
+    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های ارسال کد تایید
     /// </summary>
-    public static RateLimitExceededException ForVerificationCode(int maxRequests, TimeSpan resetTime)
+    public static RateLimitExceededException ForVerificationCodeRequests(string identifier, DateTime resetTime)
     {
-        var resetDateTime = DateTime.UtcNow.Add(resetTime);
+        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalMinutes);
         return new RateLimitExceededException(
-            $"تعداد درخواست‌ها بیش از حد مجاز است. لطفاً {GetTimeRemaining(resetDateTime)} دیگر تلاش کنید.",
-            "RATE_LIMIT_EXCEEDED",
-            "VERIFICATION_CODE",
-            maxRequests,
-            (int)resetTime.TotalSeconds,
-            resetDateTime);
+            identifier,
+            "VerificationCode",
+            resetTime,
+            $"تعداد درخواست‌های کد تایید بیش از حد مجاز است. لطفاً {waitTime} دقیقه صبر کنید");
     }
 
     /// <summary>
-    /// محاسبه زمان باقی‌مانده تا بازنشانی
+    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های API
     /// </summary>
-    private static string GetTimeRemaining(DateTime resetTime)
+    public static RateLimitExceededException ForApiRequests(string ip, DateTime resetTime)
     {
-        var remaining = resetTime - DateTime.UtcNow;
-        if (remaining.TotalMinutes >= 1)
-            return $"{(int)remaining.TotalMinutes} دقیقه و {remaining.Seconds} ثانیه";
-        return $"{remaining.Seconds} ثانیه";
+        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalSeconds);
+        return new RateLimitExceededException(
+            ip,
+            "Api",
+            resetTime,
+            $"تعداد درخواست‌های API بیش از حد مجاز است. لطفاً {waitTime} ثانیه صبر کنید");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های بازیابی رمز عبور
+    /// </summary>
+    public static RateLimitExceededException ForPasswordResetRequests(string email, DateTime resetTime)
+    {
+        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalMinutes);
+        return new RateLimitExceededException(
+            email,
+            "PasswordReset",
+            resetTime,
+            $"تعداد درخواست‌های بازیابی رمز عبور بیش از حد مجاز است. لطفاً {waitTime} دقیقه صبر کنید");
     }
 }

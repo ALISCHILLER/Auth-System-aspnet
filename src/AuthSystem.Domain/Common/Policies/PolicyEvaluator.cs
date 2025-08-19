@@ -1,66 +1,62 @@
-﻿// File: AuthSystem.Domain/Common/Policies/PolicyEvaluator.cs
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Common.Policies
+namespace AuthSystem.Domain.Common.Policies;
+
+/// <summary>
+/// کلاس برای ارزیابی سیاست‌ها
+/// </summary>
+public class PolicyEvaluator
 {
     /// <summary>
-    /// ارزیاب سیاست‌ها (Policy Evaluator)
-    /// - چند Policy را اجرا و نتیجهٔ تجمیعی بازمی‌گرداند
-    /// - پشتیبانی از گزارش چندین خطا در صورت نقض
+    /// ارزیابی یک سیاست
     /// </summary>
-    public static class PolicyEvaluator
+    public PolicyResult Evaluate<TContext>(IPolicy<TContext> policy, TContext context)
     {
-        /// <summary>
-        /// اجرای مجموعهٔ Policy همگام و ادغام نتایج (AND منطقی)
-        /// - گزارش تمام خطاها در صورت نقض
-        /// </summary>
-        public static PolicyResult EvaluateAll<TContext>(
-            TContext ctx,
-            IEnumerable<IPolicy<TContext>> policies)
+        return policy.Evaluate(context);
+    }
+
+    /// <summary>
+    /// ارزیابی ناهمزمان یک سیاست
+    /// </summary>
+    public async Task<PolicyResult> EvaluateAsync<TContext>(IAsyncPolicy<TContext> policy, TContext context)
+    {
+        return await policy.EvaluateAsync(context);
+    }
+
+    /// <summary>
+    /// ارزیابی چندین سیاست
+    /// </summary>
+    public PolicyResult EvaluateAll<TContext>(IEnumerable<IPolicy<TContext>> policies, TContext context)
+    {
+        var results = policies
+            .Select(policy => policy.Evaluate(context))
+            .ToList();
+
+        return new PolicyResult
         {
-            if (policies == null)
-                throw new ArgumentNullException(nameof(policies));
+            IsSatisfied = results.All(r => r.IsSatisfied),
+            Messages = results.SelectMany(r => r.Messages).ToList()
+        };
+    }
 
-            var errors = new List<PolicyError>();
-            foreach (var p in policies)
-            {
-                var r = p.Evaluate(ctx);
-                if (!r.IsAllowed)
-                    errors.AddRange(r.Errors);
-            }
+    /// <summary>
+    /// ارزیابی ناهمزمان چندین سیاست
+    /// </summary>
+    public async Task<PolicyResult> EvaluateAllAsync<TContext>(
+        IEnumerable<IAsyncPolicy<TContext>> policies,
+        TContext context)
+    {
+        var results = await Task.WhenAll(
+            policies.Select(policy => policy.EvaluateAsync(context))
+        );
 
-            return errors.Count > 0
-                ? PolicyResult.Deny(errors.ToArray())
-                : PolicyResult.Allow();
-        }
-
-        /// <summary>
-        /// اجرای مجموعهٔ Policy ناهمگام و ادغام نتایج (AND منطقی)
-        /// - گزارش تمام خطاها در صورت نقض
-        /// </summary>
-        public static async Task<PolicyResult> EvaluateAllAsync<TContext>(
-            TContext ctx,
-            IEnumerable<IAsyncPolicy<TContext>> policies,
-            CancellationToken cancellationToken = default)
+        return new PolicyResult
         {
-            if (policies == null)
-                throw new ArgumentNullException(nameof(policies));
-
-            var errors = new List<PolicyError>();
-            foreach (var p in policies)
-            {
-                var r = await p.EvaluateAsync(ctx, cancellationToken).ConfigureAwait(false);
-                if (!r.IsAllowed)
-                    errors.AddRange(r.Errors);
-            }
-
-            return errors.Count > 0
-                ? PolicyResult.Deny(errors.ToArray())
-                : PolicyResult.Allow();
-        }
+            IsSatisfied = results.All(r => r.IsSatisfied),
+            Messages = results.SelectMany(r => r.Messages).ToList()
+        };
     }
 }

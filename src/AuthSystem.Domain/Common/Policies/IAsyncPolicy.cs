@@ -1,15 +1,14 @@
-﻿// File: AuthSystem.Domain/Common/Policies/IAsyncPolicy.cs
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Common.Policies
+namespace AuthSystem.Domain.Common.Policies;
+
+/// <summary>
+/// اینترفیس برای سیاست‌های ناهمزمان
+/// </summary>
+public interface IAsyncPolicy<in TContext>
 {
     /// <summary>
-    /// قرارداد Policy ناهمگام
-    /// - برای مواردی که ارزیابی به عملیات async نیاز دارد
+    /// ارزیابی ناهمزمان سیاست
     /// </summary>
-    public interface IAsyncPolicy<in TContext>
-    {
-        Task<PolicyResult> EvaluateAsync(TContext context, CancellationToken cancellationToken = default);
-    }
+    Task<PolicyResult> EvaluateAsync(TContext context);
 }

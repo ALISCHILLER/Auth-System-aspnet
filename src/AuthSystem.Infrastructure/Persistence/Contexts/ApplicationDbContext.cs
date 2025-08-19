@@ -1,4 +1,6 @@
-using AuthSystem.Domain.Entities;
+using AuthSystem.Domain.Entities.Authorization.Role;
+using AuthSystem.Domain.Entities.Security.LoginHistory;
+using AuthSystem.Domain.Entities.Security.UserDevice;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;

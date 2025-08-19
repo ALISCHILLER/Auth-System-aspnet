@@ -1,14 +1,12 @@
-﻿// File: AuthSystem.Domain/Exceptions/TwoFactorException.cs
-using AuthSystem.Domain.Common.Exceptions;
+﻿using AuthSystem.Domain.Common.Exceptions;
+using AuthSystem.Domain.Enums;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا عمومی برای خطاهای احراز هویت دو عاملی
-/// - برای خطاهای عمومی مرتبط با 2FA استفاده می‌شود
-/// - شامل انواع خطاها مانند کد نامعتبر، زمان انقضای کد و غیره
+/// این استثنا زمانی رخ می‌دهد که خطایی در فرآیند 2FA رخ دهد
 /// </summary>
 public class TwoFactorException : DomainException
 {
@@ -18,100 +16,95 @@ public class TwoFactorException : DomainException
     public TwoFactorErrorType ErrorType { get; }
 
     /// <summary>
-    /// سازنده پرایوت
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    private TwoFactorException(string message, string errorCode, TwoFactorErrorType errorType)
-        : base(message, errorCode)
+    public override string ErrorCode => "TwoFactorError";
+
+    /// <summary>
+    /// سازنده با پیام خطا
+    /// </summary>
+    public TwoFactorException(string message) : base(message)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با پیام خطا و استثنای داخلی
+    /// </summary>
+    public TwoFactorException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با نوع خطا و پیام خطا
+    /// </summary>
+    public TwoFactorException(TwoFactorErrorType errorType, string message)
+        : this(message)
     {
         ErrorType = errorType;
-        Data.Add("ErrorType", errorType.ToString());
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای کد تایید نامعتبر
+    /// ایجاد استثنا برای کد نامعتبر
     /// </summary>
-    public static TwoFactorException InvalidCode(string code)
-        => new TwoFactorException(
-            $"کد تایید '{code}' نامعتبر است یا منقضی شده است",
-            "TWO_FACTOR_INVALID_CODE",
-            TwoFactorErrorType.InvalidCode)
-        {
-            Data = { ["Code"] = code }
-        };
-
-    /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای زمان انقضای کد
-    /// </summary>
-    public static TwoFactorException CodeExpired(TimeSpan validityPeriod)
-        => new TwoFactorException(
-            $"کد تایید منقضی شده است. کدها تنها به مدت {validityPeriod:mm\\:ss} معتبر هستند",
-            "TWO_FACTOR_CODE_EXPIRED",
-            TwoFactorErrorType.CodeExpired)
-        {
-            Data = { ["ValidityPeriod"] = validityPeriod }
-        };
-
-    /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای تعداد تلاش‌های بیش از حد
-    /// </summary>
-    public static TwoFactorException MaxAttemptsExceeded(int maxAttempts, int remainingAttempts)
+    public static TwoFactorException ForInvalidCode()
     {
-        var ex = new TwoFactorException(
-            $"تعداد تلاش‌ها بیش از حد مجاز است. {remainingAttempts} تلاش باقی‌مانده است",
-            "TWO_FACTOR_MAX_ATTEMPTS_EXCEEDED",
-            TwoFactorErrorType.MaxAttemptsExceeded);
-
-        ex.Data.Add("MaxAttempts", maxAttempts);
-        ex.Data.Add("RemainingAttempts", remainingAttempts);
-        return ex;
+        return new TwoFactorException(TwoFactorErrorType.InvalidCode, "کد وارد شده نامعتبر است");
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای 2FA غیرفعال
+    /// ایجاد استثنا برای کد منقضی شده
     /// </summary>
-    public static TwoFactorException NotEnabled()
-        => new TwoFactorException(
-            "احراز هویت دو عاملی برای این حساب فعال نیست",
-            "TWO_FACTOR_NOT_ENABLED",
-            TwoFactorErrorType.NotEnabled);
+    public static TwoFactorException ForExpiredCode()
+    {
+        return new TwoFactorException(TwoFactorErrorType.ExpiredCode, "کد وارد شده منقضی شده است");
+    }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای نیاز به تنظیم 2FA
+    /// ایجاد استثنا برای تعداد تلاش‌های بیش از حد
     /// </summary>
-    public static TwoFactorException SetupRequired()
-        => new TwoFactorException(
-            "نیاز به تنظیم احراز هویت دو عاملی است",
-            "TWO_FACTOR_SETUP_REQUIRED",
-            TwoFactorErrorType.SetupRequired);
-}
-
-/// <summary>
-/// انواع خطاهای احراز هویت دو عاملی
-/// </summary>
-public enum TwoFactorErrorType
-{
-    /// <summary>
-    /// کد تایید نامعتبر است
-    /// </summary>
-    InvalidCode,
+    public static TwoFactorException ForTooManyAttempts()
+    {
+        return new TwoFactorException(TwoFactorErrorType.TooManyAttempts, "تعداد تلاش‌ها بیش از حد مجاز است");
+    }
 
     /// <summary>
-    /// کد تایید منقضی شده است
+    /// ایجاد استثنا برای کلید محرمانه نامعتبر
     /// </summary>
-    CodeExpired,
+    public static TwoFactorException ForInvalidSecretKey()
+    {
+        return new TwoFactorException(TwoFactorErrorType.InvalidSecretKey, "کلید محرمانه نامعتبر است");
+    }
 
     /// <summary>
-    /// تعداد تلاش‌ها بیش از حد مجاز است
+    /// ایجاد استثنا برای کلید محرمانه غیرفعال
     /// </summary>
-    MaxAttemptsExceeded,
+    public static TwoFactorException ForInactiveSecretKey()
+    {
+        return new TwoFactorException(TwoFactorErrorType.InactiveSecretKey, "کلید محرمانه غیرفعال است");
+    }
 
     /// <summary>
-    /// احراز هویت دو عاملی فعال نیست
+    /// ایجاد استثنا برای دستگاه ناشناخته
     /// </summary>
-    NotEnabled,
+    public static TwoFactorException ForUnknownDevice()
+    {
+        return new TwoFactorException(TwoFactorErrorType.UnknownDevice, "دستگاه شما شناخته شده نیست");
+    }
 
     /// <summary>
-    /// نیاز به تنظیم احراز هویت دو عاملی است
+    /// ایجاد استثنا برای خطا در ارسال کد
     /// </summary>
-    SetupRequired
+    public static TwoFactorException ForDeliveryFailed()
+    {
+        return new TwoFactorException(TwoFactorErrorType.DeliveryFailed, "ارسال کد با خطا مواجه شد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای احراز هویت دو عاملی غیرفعال
+    /// </summary>
+    public static TwoFactorException ForTwoFactorNotEnabled()
+    {
+        return new TwoFactorException(TwoFactorErrorType.TwoFactorNotEnabled, "احراز هویت دو عاملی فعال نیست");
+    }
 }

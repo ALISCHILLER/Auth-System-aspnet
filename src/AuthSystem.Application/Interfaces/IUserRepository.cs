@@ -1,4 +1,4 @@
-﻿using AuthSystem.Domain.Entities;
+﻿using AuthSystem.Domain.Entities.Authorization.Role;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

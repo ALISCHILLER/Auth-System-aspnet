@@ -1,4 +1,4 @@
-using AuthSystem.Domain.Entities;
+using AuthSystem.Domain.Entities.Security.LoginHistory;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,71 +1,95 @@
-﻿// File: AuthSystem.Domain/Exceptions/InvalidPasswordException.cs
-using AuthSystem.Domain.Common.Exceptions;
-using AuthSystem.Domain.Enums;
+﻿using AuthSystem.Domain.Common.Exceptions;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای رمز عبور نامعتبر
-/// - هنگام اعتبارسنجی رمز عبور رخ می‌دهد
-/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
+/// این استثنا زمانی رخ می‌دهد که رمز عبور از قوانین امنیتی پیروی نکند
 /// </summary>
 public class InvalidPasswordException : DomainException
 {
     /// <summary>
-    /// سطح امنیتی رمز عبور
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    public SecurityLevel? SecurityLevel { get; }
+    public override string ErrorCode => "InvalidPassword";
 
     /// <summary>
-    /// سازنده پرایوت
+    /// سازنده با پیام خطا
     /// </summary>
-    private InvalidPasswordException(string message, string errorCode, SecurityLevel? securityLevel = null)
-        : base(message, errorCode)
+    public InvalidPasswordException(string message) : base(message)
     {
-        SecurityLevel = securityLevel;
-        if (securityLevel.HasValue)
-            Data.Add("SecurityLevel", securityLevel.Value.ToString());
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای رمز عبور خالی
+    /// سازنده با پیام خطا و استثنای داخلی
     /// </summary>
-    public static InvalidPasswordException Empty()
-        => new InvalidPasswordException(
-            "رمز عبور نمی‌تواند خالی باشد",
-            "PASSWORD_EMPTY");
-
-    /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای طول نامعتبر رمز عبور
-    /// </summary>
-    public static InvalidPasswordException InvalidLength(int minLength, int maxLength)
+    public InvalidPasswordException(string message, Exception innerException)
+        : base(message, innerException)
     {
-        var ex = new InvalidPasswordException(
-            $"رمز عبور باید بین {minLength} و {maxLength} کاراکتر باشد",
-            "PASSWORD_INVALID_LENGTH");
-
-        ex.Data.Add("MinLength", minLength);
-        ex.Data.Add("MaxLength", maxLength);
-        return ex;
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای عدم رعایت الزامات امنیتی
+    /// ایجاد استثنا برای رمز عبور خالی
     /// </summary>
-    public static InvalidPasswordException RequirementNotMet(string requirement, SecurityLevel securityLevel)
+    public static InvalidPasswordException ForEmptyPassword()
     {
-        var ex = new InvalidPasswordException(
-            $"رمز عبور باید شامل {requirement} باشد",
-            "PASSWORD_REQUIREMENT_NOT_MET",
-            securityLevel);
+        return new InvalidPasswordException("رمز عبور نمی‌تواند خالی باشد");
+    }
 
-        ex.Data.Add("Requirement", requirement);
-        return ex;
+    /// <summary>
+    /// ایجاد استثنا برای رمز عبور کوتاه
+    /// </summary>
+    public static InvalidPasswordException ForShortPassword(int minLength)
+    {
+        return new InvalidPasswordException($"رمز عبور باید حداقل {minLength} کاراکتر باشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای رمز عبور فاقد حروف بزرگ
+    /// </summary>
+    public static InvalidPasswordException ForMissingUppercase()
+    {
+        return new InvalidPasswordException("رمز عبور باید حداقل یک حرف بزرگ داشته باشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای رمز عبور فاقد حروف کوچک
+    /// </summary>
+    public static InvalidPasswordException ForMissingLowercase()
+    {
+        return new InvalidPasswordException("رمز عبور باید حداقل یک حرف کوچک داشته باشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای رمز عبور فاقد اعداد
+    /// </summary>
+    public static InvalidPasswordException ForMissingNumbers()
+    {
+        return new InvalidPasswordException("رمز عبور باید حداقل یک عدد داشته باشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای رمز عبور فاقد کاراکترهای خاص
+    /// </summary>
+    public static InvalidPasswordException ForMissingSpecialCharacters()
+    {
+        return new InvalidPasswordException("رمز عبور باید حداقل یک کاراکتر خاص داشته باشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای رمز عبور مشابه اطلاعات شخصی
+    /// </summary>
+    public static InvalidPasswordException ForSimilarToPersonalInfo()
+    {
+        return new InvalidPasswordException("رمز عبور نمی‌تواند مشابه اطلاعات شخصی باشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای رمز عبور تکراری
+    /// </summary>
+    public static InvalidPasswordException ForDuplicatePassword()
+    {
+        return new InvalidPasswordException("رمز عبور جدید نمی‌تواند مشابه رمز عبور قبلی باشد");
     }
 }
-
-/// <summary>
-/// سطوح امنیتی مختلف رمز عبور
-/// </summary>

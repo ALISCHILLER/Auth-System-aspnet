@@ -1,49 +1,53 @@
-﻿// File: AuthSystem.Domain/Enums/VerificationCodeType.cs
-namespace AuthSystem.Domain.Enums;
+﻿namespace AuthSystem.Domain.Enums;
 
 /// <summary>
 /// انواع کد تایید
-/// - این enum برای تمایز بین انواع کدهای تأیید استفاده می‌شود
+/// این enum برای طبقه‌بندی کدهای تایید در سیستم استفاده می‌شود
 /// </summary>
 public enum VerificationCodeType
 {
     /// <summary>
-    /// تایید ایمیل
+    /// کد تایید ایمیل (برای تأیید آدرس ایمیل)
     /// </summary>
     EmailVerification = 1,
 
     /// <summary>
-    /// تایید شماره تلفن
+    /// کد تایید شماره تلفن (برای تأیید شماره تلفن)
     /// </summary>
     PhoneVerification = 2,
 
     /// <summary>
-    /// احراز هویت دو عاملی
+    /// کد احراز هویت دو عاملی (برای تأیید هویت دو مرحله‌ای)
     /// </summary>
     TwoFactorAuth = 3,
 
     /// <summary>
-    /// بازیابی رمز عبور
+    /// کد بازیابی رمز عبور (برای تغییر رمز عبور)
     /// </summary>
     PasswordReset = 4,
 
     /// <summary>
-    /// فعال‌سازی حساب
+    /// کد فعال‌سازی حساب (برای فعال‌سازی حساب کاربری)
     /// </summary>
     AccountActivation = 5,
 
     /// <summary>
-    /// تایید تراکنش
+    /// کد تایید تراکنش (برای تأیید عملیات حساس)
     /// </summary>
     Transaction = 6,
 
     /// <summary>
-    /// تایید تغییر ایمیل
+    /// کد تایید دستگاه جدید (برای تأیید دستگاه جدید)
     /// </summary>
-    EmailChange = 7,
+    NewDevice = 7,
 
     /// <summary>
-    /// تایید تغییر شماره تلفن
+    /// کد تایید تغییر ایمیل (برای تأیید تغییر آدرس ایمیل)
     /// </summary>
-    PhoneChange = 8
+    EmailChange = 8,
+
+    /// <summary>
+    /// کد تایید تغییر شماره تلفن (برای تأیید تغییر شماره تلفن)
+    /// </summary>
+    PhoneChange = 9
 }

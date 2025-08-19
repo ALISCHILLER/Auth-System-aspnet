@@ -1,4 +1,4 @@
-﻿using AuthSystem.Domain.Entities;
+﻿using AuthSystem.Domain.Entities.Authorization.Role;
 using AuthSystem.Domain.ValueObjects;
 using AuthSystem.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;

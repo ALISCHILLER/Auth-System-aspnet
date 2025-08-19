@@ -1,57 +1,63 @@
-﻿// File: AuthSystem.Domain/Common/Clock/DomainClock.cs
-using System;
-using AuthSystem.Domain.Common.Clock;
+﻿using System;
 
-namespace AuthSystem.Domain.Common.Clock
+namespace AuthSystem.Domain.Common.Clock;
+
+/// <summary>
+/// پیاده‌سازی مدیریت زمان در دامنه
+/// - استفاده از این کلاس به جای DateTime.UtcNow برای تست‌پذیری
+/// - امکان تنظیم زمان برای تست‌ها
+/// </summary>
+public class DomainClock : ISystemClock
 {
+    private static readonly Lazy<DomainClock> _instance = new(() => new DomainClock());
+    private DateTime? _fixedTime;
+
     /// <summary>
-    /// نگهدارندهٔ سراسریِ ساعت دامنه برای تست‌پذیری و جداسازی از زمان سیستم.
-    /// - در Infrastructure یک ISystemClock واقعی ست می‌شود.
-    /// - در تست‌ها می‌توانید Fake/Stub تزریق کنید.
+    /// نمونه سینگلتون از DomainClock
     /// </summary>
-    public static class DomainClock
+    public static DomainClock Instance => _instance.Value;
+
+    /// <summary>
+    /// تاریخ و زمان فعلی به صورت UTC
+    /// </summary>
+    public DateTime UtcNow => _fixedTime ?? DateTime.UtcNow;
+
+    /// <summary>
+    /// تنظیم زمان به مقدار مشخص (برای تست‌ها)
+    /// </summary>
+    public void SetFixedTime(DateTime utcNow)
     {
-        private static ISystemClock _current = new DefaultSystemClock();
-        private static bool _isConfigured = false;
+        _fixedTime = utcNow;
+    }
 
-        /// <summary>
-        /// زمان فعلی UTC بر اساس ساعت جاری
-        /// </summary>
-        public static DateTime UtcNow => _current.UtcNow;
+    /// <summary>
+    /// ریست کردن زمان به حالت پیش‌فرض
+    /// </summary>
+    public void Reset()
+    {
+        _fixedTime = null;
+    }
 
-        /// <summary>
-        /// زمان فعلی Local بر اساس ساعت جاری
-        /// </summary>
-        public static DateTime Now => _current.Now;
-
-        /// <summary>
-        /// تنظیم ساعت دامنه (فقط یک بار قابل فراخوانی)
-        /// </summary>
-        public static void Configure(ISystemClock clock)
+    /// <summary>
+    /// جلو انداختن زمان به میزان مشخص (برای تست‌ها)
+    /// </summary>
+    public void Advance(TimeSpan timeSpan)
+    {
+        if (_fixedTime.HasValue)
         {
-            if (_isConfigured)
-                throw new InvalidOperationException("ساعت دامنه قبلاً تنظیم شده است");
-
-            _current = clock ?? throw new ArgumentNullException(nameof(clock));
-            _isConfigured = true;
-        }
-
-        /// <summary>
-        /// تنظیم مجدد به ساعت پیش‌فرض
-        /// </summary>
-        public static void Reset()
-        {
-            _current = new DefaultSystemClock();
-            _isConfigured = false;
-        }
-
-        /// <summary>
-        /// ساعت پیش‌فرض سیستم
-        /// </summary>
-        private sealed class DefaultSystemClock : ISystemClock
-        {
-            public DateTime UtcNow => DateTime.UtcNow;
-            public DateTime Now => DateTime.Now;
+            _fixedTime = _fixedTime.Value.Add(timeSpan);
         }
     }
+}
+
+/// <summary>
+/// Façade برای دسترسی آسان به زمان سیستم
+/// این کلاس استاتیک امکان دسترسی ساده‌تر به UtcNow را فراهم می‌کند
+/// </summary>
+public static class Clock
+{
+    /// <summary>
+    /// دریافت زمان فعلی به صورت UTC
+    /// </summary>
+    public static DateTime UtcNow => DomainClock.Instance.UtcNow;
 }

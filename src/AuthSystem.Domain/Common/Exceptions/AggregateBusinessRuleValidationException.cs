@@ -1,35 +1,56 @@
-﻿// File: AuthSystem.Domain/Common/Exceptions/AggregateBusinessRuleValidationException.cs
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AuthSystem.Domain.Common.Rules;
 
-namespace AuthSystem.Domain.Common.Exceptions
+namespace AuthSystem.Domain.Common.Exceptions;
+
+/// <summary>
+/// استثنا برای قوانین تجمعی
+/// </summary>
+public class AggregateBusinessRuleValidationException : DomainException
 {
     /// <summary>
-    /// استثنای نقض چندین قانون کسب‌وکار به صورت همزمان
+    /// لیست پیام‌های خطای قوانین
     /// </summary>
-    public class AggregateBusinessRuleValidationException : DomainException
+    public List<string> RuleMessages { get; }
+
+    /// <summary>
+    /// کد خطا برای پردازش‌های بعدی
+    /// </summary>
+    public override string ErrorCode => "AggregateRuleViolation";
+
+    /// <summary>
+    /// سازنده خصوصی برای Factory Method
+    /// </summary>
+    private AggregateBusinessRuleValidationException(List<string> ruleMessages)
+        : base($"چندین قانون کسب‌وکار نقض شده‌اند: {string.Join(", ", ruleMessages)}")
     {
-        /// <summary>
-        /// لیست خطاها (پیام و کد)
-        /// </summary>
-        public IReadOnlyList<(string Message, string ErrorCode)> Errors { get; }
+        RuleMessages = ruleMessages;
+    }
 
-        public AggregateBusinessRuleValidationException(IEnumerable<(string Message, string ErrorCode)> errors)
-            : base(CreateMessage(errors), GetFirstErrorCode(errors))
-        {
-            Errors = errors.ToList().AsReadOnly();
-        }
+    /// <summary>
+    /// ایجاد استثنا برای چندین قانون شکسته شده
+    /// </summary>
+    public static AggregateBusinessRuleValidationException ForMultipleBrokenRules(
+        IEnumerable<IBusinessRule> brokenRules)
+    {
+        var ruleMessages = brokenRules.Select(r => r.Message).ToList();
+        return new AggregateBusinessRuleValidationException(ruleMessages);
+    }
 
-        private static string CreateMessage(IEnumerable<(string Message, string ErrorCode)> errors)
+    /// <summary>
+    /// ایجاد استثنا برای چندین قانون شکسته شده (ناهمزمان)
+    /// </summary>
+    public static async Task<AggregateBusinessRuleValidationException> ForMultipleBrokenRulesAsync(
+        IEnumerable<IAsyncBusinessRule> brokenRules)
+    {
+        var ruleMessages = new List<string>();
+        foreach (var rule in brokenRules)
         {
-            return "چندین قانون کسب‌وکار نقض شده است: " +
-                   string.Join(" | ", errors.Select(e => $"[{e.ErrorCode}] {e.Message}"));
+            ruleMessages.Add(await rule.GetMessageAsync());
         }
-
-        private static string? GetFirstErrorCode(IEnumerable<(string Message, string ErrorCode)> errors)
-        {
-            return errors.FirstOrDefault().ErrorCode;
-        }
+        return new AggregateBusinessRuleValidationException(ruleMessages);
     }
 }

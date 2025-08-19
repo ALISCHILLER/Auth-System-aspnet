@@ -1,28 +1,22 @@
-﻿// File: AuthSystem.Domain/Common/Rules/BusinessRuleBase.cs
-using AuthSystem.Domain.Common.Exceptions;
-using AuthSystem.Domain.Exceptions;
+﻿namespace AuthSystem.Domain.Common.Rules;
 
-namespace AuthSystem.Domain.Common.Rules
+/// <summary>
+/// کلاس پایه برای قوانین کسب‌وکار
+/// </summary>
+public abstract class BusinessRuleBase : IBusinessRule
 {
     /// <summary>
-    /// پایهٔ ساده برای قواعد کسب‌وکار همگام
-    /// - متد Check() برای پرتاب استثنای دامنه هنگام نقض قاعده
+    /// پیام خطای قانون
     /// </summary>
-    public abstract class BusinessRuleBase : IBusinessRule
-    {
-        public abstract string Message { get; }
-        public abstract string ErrorCode { get; }
+    public abstract string Message { get; }
 
-        /// <summary>منطق تشخیص نقض قاعده</summary>
-        protected abstract bool Broken();
+    /// <summary>
+    /// کد خطا برای پردازش‌های بعدی
+    /// </summary>
+    public virtual string ErrorCode => GetType().Name;
 
-        public bool IsBroken() => Broken();
-
-        /// <summary>بررسی و پرتاب خطا در صورت نقض قاعده</summary>
-        public void Check()
-        {
-            if (IsBroken())
-                throw new BusinessRuleValidationException(Message, ErrorCode);
-        }
-    }
+    /// <summary>
+    /// بررسی آیا قانون نقض شده است
+    /// </summary>
+    public abstract bool IsBroken();
 }

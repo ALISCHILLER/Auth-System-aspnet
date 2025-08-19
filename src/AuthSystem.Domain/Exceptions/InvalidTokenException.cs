@@ -1,75 +1,93 @@
-﻿// File: AuthSystem.Domain/Exceptions/InvalidTokenException.cs
-using AuthSystem.Domain.Common.Exceptions;
-using AuthSystem.Domain.Enums;
+﻿using AuthSystem.Domain.Common.Exceptions;
 using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
 /// استثنا برای توکن امنیتی نامعتبر
-/// - هنگام اعتبارسنجی توکن‌های امنیتی رخ می‌دهد
-/// - شامل جزئیات خطا برای ارائه پیام مناسب به کاربر
+/// این استثنا زمانی رخ می‌دهد که توکن امنیتی از قوانین سیستم پیروی نکند
 /// </summary>
 public class InvalidTokenException : DomainException
 {
     /// <summary>
     /// نوع توکن
     /// </summary>
-    public TokenType? TokenType { get; }
+    public string TokenType { get; }
 
     /// <summary>
-    /// سازنده پرایوت
+    /// کد خطا برای پردازش‌های بعدی
     /// </summary>
-    private InvalidTokenException(string message, string errorCode, TokenType? tokenType = null)
-        : base(message, errorCode)
+    public override string ErrorCode => "InvalidToken";
+
+    /// <summary>
+    /// سازنده با پیام خطا
+    /// </summary>
+    public InvalidTokenException(string message) : base(message)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با پیام خطا و استثنای داخلی
+    /// </summary>
+    public InvalidTokenException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
+
+    /// <summary>
+    /// سازنده با نوع توکن و پیام خطا
+    /// </summary>
+    public InvalidTokenException(string tokenType, string message)
+        : this(message)
     {
         TokenType = tokenType;
-        if (tokenType.HasValue)
-            Data.Add("TokenType", tokenType.Value.ToString());
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای توکن خالی
+    /// ایجاد استثنا برای توکن خالی
     /// </summary>
-    public static InvalidTokenException Empty()
-        => new InvalidTokenException(
-            "توکن نمی‌تواند خالی باشد",
-            "TOKEN_EMPTY");
-
-    /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای فرمت نامعتبر توکن
-    /// </summary>
-    public static InvalidTokenException InvalidFormat(string reason)
+    public static InvalidTokenException ForEmptyToken()
     {
-        var ex = new InvalidTokenException(
-            $"فرمت توکن نامعتبر است: {reason}",
-            "TOKEN_INVALID_FORMAT");
-
-        ex.Data.Add("Reason", reason);
-        return ex;
+        return new InvalidTokenException("توکن نمی‌تواند خالی باشد");
     }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای توکن منقضی شده
+    /// ایجاد استثنا برای طول نامناسب توکن
     /// </summary>
-    public static InvalidTokenException Expired(DateTime expirationTime)
-        => new InvalidTokenException(
-            $"توکن منقضی شده است و تاریخ انقضا آن {expirationTime:yyyy/MM/dd HH:mm:ss} بوده است",
-            "TOKEN_EXPIRED")
-        {
-            Data = { ["ExpirationTime"] = expirationTime }
-        };
+    public static InvalidTokenException ForInvalidLength(int minLength, int maxLength)
+    {
+        return new InvalidTokenException($"طول توکن باید بین {minLength} و {maxLength} کاراکتر باشد");
+    }
 
     /// <summary>
-    /// سازنده استاتیک برای ایجاد استثنا برای توکن غیرفعال
+    /// ایجاد استثنا برای فرمت نامناسب توکن
     /// </summary>
-    public static InvalidTokenException NotActive(string token)
-        => new InvalidTokenException(
-            $"توکن معتبر نیست",
-            "TOKEN_NOT_ACTIVE")
-        {
-            Data = { ["Token"] = token }
-        };
-}
+    public static InvalidTokenException ForInvalidFormat()
+    {
+        return new InvalidTokenException("فرمت توکن نامعتبر است");
+    }
 
+    /// <summary>
+    /// ایجاد استثنا برای توکن منقضی شده
+    /// </summary>
+    public static InvalidTokenException ForExpiredToken()
+    {
+        return new InvalidTokenException("توکن منقضی شده است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای توکن استفاده شده
+    /// </summary>
+    public static InvalidTokenException ForAlreadyUsedToken()
+    {
+        return new InvalidTokenException("توکن قبلاً استفاده شده است");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای توکن مربوط به نوع دیگر
+    /// </summary>
+    public static InvalidTokenException ForIncorrectTokenType(string expectedType, string actualType)
+    {
+        return new InvalidTokenException($"توکن نامعتبر است. نوع مورد انتظار: {expectedType}, نوع واقعی: {actualType}");
+    }
+}

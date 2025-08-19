@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\exceptions\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\exceptions\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\authorization\\role\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\authorization\\role\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\aggregates\\useraggregate\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\aggregates\\useraggregate\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\events\\rolecreatedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\events\\rolecreatedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\security\\userdevice\\userdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\security\\userdevice\\userdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\security\\loginhistory\\loginhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\security\\loginhistory\\loginhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\security\\loginhistory\\loginattempt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\security\\loginhistory\\loginattempt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\security\\loginhistory\\failedloginattempt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\security\\loginhistory\\failedloginattempt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\authorization\\role\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\authorization\\role\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\authorization\\role\\rolepermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\authorization\\role\\rolepermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,21 +42,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "InvalidPasswordException.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Exceptions\\InvalidPasswordException.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAIA3wGoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T13:19:16.166Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -40,14 +51,105 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "User.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Aggregates\\UserAggregate\\User.cs",
-              "ViewState": "AgIAAPYAAAAAAAAAAAAowAABAAAuAAAAAAAAAA==",
+              "Title": "RoleCreatedEvent.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T12:44:56.827Z",
+              "WhenOpened": "2025-08-19T13:04:38.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Role.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\Role.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\Role.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\Role.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\Role.cs",
+              "ViewState": "AgIAAFABAAAAAAAAAAAQwF8BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T13:04:09.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserDevice.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\UserDevice\\UserDevice.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Security\\UserDevice\\UserDevice.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\UserDevice\\UserDevice.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Security\\UserDevice\\UserDevice.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAwwHAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T12:56:26.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginHistory.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginHistory.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginHistory.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginHistory.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginHistory.cs",
+              "ViewState": "AgIAABUBAAAAAAAAAAAwwCYBAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T12:56:17.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginAttempt.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginAttempt.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginAttempt.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginAttempt.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\LoginAttempt.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T12:56:15.763Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FailedLoginAttempt.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\FailedLoginAttempt.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\FailedLoginAttempt.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\FailedLoginAttempt.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory\\FailedLoginAttempt.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T12:56:11.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\UserRole.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\UserRole.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\UserRole.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\UserRole.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T12:56:05.435Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RolePermission.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\RolePermission.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\RolePermission.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\RolePermission.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\Authorization\\Role\\RolePermission.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T12:56:02.291Z",
               "EditorCaption": ""
             }
           ]

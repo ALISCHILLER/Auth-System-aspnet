@@ -1,19 +1,15 @@
-﻿// File: AuthSystem.Domain/Common/Clock/ISystemClock.cs
-using System;
+﻿using System;
 
-namespace AuthSystem.Domain.Common.Clock
+namespace AuthSystem.Domain.Common.Clock;
+
+/// <summary>
+/// اینترفیس برای مدیریت زمان
+/// - استفاده از این اینترفیس به جای DateTime.UtcNow برای تست‌پذیری
+/// </summary>
+public interface ISystemClock
 {
     /// <summary>
-    /// قرارداد ساعت سیستم در دامنه
-    /// - برای تست‌پذیری، زمان از طریق این اینترفیس تزریق می‌شود
-    /// - پیاده‌سازی در لایه زیرساخت انجام می‌گردد (مثلاً SystemClock)
+    /// تاریخ و زمان فعلی به صورت UTC
     /// </summary>
-    public interface ISystemClock
-    {
-        /// <summary>زمان فعلی UTC</summary>
-        DateTime UtcNow { get; }
-
-        /// <summary>زمان فعلی به‌صورت Local (در صورت نیاز)</summary>
-        DateTime Now { get; }
-    }
+    DateTime UtcNow { get; }
 }

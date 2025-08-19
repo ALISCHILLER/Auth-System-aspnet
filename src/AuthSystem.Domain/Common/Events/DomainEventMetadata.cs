@@ -1,18 +1,78 @@
-﻿// File: AuthSystem.Domain/Common/Events/DomainEventMetadata.cs
-using System;
+﻿using System;
+using System.Collections.Generic;
 
-namespace AuthSystem.Domain.Common.Events
+namespace AuthSystem.Domain.Common.Events;
+
+/// <summary>
+/// کلاس برای مدیریت متادیتای رویدادهای دامنه
+/// </summary>
+public class DomainEventMetadata
 {
     /// <summary>
-    /// متادیتای استاندارد رویداد دامنه جهت ردیابی و نسخه‌بندی.
+    /// شناسه کاربر انجام‌دهنده عملیات
     /// </summary>
-    public sealed class DomainEventMetadata
+    public Guid? UserId { get; set; }
+
+    /// <summary>
+    /// آدرس IP انجام‌دهنده عملیات
+    /// </summary>
+    public string? IpAddress { get; set; }
+
+    /// <summary>
+    /// User Agent انجام‌دهنده عملیات
+    /// </summary>
+    public string? UserAgent { get; set; }
+
+    /// <summary>
+    /// شناسه جلسه کاربر
+    /// </summary>
+    public string? SessionId { get; set; }
+
+    /// <summary>
+    /// زمان شروع پردازش رویداد
+    /// </summary>
+    public DateTime ProcessingStartedAt { get; } = DateTime.UtcNow;
+
+    /// <summary>
+    /// زمان پایان پردازش رویداد
+    /// </summary>
+    public DateTime? ProcessingEndedAt { get; private set; }
+
+    /// <summary>
+    /// آیا پردازش رویداد موفقیت‌آمیز بود
+    /// </summary>
+    public bool IsSuccessful { get; private set; }
+
+    /// <summary>
+    /// تعداد تلاش‌های پردازش
+    /// </summary>
+    public int AttemptCount { get; private set; }
+
+    /// <summary>
+    /// علامت‌گذاری پردازش به عنوان کامل شده
+    /// </summary>
+    public void MarkAsCompleted(bool isSuccessful)
     {
-        public Guid EventId { get; init; }
-        public string EventType { get; init; } = string.Empty;
-        public int EventVersion { get; init; }
-        public DateTime OccurredOn { get; init; }
-        public string? TriggeredBy { get; init; }
-        public Guid CorrelationId { get; init; }
+        ProcessingEndedAt = DateTime.UtcNow;
+        IsSuccessful = isSuccessful;
+    }
+
+    /// <summary>
+    /// افزودن تلاش جدید برای پردازش
+    /// </summary>
+    public void IncrementAttemptCount()
+    {
+        AttemptCount++;
+    }
+
+    /// <summary>
+    /// محاسبه زمان پردازش
+    /// </summary>
+    public TimeSpan? GetProcessingDuration()
+    {
+        if (ProcessingEndedAt == null)
+            return null;
+
+        return ProcessingEndedAt.Value - ProcessingStartedAt;
     }
 }

@@ -1,54 +1,58 @@
-﻿// File: AuthSystem.Domain/Enums/PermissionType.cs
-namespace AuthSystem.Domain.Enums;
+﻿namespace AuthSystem.Domain.Enums;
 
 /// <summary>
-/// انواع مجوزها در سیستم
-/// - این enum برای تمایز بین انواع مجوزها استفاده می‌شود
+/// انواع مجوزها
+/// این enum برای طبقه‌بندی مجوزها در سیستم استفاده می‌شود
 /// </summary>
 public enum PermissionType
 {
     /// <summary>
-    /// مجوز خواندن
+    /// مجوز خواندن (Read)
     /// </summary>
     Read = 1,
 
     /// <summary>
-    /// مجوز نوشتن
+    /// مجوز نوشتن (Write)
     /// </summary>
     Write = 2,
 
     /// <summary>
-    /// مجوز حذف
+    /// مجوز حذف (Delete)
     /// </summary>
     Delete = 3,
 
     /// <summary>
-    /// مجوز ایجاد
+    /// مجوز ایجاد (Create)
     /// </summary>
     Create = 4,
 
     /// <summary>
-    /// مجوز مدیریت
+    /// مجوز ادمین (Admin)
     /// </summary>
-    Manage = 5,
+    Admin = 5,
 
     /// <summary>
-    /// مجوز ادمین
+    /// مجوز مدیریت کاربران (UserManagement)
     /// </summary>
-    Admin = 6,
+    UserManagement = 6,
 
     /// <summary>
-    /// مجوز احراز هویت
+    /// مجوز مدیریت محتوا (ContentManagement)
     /// </summary>
-    Authenticate = 7,
+    ContentManagement = 7,
 
     /// <summary>
-    /// مجوز تأیید
+    /// مجوز گزارش‌گیری (Reporting)
     /// </summary>
-    Verify = 8,
+    Reporting = 8,
 
     /// <summary>
-    /// مجوز گزارش‌گیری
+    /// مجوز تنظیمات سیستم (SystemSettings)
     /// </summary>
-    Report = 9
+    SystemSettings = 9,
+
+    /// <summary>
+    /// مجوز مدیریت امنیت (SecurityManagement)
+    /// </summary>
+    SecurityManagement = 10
 }

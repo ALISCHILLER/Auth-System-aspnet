@@ -1,19 +1,22 @@
-﻿// File: AuthSystem.Domain/Common/Rules/IBusinessRule.cs
-namespace AuthSystem.Domain.Common.Rules
+﻿namespace AuthSystem.Domain.Common.Rules;
+
+/// <summary>
+/// اینترفیس پایه برای تمام قوانین کسب‌وکار
+/// </summary>
+public interface IBusinessRule
 {
     /// <summary>
-    /// قرارداد «قاعده کسب‌وکار» همگام
-    /// - اجرای قوانین دامنه برای جلوگیری از وضعیت نامعتبر
+    /// پیام خطای قانون
     /// </summary>
-    public interface IBusinessRule
-    {
-        /// <summary>پیام خطا در صورت نقض قاعده</summary>
-        string Message { get; }
+    string Message { get; }
 
-        /// <summary>کد خطا برای پردازش‌های بعدی</summary>
-        string ErrorCode { get; }
+    /// <summary>
+    /// کد خطا برای پردازش‌های بعدی
+    /// </summary>
+    string ErrorCode { get; }
 
-        /// <summary>آیا قاعده نقض شده است؟</summary>
-        bool IsBroken();
-    }
+    /// <summary>
+    /// بررسی آیا قانون نقض شده است
+    /// </summary>
+    bool IsBroken();
 }

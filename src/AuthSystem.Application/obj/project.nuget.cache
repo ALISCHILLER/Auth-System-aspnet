@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TLGjxKpZjWI=",
+  "dgSpecHash": "5fuAztR/wF4=",
   "success": true,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj",
   "expectedPackageFiles": [
@@ -72,8 +72,8 @@
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.fileproviders.composite\\8.0.0\\microsoft.extensions.fileproviders.composite.8.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\8.0.0\\microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\8.0.1\\microsoft.extensions.hosting.abstractions.8.0.1.nupkg.sha512",
-    "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.localization\\8.0.11\\microsoft.extensions.localization.8.0.11.nupkg.sha512",
-    "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\8.0.11\\microsoft.extensions.localization.abstractions.8.0.11.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.localization\\9.0.8\\microsoft.extensions.localization.9.0.8.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\9.0.8\\microsoft.extensions.localization.abstractions.9.0.8.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.logging\\9.0.8\\microsoft.extensions.logging.9.0.8.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.8\\microsoft.extensions.logging.abstractions.9.0.8.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.objectpool\\8.0.11\\microsoft.extensions.objectpool.8.0.11.nupkg.sha512",
@@ -106,6 +106,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\serilog\\4.3.0\\serilog.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\system.buffers\\4.6.0\\system.buffers.4.6.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

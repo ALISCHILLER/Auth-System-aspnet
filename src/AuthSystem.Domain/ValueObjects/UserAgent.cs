@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using AuthSystem.Domain.Common;
 using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.ValueObjects;
 
@@ -228,16 +230,4 @@ public sealed class UserAgent : ValueObject
     }
 
     public override string ToString() => Value;
-}
-
-/// <summary>
-/// نوع دستگاه
-/// </summary>
-public enum DeviceType
-{
-    Desktop,
-    Mobile,
-    Tablet,
-    Bot,
-    Unknown
 }

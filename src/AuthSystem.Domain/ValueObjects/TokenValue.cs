@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using AuthSystem.Domain.Common;
 using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;
@@ -104,7 +105,6 @@ public sealed class TokenValue : ValueObject
 
         var token = GenerateSecureToken(length);
         var expiresAt = validity.HasValue ? DateTime.UtcNow.Add(validity.Value) : (DateTime?)null;
-
         return new TokenValue(token, type, expiresAt);
     }
 
@@ -116,7 +116,6 @@ public sealed class TokenValue : ValueObject
         using var rng = RandomNumberGenerator.Create();
         var bytes = new byte[length * 3 / 4]; // برای تولید طول مناسب Base64
         rng.GetBytes(bytes);
-
         // تبدیل به Base64 URL-safe
         return Convert.ToBase64String(bytes)
             .Replace('+', '-')
@@ -159,7 +158,6 @@ public sealed class TokenValue : ValueObject
         var newExpiry = ExpiresAt.HasValue
             ? ExpiresAt.Value.Add(extension)
             : DateTime.UtcNow.Add(extension);
-
         return new TokenValue(Value, Type, newExpiry);
     }
 
@@ -171,4 +169,3 @@ public sealed class TokenValue : ValueObject
 
     public override string ToString() => $"[{Type} Token: ***]";
 }
-

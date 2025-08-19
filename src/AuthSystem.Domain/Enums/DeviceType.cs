@@ -1,44 +1,38 @@
-﻿// File: AuthSystem.Domain/Enums/DeviceType.cs
-namespace AuthSystem.Domain.Enums;
+﻿namespace AuthSystem.Domain.Enums;
 
 /// <summary>
-/// انواع دستگاه‌هایی که کاربر ممکن است از آن وارد سیستم شود
-/// - این enum برای ردیابی و مدیریت دستگاه‌های کاربر استفاده می‌شود
+/// انواع دستگاه‌ها
+/// این enum برای تشخیص نوع دستگاه کاربر استفاده می‌شود
 /// </summary>
 public enum DeviceType
 {
     /// <summary>
-    /// دستگاه ناشناخته
-    /// </summary>
-    Unknown = 0,
-
-    /// <summary>
-    /// رایانه رومیزی
+    /// دستگاه دسکتاپ (ویندوز، مک، لینوکس)
     /// </summary>
     Desktop = 1,
 
     /// <summary>
-    /// تلفن همراه
+    /// دستگاه موبایل (اندروید، آیفون)
     /// </summary>
     Mobile = 2,
 
     /// <summary>
-    /// تبلت
+    /// تبلت (آیپد، تبلت اندروید)
     /// </summary>
     Tablet = 3,
 
     /// <summary>
-    /// ربات یا اسکرپر
+    /// ربات یا اسکرپر (Googlebot, Facebookbot)
     /// </summary>
     Bot = 4,
 
     /// <summary>
-    /// دستگاه IoT
+    /// دستگاه IoT (دستگاه‌های اینترنت اشیاء)
     /// </summary>
     IoT = 5,
 
     /// <summary>
-    /// سرور یا اپلیکیشن سرور
+    /// دستگاه مجهول
     /// </summary>
-    Server = 6
+    Unknown = 6
 }

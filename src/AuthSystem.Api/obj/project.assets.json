@@ -1534,7 +1534,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.7": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.8": {
         "type": "package",
         "compile": {
           "lib/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -1810,34 +1810,34 @@
           "buildTransitive/net8.0/Microsoft.Extensions.Http.Resilience.targets": {}
         }
       },
-      "Microsoft.Extensions.Localization/8.0.11": {
+      "Microsoft.Extensions.Localization/9.0.8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
-          "Microsoft.Extensions.Localization.Abstractions": "8.0.11",
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
-          "Microsoft.Extensions.Options": "8.0.2"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8",
+          "Microsoft.Extensions.Localization.Abstractions": "9.0.8",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.8",
+          "Microsoft.Extensions.Options": "9.0.8"
         },
         "compile": {
-          "lib/net8.0/Microsoft.Extensions.Localization.dll": {
+          "lib/net9.0/Microsoft.Extensions.Localization.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Localization.dll": {
+          "lib/net9.0/Microsoft.Extensions.Localization.dll": {
             "related": ".xml"
           }
         }
       },
-      "Microsoft.Extensions.Localization.Abstractions/8.0.11": {
+      "Microsoft.Extensions.Localization.Abstractions/9.0.8": {
         "type": "package",
         "compile": {
-          "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+          "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+          "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.dll": {
             "related": ".xml"
           }
         }
@@ -1863,10 +1863,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/9.0.7": {
+      "Microsoft.Extensions.Logging.Abstractions/9.0.8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.7"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Logging.Abstractions.dll": {
@@ -1921,11 +1921,11 @@
           }
         }
       },
-      "Microsoft.Extensions.Options/9.0.7": {
+      "Microsoft.Extensions.Options/9.0.8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.7",
-          "Microsoft.Extensions.Primitives": "9.0.7"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8",
+          "Microsoft.Extensions.Primitives": "9.0.8"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Options.dll": {
@@ -1964,7 +1964,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.7": {
+      "Microsoft.Extensions.Primitives/9.0.8": {
         "type": "package",
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Primitives.dll": {
@@ -2770,7 +2770,7 @@
           }
         }
       },
-      "Serilog/4.2.0": {
+      "Serilog/4.3.0": {
         "type": "package",
         "compile": {
           "lib/net9.0/Serilog.dll": {
@@ -2781,6 +2781,9 @@
           "lib/net9.0/Serilog.dll": {
             "related": ".xml"
           }
+        },
+        "build": {
+          "build/_._": {}
         }
       },
       "Serilog.AspNetCore/9.0.0": {
@@ -3630,7 +3633,12 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
+          "FluentValidation": "12.0.0",
+          "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+          "MediatR": "13.0.0",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.8",
+          "Microsoft.Extensions.Localization": "9.0.8",
+          "Serilog": "4.3.0",
           "System.ComponentModel.Annotations": "5.0.0",
           "libphonenumber-csharp": "9.0.12"
         },
@@ -6094,10 +6102,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.7": {
-      "sha512": "iPK1FxbGFr2Xb+4Y+dTYI8Gupu9pOi8I3JPuPsrogUmEhe2hzZ9LpCmolMEBhVDo2ikcSr7G5zYiwaapHSQTew==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.8": {
+      "sha512": "xY3lTjj4+ZYmiKIkyWitddrp1uL5uYiweQjqo4BKBw01ZC4HhcfgLghDpPZcUlppgWAFqFy9SgkiYWOMx365pw==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/9.0.7",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/9.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6119,7 +6127,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.9.0.7.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.9.0.8.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -6451,10 +6459,10 @@
         "microsoft.extensions.http.resilience.nuspec"
       ]
     },
-    "Microsoft.Extensions.Localization/8.0.11": {
-      "sha512": "yTb325+mCuoUBBMEztLv48kK/I/99TfVPh4V5kW8Qw+45mqAJs9bndOYxvjJvJxKVuwgzOYiWC/a34fr4pJ8IA==",
+    "Microsoft.Extensions.Localization/9.0.8": {
+      "sha512": "icKfuQfr1dRVBt7JVntt31WjioupeMC/qqYPHzW67VzPjBuATtlmp3+9HMFmSWWwgJK+r4MHcaZhq8VZ5zfg2w==",
       "type": "package",
-      "path": "microsoft.extensions.localization/8.0.11",
+      "path": "microsoft.extensions.localization/9.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6462,18 +6470,18 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net462/Microsoft.Extensions.Localization.dll",
         "lib/net462/Microsoft.Extensions.Localization.xml",
-        "lib/net8.0/Microsoft.Extensions.Localization.dll",
-        "lib/net8.0/Microsoft.Extensions.Localization.xml",
+        "lib/net9.0/Microsoft.Extensions.Localization.dll",
+        "lib/net9.0/Microsoft.Extensions.Localization.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.xml",
-        "microsoft.extensions.localization.8.0.11.nupkg.sha512",
+        "microsoft.extensions.localization.9.0.8.nupkg.sha512",
         "microsoft.extensions.localization.nuspec"
       ]
     },
-    "Microsoft.Extensions.Localization.Abstractions/8.0.11": {
-      "sha512": "qyfVEOJ8PsYrwC6kTQFSTm4+FrpOAz3OfPXvRPfs7j34V+yHMuVUgIiP5yjrYHcpNbXTtCzoQc/ZdcbpdeX/Xg==",
+    "Microsoft.Extensions.Localization.Abstractions/9.0.8": {
+      "sha512": "guqP/5IRbVZ9FibWI7ieIouzB18prqWwKlfhzqF3LY+mqmP9kz1SjnlOrqvapw0C49PUght/3GRQAxDs2AEKOA==",
       "type": "package",
-      "path": "microsoft.extensions.localization.abstractions/8.0.11",
+      "path": "microsoft.extensions.localization.abstractions/9.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6481,11 +6489,11 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net462/Microsoft.Extensions.Localization.Abstractions.dll",
         "lib/net462/Microsoft.Extensions.Localization.Abstractions.xml",
-        "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.dll",
-        "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.xml",
+        "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.dll",
+        "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.xml",
-        "microsoft.extensions.localization.abstractions.8.0.11.nupkg.sha512",
+        "microsoft.extensions.localization.abstractions.9.0.8.nupkg.sha512",
         "microsoft.extensions.localization.abstractions.nuspec"
       ]
     },
@@ -6519,10 +6527,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Logging.Abstractions/9.0.7": {
-      "sha512": "sMM6NEAdUTE/elJ2wqjOi0iBWqZmSyaTByLF9e8XHv6DRJFFnOe0N+s8Uc6C91E4SboQCfLswaBIZ+9ZXA98AA==",
+    "Microsoft.Extensions.Logging.Abstractions/9.0.8": {
+      "sha512": "pYnAffJL7ARD/HCnnPvnFKSIHnTSmWz84WIlT9tPeQ4lHNiu0Az7N/8itihWvcF8sT+VVD5lq8V+ckMzu4SbOw==",
       "type": "package",
-      "path": "microsoft.extensions.logging.abstractions/9.0.7",
+      "path": "microsoft.extensions.logging.abstractions/9.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6585,7 +6593,7 @@
         "lib/net9.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
-        "microsoft.extensions.logging.abstractions.9.0.7.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.9.0.8.nupkg.sha512",
         "microsoft.extensions.logging.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -6636,10 +6644,10 @@
         "microsoft.extensions.objectpool.nuspec"
       ]
     },
-    "Microsoft.Extensions.Options/9.0.7": {
-      "sha512": "trJnF6cRWgR5uMmHpGoHmM1wOVFdIYlELlkO9zX+RfieK0321Y55zrcs4AaEymKup7dxgEN/uJU25CAcMNQRXw==",
+    "Microsoft.Extensions.Options/9.0.8": {
+      "sha512": "OmTaQ0v4gxGQkehpwWIqPoEiwsPuG/u4HUsbOFoWGx4DKET2AXzopnFe/fE608FIhzc/kcg2p8JdyMRCCUzitQ==",
       "type": "package",
-      "path": "microsoft.extensions.options/9.0.7",
+      "path": "microsoft.extensions.options/9.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6676,7 +6684,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Options.xml",
-        "microsoft.extensions.options.9.0.7.nupkg.sha512",
+        "microsoft.extensions.options.9.0.8.nupkg.sha512",
         "microsoft.extensions.options.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -6709,10 +6717,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Primitives/9.0.7": {
-      "sha512": "ti/zD9BuuO50IqlvhWQs9GHxkCmoph5BHjGiWKdg2t6Or8XoyAfRJiKag+uvd/fpASnNklfsB01WpZ4fhAe0VQ==",
+    "Microsoft.Extensions.Primitives/9.0.8": {
+      "sha512": "tizSIOEsIgSNSSh+hKeUVPK7xmTIjR8s+mJWOu1KXV3htvNQiPMFRMO17OdI1y/4ZApdBVk49u/08QGC9yvLug==",
       "type": "package",
-      "path": "microsoft.extensions.primitives/9.0.7",
+      "path": "microsoft.extensions.primitives/9.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6732,7 +6740,7 @@
         "lib/net9.0/Microsoft.Extensions.Primitives.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
-        "microsoft.extensions.primitives.9.0.7.nupkg.sha512",
+        "microsoft.extensions.primitives.9.0.8.nupkg.sha512",
         "microsoft.extensions.primitives.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -7856,14 +7864,15 @@
         "polly.ratelimiting.nuspec"
       ]
     },
-    "Serilog/4.2.0": {
-      "sha512": "gmoWVOvKgbME8TYR+gwMf7osROiWAURterc6Rt2dQyX7wtjZYpqFiA/pY6ztjGQKKV62GGCyOcmtP1UKMHgSmA==",
+    "Serilog/4.3.0": {
+      "sha512": "+cDryFR0GRhsGOnZSKwaDzRRl4MupvJ42FhCE4zhQRVanX0Jpg6WuCBk59OVhVDPmab1bB+nRykAnykYELA9qQ==",
       "type": "package",
-      "path": "serilog/4.2.0",
+      "path": "serilog/4.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
+        "build/Serilog.targets",
         "icon.png",
         "lib/net462/Serilog.dll",
         "lib/net462/Serilog.xml",
@@ -7877,7 +7886,7 @@
         "lib/net9.0/Serilog.xml",
         "lib/netstandard2.0/Serilog.dll",
         "lib/netstandard2.0/Serilog.xml",
-        "serilog.4.2.0.nupkg.sha512",
+        "serilog.4.3.0.nupkg.sha512",
         "serilog.nuspec"
       ]
     },

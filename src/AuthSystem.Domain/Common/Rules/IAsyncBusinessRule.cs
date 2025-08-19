@@ -1,23 +1,19 @@
-﻿// File: AuthSystem.Domain/Common/Rules/IAsyncBusinessRule.cs
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace AuthSystem.Domain.Common.Rules
+namespace AuthSystem.Domain.Common.Rules;
+
+/// <summary>
+/// اینترفیس برای قوانین کسب‌وکار ناهمزمان
+/// </summary>
+public interface IAsyncBusinessRule : IBusinessRule
 {
     /// <summary>
-    /// قرارداد «قاعده کسب‌وکار» ناهمگام
-    /// - برای مواردی که بررسی قانون به عملیات async نیاز دارد
-    /// - فقط قرارداد دامنه است؛ بدون I/O
+    /// بررسی آیا قانون نقض شده است (ناهمزمان)
     /// </summary>
-    public interface IAsyncBusinessRule
-    {
-        /// <summary>پیام خطا در صورت نقض قاعده</summary>
-        string Message { get; }
+    Task<bool> IsBrokenAsync();
 
-        /// <summary>کد خطا برای پردازش‌های بعدی</summary>
-        string ErrorCode { get; }
-
-        /// <summary>آیا قاعده نقض شده است؟</summary>
-        Task<bool> IsBrokenAsync(CancellationToken cancellationToken = default);
-    }
+    /// <summary>
+    /// دریافت پیام خطای قانون (ناهمزمان)
+    /// </summary>
+    Task<string> GetMessageAsync();
 }

@@ -1,129 +1,138 @@
-﻿using AuthSystem.Domain.Common.Entities;
-using AuthSystem.Domain.Exceptions;
-using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using AuthSystem.Domain.Common;
+using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Exceptions;
 
 namespace AuthSystem.Domain.ValueObjects;
 
 /// <summary>
-/// Value Object آدرس ایمیل با قابلیت نرمال‌سازی و پشتیبانی بین‌المللی
+/// Value Object آدرس ایمیل
+/// این کلاس مسئول اعتبارسنجی و مدیریت آدرس ایمیل است
 /// </summary>
 public sealed class Email : ValueObject
 {
+    /// <summary>
+    /// حداکثر طول مجاز برای آدرس ایمیل
+    /// </summary>
+    private const int MaxLength = 255;
+
+    /// <summary>
+    /// الگوی regex برای اعتبارسنجی ایمیل
+    /// </summary>
     private static readonly Regex EmailRegex = new(
         @"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
-        RegexOptions.Compiled | RegexOptions.IgnoreCase
-    );
+        RegexOptions.Compiled | RegexOptions.IgnoreCase,
+        TimeSpan.FromMilliseconds(250));
 
+    /// <summary>
+    /// مقدار آدرس ایمیل
+    /// </summary>
     public string Value { get; }
-    public string NormalizedValue { get; }
-    public string Domain { get; }
-    public string Username { get; }
 
+    /// <summary>
+    /// نام کاربری (قسمت قبل از @)
+    /// </summary>
+    public string Username => Value.Split('@')[0];
+
+    /// <summary>
+    /// دامنه (قسمت بعد از @)
+    /// </summary>
+    public string Domain => Value.Split('@')[1];
+
+    /// <summary>
+    /// آدرس ایمیل نرمال شده (حروف کوچک)
+    /// </summary>
+    public string NormalizedValue { get; }
+
+    /// <summary>
+    /// سازنده خصوصی
+    /// </summary>
     private Email(string value)
     {
         Value = value;
-        NormalizedValue = NormalizeEmail(value);
-
-        var parts = NormalizedValue.Split('@');
-        Username = parts[0];
-        Domain = parts[1];
+        NormalizedValue = value.ToLowerInvariant();
     }
 
+    /// <summary>
+    /// ایجاد نمونه معتبر از ایمیل
+    /// </summary>
     public static Email Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw InvalidEmailException.ForEmptyEmail(); // استفاده از factory method
+            throw new InvalidEmailException("آدرس ایمیل نمی‌تواند خالی باشد");
 
         value = value.Trim();
 
-        if (value.Length > 254)
-            throw InvalidEmailException.ForInvalidLength(value); // استفاده از factory method
+        if (value.Length > MaxLength)
+            throw new InvalidEmailException($"آدرس ایمیل نمی‌تواند بیشتر از {MaxLength} کاراکتر باشد");
 
         if (!IsValidEmail(value))
-            throw InvalidEmailException.ForInvalidFormat(value); // استفاده از factory method
+            throw new InvalidEmailException($"فرمت آدرس ایمیل '{value}' نامعتبر است");
 
         return new Email(value);
     }
 
-    private static bool IsValidEmail(string email)
+    /// <summary>
+    /// ایجاد ایمیل بدون اعتبارسنجی (برای موارد خاص مثل بازیابی از دیتابیس)
+    /// </summary>
+    internal static Email CreateUnsafe(string value)
+    {
+        return new Email(value);
+    }
+
+    /// <summary>
+    /// بررسی اعتبار فرمت ایمیل
+    /// </summary>
+    public static bool IsValidEmail(string email)
     {
         if (string.IsNullOrWhiteSpace(email))
             return false;
 
         try
         {
-            var idn = new IdnMapping();
-            var parts = email.Split('@');
-            if (parts.Length != 2) return false;
-
-            parts[1] = idn.GetAscii(parts[1]);
-            email = string.Join("@", parts);
-
             return EmailRegex.IsMatch(email);
         }
-        catch
+        catch (RegexMatchTimeoutException)
         {
             return false;
         }
     }
 
-    private static string NormalizeEmail(string email)
+    /// <summary>
+    /// آیا این ایمیل از دامنه مشخصی است
+    /// </summary>
+    public bool IsFromDomain(string domain)
     {
-        var parts = email.Split('@');
-        var username = parts[0].ToLowerInvariant();
-        var domain = parts[1].ToLowerInvariant();
-
-        // نرمال‌سازی Gmail
-        if (IsGmailDomain(domain))
-        {
-            username = username.Replace(".", "");
-            var plusIndex = username.IndexOf('+');
-            if (plusIndex > 0)
-                username = username.Substring(0, plusIndex);
-        }
-
-        return $"{username}@{domain}";
-    }
-
-    private static bool IsGmailDomain(string domain)
-    {
-        return domain switch
-        {
-            "gmail.com" => true,
-            "googlemail.com" => true,
-            _ => false
-        };
+        return Domain.Equals(domain, StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
-    /// بررسی اینکه آیا دامنه از نوع ایمیل موقت است یا خیر
+    /// آیا این ایمیل موقت/یکبار مصرف است
     /// </summary>
-    public bool IsDisposableEmail()
+    public bool IsDisposable()
     {
-        // لیست نمونه از دامنه‌های ایمیل موقت
+        // لیست دامنه‌های ایمیل موقت معروف
         var disposableDomains = new[]
         {
-            "tempmail.com", "throwaway.email", "guerrillamail.com",
-            "mailinator.com", "10minutemail.com", "yopmail.com"
+            "tempmail.com", "guerrillamail.com", "mailinator.com",
+            "10minutemail.com", "throwaway.email", "yopmail.com"
         };
 
-        return disposableDomains.Contains(Domain, StringComparer.OrdinalIgnoreCase);
+        return Array.Exists(disposableDomains,
+            domain => Domain.EndsWith(domain, StringComparison.OrdinalIgnoreCase));
     }
 
-    /// <summary>
-    /// بررسی اینکه آیا دامنه مسدود شده است یا خیر
-    /// </summary>
-    public bool IsBlockedDomain(IEnumerable<string> blockedDomains)
+    protected override IEnumerable<object?> GetEqualityComponents()
     {
-        return blockedDomains.Contains(Domain, StringComparer.OrdinalIgnoreCase);
+        yield return NormalizedValue;
     }
 
-    protected override IEnumerable<object> GetEqualityComponents() => new[] { NormalizedValue };
     public override string ToString() => Value;
 
     /// <summary>
-    /// اپراتور تبدیل ضمنی از Email به string
+    /// تبدیل implicit از string به Email
     /// </summary>
     public static implicit operator string(Email email) => email.Value;
 }
