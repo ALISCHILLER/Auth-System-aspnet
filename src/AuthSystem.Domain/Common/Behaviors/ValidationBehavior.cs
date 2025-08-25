@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using FluentValidation.Results; // این خط را اضافه کنید
 using MediatR;
 using AuthSystem.Domain.Common.Exceptions;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.IdentityModel.Tokens;
 
 namespace AuthSystem.Domain.Common.Behaviors;
 

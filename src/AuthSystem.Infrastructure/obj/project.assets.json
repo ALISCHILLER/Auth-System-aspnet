@@ -2372,6 +2372,7 @@
           "FluentValidation.DependencyInjectionExtensions": "12.0.0",
           "MediatR": "13.0.0",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.8",
+          "Microsoft.EntityFrameworkCore": "9.0.8",
           "Microsoft.Extensions.Localization": "9.0.8",
           "Serilog": "4.3.0",
           "System.ComponentModel.Annotations": "5.0.0",
@@ -6482,5 +6483,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 9.0.8 to 9.0.7. Reference the package directly from the project to select a different version. \r\n AuthSystem.Infrastructure -> AuthSystem.Domain -> Microsoft.EntityFrameworkCore (>= 9.0.8) \r\n AuthSystem.Infrastructure -> Microsoft.EntityFrameworkCore (>= 9.0.7)",
+      "libraryId": "Microsoft.EntityFrameworkCore",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AuthSystem.Domain.Common.Policies;
 
@@ -22,11 +24,10 @@ public class PolicyResult
     /// </summary>
     public static PolicyResult Success(string message = null)
     {
-        return new PolicyResult
-        {
-            IsSatisfied = true,
-            Messages = message != null ? new List<string> { message } : new List<string>()
-        };
+        var result = new PolicyResult { IsSatisfied = true };
+        if (message != null)
+            result.Messages.Add(message);
+        return result;
     }
 
     /// <summary>
@@ -34,11 +35,9 @@ public class PolicyResult
     /// </summary>
     public static PolicyResult Failure(string message)
     {
-        return new PolicyResult
-        {
-            IsSatisfied = false,
-            Messages = new List<string> { message }
-        };
+        var result = new PolicyResult { IsSatisfied = false };
+        result.Messages.Add(message);
+        return result;
     }
 
     /// <summary>
@@ -46,10 +45,13 @@ public class PolicyResult
     /// </summary>
     public static PolicyResult Combine(IEnumerable<PolicyResult> results)
     {
-        return new PolicyResult
+        var result = new PolicyResult { IsSatisfied = results.All(r => r.IsSatisfied) };
+
+        foreach (var r in results)
         {
-            IsSatisfied = results.All(r => r.IsSatisfied),
-            Messages = results.SelectMany(r => r.Messages).ToList()
-        };
+            result.Messages.AddRange(r.Messages);
+        }
+
+        return result;
     }
 }

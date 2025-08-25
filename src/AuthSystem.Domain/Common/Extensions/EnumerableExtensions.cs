@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AuthSystem.Domain.Common.Extensions;
 
@@ -67,12 +68,13 @@ public static class EnumerableExtensions
     /// <summary>
     /// گروه‌بندی بر اساس چندین فیلد
     /// </summary>
-    public static IEnumerable<IGrouping<TKey, TElement>> GroupByMultiple<TElement, TKey>(
+    public static IEnumerable<IGrouping<string, TElement>> GroupByMultiple<TElement>(
         this IEnumerable<TElement> source,
-        params Func<TElement, TKey>[] keySelectors)
+        params Func<TElement, object>[] keySelectors)
     {
         return source.GroupBy(item =>
-            string.Join("|", keySelectors.Select(selector => selector(item).ToString())));
+            string.Join("|", keySelectors
+                .Select(selector => selector(item)?.ToString() ?? string.Empty)));
     }
 
     /// <summary>
@@ -81,20 +83,6 @@ public static class EnumerableExtensions
     public static T FirstOrThrow<T>(this IEnumerable<T> source, string errorMessage = null)
     {
         var item = source.FirstOrDefault();
-        if (item == null)
-            throw new InvalidOperationException(errorMessage ?? "Item not found");
-
-        return item;
-    }
-
-    /// <summary>
-    /// یافتن اولین مورد یا ایجاد استثنا (ناهمزمان)
-    /// </summary>
-    public static async Task<T> FirstOrThrowAsync<T>(
-        this IQueryable<T> source,
-        string errorMessage = null)
-    {
-        var item = await source.FirstOrDefaultAsync();
         if (item == null)
             throw new InvalidOperationException(errorMessage ?? "Item not found");
 

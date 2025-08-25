@@ -35,11 +35,8 @@ public class PolicyEvaluator
             .Select(policy => policy.Evaluate(context))
             .ToList();
 
-        return new PolicyResult
-        {
-            IsSatisfied = results.All(r => r.IsSatisfied),
-            Messages = results.SelectMany(r => r.Messages).ToList()
-        };
+        // استفاده از متد Combine به جای ساخت مستقیم PolicyResult
+        return PolicyResult.Combine(results);
     }
 
     /// <summary>
@@ -53,10 +50,7 @@ public class PolicyEvaluator
             policies.Select(policy => policy.EvaluateAsync(context))
         );
 
-        return new PolicyResult
-        {
-            IsSatisfied = results.All(r => r.IsSatisfied),
-            Messages = results.SelectMany(r => r.Messages).ToList()
-        };
+        // استفاده از متد Combine به جای ساخت مستقیم PolicyResult
+        return PolicyResult.Combine(results);
     }
 }

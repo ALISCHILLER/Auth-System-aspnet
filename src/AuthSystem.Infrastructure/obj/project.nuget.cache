@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "WGmK+eyMhUE=",
-  "success": true,
+  "dgSpecHash": "oD29vA5gSPk=",
+  "success": false,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zar\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
@@ -129,5 +129,15 @@
     "C:\\Users\\zar\\.nuget\\packages\\system.threading.ratelimiting\\8.0.0\\system.threading.ratelimiting.8.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.301\\microsoft.net.sdk.compilers.toolset.9.0.301.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 9.0.8 to 9.0.7. Reference the package directly from the project to select a different version. \r\n AuthSystem.Infrastructure -> AuthSystem.Domain -> Microsoft.EntityFrameworkCore (>= 9.0.8) \r\n AuthSystem.Infrastructure -> Microsoft.EntityFrameworkCore (>= 9.0.7)",
+      "libraryId": "Microsoft.EntityFrameworkCore",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

@@ -28,7 +28,9 @@ public static class ValidationExtensions
                 .Where(m => !string.IsNullOrEmpty(m))
                 .ToList();
 
-            throw new ValidationException(errors);
+            // تبدیل لیست پیام‌های خطا به یک رشته
+            var errorMessage = string.Join("; ", errors);
+            throw new ValidationException(errorMessage);
         }
     }
 
@@ -37,18 +39,8 @@ public static class ValidationExtensions
     /// </summary>
     public static async Task ValidateAsync(this object instance)
     {
-        var validationResults = new List<ValidationResult>();
-        var validationContext = new ValidationContext(instance);
-
-        if (!await Validator.TryValidateObjectAsync(instance, validationContext, validationResults, true))
-        {
-            var errors = validationResults
-                .Select(r => r.ErrorMessage)
-                .Where(m => !string.IsNullOrEmpty(m))
-                .ToList();
-
-            throw new ValidationException(errors);
-        }
+        // استفاده از Task.Run برای شبیه‌سازی رفتار ناهمزمان
+        await Task.Run(() => instance.Validate());
     }
 
     /// <summary>
