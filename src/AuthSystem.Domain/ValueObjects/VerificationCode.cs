@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using AuthSystem.Domain.Common;
 using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;

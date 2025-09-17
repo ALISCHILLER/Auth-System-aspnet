@@ -1,5 +1,5 @@
 ﻿using System;
-using AuthSystem.Domain.Common;
+using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Common.Entities;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role;
@@ -12,39 +12,35 @@ public class UserRole : BaseEntity<Guid>
     /// <summary>
     /// شناسه کاربر
     /// </summary>
-    public Guid UserId { get; }
+    public Guid UserId { get; private set; }
 
     /// <summary>
     /// نام کاربری
     /// </summary>
-    public string Username { get; }
+    public string Username { get; private set; } = default!;
 
     /// <summary>
     /// شناسه نقش
     /// </summary>
-    public Guid RoleId { get; }
+    public Guid RoleId { get; private set; }
 
     /// <summary>
     /// نام نقش
     /// </summary>
-    public string RoleName { get; }
+    public string RoleName { get; private set; } = default!;
 
     /// <summary>
     /// تاریخ انتساب
     /// </summary>
-    public DateTime AssignedAt { get; }
+    public DateTime AssignedAt { get; private set; }
 
-    /// <summary>
-    /// سازنده خصوصی
-    /// </summary>
+
     private UserRole()
     {
         // برای EF Core
     }
 
-    /// <summary>
-    /// سازنده اصلی
-    /// </summary>
+   
     public UserRole(
         Guid id,
         Guid userId,
@@ -56,22 +52,10 @@ public class UserRole : BaseEntity<Guid>
         Username = username;
         RoleId = roleId;
         RoleName = roleName;
-        AssignedAt = DateTime.UtcNow;
+        AssignedAt = DomainClock.Instance.UtcNow;
     }
 
-    /// <summary>
-    /// آیا این نقش مربوط به کاربر خاصی است
-    /// </summary>
-    public bool IsForUser(Guid userId)
-    {
-        return UserId == userId;
-    }
+    public bool IsForUser(Guid userId) => UserId == userId;
 
-    /// <summary>
-    /// آیا این نقش مربوط به نقش خاصی است
-    /// </summary>
-    public bool IsForRole(Guid roleId)
-    {
-        return RoleId == roleId;
-    }
+    public bool IsForRole(Guid roleId) => RoleId == roleId;
 }

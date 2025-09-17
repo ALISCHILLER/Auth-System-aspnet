@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Security.Cryptography; // این خط را اضافه کردم
 using System.Text;
-using AuthSystem.Domain.Common;
 using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.Enums; // این خط را اضافه کردم
 using AuthSystem.Domain.Exceptions;

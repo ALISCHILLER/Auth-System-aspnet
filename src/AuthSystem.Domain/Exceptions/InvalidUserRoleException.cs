@@ -1,5 +1,7 @@
-﻿using AuthSystem.Domain.Common.Exceptions;
-using System;
+﻿using System;
+using AuthSystem.Domain.Common.Exceptions;
+using AuthSystem.Domain.Enums;
+
 
 namespace AuthSystem.Domain.Exceptions;
 
@@ -48,13 +50,23 @@ public class InvalidUserRoleException : DomainException
         UserId = userId;
         RoleName = roleName;
     }
+    
+    /// <summary>
+    /// سازنده با نام نقش و پیام خطا
+    /// </summary>
+    private InvalidUserRoleException(string roleName, string message)
+        : this(message)
+    {
+        RoleName = roleName;
+    }
+
 
     /// <summary>
     /// ایجاد استثنا برای نقش ناموجود
     /// </summary>
     public static InvalidUserRoleException ForNonExistentRole(string roleName)
     {
-        return new InvalidUserRoleException($"نقش '{roleName}' وجود ندارد");
+        return new InvalidUserRoleException(roleName, $"نقش '{roleName}' وجود ندارد");
     }
 
     /// <summary>
@@ -62,7 +74,29 @@ public class InvalidUserRoleException : DomainException
     /// </summary>
     public static InvalidUserRoleException ForDuplicateRole(string roleName)
     {
-        return new InvalidUserRoleException($"کاربر قبلاً نقش '{roleName}' را دارد");
+        return new InvalidUserRoleException(roleName, $"کاربر قبلاً نقش '{roleName}' را دارد");
+    }
+    /// ایجاد استثنا برای کاربری که در نقش مشخصی عضویت ندارد
+    /// </summary>
+    public static InvalidUserRoleException ForUserNotInRole(Guid userId, string roleName)
+    {
+        return new InvalidUserRoleException(userId, roleName, $"کاربر با شناسه {userId} در نقش '{roleName}' یافت نشد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای زمانی که کاربر نقش مورد نظر را ندارد
+    /// </summary>
+    public static InvalidUserRoleException ForRoleAssignmentNotFound(Guid roleId)
+    {
+        return new InvalidUserRoleException($"کاربر نقش با شناسه '{roleId}' را ندارد");
+    }
+
+    /// <summary>
+    /// ایجاد استثنا برای عدم یافتن مجوز در نقش مشخص
+    /// </summary>
+    public static InvalidUserRoleException ForPermissionNotFound(string roleName, PermissionType permission)
+    {
+        return new InvalidUserRoleException(roleName, $"مجوز '{permission}' برای نقش '{roleName}' یافت نشد");
     }
 
     /// <summary>
@@ -70,7 +104,7 @@ public class InvalidUserRoleException : DomainException
     /// </summary>
     public static InvalidUserRoleException ForRemovingDefaultRole(string roleName)
     {
-        return new InvalidUserRoleException($"نقش '{roleName}' یک نقش پیش‌فرض است و نمی‌تواند حذف شود");
+        return new InvalidUserRoleException(roleName, $"نقش '{roleName}' یک نقش پیش‌فرض است و نمی‌تواند حذف شود");
     }
 
     /// <summary>

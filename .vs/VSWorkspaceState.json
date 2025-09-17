@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\AuthSystem.Domain\\Common\\Behaviors",
+    "\\src\\AuthSystem.Domain\\Common\\Mocks",
+    "\\src\\AuthSystem.Domain\\Common\\Testing",
+    "\\src\\AuthSystem.Domain\\Entities\\Authorization\\Role",
+    "\\src\\AuthSystem.Domain\\Entities\\Security\\LoginHistory",
+    "\\src\\AuthSystem.Domain\\Entities\\Security\\UserDevice",
+    "\\src\\AuthSystem.Domain\\Entities\\UserAggregate",
+    "\\src\\AuthSystem.Domain\\Services\\Contracts"
   ],
-  "SelectedNode": "\\AuthSystem.sln",
+  "SelectedNode": "\\src\\AuthSystem.Domain",
   "PreviewInSolutionExplorer": false
 }
