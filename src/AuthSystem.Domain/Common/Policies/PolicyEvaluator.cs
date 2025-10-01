@@ -6,51 +6,36 @@ using System.Threading.Tasks;
 namespace AuthSystem.Domain.Common.Policies;
 
 /// <summary>
-/// کلاس برای ارزیابی سیاست‌ها
+/// Helper for evaluating policies individually or in batches.
 /// </summary>
-public class PolicyEvaluator
+public sealed class PolicyEvaluator
 {
-    /// <summary>
-    /// ارزیابی یک سیاست
-    /// </summary>
+  
     public PolicyResult Evaluate<TContext>(IPolicy<TContext> policy, TContext context)
     {
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
         return policy.Evaluate(context);
     }
 
-    /// <summary>
-    /// ارزیابی ناهمزمان یک سیاست
-    /// </summary>
-    public async Task<PolicyResult> EvaluateAsync<TContext>(IAsyncPolicy<TContext> policy, TContext context)
+    public Task<PolicyResult> EvaluateAsync<TContext>(IAsyncPolicy<TContext> policy, TContext context)
     {
-        return await policy.EvaluateAsync(context);
+        if (policy is null) throw new ArgumentNullException(nameof(policy));
+        return policy.EvaluateAsync(context);
     }
 
-    /// <summary>
-    /// ارزیابی چندین سیاست
-    /// </summary>
+    
     public PolicyResult EvaluateAll<TContext>(IEnumerable<IPolicy<TContext>> policies, TContext context)
     {
-        var results = policies
-            .Select(policy => policy.Evaluate(context))
-            .ToList();
-
-        // استفاده از متد Combine به جای ساخت مستقیم PolicyResult
+        if (policies is null) throw new ArgumentNullException(nameof(policies));
+        var results = policies.Select(policy => policy.Evaluate(context)).ToArray();
         return PolicyResult.Combine(results);
     }
 
-    /// <summary>
-    /// ارزیابی ناهمزمان چندین سیاست
-    /// </summary>
-    public async Task<PolicyResult> EvaluateAllAsync<TContext>(
-        IEnumerable<IAsyncPolicy<TContext>> policies,
-        TContext context)
+    public async Task<PolicyResult> EvaluateAllAsync<TContext>(IEnumerable<IAsyncPolicy<TContext>> policies, TContext context)
     {
-        var results = await Task.WhenAll(
-            policies.Select(policy => policy.EvaluateAsync(context))
-        );
-
-        // استفاده از متد Combine به جای ساخت مستقیم PolicyResult
+        if (policies is null) throw new ArgumentNullException(nameof(policies));
+        var policyArray = policies.ToArray();
+        var results = await Task.WhenAll(policyArray.Select(policy => policy.EvaluateAsync(context))).ConfigureAwait(false);
         return PolicyResult.Combine(results);
     }
 }

@@ -1,92 +1,55 @@
 ﻿using System;
+using AuthSystem.Domain.Common.Clock;
+
 
 namespace AuthSystem.Domain.Common.Extensions;
 
 /// <summary>
-/// اکستنشن‌های تاریخ و زمان
+/// DateTime helper extensions tailored for the domain.
 /// </summary>
 public static class DateTimeExtensions
 {
-    /// <summary>
-    /// تبدیل به زمان محلی ایران
-    /// </summary>
+  
     public static DateTime ToIranTime(this DateTime dateTime)
     {
         var iranTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Iran Standard Time");
-        return TimeZoneInfo.ConvertTimeFromUtc(dateTime, iranTimeZone);
+        return TimeZoneInfo.ConvertTimeFromUtc(dateTime.Kind == DateTimeKind.Utc ? dateTime : dateTime.ToUniversalTime(), iranTimeZone);
     }
 
-    /// <summary>
-    /// تبدیل به زمان UTC
-    /// </summary>
     public static DateTime ToUtcTime(this DateTime dateTime)
     {
-        if (dateTime.Kind == DateTimeKind.Utc)
-            return dateTime;
-
-        return dateTime.Kind == DateTimeKind.Unspecified
-            ? new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, DateTimeKind.Utc)
-            : dateTime.ToUniversalTime();
+        return dateTime.Kind switch
+        {
+            DateTimeKind.Utc => dateTime,
+            DateTimeKind.Unspecified => DateTime.SpecifyKind(dateTime, DateTimeKind.Utc),
+            _ => dateTime.ToUniversalTime()
+        };
     }
 
-    /// <summary>
-    /// آیا تاریخ در آینده است
-    /// </summary>
-    public static bool IsFuture(this DateTime dateTime)
-    {
-        return dateTime > DateTime.UtcNow;
-    }
+    public static bool IsFuture(this DateTime dateTime) => dateTime > DomainClock.Instance.UtcNow;
 
-    /// <summary>
-    /// آیا تاریخ در گذشته است
-    /// </summary>
-    public static bool IsPast(this DateTime dateTime)
-    {
-        return dateTime < DateTime.UtcNow;
-    }
+    public static bool IsPast(this DateTime dateTime) => dateTime < DomainClock.Instance.UtcNow;
 
-    /// <summary>
-    /// تبدیل به فرمت تاریخ شمسی
-    /// </summary>
-    public static string ToPersianDate(this DateTime dateTime)
-    {
-        // در عمل از کتابخانه‌های تبدیل تاریخ استفاده کنید
-        // این فقط یک نمونه است
-        return $"{dateTime.Year}/{dateTime.Month}/{dateTime.Day}";
-    }
+    public static string ToPersianDate(this DateTime dateTime) => $"{dateTime.Year}/{dateTime.Month:D2}/{dateTime.Day:D2}";
 
-    /// <summary>
-    /// محاسبه سن از تاریخ تولد
-    /// </summary>
+
     public static int CalculateAge(this DateTime birthDate)
     {
-        var today = DateTime.Today;
+        var today = DomainClock.Instance.UtcNow.Date;
         var age = today.Year - birthDate.Year;
-        if (birthDate > today.AddYears(-age)) age--;
+        if (birthDate.Date > today.AddYears(-age))
+        {
+            age--;
+        }
         return age;
     }
 
-    /// <summary>
-    /// گرد کردن تاریخ به دقیقه
-    /// </summary>
-    public static DateTime RoundToMinute(this DateTime dateTime)
-    {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0);
-    }
+    public static DateTime RoundToMinute(this DateTime dateTime) =>
+        new(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0, DateTimeKind.Utc);
 
-    /// <summary>
-    /// گرد کردن تاریخ به ساعت
-    /// </summary>
-    public static DateTime RoundToHour(this DateTime dateTime)
-    {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, 0, 0);
-    }
+    public static DateTime RoundToHour(this DateTime dateTime) =>
+         new(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, 0, 0, DateTimeKind.Utc);
 
-    /// <summary>
-    /// گرد کردن تاریخ به روز
-    /// </summary>
-    public static DateTime RoundToDay(this DateTime dateTime)
-    {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0);
-    }
+    public static DateTime RoundToDay(this DateTime dateTime) =>
+       new(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
 }

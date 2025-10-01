@@ -3,13 +3,12 @@
 namespace AuthSystem.Domain.Common.Clock;
 
 /// <summary>
-/// اینترفیس برای مدیریت زمان
-/// - استفاده از این اینترفیس به جای DateTime.UtcNow برای تست‌پذیری
+/// Provides access to the current UTC time inside the domain layer.
 /// </summary>
 public interface ISystemClock
 {
     /// <summary>
-    /// تاریخ و زمان فعلی به صورت UTC
+    /// Provides access to the current UTC time inside the domain layer.
     /// </summary>
     DateTime UtcNow { get; }
 }

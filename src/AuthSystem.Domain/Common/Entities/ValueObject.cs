@@ -1,82 +1,47 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AuthSystem.Domain.Exceptions;
 
 namespace AuthSystem.Domain.Common.Entities;
 
 /// <summary>
-/// کلاس پایه برای تمام Value Objectها
-/// - فاقد هویت مستقل؛ تساوی مبتنی بر «اجزای برابری» است
-/// - Immutable و Self-Validating در پیاده‌سازی‌های مشتق
-/// - validation در constructor برای self-validation
+/// Base class for immutable value objects with structural equality.
 /// </summary>
 public abstract class ValueObject : IEquatable<ValueObject>
 {
-    /// <summary>
-    /// اجزایی که در مقایسهٔ برابری استفاده می‌شوند
-    /// </summary>
+  
     protected abstract IEnumerable<object?> GetEqualityComponents();
 
-    /// <summary>
-    /// سازنده پیش‌فرض: فراخوانی self-validation
-    /// </summary>
-    protected ValueObject()
-    {
-        Validate();
-    }
-
-    /// <summary>
-    /// اعتبارسنجی خود Value Object
-    /// - در پیاده‌سازی‌های مشتق باید override شود
-    /// </summary>
-    protected virtual void Validate()
-    {
-        // پیاده‌سازی پیش‌فرض: هیچ اعتبارسنجی‌ای ندارد
-        // در پیاده‌سازی‌های مشتق باید override شود
-    }
-
-    /// <inheritdoc />
+    
     public override bool Equals(object? obj)
     {
-        if (obj is null || obj.GetType() != GetType()) return false;
+        if (obj is null || obj.GetType() != GetType())
+        {
+            return false;
+        }
         var other = (ValueObject)obj;
         return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
     }
 
-    /// <inheritdoc />
-    public override int GetHashCode()
-    {
-        // استفاده از HashCode برای ترکیب هش‌کدها
-        return GetEqualityComponents()
-            .Where(x => x is not null)
-            .Select(x => x!.GetHashCode())
-            .DefaultIfEmpty(0)
-            .Aggregate((x, y) => HashCode.Combine(x, y));
-    }
-
-    /// <inheritdoc />
+  
     public bool Equals(ValueObject? other) => Equals((object?)other);
 
-    /// <summary>
-    /// ساخت نسخهٔ کپی از VO جهت ایجاد حالت جدید (Immutability-friendly)
-    /// </summary>
-    protected static T Copy<T>(T source, Action<T> update) where T : ValueObject
+    public override int GetHashCode()
     {
-        var copy = (T)source.MemberwiseClone();
-        update(copy);
-        return copy;
+        return GetEqualityComponents()
+              .Select(component => component?.GetHashCode() ?? 0)
+              .Aggregate(0, HashCode.Combine);
     }
 
-    public static bool operator ==(ValueObject? a, ValueObject? b)
-        => a is null && b is null || a is not null && a.Equals(b);
+    public static bool operator ==(ValueObject? left, ValueObject? right) =>
+       left is null && right is null || left is not null && left.Equals(right);
 
-    public static bool operator !=(ValueObject? a, ValueObject? b) => !(a == b);
+    public static bool operator !=(ValueObject? left, ValueObject? right) => !(left == right);
 
-    /// <inheritdoc />
+   
     public override string ToString()
     {
-        var components = GetEqualityComponents().Select(c => c?.ToString() ?? "null");
-        return $"{GetType().Name}({string.Join(", ", components)})";
+        var components = string.Join(", ", GetEqualityComponents().Select(x => x?.ToString() ?? "null"));
+        return $"{GetType().Name}({components})";
     }
 }

@@ -1,210 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\",
+  "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\entities\\aggregateroot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\entities\\aggregateroot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\entities\\auditlog\\auditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\entities\\auditlog\\auditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\policies\\securitypolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\policies\\securitypolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\testing\\domaintestbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\testing\\domaintestbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\compositespecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\compositespecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\andspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\andspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\rules\\ruleresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\rules\\ruleresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\rules\\asyncbusinessrulebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\rules\\asyncbusinessrulebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\policies\\policyresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\common\\policies\\policyresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\policies\\policyresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\policies\\policyevaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\common\\policies\\policyevaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\policies\\policyevaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\mocks\\mocktokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\mocks\\mocktokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\mocks\\mockratelimiter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\mocks\\mockratelimiter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\mocks\\mockcryptoprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\mocks\\mockcryptoprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\extensions\\validationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\extensions\\validationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\specificationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\specificationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\orspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\orspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\notspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\notspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\ispecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\ispecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\expressioncomposer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\expressioncomposer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\specifications\\basespecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\specifications\\basespecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\rules\\ibusinessrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\rules\\ibusinessrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\rules\\iasyncbusinessrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\rules\\iasyncbusinessrule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\rules\\businessrulebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\rules\\businessrulebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\rules\\baserule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\rules\\baserule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\policies\\ipolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\policies\\ipolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\policies\\basepolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\policies\\basepolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\policies\\iasyncpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\policies\\iasyncpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\mocks\\mockclock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\mocks\\mockclock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\extensions\\verificationcodeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\extensions\\verificationcodeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\extensions\\userstatusextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\extensions\\userstatusextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\extensions\\stringextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\extensions\\stringextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\extensions\\phonenumberextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\extensions\\phonenumberextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\extensions\\datetimeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\common\\extensions\\datetimeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\extensions\\datetimeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\extensions\\emailextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\extensions\\emailextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\exceptions\\invalidroleexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\exceptions\\invalidroleexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\exceptions\\policyviolationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\exceptions\\policyviolationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\exceptions\\businessrulevalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\exceptions\\businessrulevalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\exceptions\\aggregatebusinessrulevalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\exceptions\\aggregatebusinessrulevalidationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\events\\rolecreatedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\events\\rolecreatedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\events\\idomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\events\\idomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\events\\iasyncdomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\events\\iasyncdomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\events\\domaineventmetadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\common\\events\\domaineventmetadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\events\\domaineventmetadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\events\\domaineventbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\common\\events\\domaineventbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\events\\domaineventbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\entities\\valueobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\entities\\valueobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\clock\\isystemclock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\clock\\isystemclock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\clock\\domainclock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\clock\\domainclock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\behaviors\\unhandledexceptionbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\behaviors\\unhandledexceptionbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\auditing\\isoftdeletableentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\auditing\\isoftdeletableentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\authsystem\\src\\authsystem.domain\\common\\auditing\\ifullyauditableentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\common\\auditing\\ifullyauditableentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -214,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -222,619 +38,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuditLog.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\AuditLog\\AuditLog.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Entities\\AuditLog\\AuditLog.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Entities\\AuditLog\\AuditLog.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Entities\\AuditLog\\AuditLog.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "PolicyResult.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T10:23:55.706Z",
+              "WhenOpened": "2025-10-01T12:05:00.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PolicyEvaluator.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T11:30:15.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DateTimeExtensions.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAA9wDYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-01T11:22:09.158Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SecurityPolicy.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\SecurityPolicy.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\SecurityPolicy.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\SecurityPolicy.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\SecurityPolicy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAhAAAAAAAAAA==",
+              "Title": "DomainEventMetadata.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
+              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
+              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowB8AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:59.36Z",
+              "WhenOpened": "2025-10-01T11:14:21.096Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CompositeSpecification.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\CompositeSpecification.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\CompositeSpecification.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\CompositeSpecification.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\CompositeSpecification.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA1wAUAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:08.217Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DomainTestBase.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Testing\\DomainTestBase.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Testing\\DomainTestBase.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Testing\\DomainTestBase.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Testing\\DomainTestBase.cs",
-              "ViewState": "AgIAAKgAAAAAAAAAAAAnwLUAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:15.472Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BaseEntity.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Entities\\BaseEntity.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Entities\\BaseEntity.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Entities\\BaseEntity.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Entities\\BaseEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:29.57Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "RuleResult.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\RuleResult.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Rules\\RuleResult.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\RuleResult.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Rules\\RuleResult.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAjwBsAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:04.984Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AggregateRoot.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Entities\\AggregateRoot.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Entities\\AggregateRoot.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Entities\\AggregateRoot.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Entities\\AggregateRoot.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:28.714Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AndSpecification.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\AndSpecification.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\AndSpecification.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\AndSpecification.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\AndSpecification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:07.626Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AsyncBusinessRuleBase.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\AsyncBusinessRuleBase.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Rules\\AsyncBusinessRuleBase.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\AsyncBusinessRuleBase.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Rules\\AsyncBusinessRuleBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:02.554Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PolicyResult.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyResult.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:58.729Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PolicyEvaluator.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\PolicyEvaluator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:57.689Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MockTokenGenerator.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockTokenGenerator.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Mocks\\MockTokenGenerator.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockTokenGenerator.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Mocks\\MockTokenGenerator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:52.155Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "MockRateLimiter.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockRateLimiter.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Mocks\\MockRateLimiter.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockRateLimiter.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Mocks\\MockRateLimiter.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAwBwAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:52.874Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "MockCryptoProvider.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockCryptoProvider.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Mocks\\MockCryptoProvider.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockCryptoProvider.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Mocks\\MockCryptoProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:51.537Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ValidationExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\ValidationExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\ValidationExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\ValidationExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\ValidationExtensions.cs",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAYwIsAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:47.665Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "SpecificationExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\SpecificationExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\SpecificationExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\SpecificationExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\SpecificationExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:13.474Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "OrSpecification.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\OrSpecification.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\OrSpecification.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\OrSpecification.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\OrSpecification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:12.48Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "NotSpecification.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\NotSpecification.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\NotSpecification.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\NotSpecification.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\NotSpecification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:11.773Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ISpecification.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\ISpecification.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\ISpecification.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\ISpecification.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\ISpecification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:10.12Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ExpressionComposer.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\ExpressionComposer.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\ExpressionComposer.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\ExpressionComposer.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\ExpressionComposer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:09.321Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "BaseSpecification.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\BaseSpecification.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Specifications\\BaseSpecification.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Specifications\\BaseSpecification.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Specifications\\BaseSpecification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:07.041Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "IBusinessRule.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\IBusinessRule.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Rules\\IBusinessRule.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\IBusinessRule.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Rules\\IBusinessRule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:04.4Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "IAsyncBusinessRule.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\IAsyncBusinessRule.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Rules\\IAsyncBusinessRule.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\IAsyncBusinessRule.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Rules\\IAsyncBusinessRule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:03.81Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "BusinessRuleBase.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\BusinessRuleBase.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Rules\\BusinessRuleBase.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\BusinessRuleBase.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Rules\\BusinessRuleBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:03.217Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "BaseRule.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\BaseRule.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Rules\\BaseRule.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Rules\\BaseRule.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Rules\\BaseRule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:02:01.968Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "IPolicy.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\IPolicy.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\IPolicy.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\IPolicy.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\IPolicy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:56.881Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "BasePolicy.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\BasePolicy.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\BasePolicy.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\BasePolicy.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\BasePolicy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:56.127Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "IAsyncPolicy.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\IAsyncPolicy.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Policies\\IAsyncPolicy.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Policies\\IAsyncPolicy.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Policies\\IAsyncPolicy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:55.594Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "MockClock.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockClock.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Mocks\\MockClock.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Mocks\\MockClock.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Mocks\\MockClock.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:50.914Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "VerificationCodeExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\VerificationCodeExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\VerificationCodeExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\VerificationCodeExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\VerificationCodeExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:48.25Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "UserStatusExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\UserStatusExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\UserStatusExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\UserStatusExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\UserStatusExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:46.657Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "StringExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\StringExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\StringExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\StringExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\StringExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:45.616Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "PhoneNumberExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\PhoneNumberExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\PhoneNumberExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\PhoneNumberExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\PhoneNumberExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:45.026Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "DateTimeExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\DateTimeExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:43.753Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "EmailExtensions.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\EmailExtensions.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Extensions\\EmailExtensions.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Extensions\\EmailExtensions.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Extensions\\EmailExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:43.201Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "InvalidRoleException.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\InvalidRoleException.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Exceptions\\InvalidRoleException.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\InvalidRoleException.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Exceptions\\InvalidRoleException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:41.338Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "PolicyViolationException.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\PolicyViolationException.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Exceptions\\PolicyViolationException.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\PolicyViolationException.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Exceptions\\PolicyViolationException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:40.543Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "DomainException.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\DomainException.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Exceptions\\DomainException.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\DomainException.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Exceptions\\DomainException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:39.938Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "BusinessRuleValidationException.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\BusinessRuleValidationException.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Exceptions\\BusinessRuleValidationException.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\BusinessRuleValidationException.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Exceptions\\BusinessRuleValidationException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:39.28Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "AggregateBusinessRuleValidationException.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\AggregateBusinessRuleValidationException.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Exceptions\\AggregateBusinessRuleValidationException.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Exceptions\\AggregateBusinessRuleValidationException.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Exceptions\\AggregateBusinessRuleValidationException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:38.683Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "RoleCreatedEvent.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Events\\RoleCreatedEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:36.105Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "IDomainEvent.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\IDomainEvent.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Events\\IDomainEvent.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\IDomainEvent.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Events\\IDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:35.419Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "IAsyncDomainEvent.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\IAsyncDomainEvent.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Events\\IAsyncDomainEvent.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\IAsyncDomainEvent.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Events\\IAsyncDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:34.345Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
-              "Title": "DomainEventMetadata.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Events\\DomainEventMetadata.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:33.705Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
               "Title": "DomainEventBase.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventBase.cs",
+              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventBase.cs",
               "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Events\\DomainEventBase.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventBase.cs",
+              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\Common\\Events\\DomainEventBase.cs",
               "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Events\\DomainEventBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:32.943Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "ValueObject.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Entities\\ValueObject.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Entities\\ValueObject.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Entities\\ValueObject.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Entities\\ValueObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:30.534Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
-              "Title": "ISystemClock.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Clock\\ISystemClock.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Clock\\ISystemClock.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Clock\\ISystemClock.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Clock\\ISystemClock.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:26.232Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "DomainClock.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Clock\\DomainClock.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Clock\\DomainClock.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Clock\\DomainClock.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Clock\\DomainClock.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:25.474Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 48,
-              "Title": "UnhandledExceptionBehavior.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:17.481Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 49,
-              "Title": "ISoftDeletableEntity.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Auditing\\ISoftDeletableEntity.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Auditing\\ISoftDeletableEntity.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Auditing\\ISoftDeletableEntity.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Auditing\\ISoftDeletableEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:14.345Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 50,
-              "Title": "IFullyAuditableEntity.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Auditing\\IFullyAuditableEntity.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\Common\\Auditing\\IFullyAuditableEntity.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\Common\\Auditing\\IFullyAuditableEntity.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\Common\\Auditing\\IFullyAuditableEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:01:13.563Z"
+              "WhenOpened": "2025-10-01T11:12:01.562Z",
+              "EditorCaption": ""
             }
           ]
         }

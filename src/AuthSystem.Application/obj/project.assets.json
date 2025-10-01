@@ -20,19 +20,6 @@
           }
         }
       },
-      "BCrypt.Net-Next/4.0.3": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/BCrypt.Net-Next.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/BCrypt.Net-Next.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "FluentValidation/12.0.0": {
         "type": "package",
         "compile": {
@@ -59,19 +46,6 @@
         },
         "runtime": {
           "lib/net8.0/FluentValidation.DependencyInjectionExtensions.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "libphonenumber-csharp/9.0.12": {
-        "type": "package",
-        "compile": {
-          "lib/net9.0/PhoneNumbers.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0/PhoneNumbers.dll": {
             "related": ".xml"
           }
         }
@@ -218,31 +192,15 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Cryptography.Internal/9.0.8": {
+      "Microsoft.AspNetCore.Cryptography.Internal/2.3.0": {
         "type": "package",
         "compile": {
-          "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.8": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.Internal": "9.0.8"
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
             "related": ".xml"
           }
         }
@@ -1190,34 +1148,34 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Localization/9.0.8": {
+      "Microsoft.Extensions.Localization/8.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.8",
-          "Microsoft.Extensions.Localization.Abstractions": "9.0.8",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.8",
-          "Microsoft.Extensions.Options": "9.0.8"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Localization.Abstractions": "8.0.11",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Options": "8.0.2"
         },
         "compile": {
-          "lib/net9.0/Microsoft.Extensions.Localization.dll": {
+          "lib/net8.0/Microsoft.Extensions.Localization.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Localization.dll": {
+          "lib/net8.0/Microsoft.Extensions.Localization.dll": {
             "related": ".xml"
           }
         }
       },
-      "Microsoft.Extensions.Localization.Abstractions/9.0.8": {
+      "Microsoft.Extensions.Localization.Abstractions/8.0.11": {
         "type": "package",
         "compile": {
-          "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+          "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+          "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.dll": {
             "related": ".xml"
           }
         }
@@ -1647,22 +1605,6 @@
             "assetType": "native",
             "rid": "ubuntu.16.10-x64"
           }
-        }
-      },
-      "Serilog/4.3.0": {
-        "type": "package",
-        "compile": {
-          "lib/net9.0/Serilog.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0/Serilog.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -2934,18 +2876,6 @@
       "AuthSystem.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "BCrypt.Net-Next": "4.0.3",
-          "FluentValidation": "12.0.0",
-          "FluentValidation.DependencyInjectionExtensions": "12.0.0",
-          "MediatR": "13.0.0",
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.8",
-          "Microsoft.EntityFrameworkCore": "9.0.8",
-          "Microsoft.Extensions.Localization": "9.0.8",
-          "Serilog": "4.3.0",
-          "System.ComponentModel.Annotations": "5.0.0",
-          "libphonenumber-csharp": "9.0.12"
-        },
         "compile": {
           "bin/placeholder/AuthSystem.Domain.dll": {}
         },
@@ -2976,37 +2906,6 @@
         "lib/netstandard2.0/AutoMapper.xml"
       ]
     },
-    "BCrypt.Net-Next/4.0.3": {
-      "sha512": "W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
-      "type": "package",
-      "path": "bcrypt.net-next/4.0.3",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "bcrypt.net-next.4.0.3.nupkg.sha512",
-        "bcrypt.net-next.nuspec",
-        "ico.png",
-        "lib/net20/BCrypt.Net-Next.dll",
-        "lib/net20/BCrypt.Net-Next.xml",
-        "lib/net35/BCrypt.Net-Next.dll",
-        "lib/net35/BCrypt.Net-Next.xml",
-        "lib/net462/BCrypt.Net-Next.dll",
-        "lib/net462/BCrypt.Net-Next.xml",
-        "lib/net472/BCrypt.Net-Next.dll",
-        "lib/net472/BCrypt.Net-Next.xml",
-        "lib/net48/BCrypt.Net-Next.dll",
-        "lib/net48/BCrypt.Net-Next.xml",
-        "lib/net5.0/BCrypt.Net-Next.dll",
-        "lib/net5.0/BCrypt.Net-Next.xml",
-        "lib/net6.0/BCrypt.Net-Next.dll",
-        "lib/net6.0/BCrypt.Net-Next.xml",
-        "lib/netstandard2.0/BCrypt.Net-Next.dll",
-        "lib/netstandard2.0/BCrypt.Net-Next.xml",
-        "lib/netstandard2.1/BCrypt.Net-Next.dll",
-        "lib/netstandard2.1/BCrypt.Net-Next.xml",
-        "readme.md"
-      ]
-    },
     "FluentValidation/12.0.0": {
       "sha512": "8NVLxtMUXynRHJIX3Hn1ACovaqZIJASufXIIFkD0EUbcd5PmMsL1xUD5h548gCezJ5BzlITaR9CAMrGe29aWpA==",
       "type": "package",
@@ -3035,25 +2934,6 @@
         "fluentvalidation.dependencyinjectionextensions.nuspec",
         "lib/net8.0/FluentValidation.DependencyInjectionExtensions.dll",
         "lib/net8.0/FluentValidation.DependencyInjectionExtensions.xml"
-      ]
-    },
-    "libphonenumber-csharp/9.0.12": {
-      "sha512": "vQZjoHexJsqMzesq1s0d7MrYWzdus4wR6++Hgn+O/iF1d3ulrRnEe/m0zCftzn8uUs1sZ8Jz6yy8Fl189OqAmQ==",
-      "type": "package",
-      "path": "libphonenumber-csharp/9.0.12",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "icon.png",
-        "lib/net8.0/PhoneNumbers.dll",
-        "lib/net8.0/PhoneNumbers.xml",
-        "lib/net9.0/PhoneNumbers.dll",
-        "lib/net9.0/PhoneNumbers.xml",
-        "lib/netstandard2.0/PhoneNumbers.dll",
-        "lib/netstandard2.0/PhoneNumbers.xml",
-        "libphonenumber-csharp.9.0.12.nupkg.sha512",
-        "libphonenumber-csharp.nuspec"
       ]
     },
     "MediatR/13.0.0": {
@@ -3168,42 +3048,17 @@
         "microsoft.aspnetcore.cors.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Cryptography.Internal/9.0.8": {
-      "sha512": "NwGO0wh/IjEthBLGA6fWfIiftsNF/paA5RxWp6ji4wWazetJgQ4truR9nU2thAzzFLiXqlg8vGjdVDA8bHu0zA==",
+    "Microsoft.AspNetCore.Cryptography.Internal/2.3.0": {
+      "sha512": "/qy5r0CD40OccajzDmX3gBfqqxpAJkcXoqlVz0YR70x3gTRq/VuseDU/lZ5eh8vM+KCdmPFAtyGcRWxTyXxuYg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.internal/9.0.8",
+      "path": "microsoft.aspnetcore.cryptography.internal/2.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.Internal.dll",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.Internal.xml",
-        "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
-        "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
-        "microsoft.aspnetcore.cryptography.internal.9.0.8.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.internal.2.3.0.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.internal.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.8": {
-      "sha512": "gK70xxXYwwPiXYKYVmLYMuIO5EOGrRtQghmM6PkgtZ/0lgLEjIs//xgSLvZkV/mroNHA1DEqTcqscEj9OzZ1IA==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.keyderivation/9.0.8",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
-        "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
-        "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
-        "microsoft.aspnetcore.cryptography.keyderivation.9.0.8.nupkg.sha512",
-        "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
       ]
     },
     "Microsoft.AspNetCore.DataProtection/2.3.0": {
@@ -4146,10 +4001,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Localization/9.0.8": {
-      "sha512": "icKfuQfr1dRVBt7JVntt31WjioupeMC/qqYPHzW67VzPjBuATtlmp3+9HMFmSWWwgJK+r4MHcaZhq8VZ5zfg2w==",
+    "Microsoft.Extensions.Localization/8.0.11": {
+      "sha512": "yTb325+mCuoUBBMEztLv48kK/I/99TfVPh4V5kW8Qw+45mqAJs9bndOYxvjJvJxKVuwgzOYiWC/a34fr4pJ8IA==",
       "type": "package",
-      "path": "microsoft.extensions.localization/9.0.8",
+      "path": "microsoft.extensions.localization/8.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4157,18 +4012,18 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net462/Microsoft.Extensions.Localization.dll",
         "lib/net462/Microsoft.Extensions.Localization.xml",
-        "lib/net9.0/Microsoft.Extensions.Localization.dll",
-        "lib/net9.0/Microsoft.Extensions.Localization.xml",
+        "lib/net8.0/Microsoft.Extensions.Localization.dll",
+        "lib/net8.0/Microsoft.Extensions.Localization.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.xml",
-        "microsoft.extensions.localization.9.0.8.nupkg.sha512",
+        "microsoft.extensions.localization.8.0.11.nupkg.sha512",
         "microsoft.extensions.localization.nuspec"
       ]
     },
-    "Microsoft.Extensions.Localization.Abstractions/9.0.8": {
-      "sha512": "guqP/5IRbVZ9FibWI7ieIouzB18prqWwKlfhzqF3LY+mqmP9kz1SjnlOrqvapw0C49PUght/3GRQAxDs2AEKOA==",
+    "Microsoft.Extensions.Localization.Abstractions/8.0.11": {
+      "sha512": "qyfVEOJ8PsYrwC6kTQFSTm4+FrpOAz3OfPXvRPfs7j34V+yHMuVUgIiP5yjrYHcpNbXTtCzoQc/ZdcbpdeX/Xg==",
       "type": "package",
-      "path": "microsoft.extensions.localization.abstractions/9.0.8",
+      "path": "microsoft.extensions.localization.abstractions/8.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4176,11 +4031,11 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net462/Microsoft.Extensions.Localization.Abstractions.dll",
         "lib/net462/Microsoft.Extensions.Localization.Abstractions.xml",
-        "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.dll",
-        "lib/net9.0/Microsoft.Extensions.Localization.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.Localization.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.xml",
-        "microsoft.extensions.localization.abstractions.9.0.8.nupkg.sha512",
+        "microsoft.extensions.localization.abstractions.8.0.11.nupkg.sha512",
         "microsoft.extensions.localization.abstractions.nuspec"
       ]
     },
@@ -4828,32 +4683,6 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
-      ]
-    },
-    "Serilog/4.3.0": {
-      "sha512": "+cDryFR0GRhsGOnZSKwaDzRRl4MupvJ42FhCE4zhQRVanX0Jpg6WuCBk59OVhVDPmab1bB+nRykAnykYELA9qQ==",
-      "type": "package",
-      "path": "serilog/4.3.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "build/Serilog.targets",
-        "icon.png",
-        "lib/net462/Serilog.dll",
-        "lib/net462/Serilog.xml",
-        "lib/net471/Serilog.dll",
-        "lib/net471/Serilog.xml",
-        "lib/net6.0/Serilog.dll",
-        "lib/net6.0/Serilog.xml",
-        "lib/net8.0/Serilog.dll",
-        "lib/net8.0/Serilog.xml",
-        "lib/net9.0/Serilog.dll",
-        "lib/net9.0/Serilog.xml",
-        "lib/netstandard2.0/Serilog.dll",
-        "lib/netstandard2.0/Serilog.xml",
-        "serilog.4.3.0.nupkg.sha512",
-        "serilog.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -8221,11 +8050,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj",
+      "projectUniqueName": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Application\\AuthSystem.Application.csproj",
       "projectName": "AuthSystem.Application",
-      "projectPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\AuthSystem.Application.csproj",
+      "projectPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Application\\AuthSystem.Application.csproj",
       "packagesPath": "C:\\Users\\zar\\.nuget\\packages\\",
-      "outputPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Application\\obj\\",
+      "outputPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "e:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -8249,8 +8078,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj": {
-              "projectPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj"
+            "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj": {
+              "projectPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj"
             }
           }
         }
