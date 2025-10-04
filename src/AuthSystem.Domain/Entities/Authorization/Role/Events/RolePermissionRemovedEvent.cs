@@ -1,4 +1,5 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
@@ -8,13 +9,15 @@ namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
 /// </summary>
 public sealed class RolePermissionRemovedEvent : DomainEventBase
 {
-    public RolePermissionRemovedEvent(Guid roleId, PermissionType permission)
+    public RolePermissionRemovedEvent(Guid roleId, Guid rolePermissionId, PermissionType permissionType)
     {
         RoleId = roleId;
-        Permission = permission;
+        RolePermissionId = rolePermissionId;
+        PermissionType = permissionType;
     }
 
     public Guid RoleId { get; }
 
-    public PermissionType Permission { get; }
+    public Guid RolePermissionId { get; }
+    public PermissionType PermissionType { get; }
 }

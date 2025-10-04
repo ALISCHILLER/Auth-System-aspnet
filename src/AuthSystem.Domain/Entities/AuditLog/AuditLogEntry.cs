@@ -7,66 +7,26 @@ using AuthSystem.Domain.ValueObjects;
 namespace AuthSystem.Domain.Entities.AuditLog;
 
 /// <summary>
-/// Entity برای جزئیات لاگ حسابرسی
+/// Entity representing an individual audit log entry.
 /// </summary>
 public class AuditLogEntry : BaseEntity<Guid>
 {
-    /// <summary>
-    /// شناسه لاگ والد
-    /// </summary>
-    public Guid LogId { get; }
+    public Guid LogId { get; private set; }
+    public Guid UserId { get; private set; }
+    public string Username { get; private set; } = default!;
+    public string Action { get; private set; } = default!;
+    public string Description { get; private set; } = default!;
+    public AuditLogLevel LogLevel { get; private set; }
+    public IpAddress IpAddress { get; private set; } = default!;
+    public UserAgent UserAgent { get; private set; } = default!;
+    public DateTime Timestamp { get; private set; }
 
-    /// <summary>
-    /// شناسه کاربر
-    /// </summary>
-    public Guid UserId { get; }
-
-    /// <summary>
-    /// نام کاربری
-    /// </summary>
-    public string Username { get; }
-
-    /// <summary>
-    /// عملیات انجام شده
-    /// </summary>
-    public string Action { get; }
-
-    /// <summary>
-    /// توضیحات عملیات
-    /// </summary>
-    public string Description { get; }
-
-    /// <summary>
-    /// سطح اهمیت
-    /// </summary>
-    public AuditLogLevel LogLevel { get; }
-
-    /// <summary>
-    /// آدرس IP
-    /// </summary>
-    public IpAddress IpAddress { get; }
-
-    /// <summary>
-    /// User Agent
-    /// </summary>
-    public UserAgent UserAgent { get; }
-
-    /// <summary>
-    /// تاریخ و زمان
-    /// </summary>
-    public DateTime Timestamp { get; }
-
-    /// <summary>
-    /// سازنده خصوصی
-    /// </summary>
     private AuditLogEntry()
     {
-        // برای EF Core
+        
     }
 
-    /// <summary>
-    /// سازنده اصلی
-    /// </summary>
+    
     private AuditLogEntry(
         Guid id,
         Guid logId,
@@ -87,12 +47,11 @@ public class AuditLogEntry : BaseEntity<Guid>
         LogLevel = logLevel;
         IpAddress = ipAddress;
         UserAgent = userAgent;
-        Timestamp = timestamp;
+        Timestamp = NormalizeTimestamp(timestamp);
+        MarkAsCreated(occurredOn: Timestamp);
     }
 
-    /// <summary>
-    /// ایجاد جزئیات جدید
-    /// </summary>
+  
     public static AuditLogEntry Create(
         Guid id,
         Guid logId,
@@ -106,75 +65,73 @@ public class AuditLogEntry : BaseEntity<Guid>
         DateTime timestamp)
     {
         if (string.IsNullOrWhiteSpace(username))
+        {
             throw new InvalidAuditLogEntryException(id, "نام کاربری نمی‌تواند خالی باشد");
+        }
 
         if (string.IsNullOrWhiteSpace(action))
+        {
             throw new InvalidAuditLogEntryException(id, "عملیات نمی‌تواند خالی باشد");
-
+        }
         if (string.IsNullOrWhiteSpace(description))
+        {
             throw new InvalidAuditLogEntryException(id, "توضیحات نمی‌تواند خالی باشد");
+        }
 
-        if (ipAddress == null)
+        if (ipAddress is null)
+        {
             throw new InvalidAuditLogEntryException(id, "آدرس IP نمی‌تواند خالی باشد");
+        }
 
-        if (userAgent == null)
+        if (userAgent is null)
+        {
             throw new InvalidAuditLogEntryException(id, "User Agent نمی‌تواند خالی باشد");
+        }
 
-        return new AuditLogEntry(
-            id,
-            logId,
-            userId,
-            username,
-            action,
-            description,
-            logLevel,
-            ipAddress,
-            userAgent,
-            timestamp);
+        var occurredAt = NormalizeTimestamp(timestamp);
+        return new AuditLogEntry(id, logId, userId, username, action, description, logLevel, ipAddress, userAgent, occurredAt);
     }
 
-    /// <summary>
-    /// تأیید صحت جزئیات
-    /// </summary>
+ 
     public void Validate()
     {
         if (string.IsNullOrWhiteSpace(Username))
+        {
             throw new InvalidAuditLogEntryException(Id, "نام کاربری نمی‌تواند خالی باشد");
+        }
 
         if (string.IsNullOrWhiteSpace(Action))
+        {
             throw new InvalidAuditLogEntryException(Id, "عملیات نمی‌تواند خالی باشد");
+        }
 
         if (string.IsNullOrWhiteSpace(Description))
+        {
             throw new InvalidAuditLogEntryException(Id, "توضیحات نمی‌تواند خالی باشد");
+        }
 
-        if (IpAddress == null)
+        if (IpAddress is null)
+        {
             throw new InvalidAuditLogEntryException(Id, "آدرس IP نمی‌تواند خالی باشد");
-
-        if (UserAgent == null)
+        }
+        if (UserAgent is null)
+        {
             throw new InvalidAuditLogEntryException(Id, "User Agent نمی‌تواند خالی باشد");
+        }
     }
 
-    /// <summary>
-    /// آیا این جزئیات از نوع خاصی است
-    /// </summary>
-    public bool IsOfType(AuditLogLevel level)
-    {
-        return LogLevel == level;
-    }
+    public bool IsOfType(AuditLogLevel level) => LogLevel == level;
+    public bool IsForUser(Guid userId) => UserId == userId;
+    public bool IsForAction(string action) => Action.Equals(action, StringComparison.OrdinalIgnoreCase);
 
-    /// <summary>
-    /// آیا این جزئیات مربوط به کاربر خاصی است
-    /// </summary>
-    public bool IsForUser(Guid userId)
+    private static DateTime NormalizeTimestamp(DateTime timestamp)
     {
-        return UserId == userId;
-    }
-
-    /// <summary>
-    /// آیا این جزئیات مربوط به عملیات خاصی است
-    /// </summary>
-    public bool IsForAction(string action)
-    {
-        return Action.Equals(action, StringComparison.OrdinalIgnoreCase);
+        return timestamp.Kind switch
+        {
+            DateTimeKind.Utc => timestamp,
+            DateTimeKind.Local => timestamp.ToUniversalTime(),
+            DateTimeKind.Unspecified => DateTime.SpecifyKind(timestamp, DateTimeKind.Utc),
+            _ => timestamp
+        };
     }
 }

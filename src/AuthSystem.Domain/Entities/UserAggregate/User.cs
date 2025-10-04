@@ -13,7 +13,7 @@ using AuthSystem.Domain.ValueObjects;
 namespace AuthSystem.Domain.Entities.UserAggregate;
 
 /// <summary>
-/// ریشه تجمع کاربر
+/// Aggregate root representing a user.
 /// </summary>
 public sealed class User : AggregateRoot<Guid>
 {
@@ -45,20 +45,34 @@ public sealed class User : AggregateRoot<Guid>
         CheckRule(new UserMustHaveValidNameRule(firstName, lastName));
         CheckRule(new UserMustHaveValidPasswordRule(passwordHash));
 
-        Email = email;
-        PasswordHash = passwordHash;
-        FirstName = firstName;
-        LastName = lastName;
-        PhoneNumber = phoneNumber;
-        DateOfBirth = dateOfBirth;
-        NationalCode = nationalCode;
-        IsEmailVerified = isEmailVerified && email is not null;
-        IsPhoneVerified = isPhoneVerified && phoneNumber is not null;
-        IsSocialLogin = isSocialLogin;
-        Status = UserStatus.Pending;
-        AccessFailedCount = 0;
+        if (email is not null)
+        {
+            CheckRule(new UserMustHaveValidEmailRule(email.Value));
+        }
 
-        ApplyRaise(new UserRegisteredEvent(id, email?.Value, firstName, lastName));
+        if (phoneNumber is not null)
+        {
+            CheckRule(new UserMustHaveValidPhoneRule(phoneNumber.Value));
+        }
+
+        if (nationalCode is not null)
+        {
+            CheckRule(new UserMustHaveValidNationalCodeRule(nationalCode.Value));
+        }
+
+        ApplyRaise(new UserRegisteredEvent(
+            id,
+            email,
+            passwordHash,
+            firstName,
+            lastName,
+            phoneNumber,
+            dateOfBirth,
+            nationalCode,
+            isEmailVerified && email is not null,
+            isPhoneVerified && phoneNumber is not null,
+            isSocialLogin,
+            UserStatus.Pending));
     }
 
     public Email? Email { get; private set; }
@@ -95,9 +109,7 @@ public sealed class User : AggregateRoot<Guid>
 
     public DateTime? LockoutEnd { get; private set; }
 
-    public IReadOnlyDictionary<Guid, string> Roles => _roles.ToDictionary(
-        static pair => pair.Key,
-        static pair => pair.Value.RoleName);
+    public IReadOnlyDictionary<Guid, string> Roles => _roles.ToDictionary(static pair => pair.Key, static pair => pair.Value.RoleName);
 
     public IReadOnlyDictionary<string, string> SocialLogins => _socialLogins;
 
@@ -145,8 +157,7 @@ public sealed class User : AggregateRoot<Guid>
     {
         CheckRule(new UserMustHaveValidPasswordRule(passwordHash));
 
-        PasswordHash = passwordHash;
-        ApplyRaise(new UserPasswordChangedEvent(Id));
+        ApplyRaise(new UserPasswordChangedEvent(Id, passwordHash));
     }
 
     public void EnableTwoFactorAuthentication(TwoFactorSecretKey secretKey)
@@ -179,15 +190,20 @@ public sealed class User : AggregateRoot<Guid>
 
     public void RegisterLoginFailure(string reason)
     {
-        AccessFailedCount++;
-        MarkAsUpdated();
-        ApplyRaise(new UserLoginFailedEvent(Id, reason, AccessFailedCount));
+        var newAttemptCount = AccessFailedCount + 1;
+        ApplyRaise(new UserLoginFailedEvent(Id, reason, newAttemptCount));
     }
 
     public void Lock(TimeSpan? duration = null)
     {
-        LockoutEnd = DomainClock.Instance.UtcNow.Add(duration ?? TimeSpan.FromMinutes(15));
-        ApplyRaise(new UserLockedEvent(Id, LockoutEnd));
+        var now = DomainClock.Instance.UtcNow;
+        var proposedEnd = duration.HasValue ? now.Add(duration.Value) : now.AddMinutes(15);
+        if (LockoutEnd.HasValue && LockoutEnd.Value > proposedEnd)
+        {
+            proposedEnd = LockoutEnd.Value;
+        }
+
+        ApplyRaise(new UserLockedEvent(Id, proposedEnd));
     }
 
     public void Unlock()
@@ -206,10 +222,7 @@ public sealed class User : AggregateRoot<Guid>
         {
             return;
         }
-
-        var previous = Status;
-        Status = status;
-        ApplyRaise(new UserStatusChangedEvent(Id, previous, status));
+        ApplyRaise(new UserStatusChangedEvent(Id, Status, status));
     }
 
     public void AddRole(Guid roleId, string roleName)
@@ -217,11 +230,11 @@ public sealed class User : AggregateRoot<Guid>
         CheckRule(new UserRoleCannotBeDuplicatedRule(_roles.Keys, roleId));
         var previousRoles = _roles.Values.Select(r => r.RoleName).ToArray();
 
-        _roles[roleId] = new UserRoleInfo(roleName, DomainClock.Instance.UtcNow);
-        MarkAsUpdated();
+       
 
         ApplyRaise(new UserRoleAddedEvent(Id, roleId, roleName));
-        PublishRolesChangedEvent(previousRoles);
+        var currentRoles = _roles.Values.Select(r => r.RoleName).ToArray();
+        ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
     }
 
     public void RemoveRole(Guid roleId)
@@ -233,11 +246,11 @@ public sealed class User : AggregateRoot<Guid>
 
         var previousRoles = _roles.Values.Select(r => r.RoleName).ToArray();
 
-        _roles.Remove(roleId);
-        MarkAsUpdated();
+        
 
         ApplyRaise(new UserRoleRemovedEvent(Id, roleId, role.RoleName));
-        PublishRolesChangedEvent(previousRoles);
+        var currentRoles = _roles.Values.Select(r => r.RoleName).ToArray();
+        ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
     }
 
     public bool HasRole(Guid roleId) => _roles.ContainsKey(roleId);
@@ -264,54 +277,72 @@ public sealed class User : AggregateRoot<Guid>
         MarkAsUpdated();
     }
 
-    private void PublishRolesChangedEvent(IReadOnlyCollection<string> previousRoles)
-    {
-        var currentRoles = _roles.Values.Select(r => r.RoleName).ToArray();
-        ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
-    }
 
     private sealed record UserRoleInfo(string RoleName, DateTime AssignedAt);
 
     private void On(UserRegisteredEvent @event)
     {
-        Status = UserStatus.Pending;
+        Id = @event.UserId;
+        Email = @event.Email;
+        PasswordHash = @event.PasswordHash;
+        FirstName = @event.FirstName;
+        LastName = @event.LastName;
+        PhoneNumber = @event.PhoneNumber;
+        DateOfBirth = @event.DateOfBirth;
+        NationalCode = @event.NationalCode;
+        IsEmailVerified = @event.IsEmailVerified;
+        IsPhoneVerified = @event.IsPhoneVerified;
+        IsSocialLogin = @event.IsSocialLogin;
+        Status = @event.Status;
+        IsTwoFactorEnabled = false;
+        TwoFactorSecretKey = null;
+        AccessFailedCount = 0;
+        LockoutEnd = null;
+        LastLoginAt = null;
+        _roles.Clear();
+        _socialLogins.Clear();
+        MarkAsCreated(occurredOn: @event.OccurredOn);
     }
 
     private void On(EmailVerifiedEvent @event)
     {
         IsEmailVerified = true;
-        MarkAsUpdated();
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserPasswordChangedEvent @event)
     {
-        ResetAccessFailedCount();
+        PasswordHash = @event.PasswordHash;
+        AccessFailedCount = 0;
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(TwoFactorEnabledEvent @event)
     {
         TwoFactorSecretKey = @event.SecretKey;
         IsTwoFactorEnabled = true;
-        MarkAsUpdated();
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(TwoFactorDisabledEvent @event)
     {
         TwoFactorSecretKey = null;
         IsTwoFactorEnabled = false;
-        MarkAsUpdated();
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserLoggedInEvent @event)
     {
-        LastLoginAt = DomainClock.Instance.UtcNow;
+        LastLoginAt = @event.OccurredOn;
         AccessFailedCount = 0;
         LockoutEnd = null;
-        MarkAsUpdated();
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserLoginFailedEvent @event)
     {
+        AccessFailedCount = @event.FailedAttempts;
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
         if (AccessFailedCount >= 5)
         {
             Lock(TimeSpan.FromMinutes(15));
@@ -321,31 +352,36 @@ public sealed class User : AggregateRoot<Guid>
     private void On(UserLockedEvent @event)
     {
         LockoutEnd = @event.LockoutEnd;
-        MarkAsUpdated();
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserUnlockedEvent @event)
     {
         LockoutEnd = null;
         AccessFailedCount = 0;
-        MarkAsUpdated();
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserStatusChangedEvent @event)
     {
         Status = @event.NewStatus;
-        MarkAsUpdated();
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserRoleAddedEvent @event)
     {
+        _roles[@event.RoleId] = new UserRoleInfo(@event.RoleName, @event.OccurredOn);
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserRoleRemovedEvent @event)
     {
+        _roles.Remove(@event.RoleId);
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserRoleChangedEvent @event)
     {
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 }

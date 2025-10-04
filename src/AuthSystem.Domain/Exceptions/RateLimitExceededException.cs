@@ -1,52 +1,36 @@
-﻿using AuthSystem.Domain.Common.Exceptions;
-using System;
+﻿using System;
+using AuthSystem.Domain.Common.Clock;
+using AuthSystem.Domain.Common.Exceptions;
 
 namespace AuthSystem.Domain.Exceptions;
 
 /// <summary>
-/// استثنا برای تجاوز از محدودیت نرخ درخواست‌ها
-/// این استثنا زمانی رخ می‌دهد که کاربر بیش از حد مجاز درخواست ارسال کند
+/// Exception thrown when rate limits are exceeded.
 /// </summary>
 public class RateLimitExceededException : DomainException
 {
-    /// <summary>
-    /// کلید محدودیت نرخ (معمولاً آدرس IP یا شناسه کاربر)
-    /// </summary>
+    
     public string RateLimitKey { get; }
 
-    /// <summary>
-    /// نوع محدودیت
-    /// </summary>
     public string RateLimitType { get; }
 
-    /// <summary>
-    /// زمان بازنشانی محدودیت
-    /// </summary>
+   
     public DateTime ResetTime { get; }
 
-    /// <summary>
-    /// کد خطا برای پردازش‌های بعدی
-    /// </summary>
+  
     public override string ErrorCode => "RateLimitExceeded";
 
-    /// <summary>
-    /// سازنده با پیام خطا
-    /// </summary>
     public RateLimitExceededException(string message) : base(message)
     {
     }
 
-    /// <summary>
-    /// سازنده با پیام خطا و استثنای داخلی
-    /// </summary>
+   
     public RateLimitExceededException(string message, Exception innerException)
         : base(message, innerException)
     {
     }
 
-    /// <summary>
-    /// سازنده با کلید محدودیت، نوع محدودیت، زمان بازنشانی و پیام خطا
-    /// </summary>
+    
     public RateLimitExceededException(string rateLimitKey, string rateLimitType, DateTime resetTime, string message)
         : this(message)
     {
@@ -55,12 +39,10 @@ public class RateLimitExceededException : DomainException
         ResetTime = resetTime;
     }
 
-    /// <summary>
-    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های ورود
-    /// </summary>
+    
     public static RateLimitExceededException ForLoginAttempts(string ip, DateTime resetTime)
     {
-        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalSeconds);
+        var waitTime = CalculateSeconds(resetTime);
         return new RateLimitExceededException(
             ip,
             "Login",
@@ -68,12 +50,10 @@ public class RateLimitExceededException : DomainException
             $"تعداد تلاش‌های ورود بیش از حد مجاز است. لطفاً {waitTime} ثانیه صبر کنید");
     }
 
-    /// <summary>
-    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های ارسال کد تایید
-    /// </summary>
+  
     public static RateLimitExceededException ForVerificationCodeRequests(string identifier, DateTime resetTime)
     {
-        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalMinutes);
+        var waitTime = CalculateMinutes(resetTime);
         return new RateLimitExceededException(
             identifier,
             "VerificationCode",
@@ -81,12 +61,10 @@ public class RateLimitExceededException : DomainException
             $"تعداد درخواست‌های کد تایید بیش از حد مجاز است. لطفاً {waitTime} دقیقه صبر کنید");
     }
 
-    /// <summary>
-    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های API
-    /// </summary>
+    
     public static RateLimitExceededException ForApiRequests(string ip, DateTime resetTime)
     {
-        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalSeconds);
+        var waitTime = CalculateSeconds(resetTime);
         return new RateLimitExceededException(
             ip,
             "Api",
@@ -94,16 +72,25 @@ public class RateLimitExceededException : DomainException
             $"تعداد درخواست‌های API بیش از حد مجاز است. لطفاً {waitTime} ثانیه صبر کنید");
     }
 
-    /// <summary>
-    /// ایجاد استثنا برای تجاوز از محدودیت درخواست‌های بازیابی رمز عبور
-    /// </summary>
+  
     public static RateLimitExceededException ForPasswordResetRequests(string email, DateTime resetTime)
     {
-        var waitTime = (int)Math.Ceiling((resetTime - DateTime.UtcNow).TotalMinutes);
+        var waitTime = CalculateMinutes(resetTime);
         return new RateLimitExceededException(
             email,
             "PasswordReset",
             resetTime,
             $"تعداد درخواست‌های بازیابی رمز عبور بیش از حد مجاز است. لطفاً {waitTime} دقیقه صبر کنید");
+    }
+    private static int CalculateSeconds(DateTime resetTime)
+    {
+        var now = DomainClock.Instance.UtcNow;
+        return (int)Math.Ceiling((resetTime - now).TotalSeconds);
+    }
+
+    private static int CalculateMinutes(DateTime resetTime)
+    {
+        var now = DomainClock.Instance.UtcNow;
+        return (int)Math.Ceiling((resetTime - now).TotalMinutes);
     }
 }

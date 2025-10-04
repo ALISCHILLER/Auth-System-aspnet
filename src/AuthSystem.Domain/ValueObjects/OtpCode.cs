@@ -1,105 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using AuthSystem.Domain.Exceptions;
-using AuthSystem.Domain.Enums;
+using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.ValueObjects;
 
 /// <summary>
-/// Value Object برای کد تایید یکبار مصرف (OTP)
+/// Value object representing a one-time password (OTP) verification code.
 /// </summary>
 public sealed class OtpCode : ValueObject
 {
-    /// <summary>
-    /// طول پیش‌فرض کد
-    /// </summary>
+    
     private const int DefaultLength = 6;
 
-    /// <summary>
-    /// حداقل طول کد
-    /// </summary>
+   
     private const int MinLength = 4;
 
-    /// <summary>
-    /// حداکثر طول کد
-    /// </summary>
+   
     private const int MaxLength = 10;
 
-    /// <summary>
-    /// مدت اعتبار پیش‌فرض (دقیقه)
-    /// </summary>
+  
     private const int DefaultValidityMinutes = 10;
 
-    /// <summary>
-    /// حداکثر تعداد تلاش
-    /// </summary>
+   
     private const int MaxAttempts = 3;
 
-    /// <summary>
-    /// مقدار کد
-    /// </summary>
+   
     public string Value { get; }
 
-    /// <summary>
-    /// نوع کد تایید
-    /// </summary>
+   
     public VerificationCodeType Type { get; }
 
-    /// <summary>
-    /// زمان ایجاد
-    /// </summary>
+
     public DateTime CreatedAt { get; }
 
-    /// <summary>
-    /// زمان انقضا
-    /// </summary>
+  
     public DateTime ExpiresAt { get; }
 
-    /// <summary>
-    /// تعداد تلاش‌های انجام شده
-    /// </summary>
+    
     public int AttemptCount { get; private set; }
 
-    /// <summary>
-    /// آیا استفاده شده است
-    /// </summary>
+   
     public bool IsUsed { get; private set; }
 
-    /// <summary>
-    /// زمان استفاده
-    /// </summary>
+    
     public DateTime? UsedAt { get; private set; }
 
-    /// <summary>
-    /// آیا منقضی شده است
-    /// </summary>
-    public bool IsExpired => DateTime.UtcNow > ExpiresAt;
-
-    /// <summary>
-    /// آیا قابل استفاده است
-    /// </summary>
+    public bool IsExpired => DomainClock.Instance.UtcNow > ExpiresAt;
     public bool IsValid => !IsExpired && !IsUsed && AttemptCount < MaxAttempts;
 
-    /// <summary>
-    /// تعداد تلاش‌های باقی‌مانده
-    /// </summary>
+   
     public int RemainingAttempts => Math.Max(0, MaxAttempts - AttemptCount);
+    public TimeSpan? TimeToExpiry => IsExpired ? null : ExpiresAt - DomainClock.Instance.UtcNow;
 
-    /// <summary>
-    /// زمان باقی‌مانده تا انقضا
-    /// </summary>
-    public TimeSpan? TimeToExpiry => !IsExpired
-        ? ExpiresAt - DateTime.UtcNow
-        : null;
 
-    /// <summary>
-    /// سازنده خصوصی
-    /// </summary>
     private OtpCode(
         string value,
         VerificationCodeType type,
+          DateTime createdAt,
         DateTime expiresAt,
         int attemptCount = 0,
         bool isUsed = false,
@@ -107,46 +67,32 @@ public sealed class OtpCode : ValueObject
     {
         Value = value;
         Type = type;
-        CreatedAt = DateTime.UtcNow;
-        ExpiresAt = expiresAt;
+        CreatedAt = EnsureUtc(createdAt);
+        ExpiresAt = EnsureUtc(expiresAt);
         AttemptCount = attemptCount;
         IsUsed = isUsed;
-        UsedAt = usedAt;
+        UsedAt = usedAt.HasValue ? EnsureUtc(usedAt.Value) : null;
     }
 
-    /// <summary>
-    /// تولید کد تایید عددی جدید
-    /// </summary>
-    public static OtpCode GenerateNumeric(
-        VerificationCodeType type,
-        int length = DefaultLength,
-        int? validityMinutes = null)
+    public static OtpCode GenerateNumeric(VerificationCodeType type, int length = DefaultLength, int? validityMinutes = null)
     {
         ValidateLength(length);
+        var now = DomainClock.Instance.UtcNow;
+        var expiresAt = now.AddMinutes(validityMinutes ?? DefaultValidityMinutes);
         var code = GenerateNumericCode(length);
-        var validity = validityMinutes ?? DefaultValidityMinutes;
-        var expiresAt = DateTime.UtcNow.AddMinutes(validity);
-        return new OtpCode(code, type, expiresAt);
+        return new OtpCode(code, type, now, expiresAt);
     }
 
-    /// <summary>
-    /// تولید کد تایید الفبایی-عددی جدید
-    /// </summary>
-    public static OtpCode GenerateAlphanumeric(
-        VerificationCodeType type,
-        int length = DefaultLength,
-        int? validityMinutes = null)
+    public static OtpCode GenerateAlphanumeric(VerificationCodeType type, int length = DefaultLength, int? validityMinutes = null)
     {
         ValidateLength(length);
+        var now = DomainClock.Instance.UtcNow;
+        var expiresAt = now.AddMinutes(validityMinutes ?? DefaultValidityMinutes);
         var code = GenerateAlphanumericCode(length);
-        var validity = validityMinutes ?? DefaultValidityMinutes;
-        var expiresAt = DateTime.UtcNow.AddMinutes(validity);
-        return new OtpCode(code, type, expiresAt);
+        return new OtpCode(code, type, now, expiresAt);
     }
 
-    /// <summary>
-    /// ایجاد از کد موجود (برای بازیابی از دیتابیس)
-    /// </summary>
+  
     public static OtpCode CreateFromExisting(
         string value,
         VerificationCodeType type,
@@ -157,70 +103,57 @@ public sealed class OtpCode : ValueObject
         DateTime? usedAt = null)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("کد تایید نمی‌تواند خالی باشد");
+        {
+            throw new ArgumentException("کد تایید نمی‌تواند خالی باشد", nameof(value));
+        }
 
-        return new OtpCode(value, type, expiresAt, attemptCount, isUsed, usedAt);
+        return new OtpCode(value, type, createdAt, expiresAt, attemptCount, isUsed, usedAt);
     }
 
-    /// <summary>
-    /// بررسی اعتبار کد
-    /// </summary>
+   
     public bool Verify(string code)
     {
         if (!IsValid)
+        {
             return false;
+        }
 
-        // ثبت تلاش
+      
         AttemptCount++;
 
         if (string.IsNullOrWhiteSpace(code))
+        {
             return false;
+        }
 
-        // مقایسه بدون حساسیت به حروف بزرگ و کوچک
+     
         var isMatch = Value.Equals(code, StringComparison.OrdinalIgnoreCase);
 
         if (isMatch)
         {
             IsUsed = true;
-            UsedAt = DateTime.UtcNow;
+            UsedAt = DomainClock.Instance.UtcNow;
         }
 
         return isMatch;
     }
 
-    /// <summary>
-    /// ثبت تلاش ناموفق
-    /// </summary>
-    public OtpCode RecordFailedAttempt()
-    {
-        return new OtpCode(
-            Value, Type, ExpiresAt,
-            AttemptCount + 1, IsUsed, UsedAt);
-    }
+    public OtpCode RecordFailedAttempt() =>
+          new(Value, Type, CreatedAt, ExpiresAt, AttemptCount + 1, IsUsed, UsedAt);
 
-    /// <summary>
-    /// علامت‌گذاری به عنوان استفاده شده
-    /// </summary>
-    public OtpCode MarkAsUsed()
-    {
-        return new OtpCode(
-            Value, Type, ExpiresAt,
-            AttemptCount, true, DateTime.UtcNow);
-    }
+    public OtpCode MarkAsUsed() =>
+       new(Value, Type, CreatedAt, ExpiresAt, AttemptCount, true, DomainClock.Instance.UtcNow);
 
-    /// <summary>
-    /// بررسی معتبر بودن طول کد
-    /// </summary>
+  
     private static void ValidateLength(int length)
     {
         if (length < MinLength || length > MaxLength)
-            throw new ArgumentException(
-                $"طول کد باید بین {MinLength} و {MaxLength} کاراکتر باشد");
+        {
+            throw new ArgumentException($"طول کد باید بین {MinLength} و {MaxLength} کاراکتر باشد", nameof(length));
+        }
     }
 
-    /// <summary>
-    /// تولید کد عددی تصادفی
-    /// </summary>
+  
     private static string GenerateNumericCode(int length)
     {
         using var rng = RandomNumberGenerator.Create();
@@ -231,9 +164,7 @@ public sealed class OtpCode : ValueObject
         return code.PadLeft(length, '0');
     }
 
-    /// <summary>
-    /// تولید کد الفبایی-عددی تصادفی
-    /// </summary>
+    
     private static string GenerateAlphanumericCode(int length)
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -241,25 +172,25 @@ public sealed class OtpCode : ValueObject
         var result = new char[length];
         var bytes = new byte[length];
         rng.GetBytes(bytes);
-        for (int i = 0; i < length; i++)
+        for (var i = 0; i < length; i++)
         {
             result[i] = chars[bytes[i] % chars.Length];
         }
         return new string(result);
     }
 
-    /// <summary>
-    /// دریافت کد با فرمت مناسب برای نمایش
-    /// </summary>
     public string GetFormattedCode()
     {
-        // برای کدهای 6 رقمی: 123-456
+       
         if (Value.Length == 6)
-            return $"{Value.Substring(0, 3)}-{Value.Substring(3, 3)}";
+        {
+            return $"{Value[..3]}-{Value[3..6]}";
+        }
 
-        // برای کدهای 8 رقمی: 1234-5678
         if (Value.Length == 8)
-            return $"{Value.Substring(0, 4)}-{Value.Substring(4, 4)}";
+        {
+            return $"{Value[..4]}-{Value[4..8]}";
+        }
 
         return Value;
     }
@@ -271,5 +202,12 @@ public sealed class OtpCode : ValueObject
         yield return CreatedAt;
     }
 
-    public override string ToString() => $"[{Type} OTP Code: ***]";
+    public override string ToString() => "[OTP Code]";
+
+    private static DateTime EnsureUtc(DateTime dateTime) => dateTime.Kind switch
+    {
+        DateTimeKind.Utc => dateTime,
+        DateTimeKind.Local => dateTime.ToUniversalTime(),
+        _ => DateTime.SpecifyKind(dateTime, DateTimeKind.Utc)
+    };
 }

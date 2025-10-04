@@ -5,53 +5,44 @@ using System.Linq;
 namespace AuthSystem.Domain.Common.Policies;
 
 /// <summary>
-/// کلاس برای نتیجه ارزیابی سیاست‌ها
+/// Represents the outcome of evaluating a policy.
 /// </summary>
-public class PolicyResult
+public sealed class PolicyResult
 {
-    /// <summary>
-    /// آیا سیاست برآورده شده است
-    /// </summary>
-    public bool IsSatisfied { get; set; }
+    private readonly List<string> _messages = new();
 
-    /// <summary>
-    /// پیام‌های نتیجه
-    /// </summary>
-    public List<string> Messages { get; } = new List<string>();
-
-    /// <summary>
-    /// ایجاد نتیجه موفق
-    /// </summary>
-    public static PolicyResult Success(string message = null)
+    private PolicyResult(bool isSatisfied, IEnumerable<string>? messages = null)
     {
-        var result = new PolicyResult { IsSatisfied = true };
-        if (message != null)
-            result.Messages.Add(message);
-        return result;
+        IsSatisfied = isSatisfied;
+        if (messages is not null)
+        {
+            _messages.AddRange(messages.Where(message => !string.IsNullOrWhiteSpace(message)));
+        }
     }
+    public bool IsSatisfied { get; }
+    public IReadOnlyCollection<string> Messages => _messages.AsReadOnly();
 
-    /// <summary>
-    /// ایجاد نتیجه ناموفق
-    /// </summary>
+    public static PolicyResult Success(string? message = null) =>
+        new(true, message is null ? null : new[] { message });
+
+
     public static PolicyResult Failure(string message)
     {
-        var result = new PolicyResult { IsSatisfied = false };
-        result.Messages.Add(message);
-        return result;
-    }
-
-    /// <summary>
-    /// ترکیب چندین نتیجه
-    /// </summary>
-    public static PolicyResult Combine(IEnumerable<PolicyResult> results)
-    {
-        var result = new PolicyResult { IsSatisfied = results.All(r => r.IsSatisfied) };
-
-        foreach (var r in results)
+        if (string.IsNullOrWhiteSpace(message))
         {
-            result.Messages.AddRange(r.Messages);
+            throw new ArgumentException("Failure message cannot be empty.", nameof(message));
         }
 
-        return result;
+        return new(false, new[] { message });
+    }
+
+   
+    public static PolicyResult Combine(IEnumerable<PolicyResult> results)
+    {
+        if (results is null) throw new ArgumentNullException(nameof(results));
+        var array = results.ToArray();
+        var isSatisfied = array.All(result => result.IsSatisfied);
+        var messages = array.SelectMany(result => result._messages);
+        return new PolicyResult(isSatisfied, messages);
     }
 }

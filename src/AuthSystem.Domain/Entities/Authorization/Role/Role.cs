@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Common.Entities;
-using AuthSystem.Domain.Common.Rules;
 using AuthSystem.Domain.Common.Rules;
 using AuthSystem.Domain.Entities.Authorization.Role.Events;
 using AuthSystem.Domain.Entities.Authorization.Role.Rules;
@@ -10,12 +11,11 @@ using AuthSystem.Domain.Exceptions;
 namespace AuthSystem.Domain.Entities.Authorization.Role;
 
 /// <summary>
-/// ریشه تجمع نقش
+/// Aggregate root representing a role with permissions and assigned users.
 /// </summary>
 public class Role : AggregateRoot<Guid>
 {
    
-    /// </summary>
     private readonly List<RolePermission> _permissions = new();
    
     private readonly List<UserRole> _userRoles = new();
@@ -27,21 +27,12 @@ public class Role : AggregateRoot<Guid>
     }
 
 
-    public Role(
-        Guid id,
-        string name,
-        string description,
-        bool isDefault = false,
-        bool isSystemRole = false) : base(id)
+  public Role(Guid id, string name, string description, bool isDefault = false, bool isSystemRole = false) : base(id)
     {
         CheckRule(new RoleNameMustBeValidRule(name));
         CheckRule(new RoleDescriptionMustBeValidRule(description));
 
-        Name = name;
-        Description = description;
-        IsDefault = isDefault;
-        IsSystemRole = isSystemRole;
-        ApplyRaise(new RoleCreatedEvent(Id, Name, Description, IsDefault, IsSystemRole));
+        ApplyRaise(new RoleCreatedEvent(id, name, description, isDefault, isSystemRole));
     }
     public string Name { get; private set; } = default!;
 
@@ -59,10 +50,12 @@ public class Role : AggregateRoot<Guid>
     {
         
         CheckRule(new RoleNameMustBeValidRule(name));
+        if (string.Equals(Name, name, StringComparison.Ordinal))
+        {
+            return;
+        }
 
-        Name = name;
-        MarkAsUpdated();
-        ApplyRaise(new RoleUpdatedEvent(Id, Name, Description));
+        ApplyRaise(new RoleUpdatedEvent(Id, name, Description));
     }
 
  
@@ -71,9 +64,11 @@ public class Role : AggregateRoot<Guid>
      
         CheckRule(new RoleDescriptionMustBeValidRule(description));
 
-        Description = description;
-        MarkAsUpdated();
-        ApplyRaise(new RoleUpdatedEvent(Id, Name, Description));
+        if (string.Equals(Description, description, StringComparison.Ordinal))
+        {
+            return;
+        }
+        ApplyRaise(new RoleUpdatedEvent(Id, Name, description));
     }
 
    
@@ -81,14 +76,9 @@ public class Role : AggregateRoot<Guid>
     {
         CheckRule(new RoleCannotHaveDuplicatePermissionsRule(_permissions.Select(p => p.PermissionType), permissionType));
 
-        var permission = new RolePermission(Guid.NewGuid(), Id, permissionType);
-        _permissions.Add(permission);
-        MarkAsUpdated();
-
-       
-        ApplyRaise(new RolePermissionAddedEvent(Id, permissionType));
-
-        return permission;
+        var permissionId = Guid.NewGuid();
+        ApplyRaise(new RolePermissionAddedEvent(Id, permissionId, permissionType));
+        return _permissions.Single(p => p.Id == permissionId);
     }
 
     public void RemovePermission(PermissionType permissionType)
@@ -102,19 +92,16 @@ public class Role : AggregateRoot<Guid>
 
         CheckRule(new SystemRoleCannotRemoveAdminPermissionRule(IsSystemRole, permissionType));
         var remainingPermissions = _permissions
-           .Where(p => p.PermissionType != permissionType)
-           .Select(p => p.PermissionType)
-           .ToArray();
+          .Where(p => p.Id != permission.Id)
+            .Select(p => p.PermissionType)
+            .ToArray();
         CheckRule(new RoleMustHavePermissionsRule(remainingPermissions));
 
-        _permissions.Remove(permission);
-         MarkAsUpdated();
-
-        ApplyRaise(new RolePermissionRemovedEvent(Id, permissionType));
+        ApplyRaise(new RolePermissionRemovedEvent(Id, permission.Id, permission.PermissionType));
     }
 
     public bool HasPermission(PermissionType permissionType) =>
-      _permissions.Any(p => p.PermissionType == permissionType);
+        _permissions.Any(p => p.PermissionType == permissionType);
 
     public bool HasAllPermissions(IEnumerable<PermissionType> permissions) =>
         permissions.All(HasPermission);
@@ -128,11 +115,10 @@ public class Role : AggregateRoot<Guid>
     public UserRole AddUserToRole(Guid userId, string username)
     {
         CheckRule(new RoleCannotHaveDuplicateUsersRule(_userRoles.Select(ur => ur.UserId), userId));
-        var userRole = new UserRole(Guid.NewGuid(), userId, username, Id, Name);
-        _userRoles.Add(userRole);
-        MarkAsUpdated();
-
-        return userRole;
+        var assignment = new UserRole(Guid.NewGuid(), userId, username, Id, Name, DomainClock.Instance.UtcNow);
+        _userRoles.Add(assignment);
+        MarkAsUpdated(occurredOn: assignment.AssignedAt);
+        return assignment;
     }
 
     public void RemoveUserFromRole(Guid userId)
@@ -160,7 +146,7 @@ public class Role : AggregateRoot<Guid>
             return;
         }
 
-        MarkAsDeleted();
+    
         ApplyRaise(new RoleDeletedEvent(Id));
     }
 
@@ -171,48 +157,58 @@ public class Role : AggregateRoot<Guid>
         {
             return;
         }
-        #region Event Handlers
-        IsDeleted = false;
-        DeletedAt = null;
-        MarkAsUpdated();
+     
         ApplyRaise(new RoleUndeletedEvent(Id));
     }
-    #region Event Handlers
+   
 
     private void On(RoleCreatedEvent @event)
     {
+        Id = @event.RoleId;
         Name = @event.Name;
         Description = @event.Description;
         IsDefault = @event.IsDefault;
         IsSystemRole = @event.IsSystemRole;
+        _permissions.Clear();
+        _userRoles.Clear();
+        MarkAsCreated(occurredOn: @event.OccurredOn);
     }
 
     private void On(RoleUpdatedEvent @event)
     {
         Name = @event.Name;
         Description = @event.Description;
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
  
     private void On(RolePermissionAddedEvent @event)
     {
-        // تغییرات قبلاً اعمال شده است
+        var permission = new RolePermission(@event.RolePermissionId, @event.RoleId, @event.PermissionType, @event.OccurredOn);
+        _permissions.Add(permission);
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(RolePermissionRemovedEvent @event)
     {
-        // تغییرات قبلاً اعمال شده است
+        var permission = _permissions.FirstOrDefault(p => p.Id == @event.RolePermissionId);
+        if (permission is not null)
+        {
+            _permissions.Remove(permission);
+        }
+
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
  
     private void On(RoleDeletedEvent @event)
     {
-        // وضعیت حذف در متد Delete اعمال شده است
+        MarkAsDeleted(occurredOn: @event.OccurredOn);
     }
 
     private void On(RoleUndeletedEvent @event)
     {
-        // وضعیت بازگردانی در متد Restore اعمال شده است
+        ClearDeletion(occurredOn: @event.OccurredOn);
     }
 
 }

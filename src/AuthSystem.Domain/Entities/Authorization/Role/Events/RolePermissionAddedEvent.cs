@@ -4,17 +4,18 @@ using AuthSystem.Domain.Enums;
 namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
 
 /// <summary>
-/// رویداد افزودن مجوز به نقش
+/// Event emitted when a permission is added to a role.
 /// </summary>
 public sealed class RolePermissionAddedEvent : DomainEventBase
 {
-	public RolePermissionAddedEvent(Guid roleId, PermissionType permission)
-	{
-		RoleId = roleId;
-		Permission = permission;
-	}
+    public RolePermissionAddedEvent(Guid roleId, Guid rolePermissionId, PermissionType permissionType)
+    {
+        RoleId = roleId;
+        RolePermissionId = rolePermissionId;
+        PermissionType = permissionType;
+    }
 
-	public Guid RoleId { get; }
-
-	public PermissionType Permission { get; }
+    public Guid RoleId { get; }
+    public Guid RolePermissionId { get; }
+    public PermissionType PermissionType { get; }
 }

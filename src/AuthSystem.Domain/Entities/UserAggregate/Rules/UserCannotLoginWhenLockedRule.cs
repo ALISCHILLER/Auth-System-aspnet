@@ -1,9 +1,10 @@
-﻿using AuthSystem.Domain.Common.Rules;
+﻿using AuthSystem.Domain.Common.Clock;
+using AuthSystem.Domain.Common.Rules;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Rules;
 
 /// <summary>
-/// قانون جلوگیری از ورود کاربر در هنگام قفل بودن حساب
+/// Business rule preventing login when the user account is locked.
 /// </summary>
 public sealed class UserCannotLoginWhenLockedRule : BusinessRuleBase
 {
@@ -18,6 +19,6 @@ public sealed class UserCannotLoginWhenLockedRule : BusinessRuleBase
 
     public override bool IsBroken()
     {
-        return _lockoutEnd.HasValue && _lockoutEnd.Value > DateTime.UtcNow;
+        return _lockoutEnd.HasValue && _lockoutEnd.Value > DomainClock.Instance.UtcNow;
     }
 }

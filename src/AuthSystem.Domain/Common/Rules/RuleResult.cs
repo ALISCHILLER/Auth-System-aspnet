@@ -3,53 +3,44 @@
 namespace AuthSystem.Domain.Common.Rules;
 
 /// <summary>
-/// کلاس برای نتیجه ارزیابی قوانین
+/// Represents the evaluation result of a business rule.
 /// </summary>
-public class RuleResult
+public sealed class RuleResult
 {
-    /// <summary>
-    /// آیا قانون برآورده شده است
-    /// </summary>
-    public bool IsSatisfied { get; set; }
+    private readonly List<string> _messages = new();
 
-    /// <summary>
-    /// پیام‌های نتیجه
-    /// </summary>
-    public List<string> Messages { get; } = new List<string>();
-
-    /// <summary>
-    /// ایجاد نتیجه موفق
-    /// </summary>
-    public static RuleResult Success(string message = null)
+    private RuleResult(bool isSatisfied, IEnumerable<string>? messages = null)
     {
-        return new RuleResult
+        IsSatisfied = isSatisfied;
+        if (messages is not null)
         {
-            IsSatisfied = true,
-            Messages = message != null ? new List<string> { message } : new List<string>()
-        };
+            _messages.AddRange(messages.Where(message => !string.IsNullOrWhiteSpace(message)));
+        }
     }
 
-    /// <summary>
-    /// ایجاد نتیجه ناموفق
-    /// </summary>
+    public bool IsSatisfied { get; }
+    public IReadOnlyCollection<string> Messages => _messages.AsReadOnly();
+
+    public static RuleResult Success(string? message = null) =>
+        new(true, message is null ? null : new[] { message });
+
     public static RuleResult Failure(string message)
     {
-        return new RuleResult
+        if (string.IsNullOrWhiteSpace(message))
         {
-            IsSatisfied = false,
-            Messages = new List<string> { message }
-        };
+            throw new ArgumentException("Failure message cannot be empty.", nameof(message));
+        }
+
+        return new(false, new[] { message });
     }
 
-    /// <summary>
-    /// ترکیب چندین نتیجه
-    /// </summary>
+  
     public static RuleResult Combine(IEnumerable<RuleResult> results)
     {
-        return new RuleResult
-        {
-            IsSatisfied = results.All(r => r.IsSatisfied),
-            Messages = results.SelectMany(r => r.Messages).ToList()
-        };
+        if (results is null) throw new ArgumentNullException(nameof(results));
+        var array = results.ToArray();
+        var isSatisfied = array.All(result => result.IsSatisfied);
+        var messages = array.SelectMany(result => result._messages);
+        return new RuleResult(isSatisfied, messages);
     }
 }
