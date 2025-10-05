@@ -111,12 +111,3 @@ public static class VerificationCodeExtensions
         return code.MarkAsUsed();
     }
 }
-
-/// <summary>
-/// فرمت کد تایید
-/// </summary>
-public enum CodeFormat
-{
-    Numeric,
-    Alphanumeric
-}

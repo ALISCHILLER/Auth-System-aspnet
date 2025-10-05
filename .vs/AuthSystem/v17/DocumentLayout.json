@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\valueobjects\\passwordhash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\valueobjects\\passwordhash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\valueobjects\\tokenvalue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\valueobjects\\tokenvalue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\valueobjects\\twofactorsecretkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\valueobjects\\twofactorsecretkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.domain\\valueobjects\\verificationcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA8D1EA8-3D58-849B-1C1F-F1B606E5EF34}|src\\AuthSystem.Domain\\AuthSystem.Domain.csproj|solutionrelative:src\\authsystem.domain\\valueobjects\\verificationcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,63 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VerificationCode.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\VerificationCode.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\ValueObjects\\VerificationCode.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\VerificationCode.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\ValueObjects\\VerificationCode.cs",
-              "ViewState": "AgIAAKwAAAAAAAAAAAAkwLsAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T08:18:31.694Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TwoFactorSecretKey.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\TwoFactorSecretKey.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\ValueObjects\\TwoFactorSecretKey.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\TwoFactorSecretKey.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\ValueObjects\\TwoFactorSecretKey.cs",
-              "ViewState": "AgIAALYAAAAAAAAAAAAAAM0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T08:06:52.897Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TokenValue.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\TokenValue.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\ValueObjects\\TokenValue.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\TokenValue.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\ValueObjects\\TokenValue.cs",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAAAJAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T08:02:22.465Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PasswordHash.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\PasswordHash.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Domain\\ValueObjects\\PasswordHash.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\ValueObjects\\PasswordHash.cs",
-              "RelativeToolTip": "src\\AuthSystem.Domain\\ValueObjects\\PasswordHash.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAiwG0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T07:52:43.812Z",
-              "EditorCaption": ""
             }
           ]
         }
