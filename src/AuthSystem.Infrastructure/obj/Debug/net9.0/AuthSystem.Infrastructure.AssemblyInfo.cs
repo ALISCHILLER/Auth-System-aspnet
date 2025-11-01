@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthSystem.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7cff1b1ab782dee80922df73607c8cf1c322789")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d0dd68dea08c305030ff8754bc0da7faec62a92")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuthSystem.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthSystem.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

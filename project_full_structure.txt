@@ -1,4 +1,4 @@
-Project Structure - Sun 10/05/2025 14:27:06.29
+Project Structure - Sat 11/01/2025 14:18:29.07
 ========================================
 
 .vs/Auth-System-aspnet/CopilotIndices/17.12.38.29086/CodeChunks.db
@@ -16,11 +16,11 @@ Project Structure - Sun 10/05/2025 14:27:06.29
 .vs/AuthSystem/CopilotIndices/17.12.38.29086/SemanticSymbols.db-shm
 .vs/AuthSystem/CopilotIndices/17.12.38.29086/SemanticSymbols.db-wal
 .vs/AuthSystem/DesignTimeBuild/.dtbcache.v2
-.vs/AuthSystem/FileContentIndex/4550ebe4-c232-4b3b-9a38-7f0f30d61a4b.vsidx
-.vs/AuthSystem/FileContentIndex/65d5391a-88e4-41dc-a612-1fd0d1971fe3.vsidx
-.vs/AuthSystem/FileContentIndex/9233733c-cb20-4b95-ad7c-9c382ddadd0b.vsidx
-.vs/AuthSystem/FileContentIndex/dc36c340-a118-49f0-9c0a-45ef9abe9c59.vsidx
-.vs/AuthSystem/FileContentIndex/fc7ed19a-d043-4f6c-8a6d-45c2b2bc7832.vsidx
+.vs/AuthSystem/FileContentIndex/04a99e1b-cd72-4fdb-95d2-7f639e6c2114.vsidx
+.vs/AuthSystem/FileContentIndex/9a6eaf9c-266b-4062-a406-39aceb49dabb.vsidx
+.vs/AuthSystem/FileContentIndex/c4fce3aa-f3ae-4638-a423-4d6cf536b766.vsidx
+.vs/AuthSystem/FileContentIndex/e2a51625-7bf0-46a0-b7d1-64af485ba8d2.vsidx
+.vs/AuthSystem/FileContentIndex/f6815ce7-ff94-45df-8b44-7fd20dd6627a.vsidx
 .vs/AuthSystem/v17/.futdcache.v2
 .vs/AuthSystem/v17/.suo
 .vs/AuthSystem/v17/.wsuo
@@ -270,7 +270,9 @@ src/AuthSystem.Api/obj/Release/net9.0/AuthSystem.Api.GlobalUsings.g.cs
 src/AuthSystem.Api/Program.cs
 src/AuthSystem.Api/Properties/launchSettings.json
 src/AuthSystem.Application/Abstractions/IAggregateRepository.cs
+src/AuthSystem.Application/Abstractions/ICurrentUserContextAccessor.cs
 src/AuthSystem.Application/Abstractions/ICurrentUserService.cs
+src/AuthSystem.Application/Abstractions/IDomainEventCollector.cs
 src/AuthSystem.Application/Abstractions/IDomainEventDispatcher.cs
 src/AuthSystem.Application/Abstractions/IEmailSender.cs
 src/AuthSystem.Application/Abstractions/IRoleRepository.cs
@@ -304,6 +306,7 @@ src/AuthSystem.Application/Common/Behaviors/LoggingBehavior.cs
 src/AuthSystem.Application/Common/Behaviors/PerformanceBehavior.cs
 src/AuthSystem.Application/Common/Behaviors/UnitOfWorkBehavior.cs
 src/AuthSystem.Application/Common/Behaviors/ValidationBehavior.cs
+src/AuthSystem.Application/Common/Events/DomainEventNotification.cs
 src/AuthSystem.Application/Common/Exceptions/ValidationException.cs
 src/AuthSystem.Application/Common/Interfaces/IApplicationDbContext.cs
 src/AuthSystem.Application/Common/Mapping/ApplicationMappingProfile.cs
@@ -467,14 +470,19 @@ src/AuthSystem.Domain/Entities/Authorization/Role/UserRole.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/EmailVerifiedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/TwoFactorDisabledEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/TwoFactorEnabledEvent.cs
+src/AuthSystem.Domain/Entities/UserAggregate/Events/UserAccessFailedCountResetEvent.cs
+src/AuthSystem.Domain/Entities/UserAggregate/Events/UserEmailChangedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserLockedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserLoggedInEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserLoginFailedEvent.cs
+src/AuthSystem.Domain/Entities/UserAggregate/Events/UsernameChangedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserPasswordChangedEvent.cs
+src/AuthSystem.Domain/Entities/UserAggregate/Events/UserPhoneVerifiedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRegisteredEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRoleAddedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRoleChangedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRoleRemovedEvent.cs
+src/AuthSystem.Domain/Entities/UserAggregate/Events/UserSocialLoginLinkedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserStatusChangedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Events/UserUnlockedEvent.cs
 src/AuthSystem.Domain/Entities/UserAggregate/Rules/UserCannotLoginWhenLockedRule.cs
@@ -511,6 +519,7 @@ src/AuthSystem.Domain/Exceptions/InvalidIpAddressException.cs
 src/AuthSystem.Domain/Exceptions/InvalidNationalCodeException.cs
 src/AuthSystem.Domain/Exceptions/InvalidPasswordException.cs
 src/AuthSystem.Domain/Exceptions/InvalidPhoneNumberException.cs
+src/AuthSystem.Domain/Exceptions/InvalidSocialLoginException.cs
 src/AuthSystem.Domain/Exceptions/InvalidTokenException.cs
 src/AuthSystem.Domain/Exceptions/InvalidTwoFactorSecretKeyException.cs
 src/AuthSystem.Domain/Exceptions/InvalidUserException.cs
@@ -591,6 +600,13 @@ src/AuthSystem.Infrastructure/bin/Debug/net9.0/AuthSystem.Infrastructure.deps.js
 src/AuthSystem.Infrastructure/bin/Debug/net9.0/AuthSystem.Infrastructure.dll
 src/AuthSystem.Infrastructure/bin/Debug/net9.0/AuthSystem.Infrastructure.pdb
 src/AuthSystem.Infrastructure/bin/Debug/net9.0/AuthSystem.Infrastructure.runtimeconfig.json
+src/AuthSystem.Infrastructure/DependencyInjection.cs
+src/AuthSystem.Infrastructure/DomainEvents/DomainEventDispatcher.cs
+src/AuthSystem.Infrastructure/DomainEvents/InMemoryDomainEventCollector.cs
+src/AuthSystem.Infrastructure/Identity/CurrentUserContext.cs
+src/AuthSystem.Infrastructure/Identity/CurrentUserService.cs
+src/AuthSystem.Infrastructure/Messaging/NoOpEmailSender.cs
+src/AuthSystem.Infrastructure/Messaging/NoOpSmsSender.cs
 src/AuthSystem.Infrastructure/obj/AuthSystem.Infrastructure.csproj.EntityFrameworkCore.targets
 src/AuthSystem.Infrastructure/obj/AuthSystem.Infrastructure.csproj.nuget.dgspec.json
 src/AuthSystem.Infrastructure/obj/AuthSystem.Infrastructure.csproj.nuget.g.props
@@ -619,6 +635,14 @@ src/AuthSystem.Infrastructure/obj/Release/net9.0/AuthSystem.Infrastructure.asset
 src/AuthSystem.Infrastructure/obj/Release/net9.0/AuthSystem.Infrastructure.csproj.AssemblyReference.cache
 src/AuthSystem.Infrastructure/obj/Release/net9.0/AuthSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 src/AuthSystem.Infrastructure/obj/Release/net9.0/AuthSystem.Infrastructure.GlobalUsings.g.cs
+src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryApplicationDbContext.cs
+src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryDatabase.cs
+src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryRoleRepository.cs
+src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryUnitOfWork.cs
+src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryUserRepository.cs
+src/AuthSystem.Infrastructure/Tokens/InMemoryTokenService.cs
+src/AuthSystem.Infrastructure/Tokens/TokenOptions.cs
+src/AuthSystem.Infrastructure/Verification/InMemoryVerificationCodeService.cs
 src/AuthSystem.Shared/AuthSystem.Shared.csproj
 src/AuthSystem.Shared/Class1.cs
 src/AuthSystem.Shared/obj/AuthSystem.Shared.csproj.nuget.dgspec.json
@@ -643,6 +667,7 @@ tests/AuthSystem.UnitTests/bin/Debug/net9.0/.msCoverageSourceRootsMapping_AuthSy
 tests/AuthSystem.UnitTests/bin/Debug/net9.0/CoverletSourceRootsMapping_AuthSystem.UnitTests
 tests/AuthSystem.UnitTests/bin/Release/net9.0/.msCoverageSourceRootsMapping_AuthSystem.UnitTests
 tests/AuthSystem.UnitTests/bin/Release/net9.0/CoverletSourceRootsMapping_AuthSystem.UnitTests
+tests/AuthSystem.UnitTests/Domain/Users/UserAggregateTests.cs
 tests/AuthSystem.UnitTests/obj/AuthSystem.UnitTests.csproj.nuget.dgspec.json
 tests/AuthSystem.UnitTests/obj/AuthSystem.UnitTests.csproj.nuget.g.props
 tests/AuthSystem.UnitTests/obj/AuthSystem.UnitTests.csproj.nuget.g.targets
@@ -662,8 +687,7 @@ tests/AuthSystem.UnitTests/obj/Release/net9.0/AuthSystem.UnitTests.assets.cache
 tests/AuthSystem.UnitTests/obj/Release/net9.0/AuthSystem.UnitTests.csproj.AssemblyReference.cache
 tests/AuthSystem.UnitTests/obj/Release/net9.0/AuthSystem.UnitTests.GeneratedMSBuildEditorConfig.editorconfig
 tests/AuthSystem.UnitTests/obj/Release/net9.0/AuthSystem.UnitTests.GlobalUsings.g.cs
-tests/AuthSystem.UnitTests/UnitTest1.cs
 
 ========================================
-Total files: 662
+Total files: 686
 Total size :  MB

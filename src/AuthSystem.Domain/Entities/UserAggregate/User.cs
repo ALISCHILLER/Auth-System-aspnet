@@ -121,15 +121,34 @@ public sealed class User : AggregateRoot<Guid>
     {
         CheckRule(new UsernameMustBeValidRule(username));
 
-        Username = username;
-        MarkAsUpdated();
+        var previousUsername = Username;
+
+        if (string.Equals(previousUsername, username, StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        ApplyRaise(new UsernameChangedEvent(Id, previousUsername, username));
     }
 
     public void ChangeEmail(Email email)
     {
-        Email = email ?? throw InvalidUserException.ForInvalidEmail(string.Empty);
-        IsEmailVerified = false;
-        MarkAsUpdated();
+        if (email is null)
+        {
+            throw InvalidUserException.ForInvalidEmail(string.Empty);
+        }
+
+        CheckRule(new UserMustHaveValidEmailRule(email.Value));
+
+        var previousEmail = Email;
+        var wasVerified = IsEmailVerified;
+
+        if (previousEmail is not null && previousEmail.Equals(email))
+        {
+            return;
+        }
+
+        ApplyRaise(new UserEmailChangedEvent(Id, previousEmail, email, wasVerified));
     }
 
     public void VerifyEmail()
@@ -144,13 +163,14 @@ public sealed class User : AggregateRoot<Guid>
 
     public void VerifyPhone()
     {
-        if (PhoneNumber is null)
+        var phoneNumber = PhoneNumber ?? throw InvalidUserException.ForInvalidPhoneNumber(string.Empty);
+
+        if (IsPhoneVerified)
         {
-            throw InvalidUserException.ForInvalidPhoneNumber(string.Empty);
+            return;
         }
 
-        IsPhoneVerified = true;
-        MarkAsUpdated();
+        ApplyRaise(new UserPhoneVerifiedEvent(Id, phoneNumber));
     }
 
     public void ChangePassword(PasswordHash passwordHash)
@@ -165,6 +185,10 @@ public sealed class User : AggregateRoot<Guid>
         if (secretKey is null)
         {
             throw new InvalidTwoFactorSecretKeyException("کلید احراز هویت دو عاملی نامعتبر است");
+        }
+        if (IsTwoFactorEnabled)
+        {
+            return;
         }
 
         ApplyRaise(new TwoFactorEnabledEvent(Id, secretKey));
@@ -198,9 +222,9 @@ public sealed class User : AggregateRoot<Guid>
     {
         var now = DomainClock.Instance.UtcNow;
         var proposedEnd = duration.HasValue ? now.Add(duration.Value) : now.AddMinutes(15);
-        if (LockoutEnd.HasValue && LockoutEnd.Value > proposedEnd)
+        if (LockoutEnd.HasValue && LockoutEnd.Value >= proposedEnd)
         {
-            proposedEnd = LockoutEnd.Value;
+            return;
         }
 
         ApplyRaise(new UserLockedEvent(Id, proposedEnd));
@@ -208,7 +232,7 @@ public sealed class User : AggregateRoot<Guid>
 
     public void Unlock()
     {
-        if (!IsLocked && AccessFailedCount == 0)
+        if (!IsLocked)
         {
             return;
         }
@@ -233,7 +257,8 @@ public sealed class User : AggregateRoot<Guid>
        
 
         ApplyRaise(new UserRoleAddedEvent(Id, roleId, roleName));
-        var currentRoles = _roles.Values.Select(r => r.RoleName).ToArray();
+
+        var currentRoles = previousRoles.Concat(new[] { roleName }).ToArray();
         ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
     }
 
@@ -249,7 +274,10 @@ public sealed class User : AggregateRoot<Guid>
         
 
         ApplyRaise(new UserRoleRemovedEvent(Id, roleId, role.RoleName));
-        var currentRoles = _roles.Values.Select(r => r.RoleName).ToArray();
+
+        var currentRoles = previousRoles
+            .Where(r => !string.Equals(r, role.RoleName, StringComparison.Ordinal))
+            .ToArray();
         ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
     }
 
@@ -257,24 +285,34 @@ public sealed class User : AggregateRoot<Guid>
 
     public void ResetAccessFailedCount()
     {
-        AccessFailedCount = 0;
-        MarkAsUpdated();
+        var previousFailedCount = AccessFailedCount;
+
+        if (previousFailedCount <= 0)
+        {
+            return;
+        }
+
+        ApplyRaise(new UserAccessFailedCountResetEvent(Id, previousFailedCount));
     }
 
     public void AddSocialLogin(string provider, string providerUserId)
     {
         if (string.IsNullOrWhiteSpace(provider))
         {
-            throw new ArgumentException("نام ارائه‌دهنده نمی‌تواند خالی باشد", nameof(provider));
+            throw InvalidSocialLoginException.ForMissingProvider(Id);
         }
 
         if (string.IsNullOrWhiteSpace(providerUserId))
         {
-            throw new ArgumentException("شناسه کاربر در شبکه اجتماعی نمی‌تواند خالی باشد", nameof(providerUserId));
+            throw InvalidSocialLoginException.ForMissingProviderUserId(Id, provider);
         }
 
-        _socialLogins[provider] = providerUserId;
-        MarkAsUpdated();
+        if (_socialLogins.TryGetValue(provider, out var existing) && string.Equals(existing, providerUserId, StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        ApplyRaise(new UserSocialLoginLinkedEvent(Id, provider, providerUserId));
     }
 
 
@@ -317,6 +355,14 @@ public sealed class User : AggregateRoot<Guid>
         MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
+    private void On(UserEmailChangedEvent @event)
+    {
+        Email = @event.NewEmail;
+        IsEmailVerified = false;
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
+    }
+
+
     private void On(TwoFactorEnabledEvent @event)
     {
         TwoFactorSecretKey = @event.SecretKey;
@@ -343,10 +389,14 @@ public sealed class User : AggregateRoot<Guid>
     {
         AccessFailedCount = @event.FailedAttempts;
         MarkAsUpdated(occurredOn: @event.OccurredOn);
-        if (AccessFailedCount >= 5)
-        {
-            Lock(TimeSpan.FromMinutes(15));
-        }
+        // Lockout policy should be evaluated outside of the event handler to avoid
+        // raising additional events during state application.
+    }
+
+    private void On(UserPhoneVerifiedEvent @event)
+    {
+        IsPhoneVerified = true;
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
     private void On(UserLockedEvent @event)
@@ -382,6 +432,23 @@ public sealed class User : AggregateRoot<Guid>
 
     private void On(UserRoleChangedEvent @event)
     {
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
+    }
+    private void On(UsernameChangedEvent @event)
+    {
+        Username = @event.NewUsername;
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
+    }
+
+    private void On(UserAccessFailedCountResetEvent @event)
+    {
+        AccessFailedCount = 0;
+        MarkAsUpdated(occurredOn: @event.OccurredOn);
+    }
+
+    private void On(UserSocialLoginLinkedEvent @event)
+    {
+        _socialLogins[@event.Provider] = @event.ProviderUserId;
         MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 }

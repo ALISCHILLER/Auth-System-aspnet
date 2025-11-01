@@ -1,4 +1,8 @@
-﻿namespace AuthSystem.Application.Abstractions;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace AuthSystem.Application.Abstractions;
 
 public interface IVerificationCodeService
 {

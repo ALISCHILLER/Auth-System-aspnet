@@ -3,7 +3,7 @@
 <style>body{font-family:monospace;background:#f8f9fa;padding:20px}
 .folder{font-weight:bold;color:#2c3e50}.file{color:#34495e}</style>
 </head><body>
-<h2>Project Structure - Sun 10/05/2025 14:27:06.31</h2>
+<h2>Project Structure - Sat 11/01/2025 14:18:29.08</h2>
 <pre>
     <span class="file">.vs/Auth-System-aspnet/CopilotIndices/17.12.38.29086/CodeChunks.db</span> 
     <span class="file">.vs/Auth-System-aspnet/CopilotIndices/17.12.38.29086/SemanticSymbols.db</span> 
@@ -20,11 +20,11 @@
     <span class="file">.vs/AuthSystem/CopilotIndices/17.12.38.29086/SemanticSymbols.db-shm</span> 
     <span class="file">.vs/AuthSystem/CopilotIndices/17.12.38.29086/SemanticSymbols.db-wal</span> 
     <span class="file">.vs/AuthSystem/DesignTimeBuild/.dtbcache.v2</span> 
-    <span class="file">.vs/AuthSystem/FileContentIndex/4550ebe4-c232-4b3b-9a38-7f0f30d61a4b.vsidx</span> 
-    <span class="file">.vs/AuthSystem/FileContentIndex/65d5391a-88e4-41dc-a612-1fd0d1971fe3.vsidx</span> 
-    <span class="file">.vs/AuthSystem/FileContentIndex/9233733c-cb20-4b95-ad7c-9c382ddadd0b.vsidx</span> 
-    <span class="file">.vs/AuthSystem/FileContentIndex/dc36c340-a118-49f0-9c0a-45ef9abe9c59.vsidx</span> 
-    <span class="file">.vs/AuthSystem/FileContentIndex/fc7ed19a-d043-4f6c-8a6d-45c2b2bc7832.vsidx</span> 
+    <span class="file">.vs/AuthSystem/FileContentIndex/04a99e1b-cd72-4fdb-95d2-7f639e6c2114.vsidx</span> 
+    <span class="file">.vs/AuthSystem/FileContentIndex/9a6eaf9c-266b-4062-a406-39aceb49dabb.vsidx</span> 
+    <span class="file">.vs/AuthSystem/FileContentIndex/c4fce3aa-f3ae-4638-a423-4d6cf536b766.vsidx</span> 
+    <span class="file">.vs/AuthSystem/FileContentIndex/e2a51625-7bf0-46a0-b7d1-64af485ba8d2.vsidx</span> 
+    <span class="file">.vs/AuthSystem/FileContentIndex/f6815ce7-ff94-45df-8b44-7fd20dd6627a.vsidx</span> 
     <span class="file">.vs/AuthSystem/v17/.futdcache.v2</span> 
     <span class="file">.vs/AuthSystem/v17/.suo</span> 
     <span class="file">.vs/AuthSystem/v17/.wsuo</span> 
@@ -274,7 +274,9 @@
     <span class="file">src/AuthSystem.Api/Program.cs</span> 
     <span class="file">src/AuthSystem.Api/Properties/launchSettings.json</span> 
     <span class="file">src/AuthSystem.Application/Abstractions/IAggregateRepository.cs</span> 
+    <span class="file">src/AuthSystem.Application/Abstractions/ICurrentUserContextAccessor.cs</span> 
     <span class="file">src/AuthSystem.Application/Abstractions/ICurrentUserService.cs</span> 
+    <span class="file">src/AuthSystem.Application/Abstractions/IDomainEventCollector.cs</span> 
     <span class="file">src/AuthSystem.Application/Abstractions/IDomainEventDispatcher.cs</span> 
     <span class="file">src/AuthSystem.Application/Abstractions/IEmailSender.cs</span> 
     <span class="file">src/AuthSystem.Application/Abstractions/IRoleRepository.cs</span> 
@@ -308,6 +310,7 @@
     <span class="file">src/AuthSystem.Application/Common/Behaviors/PerformanceBehavior.cs</span> 
     <span class="file">src/AuthSystem.Application/Common/Behaviors/UnitOfWorkBehavior.cs</span> 
     <span class="file">src/AuthSystem.Application/Common/Behaviors/ValidationBehavior.cs</span> 
+    <span class="file">src/AuthSystem.Application/Common/Events/DomainEventNotification.cs</span> 
     <span class="file">src/AuthSystem.Application/Common/Exceptions/ValidationException.cs</span> 
     <span class="file">src/AuthSystem.Application/Common/Interfaces/IApplicationDbContext.cs</span> 
     <span class="file">src/AuthSystem.Application/Common/Mapping/ApplicationMappingProfile.cs</span> 
@@ -471,14 +474,19 @@
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/EmailVerifiedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/TwoFactorDisabledEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/TwoFactorEnabledEvent.cs</span> 
+    <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserAccessFailedCountResetEvent.cs</span> 
+    <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserEmailChangedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserLockedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserLoggedInEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserLoginFailedEvent.cs</span> 
+    <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UsernameChangedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserPasswordChangedEvent.cs</span> 
+    <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserPhoneVerifiedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRegisteredEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRoleAddedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRoleChangedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserRoleRemovedEvent.cs</span> 
+    <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserSocialLoginLinkedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserStatusChangedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Events/UserUnlockedEvent.cs</span> 
     <span class="file">src/AuthSystem.Domain/Entities/UserAggregate/Rules/UserCannotLoginWhenLockedRule.cs</span> 
@@ -515,6 +523,7 @@
     <span class="file">src/AuthSystem.Domain/Exceptions/InvalidNationalCodeException.cs</span> 
     <span class="file">src/AuthSystem.Domain/Exceptions/InvalidPasswordException.cs</span> 
     <span class="file">src/AuthSystem.Domain/Exceptions/InvalidPhoneNumberException.cs</span> 
+    <span class="file">src/AuthSystem.Domain/Exceptions/InvalidSocialLoginException.cs</span> 
     <span class="file">src/AuthSystem.Domain/Exceptions/InvalidTokenException.cs</span> 
     <span class="file">src/AuthSystem.Domain/Exceptions/InvalidTwoFactorSecretKeyException.cs</span> 
     <span class="file">src/AuthSystem.Domain/Exceptions/InvalidUserException.cs</span> 
@@ -595,6 +604,13 @@
     <span class="file">src/AuthSystem.Infrastructure/bin/Debug/net9.0/AuthSystem.Infrastructure.dll</span> 
     <span class="file">src/AuthSystem.Infrastructure/bin/Debug/net9.0/AuthSystem.Infrastructure.pdb</span> 
     <span class="file">src/AuthSystem.Infrastructure/bin/Debug/net9.0/AuthSystem.Infrastructure.runtimeconfig.json</span> 
+    <span class="file">src/AuthSystem.Infrastructure/DependencyInjection.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/DomainEvents/DomainEventDispatcher.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/DomainEvents/InMemoryDomainEventCollector.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Identity/CurrentUserContext.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Identity/CurrentUserService.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Messaging/NoOpEmailSender.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Messaging/NoOpSmsSender.cs</span> 
     <span class="file">src/AuthSystem.Infrastructure/obj/AuthSystem.Infrastructure.csproj.EntityFrameworkCore.targets</span> 
     <span class="file">src/AuthSystem.Infrastructure/obj/AuthSystem.Infrastructure.csproj.nuget.dgspec.json</span> 
     <span class="file">src/AuthSystem.Infrastructure/obj/AuthSystem.Infrastructure.csproj.nuget.g.props</span> 
@@ -623,6 +639,14 @@
     <span class="file">src/AuthSystem.Infrastructure/obj/Release/net9.0/AuthSystem.Infrastructure.csproj.AssemblyReference.cache</span> 
     <span class="file">src/AuthSystem.Infrastructure/obj/Release/net9.0/AuthSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig</span> 
     <span class="file">src/AuthSystem.Infrastructure/obj/Release/net9.0/AuthSystem.Infrastructure.GlobalUsings.g.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryApplicationDbContext.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryDatabase.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryRoleRepository.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryUnitOfWork.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Persistence/InMemory/InMemoryUserRepository.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Tokens/InMemoryTokenService.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Tokens/TokenOptions.cs</span> 
+    <span class="file">src/AuthSystem.Infrastructure/Verification/InMemoryVerificationCodeService.cs</span> 
     <span class="file">src/AuthSystem.Shared/AuthSystem.Shared.csproj</span> 
     <span class="file">src/AuthSystem.Shared/Class1.cs</span> 
     <span class="file">src/AuthSystem.Shared/obj/AuthSystem.Shared.csproj.nuget.dgspec.json</span> 
@@ -647,6 +671,7 @@
     <span class="file">tests/AuthSystem.UnitTests/bin/Debug/net9.0/CoverletSourceRootsMapping_AuthSystem.UnitTests</span> 
     <span class="file">tests/AuthSystem.UnitTests/bin/Release/net9.0/.msCoverageSourceRootsMapping_AuthSystem.UnitTests</span> 
     <span class="file">tests/AuthSystem.UnitTests/bin/Release/net9.0/CoverletSourceRootsMapping_AuthSystem.UnitTests</span> 
+    <span class="file">tests/AuthSystem.UnitTests/Domain/Users/UserAggregateTests.cs</span> 
     <span class="file">tests/AuthSystem.UnitTests/obj/AuthSystem.UnitTests.csproj.nuget.dgspec.json</span> 
     <span class="file">tests/AuthSystem.UnitTests/obj/AuthSystem.UnitTests.csproj.nuget.g.props</span> 
     <span class="file">tests/AuthSystem.UnitTests/obj/AuthSystem.UnitTests.csproj.nuget.g.targets</span> 
@@ -666,8 +691,7 @@
     <span class="file">tests/AuthSystem.UnitTests/obj/Release/net9.0/AuthSystem.UnitTests.csproj.AssemblyReference.cache</span> 
     <span class="file">tests/AuthSystem.UnitTests/obj/Release/net9.0/AuthSystem.UnitTests.GeneratedMSBuildEditorConfig.editorconfig</span> 
     <span class="file">tests/AuthSystem.UnitTests/obj/Release/net9.0/AuthSystem.UnitTests.GlobalUsings.g.cs</span> 
-    <span class="file">tests/AuthSystem.UnitTests/UnitTest1.cs</span> 
 </pre>
-<hr>Total files: 662<br>
-Total size : 62 MB
+<hr>Total files: 686<br>
+Total size : 60 MB
 </body></html>

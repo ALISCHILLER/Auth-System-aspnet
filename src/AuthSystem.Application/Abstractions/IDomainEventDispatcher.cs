@@ -1,4 +1,7 @@
-﻿namespace AuthSystem.Application.Abstractions;
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace AuthSystem.Application.Abstractions;
 
 public interface IDomainEventDispatcher
 {
