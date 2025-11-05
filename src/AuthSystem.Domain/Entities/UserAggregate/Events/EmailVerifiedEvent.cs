@@ -1,11 +1,12 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 
 /// <summary>
 /// رویداد تایید ایمیل کاربر
 /// </summary>
-public sealed class EmailVerifiedEvent : DomainEventBase
+public sealed class EmailVerifiedEvent : DomainEvent
 {
     public EmailVerifiedEvent(Guid userId, string email)
     {

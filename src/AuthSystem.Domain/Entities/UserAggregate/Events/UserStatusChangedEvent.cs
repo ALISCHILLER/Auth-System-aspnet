@@ -6,7 +6,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// رویداد تغییر وضعیت کاربر
 /// </summary>
-public sealed class UserStatusChangedEvent : DomainEventBase
+public sealed class UserStatusChangedEvent : DomainEvent
 {
     public UserStatusChangedEvent(Guid userId, UserStatus previousStatus, UserStatus newStatus)
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AuthSystem.Domain.Common.Rules;
+using AuthSystem.Domain.Common.Abstractions;
 
 namespace AuthSystem.Domain.Common.Exceptions;
 

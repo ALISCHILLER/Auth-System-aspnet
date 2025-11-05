@@ -1,5 +1,5 @@
 ﻿using System;
-using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;
 using AuthSystem.Domain.ValueObjects;
@@ -9,7 +9,7 @@ namespace AuthSystem.Domain.Entities.AuditLog;
 /// <summary>
 /// Entity representing an individual audit log entry.
 /// </summary>
-public class AuditLogEntry : BaseEntity<Guid>
+public class AuditLogEntry : Entity<Guid>
 {
     public Guid LogId { get; private set; }
     public Guid UserId { get; private set; }

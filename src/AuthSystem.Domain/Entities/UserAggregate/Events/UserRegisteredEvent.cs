@@ -8,7 +8,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// Event emitted when a new user is registered.
 /// </summary>
-public sealed class UserRegisteredEvent : DomainEventBase
+public sealed class UserRegisteredEvent : DomainEvent
 {
     public UserRegisteredEvent(
         Guid userId,

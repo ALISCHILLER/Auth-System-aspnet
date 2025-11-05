@@ -1,4 +1,5 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 using AuthSystem.Domain.ValueObjects;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Events;
@@ -6,7 +7,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// رویداد ورود موفق کاربر
 /// </summary>
-public sealed class UserLoggedInEvent : DomainEventBase
+public sealed class UserLoggedInEvent : DomainEvent
 {
     public UserLoggedInEvent(Guid userId, IpAddress? ipAddress, UserAgent? userAgent)
     {

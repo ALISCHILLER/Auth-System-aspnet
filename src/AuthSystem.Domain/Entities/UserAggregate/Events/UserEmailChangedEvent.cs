@@ -7,7 +7,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// Event emitted whenever a user's primary email address changes.
 /// </summary>
-public sealed class UserEmailChangedEvent : DomainEventBase
+public sealed class UserEmailChangedEvent : DomainEvent
 {
     public UserEmailChangedEvent(Guid userId, Email? previousEmail, Email newEmail, bool wasPreviouslyVerified)
     {

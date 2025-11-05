@@ -7,7 +7,7 @@ namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
 /// <summary>
 /// رویداد حذف مجوز از نقش
 /// </summary>
-public sealed class RolePermissionRemovedEvent : DomainEventBase
+public sealed class RolePermissionRemovedEvent : DomainEvent
 {
     public RolePermissionRemovedEvent(Guid roleId, Guid rolePermissionId, PermissionType permissionType)
     {

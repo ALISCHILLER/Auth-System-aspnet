@@ -5,7 +5,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// رویداد باز شدن قفل حساب کاربر
 /// </summary>
-public sealed class UserUnlockedEvent : DomainEventBase
+public sealed class UserUnlockedEvent : DomainEvent
 {
     public UserUnlockedEvent(Guid userId)
     {

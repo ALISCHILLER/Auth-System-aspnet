@@ -1,11 +1,12 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
 
 /// <summary>
 /// رویداد بازیابی نقش حذف‌شده
 /// </summary>
-public sealed class RoleUndeletedEvent : DomainEventBase
+public sealed class RoleUndeletedEvent : DomainEvent
 {
     public RoleUndeletedEvent(Guid roleId)
     {

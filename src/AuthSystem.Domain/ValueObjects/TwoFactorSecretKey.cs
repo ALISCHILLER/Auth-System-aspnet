@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using AuthSystem.Domain.Exceptions;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Exceptions;
 
 namespace AuthSystem.Domain.ValueObjects;

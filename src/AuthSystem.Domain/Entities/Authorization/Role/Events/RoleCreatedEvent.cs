@@ -5,7 +5,7 @@ namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
 /// <summary>
 /// رویداد ایجاد نقش جدید
 /// </summary>
-public sealed class RoleCreatedEvent : DomainEventBase
+public sealed class RoleCreatedEvent : DomainEvent
 {
     public RoleCreatedEvent(Guid roleId, string name, string description, bool isDefault, bool isSystemRole)
     {

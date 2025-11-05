@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Entities;
 using AuthSystem.Domain.Common.Rules;
 using AuthSystem.Domain.Entities.UserAggregate.Events;
 using AuthSystem.Domain.Entities.UserAggregate.Rules;

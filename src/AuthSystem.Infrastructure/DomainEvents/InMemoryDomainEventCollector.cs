@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using AuthSystem.Application.Abstractions;
-using AuthSystem.Domain.Common.Entities;
-using AuthSystem.Domain.Common.Events;
+using AuthSystem.Application.Common.Abstractions.DomainEvents;
+using AuthSystem.Domain.Common.Abstractions;
 
 namespace AuthSystem.Infrastructure.DomainEvents;
 
@@ -11,27 +10,24 @@ internal sealed class InMemoryDomainEventCollector : IDomainEventCollector
 {
     private readonly ConcurrentQueue<IDomainEvent> _events = new();
 
-    public void CollectFromAggregate(AggregateRoot<Guid> aggregate)
+    public void CollectFrom(params IHasDomainEvents[] aggregates)
     {
-        if (aggregate is null)
+        foreach (var aggregate in aggregates)
         {
-            throw new ArgumentNullException(nameof(aggregate));
-        }
+            if (aggregate is null)
+            {
+                continue;
+            }
 
-        if (!aggregate.HasDomainEvents())
-        {
-            return;
+            var pendingEvents = aggregate.DequeueDomainEvents();
+            foreach (var domainEvent in pendingEvents)
+            {
+                _events.Enqueue(domainEvent);
+            }
         }
-
-        foreach (var domainEvent in aggregate.DomainEvents)
-        {
-            _events.Enqueue(domainEvent);
-        }
-
-        aggregate.ClearDomainEvents();
     }
 
-    public IReadOnlyCollection<IDomainEvent> DrainEvents()
+    public IReadOnlyCollection<IDomainEvent> DequeueAll()
     {
         var drained = new List<IDomainEvent>();
         while (_events.TryDequeue(out var domainEvent))
@@ -39,6 +35,6 @@ internal sealed class InMemoryDomainEventCollector : IDomainEventCollector
             drained.Add(domainEvent);
         }
 
-        return drained.AsReadOnly();
+        return drained;
     }
 }

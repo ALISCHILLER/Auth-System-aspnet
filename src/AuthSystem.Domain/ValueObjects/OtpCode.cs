@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.ValueObjects;

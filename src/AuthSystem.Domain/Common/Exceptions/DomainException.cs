@@ -1,28 +1,29 @@
 ﻿using System;
+using AuthSystem.Domain.Common.Errors;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuthSystem.Domain.Common.Exceptions;
 
-/// <summary>
-/// کلاس پایه برای استثناهای دامنه
-/// </summary>
+
 public abstract class DomainException : Exception
 {
-    /// <summary>
-    /// کد خطا برای پردازش‌های بعدی
-    /// </summary>
+
+    protected DomainException(string message)
+       : base(message)
+    {
+    }
+
+    protected DomainException(string message, Exception innerException)
+       : base(message, innerException)
+    {
+    }
+
+    protected DomainException(DomainError error)
+      : base(error.Message)
+    {
+        Error = error;
+    }
     public virtual string ErrorCode => GetType().Name;
 
-    /// <summary>
-    /// سازنده با پیام خطا
-    /// </summary>
-    protected DomainException(string message) : base(message)
-    {
-    }
-
-    /// <summary>
-    /// سازنده با پیام خطا و استثنای داخلی
-    /// </summary>
-    protected DomainException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
+    public DomainError? Error { get; }
 }

@@ -1,30 +1,51 @@
+using AuthSystem.Api.Extensions;
+using AuthSystem.Api.Filters;
 using AuthSystem.Application;
 using AuthSystem.Infrastructure;
 using Serilog;
-
-
+using Serilog.Events;
+using AuthSystem.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Serilog
-builder.Host.UseSerilog((context, services, configuration) =>
-    configuration
-        .ReadFrom.Configuration(context.Configuration)
-   // Layer registrations
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
+
+builder.Host.UseSerilog();
+
 builder.Services
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration, builder.Environment);
 
-// MVC + Swagger + HealthChecks
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidateModelAttribute>();
+});
 
+builder.Services.AddApiVersioningAndExplorer();
+builder.Services.AddSwaggerDocs(builder.Configuration);
+builder.Services.AddApiAuth(builder.Configuration);
+builder.Services.AddApiProblemDetails();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
+
+builder.Services.AddInfrastructureHealthChecks();
 
 var app = builder.Build();
 
 app.UseSerilogRequestLogging();
+app.UseCors();
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -34,13 +55,13 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+app.UseApiProblemDetails();
 
-// Enable these when real authentication is wired up.
-// app.UseAuthentication();
-// app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 
-// نگاشت کنترلرها به مسیرها
+
 app.MapControllers();
-app.MapHealthChecks("/health");
-// اجرای اپلیکیشن
+app.MapHealthChecks("/health").AllowAnonymous();
+
 app.Run();

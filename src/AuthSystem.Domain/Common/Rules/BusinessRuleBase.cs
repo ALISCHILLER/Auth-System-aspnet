@@ -1,4 +1,6 @@
-﻿namespace AuthSystem.Domain.Common.Rules;
+﻿using AuthSystem.Domain.Common.Abstractions;
+
+namespace AuthSystem.Domain.Common.Rules;
 
 /// <summary>
 /// کلاس پایه برای قوانین کسب‌وکار
@@ -19,4 +21,6 @@ public abstract class BusinessRuleBase : IBusinessRule
     /// بررسی آیا قانون نقض شده است
     /// </summary>
     public abstract bool IsBroken();
+
+    string IBusinessRule.Code => ErrorCode;
 }

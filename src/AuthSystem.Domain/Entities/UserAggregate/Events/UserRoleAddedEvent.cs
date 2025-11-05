@@ -5,7 +5,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// رویداد افزودن نقش به کاربر
 /// </summary>
-public sealed class UserRoleAddedEvent : DomainEventBase
+public sealed class UserRoleAddedEvent : DomainEvent
 {
     public UserRoleAddedEvent(Guid userId, Guid roleId, string roleName)
     {

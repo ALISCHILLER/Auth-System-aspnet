@@ -1,11 +1,12 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
 
 /// <summary>
 /// رویداد به‌روزرسانی نقش
 /// </summary>
-public sealed class RoleUpdatedEvent : DomainEventBase
+public sealed class RoleUpdatedEvent : DomainEvent
 {
     public RoleUpdatedEvent(Guid roleId, string name, string description)
     {

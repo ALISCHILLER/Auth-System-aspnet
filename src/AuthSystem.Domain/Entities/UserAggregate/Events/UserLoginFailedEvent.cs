@@ -1,11 +1,12 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 
 /// <summary>
 /// رویداد تلاش ناموفق برای ورود کاربر
 /// </summary>
-public sealed class UserLoginFailedEvent : DomainEventBase
+public sealed class UserLoginFailedEvent : DomainEvent
 {
     public UserLoginFailedEvent(Guid userId, string reason, int failedAttempts)
     {

@@ -1,11 +1,12 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 
 /// <summary>
 /// رویداد غیرفعال شدن احراز هویت دو عاملی برای کاربر
 /// </summary>
-public sealed class TwoFactorDisabledEvent : DomainEventBase
+public sealed class TwoFactorDisabledEvent : DomainEvent
 {
     public TwoFactorDisabledEvent(Guid userId)
     {

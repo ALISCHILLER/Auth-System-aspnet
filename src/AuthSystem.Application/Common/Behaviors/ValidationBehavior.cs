@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using AuthSystem.Application.Common.Exceptions;
 using FluentValidation;
 using MediatR;
-using AuthSystem.Application.Common.Exceptions;
 
 namespace AuthSystem.Application.Common.Behaviors;
 
@@ -11,20 +13,23 @@ public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidat
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        if (!validators.Any())
+        if (validators.Any())
         {
-            return await next();
+            var context = new ValidationContext<TRequest>(request);
+            var validationResults = await Task
+                .WhenAll(validators.Select(validator => validator.ValidateAsync(context, cancellationToken)))
+                .ConfigureAwait(false);
+
+            var failures = validationResults
+                 .SelectMany(result => result.Errors)
+                 .Where(failure => failure is not null)
+                 .ToArray();
+            if (failures.Length > 0)
+            {
+                throw new AppValidationException(failures);
+            }
         }
 
-        var context = new ValidationContext<TRequest>(request);
-        var validationResults = await Task.WhenAll(validators.Select(validator => validator.ValidateAsync(context, cancellationToken)));
-        var failures = validationResults.SelectMany(result => result.Errors).Where(failure => failure is not null).ToArray();
-
-        if (failures.Length > 0)
-        {
-            throw new ValidationException(failures);
-        }
-
-        return await next();
+        return await next().ConfigureAwait(false);
     }
 }

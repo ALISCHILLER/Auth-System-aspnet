@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AuthSystem.Domain.Common.Abstractions;
 
 namespace AuthSystem.Domain.Common.Rules;
 
-/// <summary>
-/// Base implementation for asynchronous business rules.
-/// </summary>
+
 public abstract class AsyncBusinessRuleBase : IAsyncBusinessRule
 {
    

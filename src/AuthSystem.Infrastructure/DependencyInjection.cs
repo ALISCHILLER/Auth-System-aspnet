@@ -1,50 +1,75 @@
-﻿using AuthSystem.Application.Abstractions;
-using AuthSystem.Application.Common.Interfaces;
+﻿using System;
+using AuthSystem.Application.Common.Abstractions.Authorization;
+using AuthSystem.Application.Common.Abstractions.DomainEvents;
+using AuthSystem.Application.Common.Abstractions.Messaging;
+using AuthSystem.Application.Common.Abstractions.Persistence;
+using AuthSystem.Application.Common.Abstractions.Security;
+using AuthSystem.Infrastructure.Auth;
 using AuthSystem.Infrastructure.DomainEvents;
+using AuthSystem.Infrastructure.Extensions;
 using AuthSystem.Infrastructure.Identity;
-using AuthSystem.Infrastructure.Messaging;
-using AuthSystem.Infrastructure.Persistence.InMemory;
+using AuthSystem.Infrastructure.Messaging.Email;
+using AuthSystem.Infrastructure.Messaging.Sms;
+using AuthSystem.Infrastructure.Options;
+using AuthSystem.Infrastructure.Persistence.Sql;
+using AuthSystem.Infrastructure.Persistence.Sql.Repositories;
 using AuthSystem.Infrastructure.Tokens;
 using AuthSystem.Infrastructure.Verification;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace AuthSystem.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration? configuration = null)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        services.AddSingleton<InMemoryDatabase>();
+        services.Configure<TokenOptions>(configuration.GetSection(TokenOptions.SectionName));
+        services.Configure<EmailOptions>(configuration.GetSection(EmailOptions.SectionName));
+        services.Configure<SmsOptions>(configuration.GetSection(SmsOptions.SectionName));
+
+        services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            var connectionString = configuration.GetConnectionString("Default")
+                ?? throw new InvalidOperationException("Connection string 'Default' is missing.");
+
+            options.UseSqlServer(connectionString, sql =>
+            {
+                sql.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                sql.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            });
+
+            if (environment.IsDevelopment())
+            {
+                options.EnableSensitiveDataLogging();
+            }
+        });
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<IPermissionService, PermissionService>();
 
         services.AddScoped<IDomainEventCollector, InMemoryDomainEventCollector>();
         services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
-        services.AddScoped<IUnitOfWork, InMemoryUnitOfWork>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IApplicationDbContext, SqlApplicationDbContext>();
 
-        services.AddScoped<IUserRepository, InMemoryUserRepository>();
-        services.AddScoped<IRoleRepository, InMemoryRoleRepository>();
-        services.AddScoped<IApplicationDbContext, InMemoryApplicationDbContext>();
 
-        services.AddScoped<IVerificationCodeService, InMemoryVerificationCodeService>();
-        services.AddSingleton<IEmailSender, NoOpEmailSender>();
-        services.AddSingleton<ISmsSender, NoOpSmsSender>();
+        services.AddScoped<ITokenService, JwtTokenService>();
+        services.AddScoped<RefreshTokenHasher>();
 
-        services.AddScoped<CurrentUserContext>();
-        services.AddScoped<CurrentUserService>();
-        services.AddScoped<ICurrentUserService>(sp => sp.GetRequiredService<CurrentUserService>());
-        services.AddScoped<ICurrentUserContextAccessor>(sp => sp.GetRequiredService<CurrentUserService>());
 
-        services.AddSingleton<ITokenService, InMemoryTokenService>();
-        services.AddOptions<TokenOptions>();
+        services.AddScoped<IEmailSender, NoOpEmailSender>();
+        services.AddScoped<ISmsSender, NoOpSmsSender>();
 
-        if (configuration is not null)
-        {
-            services.Configure<TokenOptions>(configuration.GetSection("Authentication:Tokens"));
-        }
-        else
-        {
-            services.Configure<TokenOptions>(_ => { });
-        }
+        services.AddScoped<IVerificationCodeService, SqlVerificationCodeService>();
+
+        services.AddInfraHealthChecks();
 
         return services;
     }

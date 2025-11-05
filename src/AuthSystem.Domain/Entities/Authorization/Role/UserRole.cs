@@ -1,13 +1,13 @@
 ﻿using System;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Common.Base;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role;
 
 /// <summary>
 /// Entity linking a user to a role.
 /// </summary>
-public class UserRole : BaseEntity<Guid>
+public class UserRole : Entity<Guid>
 {
 
     public Guid UserId { get; private set; }

@@ -1,6 +1,6 @@
 ﻿using System;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role;
@@ -8,7 +8,7 @@ namespace AuthSystem.Domain.Entities.Authorization.Role;
 /// <summary>
 /// Entity representing a permission assigned to a role.
 /// </summary>
-public class RolePermission : BaseEntity<Guid>
+public class RolePermission : Entity<Guid>
 {
     public Guid RoleId { get; private set; }
     public PermissionType PermissionType { get; private set; }

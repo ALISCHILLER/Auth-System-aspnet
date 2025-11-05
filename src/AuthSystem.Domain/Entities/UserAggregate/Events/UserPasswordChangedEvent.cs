@@ -7,7 +7,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// Event emitted when a user's password is changed.
 /// </summary>
-public sealed class UserPasswordChangedEvent : DomainEventBase
+public sealed class UserPasswordChangedEvent : DomainEvent
 {
     public UserPasswordChangedEvent(Guid userId, PasswordHash passwordHash)
     {

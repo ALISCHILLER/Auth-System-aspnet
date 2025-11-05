@@ -1,48 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using AuthSystem.Application.Abstractions;
+using AuthSystem.Application.Common.Abstractions.DomainEvents;
 using AuthSystem.Application.Common.Events;
-using AuthSystem.Domain.Common.Events;
+using AuthSystem.Domain.Common.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace AuthSystem.Infrastructure.DomainEvents;
 
 internal sealed class DomainEventDispatcher(
-    IDomainEventCollector collector,
     IPublisher publisher,
     ILogger<DomainEventDispatcher> logger) : IDomainEventDispatcher
 {
-    public async Task DispatchPendingDomainEventsAsync(CancellationToken ct)
+    public async Task DispatchAsync(IEnumerable<IDomainEvent> events, CancellationToken cancellationToken = default)
     {
-        var events = collector.DrainEvents();
         foreach (var domainEvent in events)
         {
             try
             {
-                await PublishAsync(domainEvent, ct).ConfigureAwait(false);
-                domainEvent.MarkAsPublished();
+                var notificationType = typeof(DomainEventNotification<>).MakeGenericType(domainEvent.GetType());
+                var notification = Activator.CreateInstance(notificationType, domainEvent)
+                    ?? throw new InvalidOperationException($"Unable to create notification for {domainEvent.GetType().Name}");
+
+                await publisher.Publish((INotification)notification, cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                logger.LogError(ex, "Failed to dispatch domain event {EventId} ({EventType})", domainEvent.EventId, domainEvent.GetType().Name);
+                logger.LogError(exception, "Failed to dispatch domain event {EventId} ({EventType})", domainEvent.EventId, domainEvent.GetType().Name);
                 throw;
             }
         }
-
-        if (events.Count > 0)
-        {
-            logger.LogDebug("Dispatched {Count} domain events", events.Count);
-        }
-    }
-
-    private Task PublishAsync(IDomainEvent domainEvent, CancellationToken ct)
-    {
-        var notificationType = typeof(DomainEventNotification<>).MakeGenericType(domainEvent.GetType());
-        var notification = Activator.CreateInstance(notificationType, domainEvent)
-            ?? throw new InvalidOperationException($"Failed to create domain event notification for {domainEvent.GetType().Name}");
-
-        return publisher.Publish((INotification)notification, ct);
     }
 }

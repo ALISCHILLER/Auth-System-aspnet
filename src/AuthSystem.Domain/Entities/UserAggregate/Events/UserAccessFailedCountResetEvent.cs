@@ -6,7 +6,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// Event emitted when the failed access counter of a user is reset.
 /// </summary>
-public sealed class UserAccessFailedCountResetEvent : DomainEventBase
+public sealed class UserAccessFailedCountResetEvent : DomainEvent
 {
     public UserAccessFailedCountResetEvent(Guid userId, int previousFailedCount)
     {

@@ -6,7 +6,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// Event emitted whenever a social login provider is linked to a user.
 /// </summary>
-public sealed class UserSocialLoginLinkedEvent : DomainEventBase
+public sealed class UserSocialLoginLinkedEvent : DomainEvent
 {
     public UserSocialLoginLinkedEvent(Guid userId, string provider, string providerUserId)
     {

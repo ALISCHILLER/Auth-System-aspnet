@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Common.Clock;
 

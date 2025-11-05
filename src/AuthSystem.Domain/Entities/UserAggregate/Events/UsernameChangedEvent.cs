@@ -6,7 +6,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// Event emitted when a user's username is changed.
 /// </summary>
-public sealed class UsernameChangedEvent : DomainEventBase
+public sealed class UsernameChangedEvent : DomainEvent
 {
     public UsernameChangedEvent(Guid userId, string? previousUsername, string newUsername)
     {

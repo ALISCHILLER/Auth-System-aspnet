@@ -5,7 +5,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Events;
 /// <summary>
 /// رویداد حذف نقش از کاربر
 /// </summary>
-public sealed class UserRoleRemovedEvent : DomainEventBase
+public sealed class UserRoleRemovedEvent : DomainEvent
 {
     public UserRoleRemovedEvent(Guid userId, Guid roleId, string roleName)
     {

@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AuthSystem.Application.Abstractions;
+using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Domain.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace AuthSystem.Infrastructure.Identity;
 
-internal sealed class CurrentUserService(CurrentUserContext context) : ICurrentUserService, ICurrentUserContextAccessor
+internal sealed class CurrentUserService(IHttpContextAccessor httpContextAccessor) : ICurrentUserService
 {
-    public Guid? UserId => context.UserId;
+    public Guid? UserId => httpContextAccessor.HttpContext?.User.GetUserId();
 
-    public Task<bool> HasPermissionAsync(PermissionType permission, CancellationToken ct)
+    public Task<IReadOnlyCollection<PermissionType>> GetPermissionsAsync(CancellationToken cancellationToken)
     {
-        var hasPermission = context.Permissions.Contains(permission);
-        return Task.FromResult(hasPermission);
-    }
+        var principal = httpContextAccessor.HttpContext?.User;
+        if (principal is null)
+        {
+            return Task.FromResult<IReadOnlyCollection<PermissionType>>(Array.Empty<PermissionType>());
+        }
 
-    public void SetCurrentUser(Guid? userId, IEnumerable<PermissionType> permissions)
-        => context.SetUser(userId, permissions);
+        var permissions = principal.GetPermissions();
+        return Task.FromResult<IReadOnlyCollection<PermissionType>>(permissions.ToArray());
+    }
 }

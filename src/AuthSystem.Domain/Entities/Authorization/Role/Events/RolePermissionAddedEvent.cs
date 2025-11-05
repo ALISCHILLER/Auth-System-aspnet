@@ -1,4 +1,5 @@
-﻿using AuthSystem.Domain.Common.Events;
+﻿using System;
+using AuthSystem.Domain.Common.Events;
 using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
@@ -6,7 +7,7 @@ namespace AuthSystem.Domain.Entities.Authorization.Role.Events;
 /// <summary>
 /// Event emitted when a permission is added to a role.
 /// </summary>
-public sealed class RolePermissionAddedEvent : DomainEventBase
+public sealed class RolePermissionAddedEvent : DomainEvent
 {
     public RolePermissionAddedEvent(Guid roleId, Guid rolePermissionId, PermissionType permissionType)
     {

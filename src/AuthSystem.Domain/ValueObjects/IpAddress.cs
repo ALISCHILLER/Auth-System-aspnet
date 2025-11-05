@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using AuthSystem.Domain.Exceptions;
 using AuthSystem.Domain.Enums;
-using AuthSystem.Domain.Common.Entities;
+using AuthSystem.Domain.Common.Base;
 
 namespace AuthSystem.Domain.ValueObjects;
 

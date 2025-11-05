@@ -54,5 +54,20 @@ public enum PermissionType
     /// <summary>
     /// مجوز مدیریت امنیت (SecurityManagement)
     /// </summary>
-    SecurityManagement = 10
+    SecurityManagement = 10,
+
+    /// <summary>
+    /// مجوز ایجاد کاربر جدید (UserCreate)
+    /// </summary>
+    UserCreate = 11,
+
+    /// <summary>
+    /// مجوز ایجاد نقش جدید (RoleCreate)
+    /// </summary>
+    RoleCreate = 12,
+
+    /// <summary>
+    /// مجوز تخصیص نقش به کاربر (RoleAssign)
+    /// </summary>
+    RoleAssign = 13
 }
