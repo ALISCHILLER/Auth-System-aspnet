@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Application.Features.Users.Commands.RegisterUser;
 using AuthSystem.Application.Features.Users.Queries.GetUserById;
-using AuthSystem.Application.Users.Commands.RegisterUser.Contracts;
-using AuthSystem.Application.Users.Commands.RegisterUser;
-using AuthSystem.Application.Users.Queries.GetUserById.Contracts;
-using AuthSystem.Application.Users.Queries.GetUserById;
+using AuthSystem.Shared.Contracts;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSystem.Api.Controllers;
 
+
+/// <summary>
+/// Manages user-centric operations such as registration and profile retrieval.
+/// </summary>
 [ApiController]
 [Authorize]
 [ApiVersion("1.0")]
@@ -28,20 +29,32 @@ public sealed class UsersController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Registers a new user and returns the created resource.
+    /// </summary>
     [HttpPost]
     [AllowAnonymous]
-    [ProducesResponseType(typeof(RegisterUserResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ApiResponse<RegisterUserResponse>), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register([FromBody] RegisterUserCommand command, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(command, cancellationToken).ConfigureAwait(false);
-        return CreatedAtAction(nameof(GetById), new { version = "1.0", userId = response.Id }, response);
+        var envelope = ApiResponse<RegisterUserResponse>.Created(response, HttpContext.TraceIdentifier);
+        return CreatedAtAction(
+            nameof(GetById),
+            new { version = "1.0", userId = response.Id },
+            envelope);
     }
 
+    /// <summary>
+    /// Fetches a user by the unique identifier.
+    /// </summary>
     [HttpGet("{userId:guid}")]
-    [ProducesResponseType(typeof(GetUserByIdResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<GetUserByIdResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid userId, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetUserByIdQuery(userId), cancellationToken).ConfigureAwait(false);
-        return Ok(response);
+        return Ok(ApiResponse<GetUserByIdResponse>.Ok(response, HttpContext.TraceIdentifier));
     }
 }

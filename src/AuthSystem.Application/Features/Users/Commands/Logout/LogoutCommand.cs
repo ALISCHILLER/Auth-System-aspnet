@@ -3,4 +3,8 @@ using AuthSystem.Application.Common.Markers;
 
 namespace AuthSystem.Application.Features.Users.Commands.Logout;
 
-public sealed record LogoutCommand(string RefreshToken) : IRequest<Unit>, ITransactionalRequest;
+public sealed record LogoutCommand(
+    string RefreshToken,
+    string? TenantId,
+    string? IpAddress,
+    string? UserAgent) : IRequest<Unit>, ITransactionalRequest;

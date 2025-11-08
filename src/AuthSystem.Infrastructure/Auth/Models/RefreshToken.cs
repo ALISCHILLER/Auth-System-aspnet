@@ -11,6 +11,7 @@ public sealed class RefreshToken
     public string? ReplacedByTokenHash { get; set; }
     public string? Ip { get; set; }
     public string? UserAgent { get; set; }
+    public string? TenantId { get; set; }
 
     public bool IsRevoked => RevokedAtUtc is not null;
     public bool IsExpired => ExpiresAtUtc <= DateTime.UtcNow;

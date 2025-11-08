@@ -25,8 +25,10 @@ internal sealed class JwtTokenService(
 {
     private readonly TokenOptions _options = tokenOptions.Value;
 
-    public Task<string> GenerateAccessTokenAsync(Guid userId, IEnumerable<string> permissions, CancellationToken cancellationToken)
+    public Task<string> GenerateAccessTokenAsync(Guid userId, IEnumerable<string> permissions, string? tenantId, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SigningKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expires = DateTime.UtcNow.AddMinutes(_options.AccessTokenMinutes);
@@ -37,6 +39,11 @@ internal sealed class JwtTokenService(
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(ClaimTypes.NameIdentifier, userId.ToString())
         };
+
+        if (!string.IsNullOrWhiteSpace(tenantId))
+        {
+            claims.Add(new("tenant", tenantId!));
+        }
 
         claims.AddRange(permissions.Select(permission => new Claim("perm", permission)));
 
@@ -51,8 +58,10 @@ internal sealed class JwtTokenService(
         return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
     }
 
-    public async Task<string> GenerateRefreshTokenAsync(Guid userId, string? ipAddress, string? userAgent, CancellationToken cancellationToken)
+    public async Task<string> GenerateRefreshTokenAsync(Guid userId, string? ipAddress, string? userAgent, string? tenantId, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var rawToken = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
         var hashed = hasher.Hash(rawToken);
 
@@ -63,6 +72,7 @@ internal sealed class JwtTokenService(
             Hash = hashed,
             Ip = ipAddress,
             UserAgent = userAgent,
+            TenantId = tenantId,
             CreatedAtUtc = DateTime.UtcNow,
             ExpiresAtUtc = DateTime.UtcNow.AddDays(_options.RefreshTokenDays)
         };
@@ -75,6 +85,8 @@ internal sealed class JwtTokenService(
 
     public async Task<bool> RevokeRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         if (string.IsNullOrWhiteSpace(refreshToken))
         {
             return false;
@@ -92,20 +104,22 @@ internal sealed class JwtTokenService(
         return true;
     }
 
-    public async Task<(bool Success, Guid UserId)> ValidateRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken)
+    public async Task<(bool Success, Guid UserId, string? TenantId)> ValidateRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken)
     {
+
+        cancellationToken.ThrowIfCancellationRequested();
         if (string.IsNullOrWhiteSpace(refreshToken))
         {
-            return (false, Guid.Empty);
+            return (false, Guid.Empty, null);
         }
 
         var hash = hasher.Hash(refreshToken);
         var entity = await dbContext.RefreshTokens.AsNoTracking().FirstOrDefaultAsync(x => x.Hash == hash, cancellationToken).ConfigureAwait(false);
         if (entity is null || entity.IsExpired || entity.RevokedAtUtc is not null)
         {
-            return (false, Guid.Empty);
+            return (false, Guid.Empty, null);
         }
 
-        return (true, entity.UserId);
+        return (true, entity.UserId, entity.TenantId);
     }
 }

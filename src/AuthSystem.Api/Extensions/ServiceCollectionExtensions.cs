@@ -1,6 +1,9 @@
-﻿using AuthSystem.Infrastructure.Extensions;
+﻿using AuthSystem.Api.RealTime;
+using AuthSystem.Application.Common.Abstractions.Monitoring;
+using AuthSystem.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AuthSystem.Api.Extensions;
@@ -28,6 +31,13 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddInfrastructureHealthChecks(this IServiceCollection services)
     {
         services.AddInfraHealthChecks();
+        return services;
+    }
+    public static IServiceCollection AddRealTimeSecurityEvents(this IServiceCollection services)
+    {
+        services.AddSignalR();
+        services.AddScoped<SignalRSecurityEventPublisher>();
+        services.AddScoped<ISecurityEventPublisher>(provider => provider.GetRequiredService<SignalRSecurityEventPublisher>());
         return services;
     }
 }

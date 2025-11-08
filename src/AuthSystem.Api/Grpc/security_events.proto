@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthSystem.Api.Grpc";
+
+package authsystem.security;
+
+import "google/protobuf/timestamp.proto";
+
+service SecurityEvents {
+  rpc ListSecurityEvents(SecurityEventsRequest) returns (SecurityEventsResponse);
+}
+
+message SecurityEventsRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string tenant_id = 3;
+  string event_type = 4;
+}
+
+message SecurityEventsResponse {
+  repeated SecurityEvent items = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int32 total_count = 4;
+}
+
+message SecurityEvent {
+  string id = 1;
+  string event_type = 2;
+  string user_id = 3;
+  string user_name = 4;
+  string tenant_id = 5;
+  google.protobuf.Timestamp occurred_at_utc = 6;
+  string ip_address = 7;
+  string user_agent = 8;
+  string description = 9;
+  map<string, string> metadata = 10;
+}

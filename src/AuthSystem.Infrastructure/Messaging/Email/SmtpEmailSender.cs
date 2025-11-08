@@ -1,16 +1,15 @@
-﻿using System.Net;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
 using AuthSystem.Application.Common.Abstractions.Messaging;
 using AuthSystem.Infrastructure.Options;
-using Microsoft.CodeAnalysis.Emit;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace AuthSystem.Infrastructure.Messaging.Email;
 
 internal sealed class SmtpEmailSender(
+    ISmtpClientFactory smtpClientFactory,
     IOptions<EmailOptions> options,
     ILogger<SmtpEmailSender> logger) : IEmailSender
 {
@@ -18,20 +17,20 @@ internal sealed class SmtpEmailSender(
 
     public async Task SendAsync(string to, string subject, string htmlBody, CancellationToken cancellationToken)
     {
-        using var client = new SmtpClient(_options.Host, _options.Port)
-        {
-            EnableSsl = _options.EnableSsl,
-            Credentials = new NetworkCredential(_options.Username, _options.Password)
-        };
+        using var client = smtpClientFactory.Create(_options);
 
-        using var message = new MailMessage(_options.FromAddress, to, subject, htmlBody)
+        var fromAddress = new MailAddress(_options.From, _options.DisplayName ?? _options.From);
+
+        using var message = new MailMessage(fromAddress, new MailAddress(to))
         {
+            Subject = subject,
+            Body = htmlBody,
             IsBodyHtml = true
         };
 
         try
         {
-            await client.SendMailAsync(message, cancellationToken).ConfigureAwait(false);
+            await client.SendAsync(message, cancellationToken).ConfigureAwait(false);
         }
         catch (SmtpException exception)
         {

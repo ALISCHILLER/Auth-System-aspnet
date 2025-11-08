@@ -13,12 +13,14 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.10" />
-    <PackageReference Include="MailKit" Version="4.14.1" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.10" />
+    <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AuthSystem.Application\AuthSystem.Application.csproj" />
     <ProjectReference Include="..\AuthSystem.Domain\AuthSystem.Domain.csproj" />
+	<ProjectReference Include="..\AuthSystem.Shared\AuthSystem.Shared.csproj" />
   </ItemGroup>
 </Project>

@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{8B9C0D1E-2F3A-4B5C-6D7E-8F9A0B1C2D3E}|src\\AuthSystem.Api\\AuthSystem.Api.csproj|e:\\project-zar\\custom\\asp\\new\\auth-system-aspnet\\src\\authsystem.api\\controllers\\healthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B9C0D1E-2F3A-4B5C-6D7E-8F9A0B1C2D3E}|src\\AuthSystem.Api\\AuthSystem.Api.csproj|solutionrelative:src\\authsystem.api\\controllers\\healthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,24 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HealthController.cs",
-              "DocumentMoniker": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Api\\Controllers\\HealthController.cs",
-              "RelativeDocumentMoniker": "src\\AuthSystem.Api\\Controllers\\HealthController.cs",
-              "ToolTip": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Api\\Controllers\\HealthController.cs",
-              "RelativeToolTip": "src\\AuthSystem.Api\\Controllers\\HealthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-02T05:04:54.402Z",
-              "EditorCaption": ""
             }
           ]
         }

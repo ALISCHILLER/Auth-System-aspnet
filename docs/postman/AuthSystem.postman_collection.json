@@ -1,0 +1,67 @@
+{
+  "info": {
+    "name": "Auth System API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Sample requests for Auth System REST, SCIM, and webhook testing."
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Tenant-Id", "value": "{{tenant}}" }
+        ],
+        "url": { "raw": "{{host}}/api/v1/auth/login", "host": ["{{host}}"], "path": ["api", "v1", "auth", "login"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"P@ssw0rd!\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Audit - Security Events",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "X-Tenant-Id", "value": "{{tenant}}" }
+        ],
+        "url": {
+          "raw": "{{host}}/api/v1/audit/security-events?page=1&pageSize=25",
+          "host": ["{{host}}"],
+          "path": ["api", "v1", "audit", "security-events"],
+          "query": [
+            { "key": "page", "value": "1" },
+            { "key": "pageSize", "value": "25" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SCIM - Users",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "X-Tenant-Id", "value": "{{tenant}}" }
+        ],
+        "url": {
+          "raw": "{{host}}/api/scim/v2/Users?startIndex=1&count=25",
+          "host": ["{{host}}"],
+          "path": ["api", "scim", "v2", "Users"],
+          "query": [
+            { "key": "startIndex", "value": "1" },
+            { "key": "count", "value": "25" }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "host", "value": "https://localhost:5001" },
+    { "key": "tenant", "value": "demo" },
+    { "key": "token", "value": "" }
+  ]
+}

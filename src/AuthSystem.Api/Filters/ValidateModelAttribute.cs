@@ -16,12 +16,17 @@ public sealed class ValidateModelAttribute : ActionFilterAttribute
                     pair => pair.Key,
                     pair => pair.Value!.Errors.Select(error => error.ErrorMessage).ToArray());
 
-            context.Result = new BadRequestObjectResult(new
+            var problem = new ValidationProblemDetails(errors)
             {
-                title = "Validation failed",
-                status = 400,
-                errors
-            });
+                Title = "Validation failed",
+                Status = StatusCodes.Status400BadRequest,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                Detail = "The request payload did not pass validation rules.",
+                Instance = context.HttpContext.Request.Path
+            };
+            problem.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
+
+            context.Result = new BadRequestObjectResult(problem);
         }
     }
 }
