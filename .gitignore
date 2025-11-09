@@ -1,0 +1,54 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio and Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+*.backup
+*.Backup.*
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Azure Functions local settings
+local.settings.json
+
+# Generated files
+*.gpState
+*.db
+*.db-shm
+*.db-wal
+
+# Rider/JetBrains caches
+.idea/
+
+# Others
+*.vspscc
+*.vssscc
