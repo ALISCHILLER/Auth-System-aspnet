@@ -1,4 +1,8 @@
-﻿using AuthSystem.Domain.Entities.Authorization.Role;
+﻿using AuthSystem.Domain.Entities.UserAggregate;
+using Microsoft.EntityFrameworkCore;
+
+usinusing AuthSystem.Domain.Entities.Authorization.Role;
+using AuthSystem.Domain.Entities.UserAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,5 +20,10 @@ internal sealed class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
         builder.Property(x => x.Username).HasMaxLength(128).IsRequired();
         builder.Property(x => x.RoleName).HasMaxLength(128).IsRequired();
         builder.HasIndex(x => new { x.UserId, x.RoleId }).IsUnique();
+
+        builder.HasOne<User>()
+           .WithMany()
+           .HasForeignKey(x => x.UserId)
+           .OnDelete(DeleteBehavior.Cascade);
     }
 }

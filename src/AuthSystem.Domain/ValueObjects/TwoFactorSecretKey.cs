@@ -5,7 +5,6 @@ using System.Text;
 using AuthSystem.Domain.Exceptions;
 using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Common.Base;
-using AuthSystem.Domain.Exceptions;
 
 namespace AuthSystem.Domain.ValueObjects;
 
@@ -17,23 +16,27 @@ public sealed class TwoFactorSecretKey : ValueObject
     
     private const int SecretKeyLength = 20;
 
-   
     private const string DefaultIssuer = "AuthSystem";
+
     private const string Base32Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+    public string Value { get; private set; }
+    public string Issuer { get; private set; }
 
-    
-    public string Value { get; }
 
-  
-    public string Issuer { get; }
-
-    
-    public DateTime CreatedAt { get; }
+    public DateTime CreatedAt { get; private set; }
 
     public bool IsActive { get; private set; }
 
     
     public DateTime? LastUsedAt { get; private set; }
+
+    private TwoFactorSecretKey()
+    {
+        Value = string.Empty;
+        Issuer = DefaultIssuer;
+        CreatedAt = DomainClock.Instance.UtcNow;
+    }
+
 
     private TwoFactorSecretKey(string value, string issuer, bool isActive = false, DateTime? createdAt = null)
     {
@@ -65,6 +68,11 @@ public sealed class TwoFactorSecretKey : ValueObject
         if (!IsValidBase32(value))
         {
             throw new InvalidTwoFactorSecretKeyException("فرمت کلید محرمانه نامعتبر است");
+        }
+
+        if (string.IsNullOrWhiteSpace(issuer))
+        {
+            issuer = DefaultIssuer;
         }
 
         var key = new TwoFactorSecretKey(value, issuer, isActive, createdAt)

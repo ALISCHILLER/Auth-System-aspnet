@@ -1,5 +1,4 @@
-﻿using System;
-using AuthSystem.Domain.Entities.UserAggregate;
+﻿using AuthSystem.Domain.Entities.UserAggregate;
 using AuthSystem.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -17,6 +16,9 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.FirstName).HasMaxLength(128).IsRequired();
         builder.Property(x => x.LastName).HasMaxLength(128).IsRequired();
         builder.Property(x => x.Username).HasMaxLength(128);
+        builder.HasIndex(x => x.Username)
+         .IsUnique()
+         .HasFilter("[Username] IS NOT NULL");
 
         builder.Property(x => x.Status).HasConversion<int>();
 
@@ -25,12 +27,18 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
                 email => email?.Value,
                 value => value is null ? null : Email.Create(value))
             .HasMaxLength(320);
+        builder.HasIndex(x => x.Email)
+           .IsUnique()
+           .HasFilter("[Email] IS NOT NULL");
 
         builder.Property(x => x.PhoneNumber)
             .HasConversion(
                 number => number?.Value,
                 value => value is null ? null : PhoneNumber.Create(value))
             .HasMaxLength(32);
+        builder.HasIndex(x => x.PhoneNumber)
+          .IsUnique()
+          .HasFilter("[PhoneNumber] IS NOT NULL");
 
         builder.Property(x => x.NationalCode)
             .HasConversion(
@@ -45,11 +53,37 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(512)
             .IsRequired();
 
-        builder.Property(x => x.TwoFactorSecretKey)
-            .HasConversion(
-                secret => secret?.Value,
-                value => value is null ? null : TwoFactorSecretKey.CreateFromExisting(value, "AuthSystem", isActive: true, DateTime.UtcNow))
-            .HasMaxLength(256);
+        builder.OwnsOne(x => x.TwoFactorSecretKey, navigationBuilder =>
+        {
+            navigationBuilder.Property(secret => secret.Value)
+                .HasColumnName("TwoFactorSecretKey")
+                .HasMaxLength(256)
+                .IsRequired(false);
+
+            navigationBuilder.Property(secret => secret.Issuer)
+                .HasColumnName("TwoFactorSecretKeyIssuer")
+                .HasMaxLength(256)
+                .IsRequired(false);
+
+            navigationBuilder.Property(secret => secret.CreatedAt)
+                .HasColumnName("TwoFactorSecretKeyCreatedAt")
+                .HasColumnType("datetime2(0)")
+                .IsRequired(false);
+
+            navigationBuilder.Property(secret => secret.IsActive)
+                .HasColumnName("TwoFactorSecretKeyIsActive")
+                .HasColumnType("bit")
+                .IsRequired(false);
+
+            navigationBuilder.Property(secret => secret.LastUsedAt)
+                .HasColumnName("TwoFactorSecretKeyLastUsedAt")
+                .HasColumnType("datetime2(0)")
+                .IsRequired(false);
+
+            navigationBuilder.WithOwner();
+        });
+
+        builder.Navigation(x => x.TwoFactorSecretKey).IsRequired(false);
 
         builder.Property(x => x.LastLoginAt);
         builder.Property(x => x.LockoutEnd);

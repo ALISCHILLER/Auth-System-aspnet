@@ -1,4 +1,5 @@
-﻿using AuthSystem.Infrastructure.Auth.Models;
+﻿using AuthSystem.Domain.Entities.UserAggregate;
+using AuthSystem.Infrastructure.Auth.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,5 +20,10 @@ internal sealed class RefreshTokenConfiguration : IEntityTypeConfiguration<Refre
         builder.Property(x => x.ExpiresAtUtc).IsRequired();
         builder.HasIndex(x => new { x.UserId, x.ExpiresAtUtc });
         builder.HasIndex(x => x.Hash).IsUnique();
+
+        builder.HasOne<User>()
+           .WithMany()
+           .HasForeignKey(x => x.UserId)
+           .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -14,6 +15,8 @@ internal sealed class SqlVerificationCodeService(ApplicationDbContext dbContext)
 {
     public async Task<string> IssueAsync(Guid userId, TimeSpan timeToLive, CancellationToken cancellationToken)
     {
+        await RemoveExpiredCodesAsync(cancellationToken).ConfigureAwait(false);
+
         var code = RandomNumberGenerator.GetInt32(100000, 999999).ToString();
         var hash = Hash(code);
 
@@ -32,6 +35,8 @@ internal sealed class SqlVerificationCodeService(ApplicationDbContext dbContext)
 
     public async Task<bool> ValidateAsync(Guid userId, string code, CancellationToken cancellationToken)
     {
+        await RemoveExpiredCodesAsync(cancellationToken).ConfigureAwait(false);
+
         var hash = Hash(code);
         var entity = await dbContext.VerificationCodes
             .FirstOrDefaultAsync(x => x.UserId == userId && x.CodeHash == hash && x.ConsumedAtUtc == null, cancellationToken)
@@ -49,6 +54,8 @@ internal sealed class SqlVerificationCodeService(ApplicationDbContext dbContext)
 
     public async Task InvalidateAsync(Guid userId, string code, CancellationToken cancellationToken)
     {
+        await RemoveExpiredCodesAsync(cancellationToken).ConfigureAwait(false);
+
         var hash = Hash(code);
         var entity = await dbContext.VerificationCodes
             .FirstOrDefaultAsync(x => x.UserId == userId && x.CodeHash == hash, cancellationToken)
@@ -61,6 +68,15 @@ internal sealed class SqlVerificationCodeService(ApplicationDbContext dbContext)
 
         entity.ConsumedAtUtc = DateTime.UtcNow;
         await dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+    }
+    private async Task RemoveExpiredCodesAsync(CancellationToken cancellationToken)
+    {
+        var now = DateTime.UtcNow;
+
+        await dbContext.VerificationCodes
+            .Where(x => x.ExpiresAtUtc <= now || x.ConsumedAtUtc != null)
+            .ExecuteDeleteAsync(cancellationToken)
+            .ConfigureAwait(false);
     }
 
     private static string Hash(string code)
