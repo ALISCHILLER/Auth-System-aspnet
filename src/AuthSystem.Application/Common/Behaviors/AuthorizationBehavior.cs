@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AuthSystem.Application.Common.Abstractions.Authorization;
 using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Exceptions;
+using AuthSystem.Domain.Enums;
 using MediatR;
 
 namespace AuthSystem.Application.Common.Behaviors;
 
 public sealed class AuthorizationBehavior<TRequest, TResponse>(
     ICurrentUserService currentUserService,
-    IPermissionService permissionService)
+   IPermissionService permissionService,
+    ICurrentUserPermissionCache permissionCache)
     : IPipelineBehavior<TRequest, TResponse>
         where TRequest : notnull
 {
@@ -24,11 +27,17 @@ public sealed class AuthorizationBehavior<TRequest, TResponse>(
                 throw new UnauthorizedAccessException("User is not authenticated.");
             }
 
-            var permissions = await permissionService
-                .GetPermissionsAsync(currentUserId.Value, cancellationToken)
-                .ConfigureAwait(false);
+            if (!permissionCache.TryGet(currentUserId.Value, out var cachedPermissions))
+            {
+                var permissions = await permissionService
+                    .GetPermissionsAsync(currentUserId.Value, cancellationToken)
+                    .ConfigureAwait(false);
 
-            if (!permissions.Contains(requirement.RequiredPermission))
+                cachedPermissions = permissions as IReadOnlySet<PermissionType> ?? new HashSet<PermissionType>(permissions);
+                permissionCache.Set(currentUserId.Value, cachedPermissions);
+            }
+
+            if (!cachedPermissions.Contains(requirement.RequiredPermission))
             {
                 throw new ForbiddenException($"Missing permission: {requirement.RequiredPermission}");
             }

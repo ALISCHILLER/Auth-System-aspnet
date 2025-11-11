@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "GHPF17Mwzj0=",
+  "dgSpecHash": "wyhAnLp+vM0=",
   "success": true,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\zar\\.nuget\\packages\\microsoft.codeanalysis.netanalyzers\\9.0.0\\microsoft.codeanalysis.netanalyzers.9.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.301\\microsoft.net.sdk.compilers.toolset.9.0.301.nupkg.sha512"
   ],
   "logs": []

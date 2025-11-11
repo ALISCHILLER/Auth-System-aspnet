@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using AuthSystem.Application.Common.Abstractions.Authorization;
+using AuthSystem.Application.Common.Abstractions.Diagnostics;
 using AuthSystem.Application.Common.Abstractions.DomainEvents;
 using AuthSystem.Application.Common.Abstractions.Identity;
 using AuthSystem.Application.Common.Abstractions.Messaging;
@@ -9,6 +10,7 @@ using AuthSystem.Application.Common.Abstractions.Persistence;
 using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Abstractions.Time;
 using AuthSystem.Infrastructure.Auth;
+using AuthSystem.Infrastructure.Diagnostics;
 using AuthSystem.Infrastructure.DomainEvents;
 using AuthSystem.Infrastructure.Extensions;
 using AuthSystem.Infrastructure.Identity;
@@ -29,8 +31,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Extensions.Http;
-yInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace AuthSystem.Infrastructure;
 
@@ -63,6 +63,7 @@ public static class DependencyInjection
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<ITenantProvider, TenantProvider>();
+        services.AddScoped<IRequestChannelProvider, HttpRequestChannelProvider>();
         services.AddScoped<IJitProvisioningService, JitProvisioningService>();
         services.AddScoped<IScimUserService, ScimUserService>();
         services.AddScoped<IPermissionService, PermissionService>();

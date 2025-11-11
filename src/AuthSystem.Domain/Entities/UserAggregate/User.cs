@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Common.Rules;
@@ -17,7 +17,8 @@ namespace AuthSystem.Domain.Entities.UserAggregate;
 /// </summary>
 public sealed class User : AggregateRoot<Guid>
 {
-    private readonly Dictionary<Guid, UserRoleInfo> _roles = new();
+    private readonly Dictionary<Guid, string> _roles = new();
+    private IReadOnlyDictionary<Guid, string>? _rolesView;
     private readonly Dictionary<string, string> _socialLogins = new(StringComparer.OrdinalIgnoreCase);
 
     private User()
@@ -109,7 +110,7 @@ public sealed class User : AggregateRoot<Guid>
 
     public DateTime? LockoutEnd { get; private set; }
 
-    public IReadOnlyDictionary<Guid, string> Roles => _roles.ToDictionary(static pair => pair.Key, static pair => pair.Value.RoleName);
+    public IReadOnlyDictionary<Guid, string> Roles => _rolesView ??= new ReadOnlyDictionary<Guid, string>(_roles);
 
     public IReadOnlyDictionary<string, string> SocialLogins => _socialLogins;
 
@@ -252,32 +253,27 @@ public sealed class User : AggregateRoot<Guid>
     public void AddRole(Guid roleId, string roleName)
     {
         CheckRule(new UserRoleCannotBeDuplicatedRule(_roles.Keys, roleId));
-        var previousRoles = _roles.Values.Select(r => r.RoleName).ToArray();
+        var previousRoles = GetRoleNamesSnapshot();
 
-       
+
 
         ApplyRaise(new UserRoleAddedEvent(Id, roleId, roleName));
 
-        var currentRoles = previousRoles.Concat(new[] { roleName }).ToArray();
+        var previousRoles = GetRoleNamesSnapshot();
         ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
     }
 
     public void RemoveRole(Guid roleId)
     {
-        if (!_roles.TryGetValue(roleId, out var role))
+        if (!_roles.TryGetValue(roleId, out var roleName))
         {
             throw InvalidUserRoleException.ForRoleAssignmentNotFound(roleId);
         }
 
-        var previousRoles = _roles.Values.Select(r => r.RoleName).ToArray();
+        var previousRoles = GetRoleNamesSnapshot();
 
-        
-
-        ApplyRaise(new UserRoleRemovedEvent(Id, roleId, role.RoleName));
-
-        var currentRoles = previousRoles
-            .Where(r => !string.Equals(r, role.RoleName, StringComparison.Ordinal))
-            .ToArray();
+        ApplyRaise(new UserRoleRemovedEvent(Id, roleId, roleName));
+        var currentRoles = GetRoleNamesSnapshot();
         ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
     }
 
@@ -314,9 +310,22 @@ public sealed class User : AggregateRoot<Guid>
 
         ApplyRaise(new UserSocialLoginLinkedEvent(Id, provider, providerUserId));
     }
+    private string[] GetRoleNamesSnapshot()
+    {
+        if (_roles.Count == 0)
+        {
+            return Array.Empty<string>();
+        }
 
+        var snapshot = new string[_roles.Count];
+        var index = 0;
+        foreach (var roleName in _roles.Values)
+        {
+            snapshot[index++] = roleName;
+        }
 
-    private sealed record UserRoleInfo(string RoleName, DateTime AssignedAt);
+        return snapshot;
+    }
 
     private void On(UserRegisteredEvent @event)
     {
@@ -420,7 +429,7 @@ public sealed class User : AggregateRoot<Guid>
 
     private void On(UserRoleAddedEvent @event)
     {
-        _roles[@event.RoleId] = new UserRoleInfo(@event.RoleName, @event.OccurredOn);
+        _roles[@event.RoleId] = @event.RoleName;
         MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 

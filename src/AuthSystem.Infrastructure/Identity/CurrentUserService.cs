@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AuthSystem.Application.Common.Abstractions.Security;
@@ -13,15 +12,15 @@ internal sealed class CurrentUserService(IHttpContextAccessor httpContextAccesso
 {
     public Guid? UserId => httpContextAccessor.HttpContext?.User.GetUserId();
 
-    public Task<IReadOnlyCollection<PermissionType>> GetPermissionsAsync(CancellationToken cancellationToken)
+    public Task<IReadOnlySet<PermissionType>> GetPermissionsAsync(CancellationToken cancellationToken)
     {
         var principal = httpContextAccessor.HttpContext?.User;
         if (principal is null)
         {
-            return Task.FromResult<IReadOnlyCollection<PermissionType>>(Array.Empty<PermissionType>());
+            return Task.FromResult<IReadOnlySet<PermissionType>>(new HashSet<PermissionType>());
         }
 
         var permissions = principal.GetPermissions();
-        return Task.FromResult<IReadOnlyCollection<PermissionType>>(permissions.ToArray());
+        return Task.FromResult<IReadOnlySet<PermissionType>>(permissions);
     }
 }

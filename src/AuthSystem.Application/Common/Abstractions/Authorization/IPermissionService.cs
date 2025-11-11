@@ -8,5 +8,5 @@ namespace AuthSystem.Application.Common.Abstractions.Authorization;
 
 public interface IPermissionService
 {
-    Task<IReadOnlyCollection<PermissionType>> GetPermissionsAsync(Guid userId, CancellationToken cancellationToken);
+    Task<IReadOnlySet<PermissionType>> GetPermissionsAsync(Guid userId, CancellationToken cancellationToken);
 }

@@ -10,29 +10,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+   <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="13.8.1" />
+    <PackageReference Include="HotChocolate.Data" Version="13.8.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.RateLimiting" Version="9.0.10" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
-	  <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="9.0.0" />
+ <PackageReference Include="Microsoft.AspNetCore.RateLimiting" Version="9.0.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.9.0" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
-    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.9.0" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="13.8.1" />
-    <PackageReference Include="HotChocolate.Data" Version="13.8.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AuthSystem.Application\AuthSystem.Application.csproj" />
     <ProjectReference Include="..\AuthSystem.Infrastructure\AuthSystem.Infrastructure.csproj" />
-	   <ProjectReference Include="..\AuthSystem.Shared\AuthSystem.Shared.csproj" />
+	    <ProjectReference Include="..\AuthSystem.Shared\AuthSystem.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,5 +9,5 @@ namespace AuthSystem.Application.Common.Abstractions.Security;
 public interface ICurrentUserService
 {
     Guid? UserId { get; }
-    Task<IReadOnlyCollection<PermissionType>> GetPermissionsAsync(CancellationToken cancellationToken);
+    Task<IReadOnlySet<PermissionType>> GetPermissionsAsync(CancellationToken cancellationToken);
 }

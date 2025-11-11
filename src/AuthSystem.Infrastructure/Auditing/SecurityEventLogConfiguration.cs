@@ -31,5 +31,8 @@ internal sealed class SecurityEventLogConfiguration : IEntityTypeConfiguration<S
 
         builder.Property(log => log.MetadataJson)
             .HasColumnType("nvarchar(max)");
+
+        builder.HasIndex(log => new { log.TenantId, log.OccurredAtUtc });
+        builder.HasIndex(log => new { log.EventType, log.OccurredAtUtc });
     }
 }

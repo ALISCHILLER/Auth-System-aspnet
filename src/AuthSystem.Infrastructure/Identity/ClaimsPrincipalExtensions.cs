@@ -23,14 +23,14 @@ internal static class ClaimsPrincipalExtensions
         return Guid.TryParse(idValue, out var id) ? id : null;
     }
 
-    public static IReadOnlyCollection<PermissionType> GetPermissions(this ClaimsPrincipal principal)
+    public static IReadOnlySet<PermissionType> GetPermissions(this ClaimsPrincipal principal)
     {
         if (principal is null)
         {
-            return Array.Empty<PermissionType>();
+            return new HashSet<PermissionType>();
         }
 
-        var permissions = new List<PermissionType>();
+        var permissions = new HashSet<PermissionType>();
         foreach (var claim in principal.FindAll(PermissionClaimType))
         {
             if (Enum.TryParse<PermissionType>(claim.Value, ignoreCase: true, out var parsed))
