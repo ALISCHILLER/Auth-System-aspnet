@@ -1,6 +1,7 @@
 ﻿using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Application.Features.Users.Commands.RegisterUser;
 using AuthSystem.Application.Features.Users.Queries.GetUserById;
+using AuthSystem.Shared.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,7 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Infrastructure.Persistence.Sql;
+using AuthSystem.Shared.Contracts.Security;
+using AuthSystem.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 

@@ -1,4 +1,7 @@
 ﻿using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
+using AuthSystem.Shared.Contracts;
+using AuthSystem.Shared.Contracts.Security;
+using AuthSystem.Shared.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +25,9 @@ public sealed class AuditController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetSecurityEvents(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 25,
-        [FromQuery] string? tenantId,
-        [FromQuery] SecurityEventType? eventType,
-        CancellationToken cancellationToken)
+        [FromQuery] string? tenantId = null,
+        [FromQuery] SecurityEventType? eventType = null,
+        CancellationToken cancellationToken = default)
     {
         var query = new GetSecurityEventsQuery(page, pageSize, tenantId, eventType);
         var result = await mediator.Send(query, cancellationToken).ConfigureAwait(false);

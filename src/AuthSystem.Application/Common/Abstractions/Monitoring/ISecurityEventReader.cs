@@ -1,4 +1,7 @@
-﻿namespace AuthSystem.Application.Common.Abstractions.Monitoring;
+﻿using AuthSystem.Shared.Contracts.Security;
+using AuthSystem.Shared.DTOs;
+
+namespace AuthSystem.Application.Common.Abstractions.Monitoring;
 
 /// <summary>
 /// Provides read access to persisted security audit events.

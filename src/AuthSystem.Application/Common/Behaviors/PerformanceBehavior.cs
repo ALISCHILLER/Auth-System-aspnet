@@ -2,6 +2,7 @@
 using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Options;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
@@ -15,7 +16,7 @@ public sealed class PerformanceBehavior<TRequest, TResponse>(
     IRequestChannelProvider requestChannelProvider,
     IOptions<PipelineLoggingOptions> options)
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : notnull
+    where TRequest : notnull, IRequest<TResponse>
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {

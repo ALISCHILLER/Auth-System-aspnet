@@ -102,6 +102,27 @@ public sealed class PhoneNumber : ValueObject
         throw new InvalidPhoneNumberException($"شماره تلفن '{value}' نامعتبر است");
     }
 
+
+    /// <summary>
+    /// بررسی معتبر بودن شماره تلفن بدون پرتاب استثناء
+    /// </summary>
+    public static bool IsValidPhoneNumber(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return false;
+        }
+
+        try
+        {
+            _ = Create(value);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
     /// <summary>
     /// تمیز کردن شماره از کاراکترهای اضافی
     /// </summary>

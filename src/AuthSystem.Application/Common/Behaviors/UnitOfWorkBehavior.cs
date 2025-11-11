@@ -10,7 +10,7 @@ public sealed class UnitOfWorkBehavior<TRequest, TResponse>(
     IDomainEventCollector domainEventCollector,
     IDomainEventDispatcher domainEventDispatcher)
     : IPipelineBehavior<TRequest, TResponse>
-     where TRequest : notnull
+     where TRequest : notnull, IRequest<TResponse>
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {

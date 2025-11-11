@@ -1,39 +1,34 @@
-﻿using AuthSystem.Application.Common.Abstractions.Monitoring;
-using AuthSystem.Application.Common.Abstractions.Security;
+﻿using AuthSystem.Application.Common.Abstractions.Identity;
+using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Application.Common.Models;
+using AuthSystem.Application.Contracts.Users;
+using AuthSystem.Shared.Contracts.Security;
 using MediatR;
 
 namespace AuthSystem.Application.Features.Users.Commands.Logout;
 
 public sealed class LogoutCommandHandler(
-    ITokenService tokenService,
-    ISecurityEventPublisher securityEventPublisher) : IRequestHandler<LogoutCommand, Unit>
+    IRefreshTokenService refreshTokenService,
+    ISecurityEventPublisher securityEventPublisher)
+    : IRequestHandler<LogoutCommand>
 {
-    public async Task<Unit> Handle(LogoutCommand request, CancellationToken cancellationToken)
+    public async Task Handle(LogoutCommand request, CancellationToken cancellationToken)
     {
-        if (!string.IsNullOrWhiteSpace(request.RefreshToken))
-        {
-            await tokenService.RevokeRefreshTokenAsync(request.RefreshToken, cancellationToken).ConfigureAwait(false);
-        }
-
-        var metadata = new Dictionary<string, string>();
-        if (!string.IsNullOrWhiteSpace(request.TenantId))
-        {
-            metadata["tenantId"] = request.TenantId!;
-        }
+        await refreshTokenService.RevokeAsync(request.RefreshToken, cancellationToken).ConfigureAwait(false);
 
         await securityEventPublisher.PublishAsync(
             new SecurityEventContext(
                 SecurityEventType.Logout,
-                null,
-                null,
+                request.UserId,
+                request.UserName,
                 request.TenantId,
                 request.IpAddress,
                 request.UserAgent,
                 "User logged out and refresh token revoked.",
-                metadata),
+                new Dictionary<string, string>
+                {
+                    ["refreshTokenId"] = request.RefreshToken
+                }),
             cancellationToken).ConfigureAwait(false);
-
-        return Unit.Value;
     }
 }

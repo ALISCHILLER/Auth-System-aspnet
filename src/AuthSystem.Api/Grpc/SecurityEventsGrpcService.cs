@@ -1,7 +1,10 @@
 ﻿using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
+using AuthSystem.Shared.Contracts.Security;
+using AuthSystem.Shared.DTOs;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MediatR;
+
 
 namespace AuthSystem.Api.Grpc;
 

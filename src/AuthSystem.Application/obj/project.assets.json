@@ -196,6 +196,16 @@
         "runtime": {
           "bin/placeholder/AuthSystem.Domain.dll": {}
         }
+      },
+      "AuthSystem.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/AuthSystem.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AuthSystem.Shared.dll": {}
+        }
       }
     }
   },
@@ -1254,11 +1264,17 @@
       "type": "project",
       "path": "../AuthSystem.Domain/AuthSystem.Domain.csproj",
       "msbuildProject": "../AuthSystem.Domain/AuthSystem.Domain.csproj"
+    },
+    "AuthSystem.Shared/1.0.0": {
+      "type": "project",
+      "path": "../AuthSystem.Shared/AuthSystem.Shared.csproj",
+      "msbuildProject": "../AuthSystem.Shared/AuthSystem.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "AuthSystem.Domain >= 1.0.0",
+      "AuthSystem.Shared >= 1.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "FluentValidation >= 11.9.0",
       "FluentValidation.DependencyInjectionExtensions >= 11.9.0",
@@ -1304,6 +1320,9 @@
           "projectReferences": {
             "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj": {
               "projectPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Domain\\AuthSystem.Domain.csproj"
+            },
+            "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj": {
+              "projectPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj"
             }
           }
         }

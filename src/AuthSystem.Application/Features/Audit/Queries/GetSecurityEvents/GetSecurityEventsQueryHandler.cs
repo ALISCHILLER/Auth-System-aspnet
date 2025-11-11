@@ -1,4 +1,7 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Monitoring;
+using AuthSystem.Application.Common.Abstractions.Monitoring;
+using AuthSystem.Shared.Contracts.Security;
+using AuthSystem.Shared.DTOs;
 using MediatR;
 
 namespace AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;

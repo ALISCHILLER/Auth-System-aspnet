@@ -2,6 +2,8 @@
 using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Application.Common.Models;
 using AuthSystem.Infrastructure.SecurityEvents;
+using AuthSystem.Shared.Contracts.Security;
+using AuthSystem.Shared.DTOs;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AuthSystem.Api.RealTime;

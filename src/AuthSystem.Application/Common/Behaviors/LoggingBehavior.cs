@@ -1,6 +1,7 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Diagnostics;
 using AuthSystem.Application.Common.Abstractions.Security;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -12,7 +13,7 @@ public sealed class LoggingBehavior<TRequest, TResponse>(
     ITenantProvider tenantProvider,
     IRequestChannelProvider requestChannelProvider)
     : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : notnull
+        where TRequest : notnull, IRequest<TResponse>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web)
     {

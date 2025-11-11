@@ -4,6 +4,8 @@ using AuthSystem.Application.Features.Users.Commands.Logout;
 using AuthSystem.Application.Features.Users.Commands.RefreshToken;
 using AuthSystem.Application.Features.Users.Commands.TwoFactor.Request;
 using AuthSystem.Application.Features.Users.Commands.TwoFactor.Verify;
+using AuthSystem.Shared.Constants;
+using AuthSystem.Shared.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

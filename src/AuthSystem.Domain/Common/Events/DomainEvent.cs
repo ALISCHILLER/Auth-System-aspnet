@@ -14,6 +14,8 @@ public abstract class DomainEvent : IDomainEvent
 
     public DateTime OccurredOnUtc { get; }
 
+    public DateTime OccurredOn => OccurredOnUtc;
+
     public bool IsPublished { get; private set; }
 
     public void MarkAsPublished() => IsPublished = true;

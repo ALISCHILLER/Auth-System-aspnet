@@ -8,10 +8,10 @@ namespace AuthSystem.Application.Common.Behaviors;
 
 public sealed class AuthorizationBehavior<TRequest, TResponse>(
     ICurrentUserService currentUserService,
-   IPermissionService permissionService,
+    IPermissionService permissionService,
     ICurrentUserPermissionCache permissionCache)
     : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : notnull
+       where TRequest : notnull, IRequest<TResponse>
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {

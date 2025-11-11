@@ -5,6 +5,7 @@ using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Exceptions;
 using AuthSystem.Application.Common.Models;
 using AuthSystem.Application.Contracts.Users;
+using AuthSystem.Shared.Contracts.Security;
 using MediatR;
 
 namespace AuthSystem.Application.Features.Users.Commands.LoginUser;

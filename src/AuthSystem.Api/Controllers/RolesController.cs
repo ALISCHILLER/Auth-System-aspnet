@@ -2,6 +2,7 @@
 using AuthSystem.Application.Features.Roles.Commands.AssignRoleToUser;
 using AuthSystem.Application.Features.Roles.Commands.CreateRole;
 using AuthSystem.Application.Features.Roles.Queries.GetAllRoles;
+using AuthSystem.Shared.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

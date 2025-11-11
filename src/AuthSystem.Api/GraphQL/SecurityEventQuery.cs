@@ -1,6 +1,9 @@
 ﻿using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
+using AuthSystem.Shared.Contracts.Security;
+using AuthSystem.Shared.DTOs;
+using HotChocolate;
+using HotChocolate.Types;
 using MediatR;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace AuthSystem.Api.GraphQL;
 

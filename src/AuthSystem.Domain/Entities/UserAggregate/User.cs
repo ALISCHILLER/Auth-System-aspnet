@@ -252,11 +252,9 @@ public sealed class User : AggregateRoot<Guid>
         CheckRule(new UserRoleCannotBeDuplicatedRule(_roles.Keys, roleId));
         var previousRoles = GetRoleNamesSnapshot();
 
-
-
         ApplyRaise(new UserRoleAddedEvent(Id, roleId, roleName));
 
-        var previousRoles = GetRoleNamesSnapshot();
+        var currentRoles = GetRoleNamesSnapshot();
         ApplyRaise(new UserRoleChangedEvent(Id, previousRoles, currentRoles));
     }
 
