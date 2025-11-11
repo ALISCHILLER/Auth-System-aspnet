@@ -1,4 +1,6 @@
-﻿using AuthSystem.Application.Contracts.Users;
+﻿using System;
+using System.Security.Claims;
+using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Application.Features.Users.Commands.LoginUser;
 using AuthSystem.Application.Features.Users.Commands.Logout;
 using AuthSystem.Application.Features.Users.Commands.RefreshToken;
@@ -112,7 +114,9 @@ public sealed class AuthController : ControllerBase
         {
             TenantId = ResolveTenantId(),
             IpAddress = ResolveIpAddress(),
-            UserAgent = ResolveUserAgent()
+            UserAgent = ResolveUserAgent(),
+            UserId = ResolveUserId(),
+            UserName = ResolveUserName()
         };
 
         await _mediator.Send(enrichedCommand, cancellationToken).ConfigureAwait(false);
@@ -129,6 +133,13 @@ public sealed class AuthController : ControllerBase
 
     private string? ResolveUserAgent()
         => Request.Headers.UserAgent.ToString();
+
+    private Guid? ResolveUserId()
+       => Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId) ? userId : null;
+
+    private string? ResolveUserName()
+        => User.FindFirstValue(ClaimTypes.Name);
+
 
     private bool ResolveExternalLogin()
         => Request.Headers.TryGetValue("X-External-Login", out var external)

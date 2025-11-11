@@ -17,12 +17,3 @@ E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Infrastructure\obj\Debug\net
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.pdb
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.genruntimeconfig.cache
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Infrastructure\obj\Debug\net9.0\ref\AuthSystem.Infrastructure.dll
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.csproj.AssemblyReference.cache
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.AssemblyInfoInputs.cache
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.AssemblyInfo.cs
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.csproj.CoreCompileInputs.cache
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.sourcelink.json
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.dll
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\refint\AuthSystem.Infrastructure.dll
-E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Infrastructure\obj\Debug\net9.0\AuthSystem.Infrastructure.pdb

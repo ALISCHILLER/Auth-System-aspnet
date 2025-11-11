@@ -24,7 +24,7 @@ public class MessagingRegistrationTests
             [$"{EmailOptions.SectionName}:Port"] = "25",
             [$"{EmailOptions.SectionName}:EnableSsl"] = "false",
             [$"{SmsOptions.SectionName}:Provider"] = "noop",
-            ["ConnectionStrings:Default"] = "Server=(localdb)\\\MSSQLLocalDB;Database=AuthSystem;Trusted_Connection=True;MultipleActiveResultSets=True"
+            ["ConnectionStrings:Default"] = @"Server=(localdb)\MSSQLLocalDB;Database=AuthSystem;Trusted_Connection=True;MultipleActiveResultSets=True"
         });
 
         var sender = provider.GetRequiredService<IEmailSender>();
@@ -39,7 +39,7 @@ public class MessagingRegistrationTests
         {
             [$"{EmailOptions.SectionName}:Provider"] = "noop",
             [$"{SmsOptions.SectionName}:Provider"] = "noop",
-            ["ConnectionStrings:Default"] = "Server=(localdb)\\\MSSQLLocalDB;Database=AuthSystem;Trusted_Connection=True;MultipleActiveResultSets=True"
+            ["ConnectionStrings:Default"] = @"Server=(localdb)\MSSQLLocalDB;Database=AuthSystem;Trusted_Connection=True;MultipleActiveResultSets=True"
         });
 
         var sender = provider.GetRequiredService<IEmailSender>();
@@ -56,7 +56,7 @@ public class MessagingRegistrationTests
             [$"{SmsOptions.SectionName}:Provider"] = "http",
             [$"{SmsOptions.SectionName}:Endpoint"] = "https://example.com/api/sms",
             [$"{SmsOptions.SectionName}:RetryCount"] = "0",
-            ["ConnectionStrings:Default"] = "Server=(localdb)\\\MSSQLLocalDB;Database=AuthSystem;Trusted_Connection=True;MultipleActiveResultSets=True"
+            ["ConnectionStrings:Default"] = @"Server=(localdb)\MSSQLLocalDB;Database=AuthSystem;Trusted_Connection=True;MultipleActiveResultSets=True"
         });
 
         var sender = provider.GetRequiredService<ISmsSender>();

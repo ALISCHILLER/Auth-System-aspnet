@@ -8,7 +8,7 @@ namespace AuthSystem.Domain.Entities.UserAggregate.Specifications;
 public sealed class UserByEmailSpecification : BaseSpecification<User>
 {
     public UserByEmailSpecification(string email)
-        : base(user => user.Email?.Value == email)
+        : base(user => user.Email != null && user.Email.Value == email)
     {
     }
 }

@@ -16,17 +16,18 @@ internal sealed class ScimUserService(ApplicationDbContext dbContext) : IScimUse
         var skip = Math.Max(0, startIndex - 1);
         var take = Math.Clamp(count, 1, 200);
 
-        var users = await dbContext.Users
-            .AsNoTracking()
+        var userEntities = await dbContext.Users
+           .AsNoTracking()
             .OrderBy(user => user.FirstName)
             .ThenBy(user => user.LastName)
             .Skip(skip)
             .Take(take)
-            .Select(MapToRepresentation)
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        return users;
+        return userEntities
+             .Select(MapToRepresentation)
+             .ToList();
     }
 
     public async Task<ScimUserRepresentation?> GetByIdAsync(string id, CancellationToken cancellationToken)
