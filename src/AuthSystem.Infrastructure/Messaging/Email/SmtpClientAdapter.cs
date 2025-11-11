@@ -1,9 +1,6 @@
-﻿using System;
+﻿using AuthSystem.Infrastructure.Options;
 using System.Net;
 using System.Net.Mail;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Infrastructure.Options;
 
 namespace AuthSystem.Infrastructure.Messaging.Email;
 

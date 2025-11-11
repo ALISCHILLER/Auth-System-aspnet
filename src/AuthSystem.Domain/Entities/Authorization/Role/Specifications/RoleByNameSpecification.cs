@@ -1,5 +1,4 @@
 ﻿using AuthSystem.Domain.Common.Specifications;
-using AuthSystem.Domain.Entities.Authorization.Role;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role.Specifications;
 

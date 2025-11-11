@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AuthSystem.Domain.Common.Abstractions;
+﻿using AuthSystem.Domain.Common.Abstractions;
 
 namespace AuthSystem.Domain.Common.Exceptions;
 

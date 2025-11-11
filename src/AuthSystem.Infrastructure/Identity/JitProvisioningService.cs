@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Identity;
+﻿using AuthSystem.Application.Common.Abstractions.Identity;
 using AuthSystem.Application.Common.Abstractions.Persistence;
 using AuthSystem.Domain.Entities.UserAggregate;
 using AuthSystem.Domain.ValueObjects;

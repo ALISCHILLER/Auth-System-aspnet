@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AuthSystem.Domain.Enums;
+﻿using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;
 using AuthSystem.Domain.ValueObjects;
 using System.Security.Cryptography;
@@ -14,7 +11,7 @@ namespace AuthSystem.Domain.Factories;
 /// </summary>
 public static class SecurityFactory
 {
-  
+
     public static TokenValue CreateAccessToken(
         Guid userId,
         string username,
@@ -44,7 +41,7 @@ public static class SecurityFactory
         return TokenValue.Generate(TokenType.Refresh, 64).Value;
     }
 
-   
+
     public static TwoFactorSecretKey CreateTwoFactorSecretKey(string issuer = "AuthSystem")
     {
         if (string.IsNullOrWhiteSpace(issuer))
@@ -58,13 +55,13 @@ public static class SecurityFactory
         return secretKey?.Activate() ?? throw new ArgumentNullException(nameof(secretKey));
     }
 
-    
+
     public static TwoFactorSecretKey DeactivateTwoFactorSecretKey(TwoFactorSecretKey secretKey)
     {
         return secretKey?.Deactivate() ?? throw new ArgumentNullException(nameof(secretKey));
     }
 
-   
+
     public static VerificationCode CreateEmailVerificationCode(
         string email,
         int length = 6,
@@ -91,7 +88,7 @@ public static class SecurityFactory
         if (string.IsNullOrWhiteSpace(phoneNumber))
             throw new ArgumentException("شماره تلفن نمی‌تواند خالی باشد", nameof(phoneNumber));
 
-       
+
         if (!PhoneNumber.IsValidPhoneNumber(phoneNumber))
             throw new InvalidPhoneNumberException(phoneNumber, "فرمت شماره تلفن نامعتبر است");
 
@@ -101,7 +98,7 @@ public static class SecurityFactory
             validityMinutes);
     }
 
-    
+
     public static VerificationCode CreateTwoFactorVerificationCode(
         string userId,
         int length = 6,
@@ -135,7 +132,7 @@ public static class SecurityFactory
             validityMinutes);
     }
 
-    
+
     public static VerificationCode CreateAccountActivationCode(
         string email,
         int length = 8,
@@ -157,11 +154,11 @@ public static class SecurityFactory
 
     public static PasswordHash CreateSecurePassword(string plainPassword)
     {
-     
+
         if (string.IsNullOrWhiteSpace(plainPassword))
             throw new InvalidPasswordException("رمز عبور نمی‌تواند خالی باشد");
 
-        
+
         CheckPasswordRules(plainPassword);
 
         return PasswordHash.CreateFromPlainText(plainPassword);
@@ -221,13 +218,13 @@ public static class SecurityFactory
         return TokenValue.Generate(TokenType.Session, 64, TimeSpan.FromHours(2));
     }
 
-    
+
     public static string CreateEncryptionKey(int length = 32)
     {
         return GenerateRandomBase64(length);
     }
 
-   
+
     public static string CreateEncryptionIv(int length = 16)
     {
         return GenerateRandomBase64(length);

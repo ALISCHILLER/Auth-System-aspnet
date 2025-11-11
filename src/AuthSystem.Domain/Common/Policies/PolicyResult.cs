@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace AuthSystem.Domain.Common.Policies;
+﻿namespace AuthSystem.Domain.Common.Policies;
 
 /// <summary>
 /// Represents the outcome of evaluating a policy.
@@ -36,7 +32,7 @@ public sealed class PolicyResult
         return new(false, new[] { message });
     }
 
-   
+
     public static PolicyResult Combine(IEnumerable<PolicyResult> results)
     {
         if (results is null) throw new ArgumentNullException(nameof(results));

@@ -1,8 +1,4 @@
-﻿using AuthSystem.Shared.Contracts.Security;
-using AuthSystem.Shared.DTOs;
-using HotChocolate.Types;
-
-namespace AuthSystem.Api.GraphQL;
+﻿namespace AuthSystem.Api.GraphQL;
 
 public sealed class SecurityEventResultType : ObjectType<PagedResult<SecurityEventDto>>
 {

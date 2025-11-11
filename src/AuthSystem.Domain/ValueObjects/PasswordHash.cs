@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography; 
+using System.Security.Cryptography;
 using System.Text;
-using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Common.Base;
-using AuthSystem.Domain.Enums; 
+using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Exceptions;
+using DomainHashAlgorithm = AuthSystem.Domain.Enums.HashAlgorithm;
 
 namespace AuthSystem.Domain.ValueObjects;
 
@@ -14,25 +14,25 @@ namespace AuthSystem.Domain.ValueObjects;
 /// </summary>
 public sealed class PasswordHash : ValueObject
 {
-    
+
     private const int ExpectedHashLength = 60;
 
-    
+
     public string Value { get; }
 
-    public HashAlgorithm Algorithm { get; }
+    public DomainHashAlgorithm Algorithm { get; }
     public DateTime CreatedAt { get; }
 
     public bool NeedsRehash => CreatedAt < DomainClock.Instance.UtcNow.AddMonths(-6);
 
-    private PasswordHash(string value, HashAlgorithm algorithm, DateTime? createdAt = null)
+    private PasswordHash(string value, DomainHashAlgorithm algorithm, DateTime? createdAt = null)
     {
         Value = value;
         Algorithm = algorithm;
         CreatedAt = createdAt?.ToUniversalTime() ?? DomainClock.Instance.UtcNow;
     }
 
-   
+
     public static PasswordHash CreateFromPlainText(string plainPassword)
     {
         if (string.IsNullOrWhiteSpace(plainPassword))
@@ -41,10 +41,10 @@ public sealed class PasswordHash : ValueObject
         }
 
         var hash = HashPassword(plainPassword);
-        return new PasswordHash(hash, HashAlgorithm.BCrypt);
+        return new PasswordHash(hash, DomainHashAlgorithm.BCrypt);
     }
 
-   
+
     public static PasswordHash CreateFromHash(string hash, DateTime? createdAt = null)
     {
         if (string.IsNullOrWhiteSpace(hash))
@@ -56,7 +56,7 @@ public sealed class PasswordHash : ValueObject
         return new PasswordHash(hash, algorithm, createdAt);
     }
 
-   
+
     public bool Verify(string plainPassword)
     {
         if (string.IsNullOrWhiteSpace(plainPassword))
@@ -67,13 +67,13 @@ public sealed class PasswordHash : ValueObject
         return VerifyPassword(plainPassword, Value);
     }
 
-  
+
     public PasswordHash RehashIfNeeded(string plainPassword)
     {
         return NeedsRehash ? CreateFromPlainText(plainPassword) : this;
     }
 
-    
+
     private static string HashPassword(string password)
     {
         using var sha256 = SHA256.Create();
@@ -84,20 +84,20 @@ public sealed class PasswordHash : ValueObject
 
     private static bool VerifyPassword(string password, string hash) => HashPassword(password) == hash;
 
-   
-    private static HashAlgorithm DetectAlgorithm(string hash)
+
+    private static DomainHashAlgorithm DetectAlgorithm(string hash)
     {
         if (hash.StartsWith("$2a$") || hash.StartsWith("$2b$") || hash.StartsWith("$2y$"))
         {
-            return HashAlgorithm.BCrypt;
+            return DomainHashAlgorithm.BCrypt;
         }
 
         if (hash.StartsWith("$argon2"))
         {
-            return HashAlgorithm.Argon2;
+            return DomainHashAlgorithm.Argon2;
         }
 
-        return HashAlgorithm.PBKDF2;
+        return DomainHashAlgorithm.PBKDF2;
     }
 
     protected override IEnumerable<object?> GetEqualityComponents()

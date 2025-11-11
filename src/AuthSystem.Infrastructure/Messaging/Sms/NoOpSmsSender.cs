@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Messaging;
+﻿using AuthSystem.Application.Common.Abstractions.Messaging;
 using Microsoft.Extensions.Logging;
 
 namespace AuthSystem.Infrastructure.Messaging.Sms;

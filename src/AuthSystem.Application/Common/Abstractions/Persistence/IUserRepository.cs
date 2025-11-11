@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using AuthSystem.Domain.Entities.UserAggregate;
+﻿using AuthSystem.Domain.Entities.UserAggregate;
 
 namespace AuthSystem.Application.Common.Abstractions.Persistence;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Domain.Entities.Authorization.Role;
+﻿using AuthSystem.Domain.Entities.Authorization.Role;
 
 namespace AuthSystem.Application.Common.Abstractions.Persistence;
 

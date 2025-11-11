@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using AuthSystem.Domain.Common.Rules;
+﻿using AuthSystem.Domain.Common.Rules;
+using System.Text.RegularExpressions;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Rules;
 

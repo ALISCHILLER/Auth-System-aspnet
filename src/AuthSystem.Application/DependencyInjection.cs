@@ -1,11 +1,11 @@
-﻿using System.Reflection;
-using AuthSystem.Application.Common.Abstractions.Authorization;
+﻿using AuthSystem.Application.Common.Abstractions.Authorization;
 using AuthSystem.Application.Common.Authorization;
 using AuthSystem.Application.Common.Behaviors;
 using AuthSystem.Application.Common.Options;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace AuthSystem.Application;
 

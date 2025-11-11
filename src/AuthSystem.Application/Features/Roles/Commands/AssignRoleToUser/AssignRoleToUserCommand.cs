@@ -1,8 +1,7 @@
-﻿using System;
-using MediatR;
-using AuthSystem.Application.Common.Abstractions.Authorization;
+﻿using AuthSystem.Application.Common.Abstractions.Authorization;
 using AuthSystem.Application.Common.Markers;
 using AuthSystem.Domain.Enums;
+using MediatR;
 
 namespace AuthSystem.Application.Features.Roles.Commands.AssignRoleToUser;
 

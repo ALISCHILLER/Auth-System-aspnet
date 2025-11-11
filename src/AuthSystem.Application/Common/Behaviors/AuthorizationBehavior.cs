@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Authorization;
+﻿using AuthSystem.Application.Common.Abstractions.Authorization;
 using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Exceptions;
 using AuthSystem.Domain.Enums;

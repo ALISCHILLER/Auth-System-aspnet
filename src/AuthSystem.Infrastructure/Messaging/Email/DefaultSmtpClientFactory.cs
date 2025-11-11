@@ -1,6 +1,4 @@
 ﻿using AuthSystem.Infrastructure.Options;
-using System.Net.Http;
-using System.Net.Mail;
 
 namespace AuthSystem.Infrastructure.Messaging.Email;
 

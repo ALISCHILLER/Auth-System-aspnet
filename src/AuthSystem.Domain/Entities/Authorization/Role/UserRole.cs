@@ -1,6 +1,5 @@
-﻿using System;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Base;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role;
 
@@ -12,13 +11,13 @@ public class UserRole : Entity<Guid>
 
     public Guid UserId { get; private set; }
 
-    
+
     public string Username { get; private set; } = default!;
 
-  
+
     public Guid RoleId { get; private set; }
 
-   
+
     public string RoleName { get; private set; } = default!;
 
 
@@ -27,7 +26,7 @@ public class UserRole : Entity<Guid>
 
     private UserRole()
     {
-     
+
     }
 
 

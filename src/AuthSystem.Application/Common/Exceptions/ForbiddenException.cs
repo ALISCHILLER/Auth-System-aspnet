@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Application.Common.Exceptions;
+﻿namespace AuthSystem.Application.Common.Exceptions;
 
 public sealed class ForbiddenException : Exception
 {

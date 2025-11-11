@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Exceptions;
+﻿using AuthSystem.Application.Common.Exceptions;
 using FluentValidation;
 using MediatR;
 

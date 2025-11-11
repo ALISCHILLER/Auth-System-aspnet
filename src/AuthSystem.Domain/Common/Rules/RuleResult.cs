@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AuthSystem.Domain.Common.Rules;
+﻿namespace AuthSystem.Domain.Common.Rules;
 
 /// <summary>
 /// Represents the evaluation result of a business rule.
@@ -34,7 +32,7 @@ public sealed class RuleResult
         return new(false, new[] { message });
     }
 
-  
+
     public static RuleResult Combine(IEnumerable<RuleResult> results)
     {
         if (results is null) throw new ArgumentNullException(nameof(results));

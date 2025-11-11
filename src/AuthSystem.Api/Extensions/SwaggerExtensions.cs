@@ -1,9 +1,5 @@
-﻿using System;
-using AuthSystem.Api.Swagger;
-using Microsoft.AspNetCore.Builder;
+﻿using AuthSystem.Api.Swagger;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace AuthSystem.Api.Extensions;
@@ -27,8 +23,8 @@ public static class SwaggerExtensions
             options.DisplayRequestDuration();
             options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
 
-        foreach (var description in provider.ApiVersionDescriptions)
-        {
+            foreach (var description in provider.ApiVersionDescriptions)
+            {
                 options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
             }
         });

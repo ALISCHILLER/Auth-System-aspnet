@@ -1,10 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
-using AuthSystem.Shared.Contracts.Security;
-using AuthSystem.Shared.DTOs;
-using HotChocolate;
-using HotChocolate.Types;
+﻿using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
 using MediatR;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 

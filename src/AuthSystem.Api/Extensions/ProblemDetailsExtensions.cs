@@ -1,6 +1,4 @@
 ﻿using AuthSystem.Api.Middleware;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AuthSystem.Api.Extensions;
 

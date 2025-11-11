@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Security;
+﻿using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Infrastructure.Auth.Models;
 using AuthSystem.Infrastructure.Options;
 using AuthSystem.Infrastructure.Persistence.Sql;
-using AuthSystem.Infrastructure.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AuthSystem.Infrastructure.Auth;
 

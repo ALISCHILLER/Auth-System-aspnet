@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AuthSystem.Domain.Entities.Authorization.Role;
+﻿using AuthSystem.Domain.Entities.Authorization.Role;
 using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.Factories;

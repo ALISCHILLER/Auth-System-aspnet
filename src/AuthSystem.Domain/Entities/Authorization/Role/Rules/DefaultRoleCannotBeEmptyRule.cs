@@ -23,4 +23,3 @@ public sealed class DefaultRoleCannotBeEmptyRule : BusinessRuleBase
         return _isDefaultRole && _remainingUsers <= 0;
     }
 }
-}

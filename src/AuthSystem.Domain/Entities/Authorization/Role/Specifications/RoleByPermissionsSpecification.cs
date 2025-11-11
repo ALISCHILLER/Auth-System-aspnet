@@ -1,7 +1,6 @@
-﻿using System.Linq.Expressions;
-using AuthSystem.Domain.Common.Specifications;
-using AuthSystem.Domain.Entities.Authorization.Role;
+﻿using AuthSystem.Domain.Common.Specifications;
 using AuthSystem.Domain.Enums;
+using System.Linq.Expressions;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role.Specifications;
 

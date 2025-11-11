@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace AuthSystem.Domain.Common.Specifications;
 
@@ -17,16 +19,18 @@ public class NotSpecification<T> : ISpecification<T>
     /// </summary>
     public NotSpecification(ISpecification<T> specification)
     {
-        _specification = specification;
+        _specification = specification ?? throw new ArgumentNullException(nameof(specification));
     }
 
     /// <summary>
     /// عبارت شرطی مشخصات
     /// </summary>
     public Expression<Func<T, bool>>? Criteria =>
-        Expression.Lambda<Func<T, bool>>(
-            Expression.Not(_specification.Criteria!.Body),
-            _specification.Criteria.Parameters);
+       _specification.Criteria is null
+            ? null
+            : Expression.Lambda<Func<T, bool>>(
+                Expression.Not(_specification.Criteria.Body),
+                _specification.Criteria.Parameters);
 
     /// <summary>
     /// لیست عبارات مرتب‌سازی

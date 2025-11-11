@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Api.Hubs;
+﻿using AuthSystem.Api.Hubs;
 using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Application.Common.Models;
 using AuthSystem.Infrastructure.SecurityEvents;
-using AuthSystem.Shared.Contracts.Security;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AuthSystem.Api.RealTime;

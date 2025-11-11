@@ -1,14 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Contracts.Roles;
+﻿using AuthSystem.Application.Contracts.Roles;
 using AuthSystem.Application.Features.Roles.Commands.AssignRoleToUser;
 using AuthSystem.Application.Features.Roles.Commands.CreateRole;
 using AuthSystem.Application.Features.Roles.Queries.GetAllRoles;
-using AuthSystem.Shared.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSystem.Api.Controllers;

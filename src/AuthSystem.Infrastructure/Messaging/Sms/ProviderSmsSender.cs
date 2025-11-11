@@ -1,14 +1,11 @@
-﻿using System.Net.Http;
+﻿using AuthSystem.Application.Common.Abstractions.Messaging;
+using AuthSystem.Infrastructure.Options;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Messaging;
-using AuthSystem.Infrastructure.Options;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace AuthSystem.Infrastructure.Messaging.Sms;
 

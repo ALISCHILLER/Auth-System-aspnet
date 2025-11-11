@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using AuthSystem.Domain.Common.Base;
-using AuthSystem.Domain.Enums;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
+using AuthSystem.Domain.Enums;
+using System.Security.Cryptography;
 
 namespace AuthSystem.Domain.ValueObjects;
 
@@ -12,46 +10,46 @@ namespace AuthSystem.Domain.ValueObjects;
 /// </summary>
 public sealed class VerificationCode : ValueObject
 {
-    
+
     private const int DefaultLength = 6;
 
-   
+
     private const int MinLength = 4;
 
-   
+
     private const int MaxLength = 10;
 
-   
+
     private const int DefaultValidityMinutes = 10;
 
-   
+
     private const int MaxAttempts = 3;
 
-   
+
     public string Value { get; }
 
-    
+
     public VerificationCodeType Type { get; }
 
-   
+
     public DateTime CreatedAt { get; }
 
-  
+
     public DateTime ExpiresAt { get; }
 
 
     public int AttemptCount { get; private set; }
 
-    
+
     public bool IsUsed { get; private set; }
 
-  
+
     public DateTime? UsedAt { get; private set; }
 
     public bool IsExpired => DomainClock.Instance.UtcNow > ExpiresAt;
     public bool IsValid => !IsExpired && !IsUsed && AttemptCount < MaxAttempts;
 
- 
+
     public int RemainingAttempts => Math.Max(0, MaxAttempts - AttemptCount);
 
     public TimeSpan? TimeToExpiry => IsExpired ? null : ExpiresAt - DomainClock.Instance.UtcNow;
@@ -91,7 +89,7 @@ public sealed class VerificationCode : ValueObject
         return new VerificationCode(code, type, now, expiresAt);
     }
 
-  
+
     public static VerificationCode CreateFromExisting(
         string value,
         VerificationCodeType type,
@@ -109,7 +107,7 @@ public sealed class VerificationCode : ValueObject
         return new VerificationCode(value, type, createdAt, expiresAt, attemptCount, isUsed, usedAt);
     }
 
-   
+
     public bool Verify(string code)
     {
         if (!IsValid)
@@ -117,7 +115,7 @@ public sealed class VerificationCode : ValueObject
             return false;
         }
 
-       
+
         AttemptCount++;
 
         if (string.IsNullOrWhiteSpace(code))
@@ -125,7 +123,7 @@ public sealed class VerificationCode : ValueObject
             return false;
         }
 
-      
+
         var isMatch = Value.Equals(code, StringComparison.OrdinalIgnoreCase);
 
         if (isMatch)
@@ -143,7 +141,7 @@ public sealed class VerificationCode : ValueObject
     public VerificationCode MarkAsUsed() =>
        new(Value, Type, CreatedAt, ExpiresAt, AttemptCount, true, DomainClock.Instance.UtcNow);
 
-    
+
     private static void ValidateLength(int length)
     {
         if (length < MinLength || length > MaxLength)
@@ -152,7 +150,7 @@ public sealed class VerificationCode : ValueObject
         }
     }
 
-  
+
     private static string GenerateNumericCode(int length)
     {
         using var rng = RandomNumberGenerator.Create();
@@ -163,7 +161,7 @@ public sealed class VerificationCode : ValueObject
         return code.PadLeft(length, '0');
     }
 
-    
+
     private static string GenerateAlphanumericCode(int length)
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

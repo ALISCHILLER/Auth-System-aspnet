@@ -1,12 +1,6 @@
-﻿using System;
-using System.Threading.RateLimiting;
-using AuthSystem.Api.Options;
-using AuthSystem.Shared.Constants;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using AuthSystem.Api.Options;
 using Microsoft.Extensions.Options;
+using System.Threading.RateLimiting;
 
 namespace AuthSystem.Api.Extensions;
 

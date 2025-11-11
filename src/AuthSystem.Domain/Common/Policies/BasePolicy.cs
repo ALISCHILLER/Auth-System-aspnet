@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace AuthSystem.Domain.Common.Policies;
+﻿namespace AuthSystem.Domain.Common.Policies;
 
 /// <summary>
 /// کلاس پایه برای تمام سیاست‌ها

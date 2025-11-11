@@ -1,5 +1,4 @@
-﻿using System;
-using AuthSystem.Domain.Common.Exceptions;
+﻿using AuthSystem.Domain.Common.Exceptions;
 using AuthSystem.Domain.Enums;
 
 
@@ -50,7 +49,7 @@ public class InvalidUserRoleException : DomainException
         UserId = userId;
         RoleName = roleName;
     }
-    
+
     /// <summary>
     /// سازنده با نام نقش و پیام خطا
     /// </summary>

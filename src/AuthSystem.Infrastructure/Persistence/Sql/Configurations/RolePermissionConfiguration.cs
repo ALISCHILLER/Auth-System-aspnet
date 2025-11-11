@@ -1,5 +1,4 @@
 ﻿using AuthSystem.Domain.Entities.Authorization.Role;
-using AuthSystem.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

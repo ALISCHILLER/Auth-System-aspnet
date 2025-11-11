@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AuthSystem.Domain.Common.Base;
+using AuthSystem.Domain.Common.Clock;
+using AuthSystem.Domain.Exceptions;
 using System.Security.Cryptography;
 using System.Text;
-using AuthSystem.Domain.Exceptions;
-using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Base;
 
 namespace AuthSystem.Domain.ValueObjects;
 
@@ -13,7 +11,7 @@ namespace AuthSystem.Domain.ValueObjects;
 /// </summary>
 public sealed class TwoFactorSecretKey : ValueObject
 {
-    
+
     private const int SecretKeyLength = 20;
 
     private const string DefaultIssuer = "AuthSystem";
@@ -27,7 +25,7 @@ public sealed class TwoFactorSecretKey : ValueObject
 
     public bool IsActive { get; private set; }
 
-    
+
     public DateTime? LastUsedAt { get; private set; }
 
     private TwoFactorSecretKey()
@@ -46,7 +44,7 @@ public sealed class TwoFactorSecretKey : ValueObject
         IsActive = isActive;
     }
 
-    
+
     public static TwoFactorSecretKey Generate(string issuer = DefaultIssuer)
     {
         if (string.IsNullOrWhiteSpace(issuer))
@@ -83,7 +81,7 @@ public sealed class TwoFactorSecretKey : ValueObject
         return key;
     }
 
-   
+
     private static string GenerateSecretKey()
     {
         using var rng = RandomNumberGenerator.Create();
@@ -92,10 +90,10 @@ public sealed class TwoFactorSecretKey : ValueObject
         return Base32Encode(bytes);
     }
 
- 
+
     private static string Base32Encode(byte[] data)
     {
-      
+
         var result = new StringBuilder((data.Length + 4) / 5 * 8);
 
         for (var i = 0; i < data.Length; i += 5)
@@ -133,7 +131,7 @@ public sealed class TwoFactorSecretKey : ValueObject
         return result.ToString();
     }
 
-  
+
     private static bool IsValidBase32(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
@@ -152,7 +150,7 @@ public sealed class TwoFactorSecretKey : ValueObject
         return true;
     }
 
- 
+
     public string GenerateUri(string userIdentifier)
     {
         if (string.IsNullOrWhiteSpace(userIdentifier))
@@ -164,7 +162,7 @@ public sealed class TwoFactorSecretKey : ValueObject
                $"?secret={Value}&issuer={Uri.EscapeDataString(Issuer)}";
     }
 
-   
+
     public TwoFactorSecretKey Activate()
     {
         var activated = new TwoFactorSecretKey(Value, Issuer, true, CreatedAt)
@@ -175,7 +173,7 @@ public sealed class TwoFactorSecretKey : ValueObject
         return activated;
     }
 
-    
+
     public TwoFactorSecretKey Deactivate()
     {
         var deactivated = new TwoFactorSecretKey(Value, Issuer, false, CreatedAt)
@@ -186,7 +184,7 @@ public sealed class TwoFactorSecretKey : ValueObject
         return deactivated;
     }
 
-    
+
     public TwoFactorSecretKey RecordUsage()
     {
         var updated = new TwoFactorSecretKey(Value, Issuer, IsActive, CreatedAt)

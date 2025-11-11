@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AuthSystem.Domain.Common.Base;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Rules;
 using AuthSystem.Domain.Entities.Authorization.Role.Events;
 using AuthSystem.Domain.Entities.Authorization.Role.Rules;
 using AuthSystem.Domain.Enums;
@@ -15,11 +11,11 @@ namespace AuthSystem.Domain.Entities.Authorization.Role;
 /// </summary>
 public class Role : AggregateRoot<Guid>
 {
-   
+
     private readonly List<RolePermission> _permissions = new();
-   
+
     private readonly List<UserRole> _userRoles = new();
-    
+
 
 
     private Role()
@@ -27,7 +23,7 @@ public class Role : AggregateRoot<Guid>
     }
 
 
-  public Role(Guid id, string name, string description, bool isDefault = false, bool isSystemRole = false) : base(id)
+    public Role(Guid id, string name, string description, bool isDefault = false, bool isSystemRole = false) : base(id)
     {
         CheckRule(new RoleNameMustBeValidRule(name));
         CheckRule(new RoleDescriptionMustBeValidRule(description));
@@ -48,7 +44,7 @@ public class Role : AggregateRoot<Guid>
 
     public void UpdateName(string name)
     {
-        
+
         CheckRule(new RoleNameMustBeValidRule(name));
         if (string.Equals(Name, name, StringComparison.Ordinal))
         {
@@ -58,10 +54,10 @@ public class Role : AggregateRoot<Guid>
         ApplyRaise(new RoleUpdatedEvent(Id, name, Description));
     }
 
- 
+
     public void UpdateDescription(string description)
     {
-     
+
         CheckRule(new RoleDescriptionMustBeValidRule(description));
 
         if (string.Equals(Description, description, StringComparison.Ordinal))
@@ -71,7 +67,7 @@ public class Role : AggregateRoot<Guid>
         ApplyRaise(new RoleUpdatedEvent(Id, Name, description));
     }
 
-   
+
     public RolePermission AddPermission(PermissionType permissionType)
     {
         CheckRule(new RoleCannotHaveDuplicatePermissionsRule(_permissions.Select(p => p.PermissionType), permissionType));
@@ -146,7 +142,7 @@ public class Role : AggregateRoot<Guid>
             return;
         }
 
-    
+
         ApplyRaise(new RoleDeletedEvent(Id));
     }
 
@@ -157,10 +153,10 @@ public class Role : AggregateRoot<Guid>
         {
             return;
         }
-     
+
         ApplyRaise(new RoleUndeletedEvent(Id));
     }
-   
+
 
     private void On(RoleCreatedEvent @event)
     {
@@ -181,7 +177,7 @@ public class Role : AggregateRoot<Guid>
         MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
- 
+
     private void On(RolePermissionAddedEvent @event)
     {
         var permission = new RolePermission(@event.RolePermissionId, @event.RoleId, @event.PermissionType, @event.OccurredOn);
@@ -200,7 +196,7 @@ public class Role : AggregateRoot<Guid>
         MarkAsUpdated(occurredOn: @event.OccurredOn);
     }
 
- 
+
     private void On(RoleDeletedEvent @event)
     {
         MarkAsDeleted(occurredOn: @event.OccurredOn);

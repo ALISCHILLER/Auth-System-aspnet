@@ -1,14 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using AuthSystem.Application.Common.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Exceptions;
-using AuthSystem.Shared.Contracts;
-using HotChocolate;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace AuthSystem.Api.Middleware;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using AuthSystem.Domain.Common.Base;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;
 using AuthSystem.Domain.ValueObjects;
@@ -23,10 +22,10 @@ public class AuditLogEntry : Entity<Guid>
 
     private AuditLogEntry()
     {
-        
+
     }
 
-    
+
     private AuditLogEntry(
         Guid id,
         Guid logId,
@@ -51,7 +50,7 @@ public class AuditLogEntry : Entity<Guid>
         MarkAsCreated(occurredOn: Timestamp);
     }
 
-  
+
     public static AuditLogEntry Create(
         Guid id,
         Guid logId,
@@ -92,7 +91,7 @@ public class AuditLogEntry : Entity<Guid>
         return new AuditLogEntry(id, logId, userId, username, action, description, logLevel, ipAddress, userAgent, occurredAt);
     }
 
- 
+
     public void Validate()
     {
         if (string.IsNullOrWhiteSpace(Username))

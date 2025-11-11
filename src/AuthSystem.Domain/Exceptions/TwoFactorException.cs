@@ -1,6 +1,5 @@
 ﻿using AuthSystem.Domain.Common.Exceptions;
 using AuthSystem.Domain.Enums;
-using System;
 
 namespace AuthSystem.Domain.Exceptions;
 

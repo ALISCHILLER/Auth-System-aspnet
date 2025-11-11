@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Domain.Common.Clock;
+﻿namespace AuthSystem.Domain.Common.Clock;
 
 /// <summary>
 /// Provides access to the current UTC time inside the domain layer.

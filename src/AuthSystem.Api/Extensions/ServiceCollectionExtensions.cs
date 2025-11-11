@@ -2,9 +2,6 @@
 using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AuthSystem.Api.Extensions;
 

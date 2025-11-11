@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AuthSystem.Application.Contracts.Roles;
+﻿namespace AuthSystem.Application.Contracts.Roles;
 
 public sealed class GetAllRolesResponse
 {

@@ -21,3 +21,4 @@ public sealed class UserMustHaveValidPasswordRule : BusinessRuleBase
     {
         return _passwordHash is null;
     }
+}

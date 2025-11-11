@@ -1,8 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Monitoring;
-using AuthSystem.Shared.Contracts.Security;
-using AuthSystem.Shared.DTOs;
+﻿using AuthSystem.Application.Common.Abstractions.Monitoring;
 using MediatR;
 
 namespace AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;

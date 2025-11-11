@@ -1,6 +1,4 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Security;
-using AuthSystem.Shared.Constants;
-using Microsoft.AspNetCore.Http;
 
 namespace AuthSystem.Infrastructure.Identity;
 

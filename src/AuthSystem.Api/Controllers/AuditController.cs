@@ -1,12 +1,6 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
-using AuthSystem.Shared.Contracts;
-using AuthSystem.Shared.Contracts.Security;
-using AuthSystem.Shared.DTOs;
+﻿using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSystem.Api.Controllers;

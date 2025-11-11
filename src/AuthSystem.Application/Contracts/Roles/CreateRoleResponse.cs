@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Application.Contracts.Roles;
+﻿namespace AuthSystem.Application.Contracts.Roles;
 
 public sealed class CreateRoleResponse
 {

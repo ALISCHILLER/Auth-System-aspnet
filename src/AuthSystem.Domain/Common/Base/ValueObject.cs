@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace AuthSystem.Domain.Common.Base;
+﻿namespace AuthSystem.Domain.Common.Base;
 
 public abstract class ValueObject
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace AuthSystem.Application.Common.Abstractions.Security;
+﻿namespace AuthSystem.Application.Common.Abstractions.Security;
 
 public interface IVerificationCodeService
 {

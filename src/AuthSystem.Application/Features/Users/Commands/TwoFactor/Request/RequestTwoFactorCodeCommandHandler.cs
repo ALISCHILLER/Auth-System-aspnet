@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Messaging;
+﻿using AuthSystem.Application.Common.Abstractions.Messaging;
 using AuthSystem.Application.Common.Abstractions.Persistence;
 using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Exceptions;

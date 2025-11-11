@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Monitoring;
+﻿using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Models;
-using AuthSystem.Shared.Contracts.Security;
 using MediatR;
 
 namespace AuthSystem.Application.Features.Users.Commands.Logout;

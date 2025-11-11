@@ -1,6 +1,3 @@
-
-using System;
-
 namespace AuthSystem.Domain.Common.Clock;
 
 public static class DomainClock

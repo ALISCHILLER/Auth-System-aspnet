@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Domain.Common.Exceptions;
+﻿namespace AuthSystem.Domain.Common.Exceptions;
 
 /// <summary>
 /// استثنا برای نقض سیاست‌ها

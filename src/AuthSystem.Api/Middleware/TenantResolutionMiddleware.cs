@@ -1,7 +1,4 @@
 ﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using AuthSystem.Shared.Constants;
-using Microsoft.AspNetCore.Http;
 
 namespace AuthSystem.Api.Middleware;
 

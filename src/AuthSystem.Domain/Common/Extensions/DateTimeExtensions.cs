@@ -1,6 +1,5 @@
-﻿using System;
+﻿using AuthSystem.Domain.Common.Clock;
 using System.Globalization;
-using AuthSystem.Domain.Common.Clock;
 
 
 namespace AuthSystem.Domain.Common.Extensions;

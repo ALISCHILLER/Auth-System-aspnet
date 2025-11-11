@@ -1,12 +1,8 @@
-﻿using System.Linq;
-using System.Text.Json.Nodes;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Identity;
+﻿using AuthSystem.Application.Common.Abstractions.Identity;
 using AuthSystem.Application.Contracts.Users;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Nodes;
 
 namespace AuthSystem.Api.Controllers;
 

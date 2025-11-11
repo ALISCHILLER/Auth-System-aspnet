@@ -1,5 +1,5 @@
-﻿using MediatR;
-using AuthSystem.Application.Contracts.Users;
+﻿using AuthSystem.Application.Contracts.Users;
+using MediatR;
 
 namespace AuthSystem.Application.Features.Users.Commands.LoginUser;
 

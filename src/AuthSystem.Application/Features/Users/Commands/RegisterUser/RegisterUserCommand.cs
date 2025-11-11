@@ -1,8 +1,8 @@
-﻿using MediatR;
-using AuthSystem.Application.Common.Abstractions.Authorization;
+﻿using AuthSystem.Application.Common.Abstractions.Authorization;
 using AuthSystem.Application.Common.Markers;
 using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Domain.Enums;
+using MediatR;
 
 namespace AuthSystem.Application.Features.Users.Commands.RegisterUser;
 

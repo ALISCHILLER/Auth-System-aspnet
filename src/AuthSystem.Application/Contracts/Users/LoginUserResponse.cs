@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Application.Contracts.Users;
+﻿namespace AuthSystem.Application.Contracts.Users;
 
 public sealed class LoginUserResponse
 {

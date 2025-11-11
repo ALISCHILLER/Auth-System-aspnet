@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
-using AuthSystem.Shared.Contracts.Security;
-using AuthSystem.Shared.DTOs;
+﻿using AuthSystem.Application.Features.Audit.Queries.GetSecurityEvents;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MediatR;

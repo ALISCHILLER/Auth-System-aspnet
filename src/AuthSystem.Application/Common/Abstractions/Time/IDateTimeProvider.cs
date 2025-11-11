@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Application.Common.Abstractions.Time;
+﻿namespace AuthSystem.Application.Common.Abstractions.Time;
 
 public interface IDateTimeProvider
 {

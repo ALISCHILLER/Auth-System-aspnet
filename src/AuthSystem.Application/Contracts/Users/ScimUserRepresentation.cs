@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AuthSystem.Application.Contracts.Users;
+﻿namespace AuthSystem.Application.Contracts.Users;
 
 public sealed record ScimUserRepresentation
 {

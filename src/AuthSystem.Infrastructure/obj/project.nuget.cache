@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "psGCQBn6WWY=",
-  "success": false,
+  "dgSpecHash": "xv7QBrWbbs4=",
+  "success": true,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zar\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
@@ -99,15 +99,5 @@
     "C:\\Users\\zar\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.301\\microsoft.net.sdk.compilers.toolset.9.0.301.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1105",
-      "level": "Error",
-      "message": "Unable to find project information for 'E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
-      "libraryId": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  "logs": []
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using AuthSystem.Application.Common.Abstractions.Time;
+﻿using AuthSystem.Application.Common.Abstractions.Time;
 
 namespace AuthSystem.Infrastructure.Time;
 

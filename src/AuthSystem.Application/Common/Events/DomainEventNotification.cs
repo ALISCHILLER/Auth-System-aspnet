@@ -1,5 +1,4 @@
 ﻿using AuthSystem.Domain.Common.Abstractions;
-using AuthSystem.Domain.Common.Events;
 using MediatR;
 
 namespace AuthSystem.Application.Common.Events;

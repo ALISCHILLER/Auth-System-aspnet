@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AuthSystem.Domain.Enums;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Infrastructure.Identity;
 

@@ -1,5 +1,5 @@
-﻿using MediatR;
-using AuthSystem.Application.Contracts.Roles;
+﻿using AuthSystem.Application.Contracts.Roles;
+using MediatR;
 
 namespace AuthSystem.Application.Features.Roles.Queries.GetAllRoles;
 

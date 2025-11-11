@@ -1,5 +1,4 @@
 ﻿using AuthSystem.Domain.Common.Exceptions;
-using System;
 
 namespace AuthSystem.Domain.Exceptions;
 

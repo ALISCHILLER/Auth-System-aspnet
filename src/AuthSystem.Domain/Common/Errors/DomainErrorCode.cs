@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Domain.Common.Errors;
+﻿namespace AuthSystem.Domain.Common.Errors;
 
 /// <summary>
 /// Canonical error codes used across the domain layer and mapped to RFC 9457 problem types.

@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.DomainEvents;
+﻿using AuthSystem.Application.Common.Abstractions.DomainEvents;
 using AuthSystem.Application.Common.Abstractions.Persistence;
 using AuthSystem.Application.Common.Markers;
 using MediatR;

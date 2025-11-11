@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Domain.Common.Auditing;
+﻿namespace AuthSystem.Domain.Common.Auditing;
 
 /// <summary>
 /// اینترفیس برای موجودیت‌های کاملاً قابل حسابرسی

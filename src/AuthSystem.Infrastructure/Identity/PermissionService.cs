@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Authorization;
+﻿using AuthSystem.Application.Common.Abstractions.Authorization;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Infrastructure.Persistence.Sql;
 using Microsoft.EntityFrameworkCore;

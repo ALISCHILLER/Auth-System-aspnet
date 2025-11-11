@@ -1,4 +1,7 @@
-﻿namespace AuthSystem.Domain.Common.Specifications;
+﻿using System;
+using System.Linq.Expressions;
+
+namespace AuthSystem.Domain.Common.Specifications;
 
 /// <summary>
 /// مشخصات ترکیبی AND
@@ -8,7 +11,8 @@ public class AndSpecification<T> : CompositeSpecification<T>
     /// <summary>
     /// سازنده با دو مشخصات
     /// </summary>
-    public AndSpecification(ISpecification<T> left, ISpecification<T> right) : base(left, right)
+    public AndSpecification(ISpecification<T> left, ISpecification<T> right)
+       : base(left, right)
     {
     }
 
@@ -18,5 +22,14 @@ public class AndSpecification<T> : CompositeSpecification<T>
     public override bool IsSatisfiedBy(T entity)
     {
         return Left.IsSatisfiedBy(entity) && Right.IsSatisfiedBy(entity);
+    }
+    /// <summary>
+    /// ترکیب عبارات معیار برای مشخصات AND
+    /// </summary>
+    protected override Expression<Func<T, bool>> CombineCriteria(
+        Expression<Func<T, bool>> left,
+        Expression<Func<T, bool>> right)
+    {
+        return ExpressionComposer.And(left, right);
     }
 }

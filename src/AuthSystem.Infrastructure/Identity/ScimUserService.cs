@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Nodes;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Identity;
+﻿using AuthSystem.Application.Common.Abstractions.Identity;
 using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Domain.Entities.UserAggregate;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.ValueObjects;
 using AuthSystem.Infrastructure.Persistence.Sql;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Nodes;
 
 namespace AuthSystem.Infrastructure.Identity;
 

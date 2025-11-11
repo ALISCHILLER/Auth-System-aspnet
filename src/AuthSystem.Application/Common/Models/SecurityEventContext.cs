@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AuthSystem.Shared.Contracts.Security;
-
-namespace AuthSystem.Application.Common.Models;
+﻿namespace AuthSystem.Application.Common.Models;
 
 /// <summary>
 /// Carries contextual information about a security event that should be persisted and fanned out.

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using AuthSystem.Domain.Common.Base;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Rules;
 using AuthSystem.Domain.Entities.UserAggregate.Events;
 using AuthSystem.Domain.Entities.UserAggregate.Rules;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;
 using AuthSystem.Domain.ValueObjects;
+using System.Collections.ObjectModel;
 
 namespace AuthSystem.Domain.Entities.UserAggregate;
 

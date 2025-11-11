@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using AuthSystem.Application.Contracts.Users;
 using System.Text.Json.Nodes;
-using AuthSystem.Application.Contracts.Users;
 
 namespace AuthSystem.Application.Common.Abstractions.Identity;
 

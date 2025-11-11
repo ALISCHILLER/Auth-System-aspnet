@@ -1,9 +1,7 @@
-using System;
 using AuthSystem.Api.Extensions;
 using AuthSystem.Api.Filters;
 using AuthSystem.Api.GraphQL;
 using AuthSystem.Api.Hubs;
-using AuthSystem.Api.Grpc;
 using AuthSystem.Api.Middleware;
 using AuthSystem.Application;
 using AuthSystem.Application.Common.Options;

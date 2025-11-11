@@ -2620,7 +2620,7 @@
         "dependencies": {
           "AuthSystem.Application": "1.0.0",
           "AuthSystem.Domain": "1.0.0",
-          "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj": "1.0.0",
+          "AuthSystem.Shared": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.10",
           "Microsoft.Extensions.Http": "9.0.10",
@@ -2633,6 +2633,16 @@
         },
         "runtime": {
           "bin/placeholder/AuthSystem.Infrastructure.dll": {}
+        }
+      },
+      "AuthSystem.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/AuthSystem.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AuthSystem.Shared.dll": {}
         }
       }
     }
@@ -7458,6 +7468,11 @@
       "type": "project",
       "path": "../AuthSystem.Infrastructure/AuthSystem.Infrastructure.csproj",
       "msbuildProject": "../AuthSystem.Infrastructure/AuthSystem.Infrastructure.csproj"
+    },
+    "AuthSystem.Shared/1.0.0": {
+      "type": "project",
+      "path": "../AuthSystem.Shared/AuthSystem.Shared.csproj",
+      "msbuildProject": "../AuthSystem.Shared/AuthSystem.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7465,14 +7480,13 @@
       "AspNetCore.HealthChecks.UI.Client >= 9.0.0",
       "AuthSystem.Application >= 1.0.0",
       "AuthSystem.Infrastructure >= 1.0.0",
-      "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
+      "AuthSystem.Shared >= 1.0.0",
       "Grpc.AspNetCore >= 2.65.0",
       "HotChocolate.AspNetCore >= 13.8.1",
       "HotChocolate.Data >= 13.8.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.10",
       "Microsoft.AspNetCore.Mvc.Versioning >= 5.1.0",
       "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer >= 5.1.0",
-      "Microsoft.AspNetCore.RateLimiting >= 9.0.10",
       "Microsoft.CodeAnalysis.NetAnalyzers >= 9.0.0",
       "OpenTelemetry.Exporter.Console >= 1.9.0",
       "OpenTelemetry.Extensions.Hosting >= 1.9.0",
@@ -7577,10 +7591,6 @@
             "target": "Package",
             "version": "[5.1.0, )"
           },
-          "Microsoft.AspNetCore.RateLimiting": {
-            "target": "Package",
-            "version": "[9.0.10, )"
-          },
           "Microsoft.CodeAnalysis.NetAnalyzers": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
@@ -7652,25 +7662,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1102",
-      "level": "Error",
-      "message": "Unable to find package Microsoft.AspNetCore.RateLimiting with version (>= 9.0.10)\r\n  - Found 6 version(s) in nuget.org [ Nearest version: 7.0.0-rc.2.22476.2 ]\r\n  - Found 0 version(s) in Microsoft Visual Studio Offline Packages\r\n  - Found 0 version(s) in C:\\Program Files\\dotnet\\library-packs",
-      "libraryId": "Microsoft.AspNetCore.RateLimiting",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1105",
-      "level": "Error",
-      "message": "Unable to find project information for 'E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
-      "libraryId": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }

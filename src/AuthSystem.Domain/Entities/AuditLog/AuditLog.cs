@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AuthSystem.Domain.Common.Base;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.Exceptions;
@@ -21,16 +18,16 @@ public class AuditLog : AggregateRoot<Guid>
 
     public int EntryCount => _entries.Count;
 
-  
+
     public IReadOnlyList<AuditLogEntry> Entries => _entries.AsReadOnly();
 
-  
+
     private AuditLog()
     {
-       
+
     }
 
-  
+
     public AuditLog(Guid id, DateTime? startTime = null) : base(id)
     {
         var startedAt = startTime.HasValue ? NormalizeTimestamp(startTime.Value) : DomainClock.Instance.UtcNow;
@@ -68,7 +65,7 @@ public class AuditLog : AggregateRoot<Guid>
         return entry;
     }
 
-   
+
     public void AddEntries(IEnumerable<AuditLogEntry> entries)
     {
         if (entries is null)
@@ -127,7 +124,7 @@ public class AuditLog : AggregateRoot<Guid>
     public IReadOnlyList<AuditLogEntry> GetEntriesByAction(string action) =>
         _entries.Where(entry => entry.Action.Equals(action, StringComparison.OrdinalIgnoreCase)).ToList().AsReadOnly();
 
-   
+
     public void Validate()
     {
         if (StartTime == default)
@@ -146,7 +143,7 @@ public class AuditLog : AggregateRoot<Guid>
         }
     }
 
-    
+
     public TimeSpan? GetDuration()
     {
         if (!EndTime.HasValue)
@@ -157,7 +154,7 @@ public class AuditLog : AggregateRoot<Guid>
         return EndTime.Value - StartTime;
     }
 
-   
+
     public void CleanupOldEntries(DateTime cutoffDate)
     {
         _entries.RemoveAll(entry => entry.Timestamp < cutoffDate);

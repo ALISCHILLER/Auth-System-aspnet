@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Security;
+﻿using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Domain.Enums;
-using Microsoft.AspNetCore.Http;
 
 namespace AuthSystem.Infrastructure.Identity;
 

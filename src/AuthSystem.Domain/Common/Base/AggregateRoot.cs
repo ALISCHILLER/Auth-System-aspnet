@@ -1,16 +1,13 @@
-﻿using AuthSystem.Domain.Common.Events;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
-using AuthSystem.Domain.Common.Abstractions;
+﻿using AuthSystem.Domain.Common.Abstractions;
+using AuthSystem.Domain.Common.Events;
 using AuthSystem.Domain.Common.Exceptions;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 
 namespace AuthSystem.Domain.Common.Base;
 
-public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvent
+public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvents
     where TId : notnull
 {
 
@@ -121,14 +118,14 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvent
     }
 
     protected static async Task CheckRuleAsync(IAsyncBusinessRule rule)
-     {
-       ArgumentNullException.ThrowIfNull(rule);
+    {
+        ArgumentNullException.ThrowIfNull(rule);
 
         if (await rule.IsBrokenAsync().ConfigureAwait(false))
-          {
+        {
             throw await BusinessRuleValidationException.ForBrokenRuleAsync(rule).ConfigureAwait(false);
-          }
-     }
+        }
+    }
 
     protected static async Task CheckRulesAsync(IEnumerable<IAsyncBusinessRule> rules)
     {
@@ -183,7 +180,7 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvent
                 types: new[] { currentEventType },
                 modifiers: null);
 
-        currentEventType = currentEventType.BaseType;
+            currentEventType = currentEventType.BaseType;
         }
 
         return method;

@@ -203,3 +203,15 @@ E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api\bin\Debug\net9.0\ru\Micr
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 E:\project-zar\custom\asp\AuthSystem\src\AuthSystem.Api\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.csproj.AssemblyReference.cache
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\rpswa.dswa.cache.json
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.GeneratedMSBuildEditorConfig.editorconfig
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.AssemblyInfoInputs.cache
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.AssemblyInfo.cs
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.csproj.CoreCompileInputs.cache
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.MvcApplicationPartsAssemblyInfo.cs
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.MvcApplicationPartsAssemblyInfo.cache
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.sourcelink.json
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.dll
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\refint\AuthSystem.Api.dll
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Api\obj\Debug\net9.0\AuthSystem.Api.pdb

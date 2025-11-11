@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using AuthSystem.Application.Common.Abstractions.DomainEvents;
+﻿using AuthSystem.Application.Common.Abstractions.DomainEvents;
 using AuthSystem.Domain.Common.Abstractions;
+using System.Collections.Concurrent;
 
 namespace AuthSystem.Infrastructure.DomainEvents;
 

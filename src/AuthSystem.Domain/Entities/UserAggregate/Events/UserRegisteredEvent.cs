@@ -1,5 +1,4 @@
-﻿using System;
-using AuthSystem.Domain.Common.Events;
+﻿using AuthSystem.Domain.Common.Events;
 using AuthSystem.Domain.Enums;
 using AuthSystem.Domain.ValueObjects;
 

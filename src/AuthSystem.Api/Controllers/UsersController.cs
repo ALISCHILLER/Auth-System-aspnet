@@ -1,13 +1,8 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Contracts.Users;
+﻿using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Application.Features.Users.Commands.RegisterUser;
 using AuthSystem.Application.Features.Users.Queries.GetUserById;
-using AuthSystem.Shared.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSystem.Api.Controllers;

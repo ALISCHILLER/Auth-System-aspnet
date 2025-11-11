@@ -1,6 +1,4 @@
-﻿using System;
-using AuthSystem.Application.Common.Abstractions.Diagnostics;
-using Microsoft.AspNetCore.Http;
+﻿using AuthSystem.Application.Common.Abstractions.Diagnostics;
 
 namespace AuthSystem.Infrastructure.Diagnostics;
 

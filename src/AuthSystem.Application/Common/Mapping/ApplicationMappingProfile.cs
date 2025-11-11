@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using AuthSystem.Application.Contracts.Users;
+﻿using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Domain.Entities.UserAggregate;
+using AutoMapper;
 
 namespace AuthSystem.Application.Common.Mapping;
 

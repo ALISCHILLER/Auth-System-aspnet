@@ -1,5 +1,4 @@
 ﻿using AuthSystem.Domain.Common.Specifications;
-using AuthSystem.Domain.Entities.UserAggregate;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Specifications;
 

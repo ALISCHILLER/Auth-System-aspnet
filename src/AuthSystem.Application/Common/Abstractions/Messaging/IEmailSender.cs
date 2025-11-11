@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-namespace AuthSystem.Application.Common.Abstractions.Messaging;
+﻿namespace AuthSystem.Application.Common.Abstractions.Messaging;
 
 public interface IEmailSender
 {

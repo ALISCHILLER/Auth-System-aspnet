@@ -1,5 +1,4 @@
-﻿using System;
-using AuthSystem.Domain.Common.Events;
+﻿using AuthSystem.Domain.Common.Events;
 using AuthSystem.Domain.ValueObjects;
 
 namespace AuthSystem.Domain.Entities.UserAggregate.Events;

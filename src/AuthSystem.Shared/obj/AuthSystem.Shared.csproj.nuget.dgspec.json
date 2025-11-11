@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj": {}
+    "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj": {}
   },
   "projects": {
-    "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj": {
+    "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
+        "projectUniqueName": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
         "projectName": "AuthSystem.Shared",
-        "projectPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
+        "projectPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
         "packagesPath": "C:\\Users\\zar\\.nuget\\packages\\",
-        "outputPath": "E:\\project-zar\\custom\\asp\\AuthSystem\\src\\AuthSystem.Shared\\obj\\",
+        "outputPath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "e:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -52,6 +52,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.NetAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -63,6 +71,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+              "version": "[9.0.301, 9.0.301]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"

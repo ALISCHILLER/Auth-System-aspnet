@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AuthSystem.Domain.Common.Extensions;
+﻿namespace AuthSystem.Domain.Common.Extensions;
 
 /// <summary>
 /// اکستنشن‌های برای مجموعه‌ها

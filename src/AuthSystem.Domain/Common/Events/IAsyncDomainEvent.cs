@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using AuthSystem.Domain.Common.Abstractions;
+﻿using AuthSystem.Domain.Common.Abstractions;
 
 namespace AuthSystem.Domain.Common.Events;
 

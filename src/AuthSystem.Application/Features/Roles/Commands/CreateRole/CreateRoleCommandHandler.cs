@@ -1,12 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Persistence;
+﻿using AuthSystem.Application.Common.Abstractions.Persistence;
 using AuthSystem.Application.Common.Exceptions;
 using AuthSystem.Application.Contracts.Roles;
 using AuthSystem.Domain.Entities.Authorization.Role;
-using AuthSystem.Domain.Enums;
 using MediatR;
 
 namespace AuthSystem.Application.Features.Roles.Commands.CreateRole;

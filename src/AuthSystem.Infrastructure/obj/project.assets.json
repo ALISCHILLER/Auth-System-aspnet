@@ -1886,6 +1886,16 @@
         "runtime": {
           "bin/placeholder/AuthSystem.Domain.dll": {}
         }
+      },
+      "AuthSystem.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/AuthSystem.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AuthSystem.Shared.dll": {}
+        }
       }
     }
   },
@@ -5935,13 +5945,18 @@
       "type": "project",
       "path": "../AuthSystem.Domain/AuthSystem.Domain.csproj",
       "msbuildProject": "../AuthSystem.Domain/AuthSystem.Domain.csproj"
+    },
+    "AuthSystem.Shared/1.0.0": {
+      "type": "project",
+      "path": "../AuthSystem.Shared/AuthSystem.Shared.csproj",
+      "msbuildProject": "../AuthSystem.Shared/AuthSystem.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "AuthSystem.Application >= 1.0.0",
       "AuthSystem.Domain >= 1.0.0",
-      "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
+      "AuthSystem.Shared >= 1.0.0",
       "Microsoft.CodeAnalysis.NetAnalyzers >= 9.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.10",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.10",
@@ -6077,16 +6092,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1105",
-      "level": "Error",
-      "message": "Unable to find project information for 'E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
-      "libraryId": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Shared\\AuthSystem.Shared.csproj",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }

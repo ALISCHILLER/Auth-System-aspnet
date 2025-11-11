@@ -1,7 +1,4 @@
-﻿using AuthSystem.Shared.Contracts.Security;
-using HotChocolate.Types;
-
-namespace AuthSystem.Api.GraphQL;
+﻿namespace AuthSystem.Api.GraphQL;
 
 public sealed class SecurityEventGraphType : ObjectType<SecurityEventDto>
 {

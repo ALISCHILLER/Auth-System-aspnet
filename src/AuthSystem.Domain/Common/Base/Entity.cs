@@ -1,10 +1,5 @@
 ﻿using AuthSystem.Domain.Common.Auditing;
 using AuthSystem.Domain.Common.Clock;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AuthSystem.Domain.Common.Base;
 

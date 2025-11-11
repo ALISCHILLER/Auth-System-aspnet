@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using AuthSystem.Domain.Common.Base;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Enums;
+using System.Text.RegularExpressions;
 
 namespace AuthSystem.Domain.ValueObjects;
 

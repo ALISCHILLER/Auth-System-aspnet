@@ -1,19 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Monitoring;
+﻿using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Application.Common.Models;
 using AuthSystem.Infrastructure.Auditing;
 using AuthSystem.Infrastructure.Options;
 using AuthSystem.Infrastructure.Persistence.Sql;
-using AuthSystem.Shared.Contracts.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 
 namespace AuthSystem.Infrastructure.SecurityEvents;
 

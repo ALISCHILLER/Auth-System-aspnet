@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AuthSystem.Infrastructure.Auditing;
+﻿namespace AuthSystem.Infrastructure.Auditing;
 
 internal sealed class SecurityEventLog
 {

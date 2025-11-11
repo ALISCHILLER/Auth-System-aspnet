@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AuthSystem.Infrastructure.Options;
+﻿namespace AuthSystem.Infrastructure.Options;
 
 public sealed class SmsOptions
 {

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AuthSystem.Domain.Common.Policies;
+﻿namespace AuthSystem.Domain.Common.Policies;
 
 /// <summary>
 /// Helper for evaluating policies individually or in batches.
 /// </summary>
 public sealed class PolicyEvaluator
 {
-  
+
     public PolicyResult Evaluate<TContext>(IPolicy<TContext> policy, TContext context)
     {
         if (policy is null) throw new ArgumentNullException(nameof(policy));
@@ -23,7 +18,7 @@ public sealed class PolicyEvaluator
         return policy.EvaluateAsync(context);
     }
 
-    
+
     public PolicyResult EvaluateAll<TContext>(IEnumerable<IPolicy<TContext>> policies, TContext context)
     {
         if (policies is null) throw new ArgumentNullException(nameof(policies));

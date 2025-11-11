@@ -1,13 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Security;
+﻿using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Infrastructure.Persistence.Sql;
 using AuthSystem.Infrastructure.Verification.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AuthSystem.Infrastructure.Verification;
 

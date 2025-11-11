@@ -1,5 +1,5 @@
-﻿using MediatR;
-using AuthSystem.Application.Common.Markers;
+﻿using AuthSystem.Application.Common.Markers;
+using MediatR;
 
 namespace AuthSystem.Application.Features.Users.Commands.Logout;
 

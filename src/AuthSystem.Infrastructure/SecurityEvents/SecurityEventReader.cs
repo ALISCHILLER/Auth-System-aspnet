@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Monitoring;
-using AuthSystem.Infrastructure.Auditing;
+﻿using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Infrastructure.Persistence.Sql;
-using AuthSystem.Shared.Contracts.Security;
-using AuthSystem.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace AuthSystem.Infrastructure.SecurityEvents;
 

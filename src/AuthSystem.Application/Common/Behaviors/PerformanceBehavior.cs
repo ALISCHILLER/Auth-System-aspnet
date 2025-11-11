@@ -1,12 +1,9 @@
-﻿using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Diagnostics;
+﻿using AuthSystem.Application.Common.Abstractions.Diagnostics;
 using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Application.Common.Options;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
 
 
 namespace AuthSystem.Application.Common.Behaviors;

@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Models;
+﻿using AuthSystem.Application.Common.Models;
 
 namespace AuthSystem.Application.Common.Abstractions.Monitoring;
 

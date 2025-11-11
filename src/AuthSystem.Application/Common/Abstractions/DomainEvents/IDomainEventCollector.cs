@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using AuthSystem.Domain.Common.Abstractions;
-using AuthSystem.Domain.Common.Events;
+﻿using AuthSystem.Domain.Common.Abstractions;
 
 namespace AuthSystem.Application.Common.Abstractions.DomainEvents;
 

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Common.Clock;
-using AuthSystem.Domain.Common.Base;
 using AuthSystem.Domain.Enums;
 
 namespace AuthSystem.Domain.Entities.Authorization.Role;
@@ -13,10 +12,10 @@ public class RolePermission : Entity<Guid>
     public Guid RoleId { get; private set; }
     public PermissionType PermissionType { get; private set; }
 
-    
+
     private RolePermission()
     {
-    
+
     }
 
 

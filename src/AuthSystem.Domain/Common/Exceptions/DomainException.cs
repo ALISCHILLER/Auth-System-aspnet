@@ -1,6 +1,4 @@
-﻿using System;
-using AuthSystem.Domain.Common.Errors;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using AuthSystem.Domain.Common.Errors;
 
 namespace AuthSystem.Domain.Common.Exceptions;
 

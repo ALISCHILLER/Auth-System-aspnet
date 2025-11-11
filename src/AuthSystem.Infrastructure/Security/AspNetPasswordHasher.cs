@@ -1,5 +1,4 @@
-﻿using System;
-using AuthSystem.Application.Common.Abstractions.Security;
+﻿using AuthSystem.Application.Common.Abstractions.Security;
 using Microsoft.AspNetCore.Identity;
 
 namespace AuthSystem.Infrastructure.Security;

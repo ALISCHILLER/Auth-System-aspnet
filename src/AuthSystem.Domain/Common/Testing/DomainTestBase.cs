@@ -9,29 +9,50 @@ namespace AuthSystem.Domain.Common.Testing;
 /// </summary>
 public abstract class DomainTestBase : IDisposable
 {
+
+    private AdjustableDomainClock? _testClock;
+
     /// <summary>
-    /// نمونه ساعت دامنه که به تست‌ها اجازه می‌دهد زمان را کنترل کنند.
+    /// نمونه ساعت دامنه که به تست‌ها اجازه می‌دهد زمان را مشاهده کنند.
     /// </summary>
-    protected DomainClock Clock => DomainClock.Instance;
+    protected IDomainClock Clock => DomainClock.Instance;
 
     /// <summary>
     /// زمان ثابت برای سناریوهای تست تعیین می‌کند.
     /// </summary>
-    protected void FreezeTime(DateTime utcNow) => Clock.SetFixedTime(utcNow);
+    protected void FreezeTime(DateTime utcNow)
+    {
+        _testClock = new AdjustableDomainClock(utcNow);
+        DomainClock.Set(_testClock);
+    }
 
     /// <summary>
     /// تغییر زمان نسبت به مقدار فعلی (در صورت فریز بودن) را فراهم می‌کند.
     /// </summary>
-    protected void AdvanceTime(TimeSpan offset) => Clock.Advance(offset);
+    protected void AdvanceTime(TimeSpan offset)
+    {
+        if (_testClock is null)
+        {
+            FreezeTime(DomainClock.Instance.UtcNow.Add(offset));
+            return;
+        }
+
+        _testClock.Advance(offset);
+    }
 
     /// <summary>
     /// ریست کردن ساعت دامنه پس از اتمام تست.
     /// </summary>
-    protected void ResetTime() => Clock.Reset();
+    protected void ResetTime()
+    {
+        _testClock = null;
+        DomainClock.Reset();
+    }
 
     /// <inheritdoc />
     public virtual void Dispose()
     {
-        Clock.Reset();
+        ResetTime();
+        GC.SuppressFinalize(this);
     }
 }

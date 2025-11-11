@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using AuthSystem.Domain.Common.Abstractions;
+﻿using AuthSystem.Domain.Common.Abstractions;
 
 namespace AuthSystem.Domain.Common.Exceptions;
 
@@ -14,7 +12,7 @@ public class BusinessRuleValidationException : DomainException
         ErrorCode = errorCode;
     }
 
-   
+
     private BusinessRuleValidationException(string message, string errorCode, Exception innerException)
         : base(message, innerException)
     {
@@ -31,7 +29,7 @@ public class BusinessRuleValidationException : DomainException
         return new BusinessRuleValidationException(rule.Message, rule.Code);
     }
 
-    
+
     public static async Task<BusinessRuleValidationException> ForBrokenRuleAsync(IAsyncBusinessRule rule)
     {
         var message = await rule.GetMessageAsync().ConfigureAwait(false);

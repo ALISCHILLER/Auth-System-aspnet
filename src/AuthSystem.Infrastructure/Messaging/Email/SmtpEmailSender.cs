@@ -1,10 +1,8 @@
-﻿using System.Net.Mail;
-using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Common.Abstractions.Messaging;
+﻿using AuthSystem.Application.Common.Abstractions.Messaging;
 using AuthSystem.Infrastructure.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Net.Mail;
 
 namespace AuthSystem.Infrastructure.Messaging.Email;
 

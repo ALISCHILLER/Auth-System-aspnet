@@ -1,19 +1,13 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AuthSystem.Application.Contracts.Users;
+﻿using AuthSystem.Application.Contracts.Users;
 using AuthSystem.Application.Features.Users.Commands.LoginUser;
 using AuthSystem.Application.Features.Users.Commands.Logout;
 using AuthSystem.Application.Features.Users.Commands.RefreshToken;
 using AuthSystem.Application.Features.Users.Commands.TwoFactor.Request;
 using AuthSystem.Application.Features.Users.Commands.TwoFactor.Verify;
-using AuthSystem.Shared.Contracts;
-using AuthSystem.Shared.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using Microsoft.Net.Http.Headers;
 
 namespace AuthSystem.Api.Controllers;
 

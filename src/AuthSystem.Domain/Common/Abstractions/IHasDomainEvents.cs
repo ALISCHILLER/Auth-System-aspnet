@@ -1,4 +1,7 @@
-﻿namespace AuthSystem.Domain.Common.Abstractions;
+﻿using System.Collections.Generic;
+using AuthSystem.Domain.Common.Events;
+
+namespace AuthSystem.Domain.Common.Abstractions;
 
 public interface IHasDomainEvents
 {
