@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "JLqJeXV4aIA=",
-  "success": false,
+  "dgSpecHash": "5ufXXkvXPiQ=",
+  "success": true,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\src\\AuthSystem.Infrastructure\\AuthSystem.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zar\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
@@ -48,7 +48,7 @@
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.http\\9.0.10\\microsoft.extensions.http.9.0.10.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.identity.core\\9.0.10\\microsoft.extensions.identity.core.9.0.10.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.logging\\9.0.10\\microsoft.extensions.logging.9.0.10.nupkg.sha512",
-    "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0\\microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.10\\microsoft.extensions.logging.abstractions.9.0.10.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.options\\9.0.10\\microsoft.extensions.options.9.0.10.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\9.0.10\\microsoft.extensions.options.configurationextensions.9.0.10.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.10\\microsoft.extensions.primitives.9.0.10.nupkg.sha512",
@@ -99,15 +99,5 @@
     "C:\\Users\\zar\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.301\\microsoft.net.sdk.compilers.toolset.9.0.301.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Microsoft.Extensions.Logging.Abstractions from 9.0.10 to 9.0.0. Reference the package directly from the project to select a different version. \r\n AuthSystem.Infrastructure -> Microsoft.Extensions.Http 9.0.10 -> Microsoft.Extensions.Logging.Abstractions (>= 9.0.10) \r\n AuthSystem.Infrastructure -> Microsoft.Extensions.Logging.Abstractions (>= 9.0.0)",
-      "libraryId": "Microsoft.Extensions.Logging.Abstractions",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  "logs": []
 }

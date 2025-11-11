@@ -1765,7 +1765,7 @@
           "FluentValidation": "11.9.0",
           "FluentValidation.DependencyInjectionExtensions": "11.9.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.10"
         },
         "compile": {
           "bin/placeholder/AuthSystem.Application.dll": {}
@@ -1795,7 +1795,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.10",
           "Microsoft.Extensions.Http": "9.0.10",
           "Microsoft.Extensions.Identity.Core": "9.0.10",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.10",
           "Polly.Extensions.Http": "3.0.0",
           "System.IdentityModel.Tokens.Jwt": "8.14.0"
         },

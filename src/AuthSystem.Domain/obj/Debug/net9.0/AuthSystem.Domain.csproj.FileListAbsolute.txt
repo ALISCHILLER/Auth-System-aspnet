@@ -19,3 +19,7 @@ E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\obj\Debug
 E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.dll
 E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\obj\Debug\net9.0\refint\AuthSystem.Domain.dll
 E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\obj\Debug\net9.0\AuthSystem.Domain.pdb
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\bin\Debug\net9.0\AuthSystem.Domain.deps.json
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\bin\Debug\net9.0\AuthSystem.Domain.dll
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\bin\Debug\net9.0\AuthSystem.Domain.pdb
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Domain\obj\Debug\net9.0\ref\AuthSystem.Domain.dll

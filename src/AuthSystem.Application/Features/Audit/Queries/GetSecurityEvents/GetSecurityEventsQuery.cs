@@ -1,4 +1,5 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Authorization;
+using AuthSystem.Domain.Enums;
 using AuthSystem.Shared.Contracts.Security;
 using AuthSystem.Shared.DTOs;
 using MediatR;
