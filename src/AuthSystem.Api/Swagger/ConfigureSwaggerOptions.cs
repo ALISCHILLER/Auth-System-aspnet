@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
+using System.IO;
+using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Any;
 
 namespace AuthSystem.Api.Swagger;
 
-public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
+public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
+    : IConfigureOptions<SwaggerGenOptions>
 {
     public void Configure(SwaggerGenOptions options)
     {
@@ -35,7 +39,9 @@ public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provi
         options.SchemaFilter<SwaggerEnumSchemaFilter>();
 
         var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        // ✅ اینجا کامل qualify می‌کنیم که با HotChocolate.Path تداخل نداشته باشه
+        var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+
         if (File.Exists(xmlPath))
         {
             options.IncludeXmlComments(xmlPath);
@@ -114,7 +120,8 @@ public sealed class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provi
             info.Description += " This API version has been deprecated.";
         }
 
-        info.Extensions["x-api-lifecycle"] = new Microsoft.OpenApi.Any.OpenApiString(description.IsDeprecated ? "deprecated" : "active");
+        info.Extensions["x-api-lifecycle"] =
+            new OpenApiString(description.IsDeprecated ? "deprecated" : "active");
 
         return info;
     }

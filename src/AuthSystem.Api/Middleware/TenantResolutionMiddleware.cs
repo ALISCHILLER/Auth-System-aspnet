@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using AuthSystem.Shared.Constants;
+using System.Security.Claims;
 
 namespace AuthSystem.Api.Middleware;
 

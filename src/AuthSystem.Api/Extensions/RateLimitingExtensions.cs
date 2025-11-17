@@ -1,6 +1,7 @@
 ﻿using AuthSystem.Api.Options;
 using AuthSystem.Shared.Constants;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.Extensions.Configuration;
 using System.Threading.RateLimiting;
 
 namespace AuthSystem.Api.Extensions;
@@ -9,11 +10,11 @@ public static class RateLimitingExtensions
 {
     public static IServiceCollection AddApiRateLimiting(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<RateLimitingOptions>(configuration.GetSection(RateLimitingOptions.SectionName));
+        var rateOptions = LoadRateLimitingOptions(configuration);
 
-        services.AddRateLimiter((serviceProvider, options) =>
+        services.AddRateLimiter(options =>
         {
-            var rateOptions = serviceProvider.GetRequiredService<IOptions<RateLimitingOptions>>().Value;
+       
 
             options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
                 RateLimitPartition.GetFixedWindowLimiter("global", _ => CreateFixedWindowOptions(rateOptions.Global)));
@@ -73,5 +74,11 @@ public static class RateLimitingExtensions
             : !string.IsNullOrWhiteSpace(ip) ? ip! : "anonymous";
 
         return string.IsNullOrWhiteSpace(tenant) ? baseKey : $"{tenant}:{baseKey}";
+    }
+    private static RateLimitingOptions LoadRateLimitingOptions(IConfiguration configuration)
+    {
+        var rateOptions = new RateLimitingOptions();
+        configuration.GetSection(RateLimitingOptions.SectionName).Bind(rateOptions);
+        return rateOptions;
     }
 }

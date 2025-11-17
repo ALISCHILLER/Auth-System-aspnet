@@ -1,5 +1,5 @@
 ﻿using AuthSystem.Api.Options;
-using Microsoft.Extensions.Options;
+using OpenTelemetry.Extensions.Hosting;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -12,35 +12,31 @@ public static class TelemetryExtensions
     {
         services.Configure<TelemetryOptions>(configuration.GetSection(TelemetryOptions.SectionName));
 
+        var telemetryOptions = configuration.GetSection(TelemetryOptions.SectionName).Get<TelemetryOptions>() ?? new TelemetryOptions();
+   
         var openTelemetry = services.AddOpenTelemetry();
         openTelemetry.ConfigureResource(resource => resource.AddService("AuthSystem.Api"));
 
-        openTelemetry.WithMetrics((sp, metrics) =>
+        if (telemetryOptions.EnableMetrics)
         {
-            var options = sp.GetRequiredService<IOptions<TelemetryOptions>>().Value;
-            if (!options.EnableMetrics)
+            openTelemetry.WithMetrics(metrics =>
             {
-                return;
-            }
+                metrics.AddAspNetCoreInstrumentation();
+                metrics.AddHttpClientInstrumentation();
+                metrics.AddRuntimeInstrumentation();
+                metrics.AddConsoleExporter();
+            });
+        }
 
-            metrics.AddAspNetCoreInstrumentation();
-            metrics.AddHttpClientInstrumentation();
-            metrics.AddRuntimeInstrumentation();
-            metrics.AddConsoleExporter();
-        });
-
-        openTelemetry.WithTracing((sp, tracing) =>
+        if (telemetryOptions.EnableTracing)
         {
-            var options = sp.GetRequiredService<IOptions<TelemetryOptions>>().Value;
-            if (!options.EnableTracing)
+            openTelemetry.WithTracing(tracing =>
             {
-                return;
-            }
-
-            tracing.AddAspNetCoreInstrumentation();
-            tracing.AddHttpClientInstrumentation();
-            tracing.AddConsoleExporter();
-        });
+                tracing.AddAspNetCoreInstrumentation();
+                tracing.AddHttpClientInstrumentation();
+                tracing.AddConsoleExporter();
+            });
+        }
 
         return services;
     }

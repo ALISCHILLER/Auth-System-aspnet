@@ -7267,6 +7267,7 @@
       "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer >= 5.1.0",
       "Microsoft.CodeAnalysis.NetAnalyzers >= 9.0.0",
       "Microsoft.Extensions.Hosting.Abstractions >= 9.0.10",
+      "Microsoft.OpenApi >= 1.6.25",
       "OpenTelemetry.Exporter.Console >= 1.9.0",
       "OpenTelemetry.Instrumentation.AspNetCore >= 1.9.0",
       "OpenTelemetry.Instrumentation.Http >= 1.9.0",
@@ -7400,6 +7401,10 @@
             "target": "Package",
             "version": "[9.0.10, )"
           },
+          "Microsoft.OpenApi": {
+            "target": "Package",
+            "version": "[1.6.25, )"
+          },
           "OpenTelemetry.Exporter.Console": {
             "target": "Package",
             "version": "[1.9.0, )"
@@ -7440,12 +7445,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.301, 9.0.301]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

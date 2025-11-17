@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1XaCJw9ZxNA=",
+  "dgSpecHash": "4jEh271zvUY=",
   "success": true,
   "projectFilePath": "E:\\project-zar\\custom\\asp\\new\\Auth-System-aspnet\\tests\\AuthSystem.UnitTests\\AuthSystem.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -99,8 +99,7 @@
     "C:\\Users\\zar\\.nuget\\packages\\xunit.core\\2.9.3\\xunit.core.2.9.3.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\xunit.extensibility.core\\2.9.3\\xunit.extensibility.core.2.9.3.nupkg.sha512",
     "C:\\Users\\zar\\.nuget\\packages\\xunit.extensibility.execution\\2.9.3\\xunit.extensibility.execution.2.9.3.nupkg.sha512",
-    "C:\\Users\\zar\\.nuget\\packages\\xunit.runner.visualstudio\\3.1.3\\xunit.runner.visualstudio.3.1.3.nupkg.sha512",
-    "C:\\Users\\zar\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.301\\microsoft.net.sdk.compilers.toolset.9.0.301.nupkg.sha512"
+    "C:\\Users\\zar\\.nuget\\packages\\xunit.runner.visualstudio\\3.1.3\\xunit.runner.visualstudio.3.1.3.nupkg.sha512"
   ],
   "logs": []
 }
