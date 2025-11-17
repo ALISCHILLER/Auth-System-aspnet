@@ -24,8 +24,8 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.Email)
             .HasConversion(
-                email => email?.Value,
-                value => value is null ? null : Email.Create(value))
+               email => email == null ? null : email.Value,
+                value => value == null ? null : Email.Create(value))
             .HasMaxLength(320);
         builder.HasIndex(x => x.Email)
            .IsUnique()
@@ -33,8 +33,8 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.PhoneNumber)
             .HasConversion(
-                number => number?.Value,
-                value => value is null ? null : PhoneNumber.Create(value))
+                number => number == null ? null : number.Value,
+                value => value == null ? null : PhoneNumber.Create(value))
             .HasMaxLength(32);
         builder.HasIndex(x => x.PhoneNumber)
           .IsUnique()
@@ -42,8 +42,8 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.NationalCode)
             .HasConversion(
-                nationalCode => nationalCode?.Value,
-                value => value is null ? null : NationalCode.Create(value))
+                  nationalCode => nationalCode == null ? null : nationalCode.Value,
+                value => value == null ? null : NationalCode.Create(value))
             .HasMaxLength(32);
 
         builder.Property(x => x.PasswordHash)

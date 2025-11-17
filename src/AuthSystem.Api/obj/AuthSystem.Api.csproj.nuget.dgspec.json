@@ -63,13 +63,35 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "AspNetCore.HealthChecks.UI.Client": {
+            "Google.Protobuf": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[3.33.1, )"
+            },
+            "Grpc": {
+              "target": "Package",
+              "version": "[2.46.6, )"
             },
             "Grpc.AspNetCore": {
               "target": "Package",
-              "version": "[2.65.0, )"
+              "version": "[2.71.0, )"
+            },
+            "Grpc.Core": {
+              "target": "Package",
+              "version": "[2.46.6, )"
+            },
+            "Grpc.Core.Api": {
+              "target": "Package",
+              "version": "[2.71.0, )"
+            },
+            "Grpc.Net.Client": {
+              "target": "Package",
+              "version": "[2.71.0, )"
+            },
+            "Grpc.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.76.0, )"
             },
             "HotChocolate.AspNetCore": {
               "target": "Package",
@@ -97,11 +119,11 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
-            "OpenTelemetry.Exporter.Console": {
+            "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
-              "version": "[1.9.0, )"
+              "version": "[9.0.10, )"
             },
-            "OpenTelemetry.Extensions.Hosting": {
+            "OpenTelemetry.Exporter.Console": {
               "target": "Package",
               "version": "[1.9.0, )"
             },
@@ -116,10 +138,6 @@
             "OpenTelemetry.Instrumentation.Runtime": {
               "target": "Package",
               "version": "[1.9.0, )"
-            },
-            "Serilog.AspNetCore": {
-              "target": "Package",
-              "version": "[9.0.0, )"
             },
             "Serilog.Sinks.Console": {
               "target": "Package",
@@ -432,11 +450,19 @@
               "target": "Package",
               "version": "[9.0.10, )"
             },
+            "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
             "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.10, )"
             },
             "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.Extensions.Http.Polly": {
               "target": "Package",
               "version": "[9.0.10, )"
             },

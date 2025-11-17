@@ -1,3 +1,3 @@
 obj\Debug\net9.0\Grpc/SecurityEvents.cs \
-obj\Debug\net9.0\Grpc/SecurityEventsGrpc.cs: C:/Users/zar/.nuget/packages/grpc.tools/2.65.0/build/native/include/google/protobuf/timestamp.proto\
+obj\Debug\net9.0\Grpc/SecurityEventsGrpc.cs: C:/Users/zar/.nuget/packages/grpc.tools/2.76.0/build/native/include/google/protobuf/timestamp.proto\
  Grpc/security_events.proto

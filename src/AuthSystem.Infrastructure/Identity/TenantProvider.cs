@@ -24,8 +24,5 @@ internal sealed class TenantProvider(IHttpContextAccessor accessor) : ITenantPro
             return context.User.FindFirst(TenantConstants.ClaimType)?.Value;
         }
     }
-}
 
-internal interface IHttpContextAccessor
-{
 }

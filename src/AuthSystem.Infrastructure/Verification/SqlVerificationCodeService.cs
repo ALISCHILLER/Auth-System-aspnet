@@ -16,7 +16,7 @@ internal sealed class SqlVerificationCodeService(ApplicationDbContext dbContext)
         var code = RandomNumberGenerator.GetInt32(100000, 999999).ToString();
         var hash = Hash(code);
 
-        var entity = new VerificationCode
+        var entity = new VerificationCodeEntity
         {
             Id = Guid.NewGuid(),
             UserId = userId,

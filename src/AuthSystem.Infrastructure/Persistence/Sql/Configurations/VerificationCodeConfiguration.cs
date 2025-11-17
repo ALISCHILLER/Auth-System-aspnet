@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AuthSystem.Infrastructure.Persistence.Sql.Configurations;
 
-internal sealed class VerificationCodeConfiguration : IEntityTypeConfiguration<VerificationCode>
+internal sealed class VerificationCodeConfiguration : IEntityTypeConfiguration<VerificationCodeEntity>
 {
-    public void Configure(EntityTypeBuilder<VerificationCode> builder)
+    public void Configure(EntityTypeBuilder<VerificationCodeEntity> builder)
     {
         builder.ToTable("VerificationCodes");
         builder.HasKey(x => x.Id);

@@ -1,6 +1,5 @@
 ﻿using AuthSystem.Domain.Entities.Authorization.Role;
 using AuthSystem.Domain.Entities.UserAggregate;
-using AuthSystem.Domain.ValueObjects;
 using AuthSystem.Infrastructure.Auditing;
 using AuthSystem.Infrastructure.Auth.Models;
 using AuthSystem.Infrastructure.Verification.Models;
@@ -15,7 +14,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<RolePermission> RolePermissions => Set<RolePermission>();
     public DbSet<UserRole> UserRoles => Set<UserRole>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-    public DbSet<VerificationCode> VerificationCodes => Set<VerificationCode>();
+    public DbSet<VerificationCodeEntity> VerificationCodes => Set<VerificationCodeEntity>();
     public DbSet<SecurityEventLog> SecurityEventLogs => Set<SecurityEventLog>();
 
 

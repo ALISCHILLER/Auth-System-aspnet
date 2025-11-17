@@ -124,7 +124,8 @@ internal sealed class ScimUserService(ApplicationDbContext dbContext) : IScimUse
                     }
                     else if (string.Equals(path, "emails", StringComparison.Ordinal) && operation["value"] is JsonArray emailArray)
                     {
-                        var primaryEmail = emailArray.OfType<JsonObject>().FirstOrDefault()?.GetValue<string>("value");
+                        var primaryEmailNode = emailArray.OfType<JsonObject>().FirstOrDefault();
+                        var primaryEmail = primaryEmailNode?["value"]?.GetValue<string>();
                         if (!string.IsNullOrWhiteSpace(primaryEmail))
                         {
                             user.ChangeEmail(Email.Create(primaryEmail));

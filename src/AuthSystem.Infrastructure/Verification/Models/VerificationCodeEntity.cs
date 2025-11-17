@@ -1,6 +1,6 @@
 ﻿namespace AuthSystem.Infrastructure.Verification.Models;
 
-public sealed class VerificationCode
+public sealed class VerificationCodeEntity
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
