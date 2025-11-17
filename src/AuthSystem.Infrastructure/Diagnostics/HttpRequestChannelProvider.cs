@@ -1,4 +1,5 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace AuthSystem.Infrastructure.Diagnostics;
 

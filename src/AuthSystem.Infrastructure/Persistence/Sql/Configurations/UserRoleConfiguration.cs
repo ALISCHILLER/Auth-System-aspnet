@@ -1,7 +1,7 @@
 ﻿using AuthSystem.Domain.Entities.UserAggregate;
 using Microsoft.EntityFrameworkCore;
 
-usinusing AuthSystem.Domain.Entities.Authorization.Role;
+using AuthSystem.Domain.Entities.Authorization.Role;
 using AuthSystem.Domain.Entities.UserAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

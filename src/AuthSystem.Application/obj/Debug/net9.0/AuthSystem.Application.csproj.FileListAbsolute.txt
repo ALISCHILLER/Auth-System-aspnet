@@ -23,3 +23,12 @@ E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\obj\
 E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\obj\Debug\net9.0\AuthSystem.Application.dll
 E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\obj\Debug\net9.0\refint\AuthSystem.Application.dll
 E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\obj\Debug\net9.0\AuthSystem.Application.pdb
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\bin\Debug\net9.0\AuthSystem.Application.deps.json
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\bin\Debug\net9.0\AuthSystem.Application.dll
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\bin\Debug\net9.0\AuthSystem.Application.pdb
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\bin\Debug\net9.0\AuthSystem.Domain.dll
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\bin\Debug\net9.0\AuthSystem.Shared.dll
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\bin\Debug\net9.0\AuthSystem.Domain.pdb
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\bin\Debug\net9.0\AuthSystem.Shared.pdb
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\obj\Debug\net9.0\AuthSyst.810430FD.Up2Date
+E:\project-zar\custom\asp\new\Auth-System-aspnet\src\AuthSystem.Application\obj\Debug\net9.0\ref\AuthSystem.Application.dll

@@ -1,6 +1,7 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Security;
 using AuthSystem.Domain.Enums;
-
+using AuthSystem.Application.Common.Abstractions.Security;
+using Microsoft.AspNetCore.Http;
 namespace AuthSystem.Infrastructure.Identity;
 
 internal sealed class CurrentUserService(IHttpContextAccessor httpContextAccessor) : ICurrentUserService

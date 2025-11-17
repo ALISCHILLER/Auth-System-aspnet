@@ -1,4 +1,6 @@
 ﻿using AuthSystem.Application.Common.Abstractions.Security;
+using AuthSystem.Shared.Constants;
+using Microsoft.AspNetCore.Http;
 
 namespace AuthSystem.Infrastructure.Identity;
 
@@ -22,4 +24,8 @@ internal sealed class TenantProvider(IHttpContextAccessor accessor) : ITenantPro
             return context.User.FindFirst(TenantConstants.ClaimType)?.Value;
         }
     }
+}
+
+internal interface IHttpContextAccessor
+{
 }

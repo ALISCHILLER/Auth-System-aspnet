@@ -12,7 +12,7 @@ public sealed class SecurityEventsGrpcService(IMediator mediator) : SecurityEven
 {
     public override async Task<SecurityEventsResponse> ListSecurityEvents(SecurityEventsRequest request, ServerCallContext context)
     {
-        var eventType = Enum.TryParse<SecurityEventType>(request.EventType, ignoreCase: true, out var parsed)
+        var eventType = System.Enum.TryParse<SecurityEventType>(request.EventType, ignoreCase: true, out var parsed)
             ? parsed
             : null as SecurityEventType?;
 

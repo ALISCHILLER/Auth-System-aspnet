@@ -2625,6 +2625,7 @@
           "AuthSystem.Shared": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.10",
+          "Microsoft.Extensions.Hosting.Abstractions": "9.0.0",
           "Microsoft.Extensions.Http": "9.0.10",
           "Microsoft.Extensions.Identity.Core": "9.0.10",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.10",
@@ -2636,7 +2637,10 @@
         },
         "runtime": {
           "bin/placeholder/AuthSystem.Infrastructure.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "AuthSystem.Shared/1.0.0": {
         "type": "project",

@@ -1,6 +1,6 @@
 ﻿namespace AuthSystem.Infrastructure.Auditing;
 
-internal sealed class SecurityEventLog
+public sealed class SecurityEventLog
 {
     public Guid Id { get; set; }
 

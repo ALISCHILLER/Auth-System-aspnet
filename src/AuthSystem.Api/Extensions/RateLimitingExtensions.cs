@@ -1,4 +1,5 @@
 ﻿using AuthSystem.Api.Options;
+using AuthSystem.Shared.Constants;
 using Microsoft.Extensions.Options;
 using System.Threading.RateLimiting;
 

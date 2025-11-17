@@ -1,4 +1,5 @@
 ﻿using AuthSystem.Application.Common.Exceptions;
+using AuthSystem.Shared.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
@@ -35,15 +36,15 @@ public sealed class ExceptionHandlingMiddleware : IMiddleware
         catch (AppValidationException exception)
         {
             var errors = exception.Errors
-                  .Select(pair => new ApiError(pair.Key, string.Join("; ", pair.Value)))
-                  .ToArray();
+                 .Select(pair => new ApiError(pair.Key, string.Join("; ", pair.Value)))
+                 .ToArray();
 
             await WriteProblemAsync(context, HttpStatusCode.BadRequest, "Validation failed", "validation_failed", errors)
                  .ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            _logger.LogError(exception, "Unhandled exception");
+            _logger.LogError(ex, "Unhandled exception");
             await WriteProblemAsync(context, HttpStatusCode.InternalServerError, "An unexpected error occurred.", "internal_error")
                 .ConfigureAwait(false);
         }

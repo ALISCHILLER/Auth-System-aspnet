@@ -4,6 +4,7 @@ using AuthSystem.Shared.DTOs;
 using HotChocolate;
 using HotChocolate.Types;
 using MediatR;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace AuthSystem.Api.GraphQL;
 
