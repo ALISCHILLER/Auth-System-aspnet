@@ -1,7 +1,9 @@
 ﻿using AuthSystem.Api.RealTime;
 using AuthSystem.Application.Common.Abstractions.Monitoring;
 using AuthSystem.Infrastructure.Extensions;
+using AuthSystem.Infrastructure.Persistence.Sql;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace AuthSystem.Api.Extensions;
 
@@ -27,14 +29,15 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddInfrastructureHealthChecks(this IServiceCollection services)
     {
-        services.AddInfraHealthChecks();
+        services.AddHealthChecks()
+            .AddCheck("self", () => HealthCheckResult.Healthy())
+            .AddDbContextCheck<ApplicationDbContext>("database");
         return services;
     }
     public static IServiceCollection AddRealTimeSecurityEvents(this IServiceCollection services)
     {
         services.AddSignalR();
-        services.AddScoped<SignalRSecurityEventPublisher>();
-        services.AddScoped<ISecurityEventPublisher>(provider => provider.GetRequiredService<SignalRSecurityEventPublisher>());
+        services.Decorate<ISecurityEventPublisher, SignalRSecurityEventPublisher>();
         return services;
     }
 }

@@ -10,14 +10,11 @@ namespace AuthSystem.Api.RealTime;
 
 internal sealed class SignalRSecurityEventPublisher : ISecurityEventPublisher
 {
-    private readonly WebhookSecurityEventPublisher _inner;
+    private readonly ISecurityEventPublisher _inner;
     private readonly IHubContext<SecurityEventsHub> _hubContext;
 
-    public SignalRSecurityEventPublisher(WebhookSecurityEventPublisher inner, IHubContext<SecurityEventsHub> hubContext)
-    {
-        _inner = inner;
-        _hubContext = hubContext;
-    }
+    public SignalRSecurityEventPublisher(ISecurityEventPublisher inner, IHubContext<SecurityEventsHub> hubContext)
+        => (_inner, _hubContext) = (inner, hubContext);
 
     public async Task PublishAsync(SecurityEventContext context, CancellationToken cancellationToken)
     {

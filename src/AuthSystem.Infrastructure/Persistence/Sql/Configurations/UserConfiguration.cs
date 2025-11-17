@@ -49,7 +49,7 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.PasswordHash)
             .HasConversion(
                 hash => hash.Value,
-                value => PasswordHash.CreateFromHash(value))
+                value => PasswordHash.CreateFromHash(value, createdAt: null))
             .HasMaxLength(512)
             .IsRequired();
 

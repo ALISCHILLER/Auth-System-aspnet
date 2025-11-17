@@ -32,10 +32,27 @@ internal sealed class SecurityEventReader(ApplicationDbContext dbContext) : ISec
 
         var total = await query.CountAsync(cancellationToken).ConfigureAwait(false);
 
-        var items = await query
+        var logs = await query
             .OrderByDescending(log => log.OccurredAtUtc)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
+                .Select(log => new
+                {
+                    log.Id,
+                    log.EventType,
+                    log.UserId,
+                    log.UserName,
+                    log.TenantId,
+                    log.OccurredAtUtc,
+                    log.IpAddress,
+                    log.UserAgent,
+                    log.Description,
+                    log.MetadataJson
+                })
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var items = logs
             .Select(log => new SecurityEventDto
             {
                 Id = log.Id,
@@ -49,8 +66,7 @@ internal sealed class SecurityEventReader(ApplicationDbContext dbContext) : ISec
                 Description = log.Description,
                 Metadata = DeserializeMetadata(log.MetadataJson)
             })
-            .ToListAsync(cancellationToken)
-            .ConfigureAwait(false);
+               .ToList();
 
         return new PagedResult<SecurityEventDto>(items, request.PageNumber, request.PageSize, total);
     }
