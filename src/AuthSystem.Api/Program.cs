@@ -19,10 +19,10 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 
-
 builder.Host.UseSerilog();
 
-builder.Services.Configure<PipelineLoggingOptions>(builder.Configuration.GetSection("Observability:PipelineLogging"));
+builder.Services.Configure<PipelineLoggingOptions>(
+    builder.Configuration.GetSection("Observability:PipelineLogging"));
 
 builder.Services
     .AddApplication()
@@ -41,16 +41,21 @@ builder.Services.AddApiRateLimiting(builder.Configuration);
 builder.Services.AddApiTelemetry(builder.Configuration);
 builder.Services.AddRealTimeSecurityEvents();
 builder.Services.AddGrpc();
+
 builder.Services
     .AddGraphQLServer()
     .AddQueryType(d => d.Name("Query"))
     .AddTypeExtension<SecurityEventQuery>()
     .AddType<SecurityEventGraphType>()
     .AddType<SecurityEventResultType>()
-    .AddType<SecurityEventTypeEnumType>();
+    .AddType<SecurityEventTypeEnumType>()
+    .AddType<SecurityEventMetadataEntryType>();
 
 const string DefaultCorsPolicy = "DefaultCors";
-var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+
+var allowedOrigins = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>() ?? Array.Empty<string>();
 
 builder.Services.AddCors(options =>
 {
@@ -72,7 +77,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddInfrastructureHealthChecks();
+// ? «?‰ Œÿ Õ–› ‘œ
+// builder.Services.AddInfrastructureHealthChecks();
 
 var app = builder.Build();
 
@@ -88,7 +94,6 @@ if (app.Environment.IsDevelopment())
     app.UseVersionedSwaggerUI(apiVersionProvider);
 }
 
-
 app.UseHttpsRedirection();
 app.UseApiProblemDetails();
 app.UseMiddleware<TenantResolutionMiddleware>();
@@ -96,11 +101,16 @@ app.UseMiddleware<TenantResolutionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 app.MapControllers().RequireCors(DefaultCorsPolicy);
-app.MapGrpcService<AuthSystem.Api.Grpc.SecurityEventsGrpcService>().RequireAuthorization().RequireCors(DefaultCorsPolicy);
-app.MapGraphQL().RequireAuthorization().RequireCors(DefaultCorsPolicy);
-app.MapHub<SecurityEventsHub>("/hubs/security-events").RequireAuthorization().RequireCors(DefaultCorsPolicy);
+app.MapGrpcService<AuthSystem.Api.Grpc.SecurityEventsGrpcService>()
+   .RequireAuthorization()
+   .RequireCors(DefaultCorsPolicy);
+app.MapGraphQL()
+   .RequireAuthorization()
+   .RequireCors(DefaultCorsPolicy);
+app.MapHub<SecurityEventsHub>("/hubs/security-events")
+   .RequireAuthorization()
+   .RequireCors(DefaultCorsPolicy);
 app.MapHealthChecks("/health").AllowAnonymous();
 
 app.Run();

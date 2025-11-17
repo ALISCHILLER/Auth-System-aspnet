@@ -1,6 +1,8 @@
 ﻿using AuthSystem.Shared.Contracts.Security;
-using AuthSystem.Shared.DTOs;
 using HotChocolate.Types;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AuthSystem.Api.GraphQL;
 
@@ -18,7 +20,22 @@ public sealed class SecurityEventGraphType : ObjectType<SecurityEventDto>
         descriptor.Field(x => x.IpAddress).Type<StringType>();
         descriptor.Field(x => x.UserAgent).Type<StringType>();
         descriptor.Field(x => x.Description).Type<StringType>();
-        descriptor.Field(x => x.Metadata).Type<DictionaryType<StringType, StringType>>();
+        descriptor.Field(x => x.Metadata)
+        .Type<ListType<NonNullType<SecurityEventMetadataEntryType>>>()
+        .Resolve(context => ConvertMetadata(context.Parent<SecurityEventDto>().Metadata));
+    }
+
+    private static IReadOnlyList<SecurityEventMetadataEntry> ConvertMetadata(
+        IReadOnlyDictionary<string, string>? metadata)
+    {
+        if (metadata is null || metadata.Count == 0)
+        {
+            return Array.Empty<SecurityEventMetadataEntry>();
+        }
+
+        return metadata
+            .Select(pair => new SecurityEventMetadataEntry(pair.Key, pair.Value))
+            .ToList();
     }
 }
 
